@@ -14,5 +14,3 @@ sudo rm /etc/postgres-reg.ini
 # *** NOTE: Remove the PostgreSQL user using System Preferences -> Users & Groups at this step!!! ***
 
 sudo rm /etc/sysctl.conf
-
-# EOF

@@ -14,5 +14,3 @@
     zcompile "$zcompdump"
   fi
 } &!
-
-# EOF

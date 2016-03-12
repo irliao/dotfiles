@@ -1,0 +1,265 @@
+
+
+Vallum User Guide
+
+version 1.1
+
+
+
+
+Introduction
+
+Vallum is a small app that helps you increasing your privacy and the security of your Mac blocking apps from leaking data to the Internet.
+Apps installed on your system are allowed to make unsolicited connections to the Internet or to the local network, and they often do it without asking your permission. Vallum is able to identify and block these connections according to your preferences, in a friendly and intuitive way.
+Vallum is designed for being easy and not intrusive in its default configuration. It requires no maintenance or interaction, and does not annoy you with popup alerts. It’s just a matter of dragging apps icons to create your configuration and then forget it. However its attitude can be altered simply playing with rules and the few options available. So for example you can activate the notification alerts system to display popup alerts whenever an app tries to connect, and then decide to pass it or block it on the fly. Or you can interact with Murus and the OS X built-in PF packet filter to manage connections at both application- and network level.
+Vallum is easy and safe. Install it in one mouse click, start from predefined configurations or build your own one in seconds, restart from scratch in one mouse click, uninstall in one mouse click. Everything is managed from the Vallum menulet in OS X menu bar, near the clock. See screenshot below:
+
+
+
+
+
+Install Vallum
+
+Download the ZIP file, uncompress it, open the DMG disk image and launch Vallum installer. Once finished your Mac will reboot. Vallum firewall will be automatically activated using the default configuration. Vallum firewall is set to automatically start at boot, use the Vallum icon in OS X menu bar, near the clock, to control the firewall.
+Before running Vallum you should disable the built in OS X application-layer firewall from OS X System Preferences -> Security -> Firewall. You should also stop and uninstall third-party application firewalls as well.
+Vallum requires OS X 10.9, 10.10 or 10.11.
+
+
+
+
+Vallum files structure
+
+Vallum firewall is made of 4 main files:
+- a filtering network kernel extension loaded at boot time (/Library/Extensions/vallumnke.kext)
+- a logging network kernel extension loaded at boot time (/Library/Extensions/vallumlognke.kext)
+- a daemon running in background loaded at boot time (/usr/local/bin/vallumafd)
+- an agent to handle user interaction, loaded at login time, runs as a menulet icon in OS X bar near the clock. (Vallum.app)
+
+Vallum installs also its configuration file in /Users/Shared/it.murus.vallumlibrary.plist and stores custom presets in /Users/Shared/Vallum/. To activate Vallum at boot there is a launchd item in /Library/LaunchDaemons/it.murus.vallumafd.plist and shell script in /etc/vallum.sh.
+
+
+
+
+Using Vallum
+
+When you run Vallum for the first time you have the choice to start it using default configuration or from a predefined configuration strategies.
+Default Vallum configuration allows all apps connections by default. No filtering is done. Apps icons populate Vallum Apps window as soon as they make a connection. Notification alerts are disabled by default.
+Stretegies window offers 5 more choices, each one coming with its own description. Click the “Strategies” button in Vallum toolbar to open Vallum Configuration Strategies window. Click the ‘right arrow’ button to instantly activate a configuration. Once done Vallum is active. You can change firewall rules in many ways using Vallum interface. Configuration is stored at shutdown and automatically activated at system boot.
+
+
+
+
+Vallum interface
+
+To configure and use Vallum use the Vallum main window. Open it from Vallum menulet icon in OS X menu bar, near the clock. There is no Vallum icon in the dock or menus in OS X menu bar. Vallum constantly runs in background, you can interact with it only from the menulet icon near the clock. Quitting the menulet will not shut down the filtering engine, but only silence it. Vallum.app (the menulet itself) is set to automatically start at login, and you should keep it always running.
+Use the main Vallum window to access main Vallum features.
+To switch between views in main window use the segmented control in the toolbar.
+The views in Vallum main Window are:
+
+- Apps view: this is the place where you set apps rules. Managed apps feature a descriptive icon to distinguish between passed apps and blocked apps and mixed-state apps. 
+
+- Exclusions view: define rules that affects both firewall filtering and verbosity.
+
+- Connections logs view: apps connections logs. This view shows all apps connection attempts.
+
+- Strategies view: choose from 6 different predefined configurations
+
+From main window you can also access:
+
+- Custom Presets Window: manage your own list of custom presets. Each preset can be enabled on the fly with one mouse click.
+
+- Tools menu to import/export Vallum configuration, restore to default configuration or open Vallum preferences panel
+
+Each view feature two buttons on top right of main Vallum window. Click the blue “i” button to get a legenda for current view, click the “gear” button to get a list of available actions.
+
+
+If Vallum Notification Alerts are enabled then Vallum will display notifications on top-right of your screen.
+
+- Notification Alerts: when enabled, they allow you to manage each connections on the fly, for each app, at both application and network level, interacting with Murus groups, black list, managed services and custom rules. 
+
+
+
+
+Vallum Preferences
+
+To open Vallum preferences panel select the Tools menu and click “Preferences…”, or click on the two status leds in Vallum main window’s toolbar. There you can set some Vallum options. Please note that preferences are bound to the ruleset.
+
+
+
+
+Vallum Apps View
+
+Click the “A” button in main Vallum window to display the Vallum Apps View. This is the most important view of Vallum. It contains managed apps. Each managed app features one or more rules.
+When an app is managed it means that is has one of the following three states: 
+
+- passed (green triangle)
+- blocked (red triangle)
+- exclusive (green triangle with red shadow)
+- inclusive (red triangle with green shadow)
+- mixed-state (blu dialog)
+- silenced mixed-state (green or red dialog)
+
+This window can get crowded very quickly, according to your system version, usage and location, however you can limit this issue using exclusions (see later).
+Apps can be inspected or edited. Select an app and click the magnifier button to display the App Rules View to edit it.
+Apps can also be removed from list. Select an app and click the X button to remove it from Vallum managed apps.
+Apps can be reordered, however apps order in Apps Window has no effect on filtering.
+
+
+
+
+Rules: passed and blocked apps
+
+- When an app is passed it is listed in Apps Window with its original icon, a green triangle and black label. All connections are allowed to pass at application level, thus this app will have unrestricted access to the Internet and to the local networks.
+- When an app is blocked it is listed in Apps Window with a greyscale and pixelated icon, a red triangle and a red label. All connections are blocked at application level, thus this app will be unable to access to the Internet and to the local networks. Passed and blocked apps has only one rule.
+
+To change the status of an app in Apps Window from passed to blocked or viceversa just select it and click the locker. You will immediately see the icon items changing colors. The change has an immediate effect on the firewall, there is not “apply” nor “undo”.
+There are two more ways to block an app, and you have to use them if the app is not yet listed in Apps Window:
+- Select the ‘gear’ button on top of Apps Window and click ‘Block Apps’, then browse your system and choose one or more apps to block. Their icon will then appear as blocked in Apps Window.
+- Drag one or more apps icon from the OS X Finder to Vallum Apps Window. Their icon will then appear as blocked in Apps Window.
+
+
+
+Rules: inclusive and exclusive apps
+
+- Inclusive apps are blocked apps with some exceptions. They are displayed using a red triangle with a green shadow. All connections from these apps are blocked except explicitly passed connections.
+- Exclusive apps are passed apps with some exceptions. They are displayed using a gree triangle with a red shadow. All connections from these apps are passed except explicitly blocked connections.
+
+
+
+
+Rules: mixed state apps
+
+When an app is in mixed state it is listed in Apps Window with its original icon and a blu dialog icon. An app will require a user authorization for each connection as long as connections do not match existing rules. When the app tries to connect Vallum displays a notification alert on right top of your screen, where you can decide whether to pass or block it.
+Mixed state apps can have more than one rule. To display rules select the app and click the magnifier button to display the App Rules View. This view shows all blocked and passed IP addresses. These addresses are permanently stored in your configuration.
+Mixed state apps can be set as passed or blocked simply selecting an app and clicking the locker.
+At the same time, if Vallum Notifications are active, you can select a passed/blocked app and set it as mixed-state clicking the magnifier button and then the ‘gear’ button in App Rules View and selecting ‘Enable notifications for this app’.
+Apps preserve their IP address list. So if you select a yellow app and make it red (or green) you will not see any IP address in App Rule View, but if you turn this app yellow back again then its IP addresses will be back too.
+Mixed state apps are generated answering “Pass this connection” or “Block this connection” in Vallum notification alerts. If you choose “Pass this app” or “Block this app”, a mixed-state managed app will turn green or red accordingly, and will not require user authorization anymore, as Vallum will silently pass or block its connections.
+
+Mixed state apps can be silenced. Check the “silence this app for…” checkbox, use the slider to set the amount of seconds, then click “Pass address/port or “Block address/port”. Vallum will take this rule and silently apply it for the chosen time. Chosen rule will be enforced to all connections for this app, and IP addresses will be stored in app’s blocked or allowed addresses, accordingly. Silenced apps appear with a red or green dialog icon according to the temporary rule.
+
+
+
+Rules: Connections Notification Alerts
+
+Notification Alerts can be activated from Vallum menulet. When active, Vallum is able to intercept apps’ outbound connections and hold them while you decide whether to block or pass them. By default notification alerts do not show all their options, and only one third of the whole alert is visible. Click the blue “more options…” button to expand the notification alert and see connection specific options, and click the “manage at network level…” button to expand it further and display network-level options for filtering the connection using the OS X PF packet filter and Murus.
+
+A notification alert is displayed on right top of the screen only if Vallum Notifications are enabled and:
+1) an unmanaged app for which Vallum has no rules is trying to connect to a remote host
+or:
+2) an already managed mixed-state app is trying to connect to an address for which it still has no rule set.
+
+In both cases, the notification alert allows you to define an application-level rule:
+
+1) Clicking “Pass this app” or “Block this App” to pass/block the whole app. 
+An unmanaged app will now show up in Apps View, with a red or green triangle accordingly. 
+An already managed mixed-state (yellow) app will be set as passed/blocked (green/red) and will not require authorization any more. By default these choices are remembered forever. Click the popup button and use the slider if you want these rules to expire. When a green or red app expires it turns yellow. From now on it will require authorization in order to pass.
+
+or:
+
+2) Clicking “Pass <IP Address>” or “Block <IP Address>” to pass/block only current connection. In this case a new record will appear in the App Rules View. Some app can be ossessive at connecting at multiple IP addresses at once. In this case Vallum will display a lot of consecutive notification alerts, one for each new IP address. However you can ‘silence’ an for one minute (or less) in order to silently accept (or block!) all connections from an app. Vallum will ‘automatically answer’ notification alerts for you, and store all IP addresses as passed or blocked accordingly.
+Clicking “Pass port <port>” or “Block port <port>” has a similar effect, as it puts a port record in allowed or blocked addresses.
+
+Interact with the OS X built-in PF packet filter
+
+Notification alert allows you also to create filtering rule at network level. These rules are system wide and affect all apps. This feature requires Murus Basic or Murus Pro to be installed, configured and running. So you can add one or more custom rules, or put current IP address in Murus black list or in a new or existing Murus group.
+If you have Murus correctly configured then Vallum notification alerts will display the list of services that contain the port involved in current connection. Select a service to manage or unmanage it in Murus Managed Outbound Services.
+
+
+
+
+Editing Apps Rules
+
+Select an app and click the magnifier button to open the editing popover view.
+This view shows two columns containing allowed and blocked items.
+Items can be:
+
+- group Everyone (includes the whole IPv4 and IPv6 address spaces)
+- IPv4 addresses
+- IPv6 addresses
+- hostnames (for each valid hostname one or more IP addresses may be added, and each one of these addresses may reverse to a different hostname)
+- IPv4 subnets (CIDR format like 192.168.0.0/24)
+- ports
+- ports ranges (for example: 2000:3000)
+
+
+Addresses can be displayed as plain addresses or hostnames when available. Select the gear button in edit popover view and check/uncheck the option.
+Items order does not matter. Items cannot be reordered. 
+Passed and Blocked items cannot overlap. For example you can’t add a blocked port belonging to an already assigned passed port range. In case of error (or typo) a yellow caution icon will be displayed.
+
+Each packet is checked for matching an app rule. Items are checked with this order:
+
+- IP addresses (including hostnames)
+- Subnets
+- Ports
+- Ports Ranges
+
+The first item that matched a rule is the item that wins. Blocked items override passed items.
+
+This means that:
+if a packet matches a passed IP address and a blocked port, the packet will pass.
+If the packet matches a blocked IP address and a passed subnet, it will be blocked.
+If the packet matches a passed subnet and a blocked ports range, it will pass.
+If the packet matches a blocked port and a passed ports range, it will be blocked..
+In case a packet matches both a passed and a blocked subnets, packet will be blocked.
+
+
+
+
+Click “+” and “-“ buttons on top of each column to add or remove records. 
+From the adding panel you can also add the “Everyone” group clicking the group button or typing “everyone”.
+Adding and removing items automatically affects app status. For example adding group Everyone to a mixed state app will change its status and disable notifications for that app.
+
+
+
+
+
+
+
+Rules: exclusions
+
+Click the folder icon in Vallum main window’s toolbar to display Vallum Exclusions View.
+This view is almost empty in default configuration, it contains only hardcoded entries. Its purpose is to list all managed exclusions.
+An exclusion is made of an absolute path or part of it, a rule “pass” or “block”, and an optional “ignore” tag.
+When an unmanaged app makes a connection, Vallum searches a match in Exclusions paths. If the app matches an exclusion, it will be passed or blocked accordingly. If an app matches more than one exclusion then the first matched exclusion is the one that wins.
+Exclusions can be reordered dragging and dropping them inside the table. Their order will affect filtering, so be careful. Hardcoded entries cannot be edited, moved, deleted or overriden. 
+Hardcoded entries may change during Vallum development. Currently the only hardcoded entry is “/usr/bin/whois”, which is needed  to get IP addresses whois records.
+Exclusions are useful to reduce Vallum verbosity and to reduce Notification alerts. For example you can set entire directories or volumes as passed or blocked to avoid Notification alerts, and you can also set them as ignored to avoid crowding the Apps view.
+Exclusions has effect only on unmanaged apps. Exclusions are overridden by rules defined in Apps view.
+So, for example, if an app is set as passed in Apps view but falls within a path belonging to a blocking exclusion, then that app will be passed.
+To create an exclusion click the gear button on right top of Exclusions view and click “Add New Exclusion”. A drop-down view will appear, here you have to configure your exclusion. Type the path (or click the “…” button to browse your files) and select the rule and the “ignore” option then add it. Another way to create an exclusion is to drag a directory icon from the OS X Finder to Vallum Exclusions view, and then set its parameters.
+
+
+
+
+Configuration Strategies
+
+Vallum offers 6 predefined configurations, default configuration being the first one.
+Open the Vallum Strategies Window clicking the “Strategies” button in Vallum main window’s toolbar. To activate a configuration simply click the ‘right arrow’ button. Configuration will be immediately activated and a drop-down view will display, showing a more detailed description and some options. Click “Done” to close Strategies window and start using Vallum.
+
+
+
+Custom Presets
+
+If you want to store a Vallum configuration you have two options: export it to file or create a custom preset.
+To create a custom preset open the Vallum Custom Presets Window from Vallum menulet -> Configuration -> Custom Presets then select the ‘gear’ button on right top and click “Save custom configuration as custom preset”. Its icon will appear in list.
+To activate a preset select it and click the ‘play’ button. To delete a preset click the ‘X’ button.
+Each preset can be bound to a specific OS X network location. Should you switch OS X network location Vallum will automatically enable a preset matching this location, if any. Importing and exporting configurations and custom presets management are not available in trial mode.
+
+
+
+
+Support
+
+To get support please visit www.murusfirewall.com/forum 
+
+
+
+Credits and info
+
+Vallum has been handcrafted in a foggy country village in northern Italy by The Murus Team.
+Kext and daemon Swift, C and Objective C code by Davide Feroldi
+Concept, design, app Swift code and GUI by Hany El Imam
+© 2016 Murus.it - All Rights Reserved
+
+

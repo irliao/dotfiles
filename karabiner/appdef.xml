@@ -21,9 +21,12 @@
   </appdef>
 
   <appdef>
+    <appname>SAFARI_TECH</appname>
+    <equal>com.apple.SafariTechnologyPreview</equal>
+  </appdef>
+
+  <appdef>
     <appname>SUBLIME</appname>
-    <equal>com.sublimetext.2</equal>
+    <equal>com.sublimetext.3</equal>
   </appdef>
 </root>
-
-<!-- EOF -->

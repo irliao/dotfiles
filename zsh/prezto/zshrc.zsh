@@ -87,5 +87,3 @@ export NVM_DIR="${HOME}/.nvm"
 # setopt HIST_SAVE_NO_DUPS         # don't write duplicate entries in the history file
 # setopt HIST_BEEP                 # Beep when accessing nonexistent history.
 # unset HISTFILE				  # disable shell history saving
-
-# EOF

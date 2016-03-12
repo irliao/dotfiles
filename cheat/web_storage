@@ -1,0 +1,9 @@
+sessionStorage, localStorage and Cookies all are used to store data on the client side. Each one has its own storage and expiration limit.
+
+localStorage: stores data with no expiration date, and gets cleared only through JavaScript, or clearing the Browser Cache / Locally Stored Data
+
+sessionStorage: similar to localStorage but expires when the browser closed (not the tab).
+
+Cookie: stores data that has to be sent back to the server with subsequent requests.
+
+Cookies are primarily for reading server-side, localStorage and sessionStorage can only be read client-side.

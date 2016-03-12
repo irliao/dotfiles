@@ -1,0 +1,20 @@
+# Reload config
+kwmc config reload
+
+# Quit Kwm
+kwmc quit
+
+# Enable start at login
+brew services start homebrew/binary/kwm
+
+# Disable start at login
+rm ~/Library/LaunchAgents/homebrew.mxcl.kwm.plist
+
+# Install Man Page
+cd ~/.kwm
+gzip kwmc.1
+cp kwmc.1.gz /usr/local/share/man/man1
+man kwmc
+
+# Uninstall
+brew remove homebrew/binary/kwm
