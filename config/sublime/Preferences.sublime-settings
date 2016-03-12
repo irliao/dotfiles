@@ -1,0 +1,11 @@
+{
+	"color_scheme": "Packages/Color Scheme - Default/Monokai.tmTheme",
+	"font_face": "Hack",
+	"font_size": 12,
+	"ignored_packages":
+	[
+		"Sublime​Linter",
+		"Vintage"
+	],
+	"tab_size": 4
+}

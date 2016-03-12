@@ -1,0 +1,27 @@
+[user]
+	name = Ian Ryan Liao
+	email = ianryanliao@gmail.com
+[push]
+        default = simple
+[credential]
+        helper = osxkeychain
+[merge]
+        conflictstyle = diff3
+[alias]
+        unstage = reset HEAD --
+        log = log --pretty=format:\"%h - %C(green)%an%C(white), %ar : %C(yellow)%s\"
+        remote = remote -v
+        branch = branch -vv
+        status = status -sb
+[filter "lfs"]
+        clean = git-lfs clean %f
+        smudge = git-lfs smudge %f
+        required = true
+[core]
+        whitespace = fix,-indent-with-non-tab,trailing-space,cr-at-eol
+        excludesfile = ~/.gitignore
+[web]
+        browser = safari
+[pager]
+        diff = diff-so-fancy | less --tabs=1,5 -RFX
+        show = diff-so-fancy | less --tabs=1,5 -RFX

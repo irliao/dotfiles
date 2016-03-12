@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<root>    
+    <item>
+	    <name>Logitech M510 mouse</name>
+	    <appendix>* Forward Button to Browser Go Forward</appendix>
+	    <appendix>* Back Button to Browser Go Back</appendix>
+	    <identifier>device.logitech.m510.buttons</identifier>
+	    <device_only>DeviceVendor::LOGITECH, DeviceProduct::LOGITECH_USB_RECEIVER</device_only>
+	    <autogen>
+	      __KeyToKey__
+	      PointingButton::BUTTON5,
+	      KeyCode::CURSOR_RIGHT, ModifierFlag::COMMAND_L
+	    </autogen>
+	    <autogen>
+	      __KeyToKey__
+	      PointingButton::BUTTON4,
+	      KeyCode::CURSOR_LEFT, ModifierFlag::COMMAND_L
+	    </autogen>
+    </item>   
+</root>
+
+<!-- EOF -->
