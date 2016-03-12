@@ -18,5 +18,3 @@ ln -s $zdotdir/zfunction.zsh $HOME/zfunction
 ln -s $zdotdir/ztmux.zsh $HOME/ztmux
 
 rm $HOME/.zshrc.zwc && echo "Restart Terminal to complete Zim setup"
-
-# EOF

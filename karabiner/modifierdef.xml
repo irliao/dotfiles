@@ -9,9 +9,6 @@
     <appendix>* Capslock + Key to Command + Option + Control</appendix>
     <appendix>* Capslock to Escape</appendix>
     <appendix></appendix>
-    <appendix>* Command_R + Key to VM_SUPER</appendix>
-    <appendix>* Command_R to Escape</appendix>
-    <appendix></appendix>
     <appendix>* Fn + Key to VM_HYPER</appendix>
     <appendix>* Fn to Escape</appendix>
     <identifier>private.modifierdef</identifier>
@@ -24,21 +21,20 @@
       KeyCode::ESCAPE
     </autogen>
 
-    <!-- Commnd_R -->
+    <!-- Fn -->
     <autogen>
-      --KeyOverlaidModifier--
-      KeyCode::COMMAND_R,
-      KeyCode::VK_MODIFIER_VM_SUPER,
-      KeyCode::ESCAPE
+      __KeyToKey__
+      KeyCode::FN,
+      KeyCode::COMMAND_L, ModifierFlag::OPTION_L | ModifierFlag::CONTROL_L | ModifierFlag::SHIFT_L
     </autogen>
 
     <!-- Fn -->
-    <autogen>
+<!--     <autogen>
       --KeyOverlaidModifier--
       KeyCode::FN, 
       KeyCode::VK_MODIFIER_VM_HYPER, ModifierFlag::COMMAND_L | ModifierFlag::OPTION_L | ModifierFlag::CONTROL_L | ModifierFlag::SHIFT_L,
       KeyCode::ESCAPE
-    </autogen>
+    </autogen> -->
 
     <!-- Fn -->
 <!--     <autogen>
@@ -56,5 +52,3 @@
     <autogen>__KeyToKey__ KeyCode::RawValue::0x3d, KeyCode::RawValue::0x30</autogen> -->
   </item>
 </root>
-
-<!-- EOF -->

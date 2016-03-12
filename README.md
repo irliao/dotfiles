@@ -1,89 +1,139 @@
 # dotfiles
 
-My personal dotfiles.
+irliao's dotfiles
 
-*** README is WIP ***
+## Installation
 
-## Getting Started
-
-These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
-
-### Prerequisities
-
-What things you need to install the software and how to install them
+Clone the repo
 
 ```
-Give examples
+git clone https://github.com/irliao/dotfiles ~/Developments/dotfiles
 ```
-
-### Installing
-
-A step by step series of examples that tell you have to get a development env running
-
-Stay what the step will be
+Symlink the repo to home directory
 
 ```
-Give the example
+ln -s ~/Developments/dotfiles ~/.dotfiles
 ```
-
-And repeat
-
-```
-until finished
-```
-
-End with an example of getting some data out of the system or using it for a little demo
-
-## Running the tests
-
-Explain how to run the automated tests for this system
-
-### Break down into end to end tests
-
-Explain what these tests test and why
+Go in the repo and update dotbot
 
 ```
-Give an example
+cd ~/.dotfiles && git submodule update --remote ./dotbot
 ```
-
-### And coding style tests
-
-Explain what these tests test and why
+Run dotbot's install script
 
 ```
-Give an example
+./install.sh
 ```
 
-## Deployment
 
-Add additional notes about how to deploy this on a live system
+## OSX Setup
 
-## Built With
+Quick Look Plugins
+```
+brew cask install qlcolorcode qlstephen qlmarkdown quicklook-json qlprettypatch quicklook-csv betterzipql qlimagesize webpquicklook suspicious-package
+```
 
-* Dropwizard - Bla bla bla
-* Maven - Maybe
-* Atom - ergaerga
 
-## Contributing
+## Homebrew Setup
 
-Please read [CONTRIBUTING.md](CONTRIBUTING.md) for details on our code of conduct, and the process for submitting pull requests to us.
+Paste at Terminal
+```
+/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+```
 
-## Versioning
+Opt out of Analytics by setting this environment variable
+```
+export HOMEBREW_NO_ANALYTICS=1
+```
 
-We use [SemVer](http://semver.org/) for versioning. For the versions available, see the [tags on this repository](https://github.com/your/project/tags). 
+Prevent Analytics from being sent
+```
+git config --file="$(brew --repository)/.git/config" --replace-all homebrew.analyticsdisabled true
+```
+
+
+## Tmux Setup
+
+Install Tmux using Brew
+```
+brew install tmux
+```
+
+## Vim Setup 
+
+Install xCode from App Store
+
+Install MacVim using Brew
+```
+brew install macvim
+```
+
+Symlink mvim binary to be vim in /usr/local/bin
+```
+ln -s /usr/local/bin/mvim /usr/local/bin/vim
+```
+
+Install YouCompleteMe for C and JavaScript family
+```
+cd ~/.vim/bundle/YouCompleteMe && ./install.py --clang-completer --tern-completer
+```
+
+## MacDown Setup
+
+Install MacDown using Brew Cask
+```
+brew cask install macdown
+```
+
+Symlink macdown binary to /usr/local/bin
+```
+ln -s /Applications/MacDown.app/Contents/SharedSupport/bin/macdown /usr/local/bin
+```
+
+Import MacDown themes
+```
+TODO
+```
+
+## Spacemacs Setup
+
+Install Spacemacs using Brew
+```
+brew tap d12frosted/emacs-plus
+brew install emacs-plus --with-cocoa --with-gnutls --with-librsvg --with-imagemagick --with-spacemacs-icon
+brew linkapps
+```
+
+Add Spacemacs to Emacs configuration
+```
+git clone https://github.com/syl20bnr/spacemacs ~/.emacs.d
+```
+
+## Updating
+
+Dotbot (submodule)
+```
+git submodule update --remote dotbot
+```
+
+Gem
+```
+sudo gem update -n /usr/local/bin
+```
+
+
+## Frameworks
+* [dotbot](https://github.com/anishathalye/dotbot)
+* [zim](https://github.com/Eriner/zim)
+* [vim-plug](https://github.com/junegunn/vim-plug)
+* [tpm](https://github.com/tmux-plugins/tpm)
+
+## Packages
+* Homebrew
+* Node.js (npm, nvm)
+* Python (pip)
+* Gem
 
 ## Authors
+* [Ian Ryan Liao](https://github.com/irliao)
 
-* **Billie Thompson** - *Initial work* - [PurpleBooth](https://github.com/PurpleBooth)
-
-See also the list of [contributors](https://github.com/your/project/contributors) who participated in this project.
-
-## License
-
-This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
-
-## Acknowledgments
-
-* Hat tip to anyone who's code was used
-* Inspiration
-* etc

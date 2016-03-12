@@ -1,0 +1,5 @@
+# Portable Aliases
+$CMDER_ROOT/config/user-profile.sh
+
+# Non-Portable Aliases
+$HOME/.bashrc

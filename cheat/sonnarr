@@ -1,0 +1,4 @@
+# Intall with Brew Cask, open from application folder
+
+# Default IP to access Sonarr
+http://localhost:8989

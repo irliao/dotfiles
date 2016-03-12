@@ -3,8 +3,6 @@
 	<include path="{{ ENV_HOME }}/.dotfiles/karabiner/modifierdef.xml"/>
 	<include path="{{ ENV_HOME }}/.dotfiles/karabiner/appurl.xml"/>
 	<include path="{{ ENV_HOME }}/.dotfiles/karabiner/appdef.xml"/>
-    <include path="{{ ENV_HOME }}/.dotfiles/karabiner/core.xml"/>
-    <include path="{{ ENV_HOME }}/.dotfiles/karabiner/logitech_m510.xml"/>
+  <include path="{{ ENV_HOME }}/.dotfiles/karabiner/core.xml"/>
+  <include path="{{ ENV_HOME }}/.dotfiles/karabiner/external_mouse.xml"/>
 </root>
-
-<!-- EOF -->

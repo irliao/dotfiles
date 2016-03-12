@@ -1,0 +1,4 @@
+# Installation
+brew install task
+brew install taskd
+brew install tasksh

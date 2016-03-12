@@ -9,8 +9,8 @@
 # Select what modules you would like enabled.
 # The second line of modules may depend on options set by modules in the first line.
 # These dependencies are noted on the respective module's README.md.
-zmodules=(directory environment git history input utility custom 
-          syntax-highlighting history-substring-search prompt completion spectrum)
+zmodules=(directory environment git history input utility custom \
+          syntax-highlighting history-substring-search prompt completion)
 
 
 ###################
@@ -22,7 +22,11 @@ zmodules=(directory environment git history input utility custom
 #
 
 # Set your desired prompt here
-zprompt_theme='gitster'
+zprompt_theme='mingit' # custom prompt theme
+# zprompt_theme='gitster'
+# zprompt_theme='pure'
+# zprompt_theme='purest'
+# zprompt_theme='gitster'
 
 #
 # Utility
@@ -30,7 +34,7 @@ zprompt_theme='gitster'
 
 # Uncomment to enable command correction prompts; 'setopt CORRECT'
 # See: http://zsh.sourceforge.net/Doc/Release/Options.html#Input_002fOutput
-zcorrection='true'
+# zcorrection='true'
 
 #
 # Syntax-Highlighting
@@ -42,7 +46,6 @@ zcorrection='true'
 # For (u)rxvt and gnome-terminal users,
 # removing the 'cursor' highlighter will fix the disappearing cursor problem
 zhighlighters=(main brackets cursor)
-
 
 #
 # SSH
@@ -61,5 +64,3 @@ zhighlighters=(main brackets cursor)
 
 # Load any helper scripts as defined here
 #zpacman_helper=(aur)
-
-# EOF

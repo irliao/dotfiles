@@ -1,24 +1,27 @@
 {
 	"bootstrapped": true,
+	"in_process_packages":
+	[
+	],
 	"installed_packages":
 	[
-		"Alignment",
-		"AutoFileName",
-		"BracketHighlighter",
-		"Color Highlighter",
-		"ColorPicker",
-		"DashDoc",
-		"Git",
-		"GitGutter",
+		"Babel",
+		"Base16 Color Schemes",
+		"ESLint",
 		"Gruvbox Dark",
-		"JsFormat",
+		"JSX",
 		"Markdown Preview",
+		"Monokai - Spacegray",
 		"Monokai JSON+",
+		"Origami",
 		"Package Control",
-		"Pretty JSON",
-		"SideBarEnhancements",
-		"Tag",
-		"Terminal",
-		"VimL"
+		"ReactJS",
+		"SublimeLinter",
+		"SublimeLinter-jsxhint",
+		"Theme - Monokai",
+		"Theme - Spaceblack",
+		"Theme - Spacegray",
+		"VimL",
+		"Vintageous"
 	]
 }

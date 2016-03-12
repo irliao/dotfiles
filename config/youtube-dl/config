@@ -1,7 +1,4 @@
-
--x
+--extract-audio
 --no-mtime
--o ~/Downloads/%(title)s.%(ext)s
---restrict-filenames
--f mp3
-
+--audio-format mp3
+-o ~/Music/YouTube\ Songs/%(title)s.%(ext)s
