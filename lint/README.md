@@ -1,0 +1,1 @@
+* Lint for languages: JavaScript

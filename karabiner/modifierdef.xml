@@ -1,0 +1,60 @@
+<?xml version="1.0"?>
+<root>
+  <modifierdef>VM_SUPER</modifierdef>
+  <modifierdef>VM_HYPER</modifierdef>
+
+  <item>
+    <name>Capslock / Command_R to Super</name>
+    <appendix>* Capslock + Key to VM_SUPER</appendix>
+    <appendix>* Capslock + Key to Command + Option + Control</appendix>
+    <appendix>* Capslock to Escape</appendix>
+    <appendix></appendix>
+    <appendix>* Command_R + Key to VM_SUPER</appendix>
+    <appendix>* Command_R to Escape</appendix>
+    <appendix></appendix>
+    <appendix>* Fn + Key to VM_HYPER</appendix>
+    <appendix>* Fn to Escape</appendix>
+    <identifier>private.modifierdef</identifier>
+
+    <!-- Capslock -->
+    <autogen>
+      --KeyOverlaidModifier--
+      KeyCode::F19, 
+      KeyCode::VK_MODIFIER_VM_SUPER, ModifierFlag::COMMAND_L | ModifierFlag::OPTION_L | ModifierFlag::CONTROL_L,
+      KeyCode::ESCAPE
+    </autogen>
+
+    <!-- Commnd_R -->
+    <autogen>
+      --KeyOverlaidModifier--
+      KeyCode::COMMAND_R,
+      KeyCode::VK_MODIFIER_VM_SUPER,
+      KeyCode::ESCAPE
+    </autogen>
+
+    <!-- Fn -->
+    <autogen>
+      --KeyOverlaidModifier--
+      KeyCode::FN, 
+      KeyCode::VK_MODIFIER_VM_HYPER, ModifierFlag::COMMAND_L | ModifierFlag::OPTION_L | ModifierFlag::CONTROL_L | ModifierFlag::SHIFT_L,
+      KeyCode::ESCAPE
+    </autogen>
+
+    <!-- Fn -->
+<!--     <autogen>
+      __DoublePressModifier__ 
+      KeyCode::FN,
+      KeyCode::FN, 
+      KeyCode::VK_STICKY_VM_SUPER
+    </autogen> -->
+
+<!--   </item>
+    <item>
+    <name>Change right option key to tab key</name>
+    <identifier>private.right_option_key_to_tab_key</identifier>
+    change right option key (0x3d) to tab key (0x30)
+    <autogen>__KeyToKey__ KeyCode::RawValue::0x3d, KeyCode::RawValue::0x30</autogen> -->
+  </item>
+</root>
+
+<!-- EOF -->

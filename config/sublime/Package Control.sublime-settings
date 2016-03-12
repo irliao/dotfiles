@@ -1,0 +1,24 @@
+{
+	"bootstrapped": true,
+	"installed_packages":
+	[
+		"Alignment",
+		"AutoFileName",
+		"BracketHighlighter",
+		"Color Highlighter",
+		"ColorPicker",
+		"DashDoc",
+		"Git",
+		"GitGutter",
+		"Gruvbox Dark",
+		"JsFormat",
+		"Markdown Preview",
+		"Monokai JSON+",
+		"Package Control",
+		"Pretty JSON",
+		"SideBarEnhancements",
+		"Tag",
+		"Terminal",
+		"VimL"
+	]
+}

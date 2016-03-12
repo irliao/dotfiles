@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<root>
+  <appdef>
+    <appname>APPSTORE</appname>
+    <equal>com.apple.appstore</equal>
+  </appdef>
+
+  <appdef>
+    <appname>ALTERNOTE</appname>
+    <equal>com.Alternote</equal>
+  </appdef>
+
+  <appdef>
+    <appname>EVERNOTE</appname>
+    <equal>com.evernote.Evernote</equal>
+  </appdef>
+
+  <appdef>
+    <appname>SAFARI</appname>
+    <equal>com.apple.Safari</equal>
+  </appdef>
+
+  <appdef>
+    <appname>SUBLIME</appname>
+    <equal>com.sublimetext.2</equal>
+  </appdef>
+</root>
+
+<!-- EOF -->

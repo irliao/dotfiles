@@ -1,0 +1,132 @@
+<?xml version="1.0"?>
+<root>
+  <!-- Apps -->
+  <vkopenurldef>
+    <name>KeyCode::VK_OPEN_URL_APP_Chrome</name>
+    <url type="file">/Applications/Google Chrome.app</url>
+  </vkopenurldef>
+  <vkopenurldef>
+    <name>KeyCode::VK_OPEN_URL_APP_Evernote</name>
+    <url type="file">/Applications/Evernote.app</url>
+  </vkopenurldef>
+  <vkopenurldef>
+    <name>KeyCode::VK_OPEN_URL_APP_Messenger</name>
+    <url type="file">/Applications/Messenger.app</url>
+  </vkopenurldef>
+  <vkopenurldef>
+    <name>KeyCode::VK_OPEN_URL_APP_Qiyi</name>
+    <url type="file">/Applications/爱奇艺.app</url>
+  </vkopenurldef>  
+    <vkopenurldef>
+    <name>KeyCode::VK_OPEN_URL_APP_Word</name>
+    <url type="file">/Applications/Microsoft Word.app</url>
+  </vkopenurldef>  
+  <vkopenurldef>
+    <name>KeyCode::VK_OPEN_URL_APP_SystemPreferences</name>
+    <url type="file">/Applications/System Preferences.app</url>
+  </vkopenurldef>  
+
+  <item>
+	<name>Remap Fn to Hyper or Fn</name>
+	<appendix>Fn to Control + Shift + Option + Command.</appendix>
+	<identifier>private.fn.hyper</identifier>
+	<autogen>
+		--KeyOverlaidModifier--
+		KeyCode::FN, 
+		KeyCode::COMMAND_L,
+		ModifierFlag::OPTION_L | ModifierFlag::CONTROL_L | ModifierFlag::SHIFT_L,
+		KeyCode::FN
+	</autogen>
+  </item>
+	<item>
+		<name>CapsLock to Super or Escape</name>
+		<appendix>Hold CapsLock to Super, tap to Escape</appendix>
+		<identifier>private.capslock.super.escape</identifier>
+		<autogen>
+			--KeyOverlaidModifier--
+			KeyCode::F19, <!-- in Seil, CapsLock is mapped to 80, which is F19 -->
+			KeyCode::COMMAND_L,
+			ModifierFlag::OPTION_L | ModifierFlag::CONTROL_L,
+			KeyCode::ESCAPE
+		</autogen>
+	</item>
+
+    <item>
+		<name>Option-V to Paste in Finder</name>
+		<appendix>Press Alt/Option + V to Paste using Command + Option + V</appendix>
+		<identifier>private.finder.paste</identifier>
+        <only>FINDER</only>
+		<autogen>
+			--KeyToKey--
+			KeyCode::V, ModifierFlag::OPTION_L,
+			KeyCode::V, ModifierFlag::COMMAND_L | ModifierFlag::OPTION_L
+		</autogen>
+	</item>
+
+    <item>
+      <name>Shift+Delete to Forward Delete (if no other modifiers pressed)</name>
+      <identifier>private.shift_delete_forward</identifier>
+      <autogen>
+        __KeyToKey__
+        KeyCode::DELETE, MODIFIERFLAG_EITHER_LEFT_OR_RIGHT_SHIFT | ModifierFlag::NONE,
+        KeyCode::FORWARD_DELETE,
+      </autogen>
+    </item>
+
+	<item>
+		<name>Hyper + Key to open App</name>
+		<appendix>* Hyper + C to open Google Chrome</appendix>
+		<appendix>* Hyper + F to open Finder</appendix>
+		<appendix>* Hyper + M to open Messenger</appendix>
+		<appendix>* Hyper + N to open Evernote</appendix>
+		<appendix>* Hyper + Q to open iQiyi</appendix>
+		<appendix>* Hyper + W to open Word</appendix>
+		<appendix>* Hyper + , to open System Preferences</appendix>
+		<identifier>private.hyper.app</identifier>
+		<autogen>
+			--KeyToKey--
+			KeyCode::C,
+			ModifierFlag::SHIFT_L, ModifierFlag::OPTION_L, ModifierFlag::CONTROL_L, ModifierFlag::COMMAND_L,
+			KeyCode::VK_OPEN_URL_APP_Chrome, ModifierFlag::NONE
+		</autogen>
+		<autogen>
+			--KeyToKey--
+			KeyCode::F, 
+			ModifierFlag::COMMAND_L, ModifierFlag::OPTION_L, ModifierFlag::CONTROL_L, ModifierFlag::SHIFT_L,
+			KeyCode::VK_OPEN_URL_APP_Finder, ModifierFlag::NONE
+		</autogen>
+		<autogen>
+			--KeyToKey--
+			KeyCode::M, 
+			ModifierFlag::COMMAND_L, ModifierFlag::OPTION_L, ModifierFlag::CONTROL_L, ModifierFlag::SHIFT_L,
+			KeyCode::VK_OPEN_URL_APP_Messenger, ModifierFlag::NONE
+		</autogen>
+
+	    <autogen>
+			--KeyToKey--
+			KeyCode::N, 
+			ModifierFlag::COMMAND_L, ModifierFlag::OPTION_L, ModifierFlag::CONTROL_L, ModifierFlag::SHIFT_L,
+			KeyCode::VK_OPEN_URL_APP_Evernote, ModifierFlag::NONE
+		</autogen>
+		<autogen>
+			--KeyToKey--
+			KeyCode::Q,
+			ModifierFlag::SHIFT_L, ModifierFlag::OPTION_L, ModifierFlag::CONTROL_L, ModifierFlag::COMMAND_L,
+			KeyCode::VK_OPEN_URL_APP_Qiyi, ModifierFlag::NONE
+		</autogen>
+		<autogen>
+			--KeyToKey--
+			KeyCode::W,
+			ModifierFlag::SHIFT_L, ModifierFlag::OPTION_L, ModifierFlag::CONTROL_L, ModifierFlag::COMMAND_L,
+			KeyCode::VK_OPEN_URL_APP_Word, ModifierFlag::NONE
+		</autogen>
+		<autogen>
+			--KeyToKey--
+			KeyCode::COMMA,
+			ModifierFlag::SHIFT_L, ModifierFlag::OPTION_L, ModifierFlag::CONTROL_L, ModifierFlag::COMMAND_L,
+			KeyCode::VK_OPEN_URL_APP_SystemPreferences, ModifierFlag::NONE
+		</autogen>                
+	</item>
+</root>
+
+<!-- EOF -->

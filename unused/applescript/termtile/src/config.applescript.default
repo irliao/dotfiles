@@ -1,0 +1,6 @@
+set _config to {}
+set _config to _config & {marginV:0}
+set _config to _config & {marginH:0}
+
+
+return _config
