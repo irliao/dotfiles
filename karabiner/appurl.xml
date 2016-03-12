@@ -112,6 +112,11 @@
     	<url>hammerspoon://safari?someParam=openExtensionBuilder</url>
   	</vkopenurldef>
 
+  	<vkopenurldef>
+    	<name>KeyCode::VK_OPEN_URL_HS_openSafariTechExtensionBuilder</name>
+    	<url>hammerspoon://safari?someParam=openExtensionBuilder</url>
+  	</vkopenurldef>
+
 	<vkopenurldef>
 		<name>KeyCode::VK_OPEN_URL_SHELL_date_pbcopy</name>
 		<url type="shell">
@@ -172,5 +177,3 @@
 		</url>
 	</vkopenurldef>
 </root>
-
-<!-- EOF -->

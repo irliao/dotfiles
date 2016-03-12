@@ -1,0 +1,15 @@
+X Lossless Decoder (XLD) is a decoder which supports various lossless audio format. It runs on Mac OS X 10.4 and later.
+
+How to use
+
+Decode file
+Drag & drop the file you want to decode on the icon of XLD, or open the file from a dialog by choosing 'File' -> 'Open' . Soon XLD begins decoding if the opened file is supported by XLD.
+Output format and destination can be selected from the preference pane.
+
+Split file with cue sheet
+Open the cue sheet as described above. Then XLD automatically open the file to be split if it is associated with the cue sheet. Otherwise, you have to choose the file to be split through the file open dialog. You will see a track list window, and you can select tracks to be extracted by checkboxes. Multiple check/uncheck operation can be done by the contextual menu. Finally press "Extract" button to begin processing.
+
+Play file
+To play a file, please select "Show Player" from Window menu and drag file into the window appeared. If you want to play tracks in a cue sheet, open the cue sheet and double-click the track you want to play in the track window.
+
+E-mail: tmkk@smoug.net

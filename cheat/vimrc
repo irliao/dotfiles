@@ -1,0 +1,11 @@
+# Profiling startup time
+vim --startuptime /tmp/startup.log +q && vim /tmp/startup.log
+
+# Mappings
+Recursive	Non-recursive	Unmap	Modes
+map	:noremap	:unmap	normal, visual, operator-pending
+nmap	:nnoremap	:nunmap	normal
+xmap	:xnoremap	:xunmap	visual
+cmap	:cnoremap	:cunmap	command-line
+omap	:onoremap	:ounmap	operator-pending
+imap	:inoremap	:iunmap	insert

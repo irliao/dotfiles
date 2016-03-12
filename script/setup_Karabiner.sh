@@ -9,5 +9,3 @@ if [[ -f $fPath ]]; then
 fi
 
 echo "Completed Karabiner setup"
-
-# EOF

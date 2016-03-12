@@ -1,1 +1,8 @@
-.DS_Store
+config/configstore/
+config/filezilla/
+config/workshopper
+node_modules/
+tmux/plugins/
+vim/bundle/
+lbin/
+*.DS_Store

@@ -1,11 +1,12 @@
 {
-	"color_scheme": "Packages/Color Scheme - Default/Monokai.tmTheme",
+	"color_scheme": "Packages/User/SublimeLinter/Monokai (SL).tmTheme",
 	"font_face": "Hack",
 	"font_size": 12,
 	"ignored_packages":
 	[
-		"Sublime​Linter",
-		"Vintage"
+		"Vintage",
+		"Vintageous"
 	],
-	"tab_size": 4
+	"tab_size": 2,
+	"theme": "Spacegray Eighties.sublime-theme"
 }

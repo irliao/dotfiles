@@ -1,0 +1,9 @@
+windows:
+  - name: sample-two-panes-focus-right
+    root: ~/
+    layout: even-horizontal
+    panes:
+      - echo "pane 1"
+      - commands:
+          - echo "pane 2"
+        focus: true

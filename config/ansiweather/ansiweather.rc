@@ -1,0 +1,7 @@
+# Symlink to ~/.ansiweatherrc
+location:Hamburg,DE
+units:metric
+daylight:true
+dateformat:%a %d %b
+timeformat:%b %d %R
+symbols:true
