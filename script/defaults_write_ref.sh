@@ -1,45 +1,8 @@
-#
-# Defaults Write Commands (Mac OS X Customization)
-# 
-# Source: https://github.com/dylang/dotfiles/blob/master/active/.osx-defaults
-#
-# INSPIRATION:
-#   - https://github.com/mathiasbynens/dotfiles/blob/master/.osx
-#
-
-# guard from doing this more than once
-[[ -f $HOME/.runonce/$(basename $0) ]] && return
-
-###############################################################################
-# System
-###############################################################################
-
-# timezone; see `systemsetup -listtimezones` for other values
-
-systemsetup -settimezone "America/Denver" > /dev/null
-
 ###############################################################################
 # Screen
 ###############################################################################
 
-# enable subpixel font rendering on non-apple LCDs
 
-defaults write NSGlobalDomain AppleFontSmoothing -int 2
-
-# enable HiDPI display modes (requires restart)
-
-sudo defaults write /Library/Preferences/com.apple.windowserver DisplayResolutionEnabled -bool true
-
-###############################################################################
-# Finder
-###############################################################################
-
-# show icons for hard drives, servers, and removable media on the desktop
-
-defaults write com.apple.finder ShowExternalHardDrivesOnDesktop -bool true
-defaults write com.apple.finder ShowHardDrivesOnDesktop -bool true
-defaults write com.apple.finder ShowMountedServersOnDesktop -bool true
-defaults write com.apple.finder ShowRemovableMediaOnDesktop -bool true
 
 # empty trash securely by default
 
@@ -178,14 +141,6 @@ defaults write NSGlobalDomain PMPrintingExpandedStateForPrint -bool true
 
 defaults write com.apple.print.PrintingPrefs "Quit When Finished" -bool true
 
-# disable the “Are you sure you want to open this application?” dialog
-
-defaults write com.apple.LaunchServices LSQuarantine -bool false
-
-# restart automatically if the computer freezes
-
-systemsetup -setrestartfreeze on
-
 # disable notification center and remove the menu bar icon
 
 launchctl unload -w /System/Library/LaunchAgents/com.apple.notificationcenterui.plist 2> /dev/null
@@ -262,35 +217,3 @@ defaults write com.apple.TimeMachine DoNotOfferNewDisksForBackup -bool true
 
 hash tmutil &> /dev/null && sudo tmutil disablelocal
 
-###############################################################################
-# Google Chrome & Google Chrome Canary
-###############################################################################
-
-# allow installing user scripts via GitHub or Userscripts.org
-
-defaults write com.google.Chrome ExtensionInstallSources -array "https://*.github.com/*" "http://userscripts.org/*"
-defaults write com.google.Chrome.canary ExtensionInstallSources -array "https://*.github.com/*" "http://userscripts.org/*"
-
-###############################################################################
-# SizeUp.app
-###############################################################################
-
-# start at login
-
-defaults write com.irradiatedsoftware.SizeUp StartAtLogin -bool true
-
-# don’t show the preferences window on next start
-
-defaults write com.irradiatedsoftware.SizeUp ShowPrefsOnNextStart -bool false
-
-# restart
-
-killall "SizeUp" > /dev/null 2>&1
-open -a "Sizeup"
-
-###############################################################################
-# done
-###############################################################################
-
-mkdir -p $HOME/.runonce
-date -u +'%Y%m%dT%H%M%SZ' > $HOME/.runonce/$(basename $0)

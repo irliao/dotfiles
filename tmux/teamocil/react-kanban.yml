@@ -1,0 +1,18 @@
+windows:
+  - name: kanban
+    layout: 7902,181x51,0,0{110x51,0,0,40,70x51,111,0[70x25,111,0,41,70x25,111,26,42]}
+    panes:
+      - commands:
+          - cd $DEVPATH/learn-js/react-js
+          - vim ./kanban-app
+        focus: true
+      - commands:
+          - cd $DEVPATH/learn-js/react-js/kanban-app
+          - npm install
+          - npm start
+        focus: false
+      - commands:
+          - cd $DEVPATH/learn-js/react-js/kanban-server
+          - npm install
+          - npm start
+        focus: false

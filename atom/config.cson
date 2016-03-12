@@ -1,0 +1,17 @@
+"*":
+  core:
+    audioBeep: false
+    projectHome: "/Users/irliao/Developments"
+    themes: [
+      "atom-dark-ui"
+      "base16-tomorrow-dark-theme"
+    ]
+  editor:
+    fontFamily: "Hack"
+    fontSize: 12
+    lineHeight: 1
+    showIndentGuide: true
+  "exception-reporting":
+    userId: "f9ff38a2-e663-201e-4046-caea3e3ad0bf"
+  welcome:
+    showOnStartup: false

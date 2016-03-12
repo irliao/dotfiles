@@ -16,5 +16,3 @@ cat <<-EOF
 Logging out.
  -- $(whoami)
 EOF
-
-# EOF

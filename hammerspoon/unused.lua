@@ -1,4 +1,4 @@
--- Lab for new custom features
+-- Unused code saved for archiving
 
 ------------------------------------------------------------------------
 -- *** If using this, save and import this snippet as undo.lua
@@ -267,6 +267,37 @@ function getAllValidWindows ()
     end
     return windows
 end
----------------------------------------------------------------
 
--- EOF
+---------------------------------------------------------------
+-- *** Obsolete due to newer Hammerspoon core implementation
+borderColor={["red"]=250,["green"]=250,["blue"]=0,["alpha"]=1} -- {["red"]=250,["green"]=0,["blue"]=0,["alpha"]=1} -- red
+local border = nil -- drawn border around focused window
+-- Draw border around focused window
+function windowHighlight()
+    eraseHighlight()
+    local win = (hs.window.focusedWindow() and hs.window.focusedWindow() or hs.window.frontmostWindow()) 
+    if win == nil or win:isFullScreen() or win:isMinimized() or (not win:isStandard()) or (not win:isVisible()) then 
+        return
+    end
+
+    local f = win:frame()
+    local fx = f.x - 0
+    local fy = f.y - 0
+    local fw = f.w + 0
+    local fh = f.h + 0
+
+    border = hs.drawing.rectangle(hs.geometry.rect(fx, fy, fw, fh))
+    border:setStrokeWidth(5)
+    border:setStrokeColor(borderColor)
+    border:setRoundedRectRadii(5.0, 5.0)
+    border:setStroke(true):setFill(false)
+    border:setLevel("floating")
+    border:show()
+end
+
+-- Erase border from drawBorder()
+function eraseHighlight()
+    if border then 
+        border:delete() 
+    end
+end

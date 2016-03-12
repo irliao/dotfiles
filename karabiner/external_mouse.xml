@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<root>
+    <item>
+	    <name>External Mouse Settings</name>
+	    <appendix>* Forward Button to Browser Go Forward</appendix>
+	    <appendix>* Back Button to Browser Go Back</appendix>
+	    <identifier>external.mouse.buttons</identifier>
+	    <autogen>
+	      __KeyToKey__
+	      PointingButton::BUTTON5,
+	      KeyCode::CURSOR_RIGHT, ModifierFlag::COMMAND_L
+	    </autogen>
+	    <autogen>
+	      __KeyToKey__
+	      PointingButton::BUTTON4,
+	      KeyCode::CURSOR_LEFT, ModifierFlag::COMMAND_L
+	    </autogen>
+    </item>
+</root>

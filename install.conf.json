@@ -1,0 +1,56 @@
+[
+    {
+        "defaults": {
+            "link": {
+                "relink": true
+            }
+        }
+    },
+    {
+        "clean": ["~"]
+    },
+    {
+        "shell": [
+          "git submodule update --remote dotbot"
+        ]
+    },
+    {
+        "link": {
+            "~/.dotfiles": "",
+            "~/.amethyst": "amethyst/amethyst.json",
+            "~/.atom": "atom",
+            "~/.bin": "bin",
+            "~/.cheat": "cheat",
+            "~/.config": "config",
+            "~/.editorconfig": "vim/editorconfig",
+            "~/.eslintrc": "node/eslintrc.json",
+            "~/.gitconfig": "git/gitconfig",
+            "~/.gitignore_global": "git/gitignore_global",
+            "~/.gvimrc": "vim/gvimrc.vim",
+            "~/.hammerspoon": "hammerspoon",
+            "~/.jsbeautifyrc": "node/jsbeautifyrc.json",
+            "~/.nvmrc": "node/nvmrc",
+            "~/.spacemacs": "emacs/spacemacs.el",
+            "~/.teamocil": "tmux/teamocil",
+            "~/.tmux": "tmux",
+            "~/.tmux.conf": "tmux/tmux.conf",
+            "~/.vim": "vim",
+            "~/.vimrc": "vim/vimrc.vim",
+            "~/.zalias": "zsh/zalias.zsh",
+            "~/.zfunction": "zsh/zfunction.zsh",
+            "~/.zim/modules/prompt/functions/prompt_mingit_setup": "zsh/prompts/mingit.zsh",
+            "~/.zimrc": "zsh/zim/zimrc.zsh",
+            "~/.zlogin": "zsh/zim/zlogin.zsh",
+            "~/.zprompt": "zsh/prompts/mingit.zsh",
+            "~/.zshrc": "zsh/zim/zshrc.zsh",
+            "~/.ztmux": "zsh/zim/ztmux.zsh"
+        }
+    },
+    {
+        "shell": [
+          "git submodule update --init --recursive",
+          "Installing submodules"
+        ]
+
+    }
+]

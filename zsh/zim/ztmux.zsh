@@ -1,3 +1,5 @@
+#!/bin/zsh
+
 #
 # Defines tmux aliases and provides for auto launching it at start-up.
 # Source: https://github.com/sorin-ionescu/prezto/blob/master/modules/tmux/init.zsh
@@ -12,7 +14,7 @@ fi
 # Auto Start
 #
 
-if [[ "$TERM_PROGRAM" = 'iTerm.app' ]]; then
+if [[ "$TERM_PROGRAM" == 'iTerm.app' ]]; then
   tmux_iterm_integration='-CC'
 fi
 
@@ -27,8 +29,7 @@ if [[ -z "$TMUX" && -z "$EMACS" && -z "$VIM" ]]; then
       set-option -t "$tmux_session" destroy-unattached off &> /dev/null
   fi
 
+  # TODO: start tmux with -2 option to support 256 colors
   # Attach to the 'zim' session or to the last session used.
-  exec tmux $tmux_iterm_integration attach-session
+  exec tmux $tmux_iterm_integration attach # use: attach vs attach-session
 fi
-
-# EOF

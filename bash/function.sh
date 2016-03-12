@@ -72,5 +72,3 @@ sh_ask() {
 # ask "Do you want to do such-and-such?" && said_yes
 
 # ask "Do you want to do such-and-such?" || said_no
-
-# EOF

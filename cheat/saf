@@ -1,0 +1,23 @@
+# Safari Extension Development
+
+# Reverse engineer an extension
+xar -xf 'TheExtensionName.safariextz'
+
+# User directory
+/Users/$USER/Library/Safari/
+
+# Cache directory
+/Users/$USER/Library/Caches/com.apple.Safari/
+
+# History, Downloads, LastSession .plist files in
+/Users/$USER/Library/Safari/
+
+# Cache.db (SQLite format) stored in
+/Users/$USER/Library/Caches/com.apple.Safari/
+
+# Converting .plist to readable XML
+plutil -convert xml1 ExampleBinary.plist -o ExampleBinary.xml
+
+# Converting binary .plist to XML
+plutil -convert binary1 Example.plist
+

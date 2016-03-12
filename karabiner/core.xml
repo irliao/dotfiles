@@ -10,9 +10,9 @@
 	  <autogen>__SimultaneousKeyPresses__ KeyCode::CURSOR_DOWN, KeyCode::CURSOR_LEFT, KeyCode::END</autogen>
 	  <autogen>__SimultaneousKeyPresses__ KeyCode::CURSOR_DOWN, KeyCode::CURSOR_RIGHT, KeyCode::PAGEDOWN</autogen>
 	</item>
-	
+
 	<item>
-		<name>Shortcuts in Sublime Text 2</name>		
+		<name>Shortcuts in Sublime Text</name>
 		<appendix>* Option_L + L to run toggle files side bar</appendix>
 		<appendix>* Option_L + P to run Package Control</appendix>
 		<appendix>* Option_L + T to run Sublime console</appendix>
@@ -62,91 +62,115 @@
 		<appendix>* Option_R + ] to show next tab</appendix>
 		<appendix>* Option_R + SPACE to go to search bar</appendix>
 		<identifier>private.shortcuts.safari</identifier>
-		<only> SAFARI </only>
 
-		<!-- Show Extension Builder via Hammerspoon -->
-	    <autogen>
-	      --KeyToKey--
-	      KeyCode::B, ModifierFlag::OPTION_R | ModifierFlag::NONE,
-	      KeyCode::VK_OPEN_URL_HS_openSafariExtensionBuilder | ModifierFlag::NONE
-	    </autogen>
+		<block>
+			<only> SAFARI, SAFARI_TECH</only>
+			<!-- Bookmark page -->
+			<autogen>
+				--KeyToKey--
+				KeyCode::S, ModifierFlag::OPTION_R | ModifierFlag::NONE,
+				KeyCode::D, ModifierFlag::COMMAND_L | ModifierFlag::NONE
+			</autogen>
 
-		<!-- Bookmark page -->
-		<autogen>
-			--KeyToKey--
-			KeyCode::S, ModifierFlag::OPTION_R | ModifierFlag::NONE,
-			KeyCode::D, ModifierFlag::COMMAND_L | ModifierFlag::NONE
-		</autogen>
+			<!-- Add page to Read List-->
+			<autogen>
+				--KeyToKey--
+				KeyCode::R, ModifierFlag::OPTION_R | ModifierFlag::NONE,
+				KeyCode::D, ModifierFlag::COMMAND_L | ModifierFlag::NONE
+			</autogen>
 
-		<!-- Add page to Read List-->
-		<autogen>
-			--KeyToKey--
-			KeyCode::R, ModifierFlag::OPTION_R | ModifierFlag::NONE,
-			KeyCode::D, ModifierFlag::COMMAND_L | ModifierFlag::NONE
-		</autogen>
+			<!-- Empty caches -->
+			<autogen>
+				--KeyToKey--
+				KeyCode::E, ModifierFlag::OPTION_R | ModifierFlag::NONE,
+				KeyCode::E, ModifierFlag::COMMAND_L | ModifierFlag::OPTION_L
+			</autogen>
 
-		<!-- Empty caches -->
-		<autogen>
-			--KeyToKey--
-			KeyCode::E, ModifierFlag::OPTION_R | ModifierFlag::NONE,
-			KeyCode::E, ModifierFlag::COMMAND_L | ModifierFlag::OPTION_L
-		</autogen>
+			<!-- Toggle bookmarks sidebar -->
+			<autogen>
+				--KeyToKey--
+				KeyCode::L, ModifierFlag::OPTION_R | ModifierFlag::NONE,
+				KeyCode::L, ModifierFlag::COMMAND_L | ModifierFlag::SHIFT_L
+			</autogen>
 
-		<!-- Toggle bookmarks sidebar -->
-		<autogen>
-			--KeyToKey--
-			KeyCode::L, ModifierFlag::OPTION_R | ModifierFlag::NONE,
-			KeyCode::L, ModifierFlag::COMMAND_L | ModifierFlag::SHIFT_L
-		</autogen>
+			<!-- Show web inspector -->
+			<autogen>
+				--KeyToKey--
+				KeyCode::I, ModifierFlag::OPTION_R | ModifierFlag::NONE,
+				KeyCode::I, ModifierFlag::COMMAND_L | ModifierFlag::OPTION_L
+			</autogen>
 
-		<!-- Show web inspector -->
-		<autogen>
-			--KeyToKey--
-			KeyCode::I, ModifierFlag::OPTION_R | ModifierFlag::NONE,
-			KeyCode::I, ModifierFlag::COMMAND_L | ModifierFlag::OPTION_L
-		</autogen>
+			<!-- Show previous tab -->
+			<autogen>
+				--KeyToKey--
+				KeyCode::BRACKET_LEFT, ModifierFlag::OPTION_R | ModifierFlag::NONE,
+				KeyCode::TAB, ModifierFlag::CONTROL_L | ModifierFlag::SHIFT_L
+			</autogen>
 
-		<!-- Show previous tab -->
-		<autogen>
-			--KeyToKey--
-			KeyCode::BRACKET_LEFT, ModifierFlag::OPTION_R | ModifierFlag::NONE,
-			KeyCode::TAB, ModifierFlag::CONTROL_L | ModifierFlag::SHIFT_L
-		</autogen>
-		<!-- Show next tab -->
-		<autogen>
-			--KeyToKey--
-			KeyCode::BRACKET_RIGHT, ModifierFlag::OPTION_R | ModifierFlag::NONE,
-			KeyCode::TAB, ModifierFlag::CONTROL_L
-		</autogen>
+			<!-- Show next tab -->
+			<autogen>
+				--KeyToKey--
+				KeyCode::BRACKET_RIGHT, ModifierFlag::OPTION_R | ModifierFlag::NONE,
+				KeyCode::TAB, ModifierFlag::CONTROL_L
+			</autogen>
 
-		<!-- Search bar -->
-		<autogen>
-			--KeyToKey--
-			KeyCode::SPACE, ModifierFlag::OPTION_R | ModifierFlag::NONE,
-			KeyCode::L, ModifierFlag::COMMAND_L | ModifierFlag::NONE
-		</autogen>
+			<!-- Search bar -->
+			<autogen>
+				--KeyToKey--
+				KeyCode::SPACE, ModifierFlag::OPTION_R | ModifierFlag::NONE,
+				KeyCode::L, ModifierFlag::COMMAND_L | ModifierFlag::NONE
+			</autogen>
+		</block>
+
+		<!-- Show extension builder for Safari via Hammerspoon -->
+		<block>
+			<only>SAFARI</only>
+		    <autogen>
+		      --KeyToKey--
+		      KeyCode::B, ModifierFlag::OPTION_R | ModifierFlag::NONE,
+		      KeyCode::VK_OPEN_URL_HS_openSafariExtensionBuilder | ModifierFlag::NONE
+		    </autogen>
+		</block>
+
+		<!-- Show extension builder for Safari Technology Preview via Hammerspoon -->
+		<block>
+			<only>SAFARI_TECH</only>
+		    <autogen>
+		      --KeyToKey--
+		      KeyCode::B, ModifierFlag::OPTION_R | ModifierFlag::NONE,
+		      KeyCode::VK_OPEN_URL_HS_openSafariTechExtensionBuilder | ModifierFlag::NONE
+		    </autogen>
+		</block>
 
 	</item>
 
 	<item>
-		<name>Shortcuts in Tmux</name>
-		<appendix>* Option as Prefix (Control + S)</appendix>
-		<appendix>* Press and release Option to Prefix</appendix>
+		<name>Shortcuts in Terminal</name>
+		<appendix>* Command_L to send Tmux Prefix (Control + S)</appendix>
+		<appendix>* Command_R to send Vim MapLeader (,)</appendix>
+		<appendix>* Control_L + Tab to send Tmux Prefix (Control + S)</appendix>
 		<identifier>private.shortcuts.tmux</identifier>
 		<only>TERMINAL</only>
- 		<!-- Prefix -->
+ 		<!-- Tmux Prefix -->
 		<autogen>
 			--KeyOverlaidModifier--
-			KeyCode::OPTION_L,
-			KeyCode::OPTION_L,
+			KeyCode::COMMAND_L,
+			KeyCode::COMMAND_L,
 			KeyCode::S, ModifierFlag::CONTROL_L | ModifierFlag::NONE
-		</autogen>		
+		</autogen>
+		<!-- Vim MapLeader -->
 		<autogen>
 			--KeyOverlaidModifier--
-			KeyCode::OPTION_R,
-			KeyCode::OPTION_R,
-			KeyCode::S, ModifierFlag::CONTROL_L | ModifierFlag::NONE
-		</autogen>		
+			KeyCode::COMMAND_R,
+			KeyCode::COMMAND_R,
+			KeyCode::COMMA, ModifierFlag::NONE
+		</autogen>
+    <!-- External keyboard access to Tmux prefix -->
+    <autogen>
+      --KeyToKey--
+      KeyCode::TAB, ModifierFlag::CONTROL_L | ModifierFlag::NONE,
+      KeyCode::S, ModifierFlag::CONTROL_L | ModifierFlag::NONE
+    </autogen>
 	</item>
 
 	<item>
@@ -219,35 +243,35 @@
 		<appendix>* Shifts + Key will not insert ()</appendix>
 		<identifier>private.shifts_to_parens_qwerty</identifier>
 		<autogen>
-			--KeyOverlaidModifier-- 
-			KeyCode::SHIFT_R, ModifierFlag::SHIFT_R | 
-			ModifierFlag::NONE, KeyCode::SHIFT_R, 
+			--KeyOverlaidModifier--
+			KeyCode::SHIFT_R, ModifierFlag::SHIFT_R |
+			ModifierFlag::NONE, KeyCode::SHIFT_R,
 			KeyCode::KEY_0, ModifierFlag::SHIFT_L
 		</autogen>
 		<autogen>
-			--KeyOverlaidModifier-- 
-			KeyCode::SHIFT_L, ModifierFlag::SHIFT_L | 
-			ModifierFlag::NONE, KeyCode::SHIFT_L, 
+			--KeyOverlaidModifier--
+			KeyCode::SHIFT_L, ModifierFlag::SHIFT_L |
+			ModifierFlag::NONE, KeyCode::SHIFT_L,
 			KeyCode::KEY_9, ModifierFlag::SHIFT_L
 		</autogen>
 
-		<!-- Remap the "rolls" of () and )( because it's too easy to hit one before finishing the other, 
+		<!-- Remap the "rolls" of () and )( because it's too easy to hit one before finishing the other,
 		and there's no other reason to be pressing both shift keys at once anyway -->
 		<autogen>
-			--KeyToKey-- 
-			KeyCode::SHIFT_L, ModifierFlag::SHIFT_R, 
+			--KeyToKey--
+			KeyCode::SHIFT_L, ModifierFlag::SHIFT_R,
 			KeyCode::KEY_0, ModifierFlag::SHIFT_L, KeyCode::KEY_9, ModifierFlag::SHIFT_L
 		</autogen>
 		<autogen>
-			--KeyToKey-- 
-			KeyCode::SHIFT_R, ModifierFlag::SHIFT_L, 
+			--KeyToKey--
+			KeyCode::SHIFT_R, ModifierFlag::SHIFT_L,
 			KeyCode::KEY_9, ModifierFlag::SHIFT_L, KeyCode::KEY_0, ModifierFlag::SHIFT_L
 		</autogen>
 		<!-- Remap Rshift+Space to ') ', because when typing an end paren and
 		then a space I tend to hit space before I let go of rshift. -->
 		<autogen>
-			--KeyToKey-- 
-			KeyCode::SPACE, ModifierFlag::SHIFT_R, 
+			--KeyToKey--
+			KeyCode::SPACE, ModifierFlag::SHIFT_R,
 			KeyCode::KEY_0, ModifierFlag::SHIFT_L, KeyCode::SPACE
 		</autogen>
 	</item>
@@ -259,65 +283,63 @@
 		<identifier>private.super.consumerkey</identifier>
 		<autogen>
 			--KeyToKey--
-			ConsumerKeyCode::BRIGHTNESS_DOWN, ModifierFlag::VM_SUPER, 
+			ConsumerKeyCode::BRIGHTNESS_DOWN, ModifierFlag::VM_SUPER,
 			KeyCode::F1, ModifierFlag::VM_SUPER | ModifierFlag::NONE
 		</autogen>
-		<autogen>		
+		<autogen>
 			--KeyToKey--
-			ConsumerKeyCode::BRIGHTNESS_UP, ModifierFlag::VM_SUPER, 
+			ConsumerKeyCode::BRIGHTNESS_UP, ModifierFlag::VM_SUPER,
 			KeyCode::F2, ModifierFlag::VM_SUPER | ModifierFlag::NONE
-		</autogen>	
-		<autogen>		
+		</autogen>
+		<autogen>
 			--KeyToKey--
 			KeyCode::EXPOSE_ALL, ModifierFlag::VM_SUPER,
 			KeyCode::F3, ModifierFlag::VM_SUPER | ModifierFlag::NONE
-		</autogen>	
-		<autogen>		
+		</autogen>
+		<autogen>
 			--KeyToKey--
 			KeyCode::LAUNCHPAD, ModifierFlag::VM_SUPER,
 			KeyCode::F4, ModifierFlag::VM_SUPER | ModifierFlag::NONE
-		</autogen>		
-		<autogen>		
+		</autogen>
+		<autogen>
 			--KeyToKey--
 			ConsumerKeyCode::KEYBOARDLIGHT_LOW, ModifierFlag::VM_SUPER,
 			KeyCode::F5, ModifierFlag::VM_SUPER | ModifierFlag::NONE
-		</autogen>		
-		<autogen>			
+		</autogen>
+		<autogen>
 			--KeyToKey--
 			ConsumerKeyCode::KEYBOARDLIGHT_HIGH, ModifierFlag::VM_SUPER,
 			KeyCode::F6, ModifierFlag::VM_SUPER | ModifierFlag::NONE
-		</autogen>		
-		<autogen>		
+		</autogen>
+		<autogen>
 			--KeyToKey--
 			ConsumerKeyCode::MUSIC_PREV, ModifierFlag::VM_SUPER,
 			KeyCode::F7, ModifierFlag::VM_SUPER | ModifierFlag::NONE
-		</autogen>	
-		<autogen>				
+		</autogen>
+		<autogen>
 			--KeyToKey--
 			ConsumerKeyCode::MUSIC_PLAY, ModifierFlag::VM_SUPER,
 			KeyCode::F8, ModifierFlag::VM_SUPER | ModifierFlag::NONE
 		</autogen>
-		<autogen>				
+		<autogen>
 			--KeyToKey--
 			ConsumerKeyCode::MUSIC_NEXT, ModifierFlag::VM_SUPER,
 			KeyCode::F9, ModifierFlag::VM_SUPER | ModifierFlag::NONE
 		</autogen>
-		<autogen>			
+		<autogen>
 			--KeyToKey--
 			ConsumerKeyCode::VOLUME_MUTE, ModifierFlag::VM_SUPER,
 			KeyCode::F10, ModifierFlag::VM_SUPER | ModifierFlag::NONE
-		</autogen>		
-		<autogen>		
+		</autogen>
+		<autogen>
 			--KeyToKey--
 			ConsumerKeyCode::VOLUME_DOWN, ModifierFlag::VM_SUPER,
 			KeyCode::F11, ModifierFlag::VM_SUPER | ModifierFlag::NONE
 		</autogen>
-		<autogen>					
+		<autogen>
 			--KeyToKey--
 			ConsumerKeyCode::VOLUME_UP, ModifierFlag::VM_SUPER,
 			KeyCode::F12, ModifierFlag::VM_SUPER | ModifierFlag::NONE
-		</autogen>	
+		</autogen>
 	</item>
 </root>
-
-<!-- EOF -->

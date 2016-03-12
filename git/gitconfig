@@ -1,5 +1,5 @@
 [user]
-	name = Ian Ryan Liao
+	name = Ian Liao
 	email = ianryanliao@gmail.com
 [push]
         default = simple
@@ -18,8 +18,7 @@
         smudge = git-lfs smudge %f
         required = true
 [core]
-        whitespace = fix,-indent-with-non-tab,trailing-space,cr-at-eol
-        excludesfile = ~/.gitignore
+        excludesfile = /Users/irliao/.gitignore_global
 [web]
         browser = safari
 [pager]

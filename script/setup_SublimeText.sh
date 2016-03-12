@@ -31,6 +31,10 @@ if [ -e $subl_app ]; then
     	rm $subl_pkg
     fi
     sudo ln -s ~/.dotfiles/config/sublime/Package\ Control.sublime-settings $subl_pkg
+
+    # Install Nyan Mode with font
+    wget https://github.com/wiggin15/SublimeNyan/raw/master/nyan.py -O ~/Library/Application\ Support/Sublime\ Text\ 3/Packages/User/nyan.py
+    wget https://github.com/wiggin15/SublimeNyan/raw/master/Nyan.ttf -O ~/Library/Fonts/Nyan.ttf
 fi
 
 # Sublime Text 2

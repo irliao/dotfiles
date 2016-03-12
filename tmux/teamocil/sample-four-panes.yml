@@ -1,0 +1,9 @@
+windows:
+  - name: sample-four-panes
+    root: ~/
+    layout: tiled
+    panes:
+      - echo "pane 1"
+      - echo "pane 2"
+      - echo "pane 3"
+      - echo "pane 4"

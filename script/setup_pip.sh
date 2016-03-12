@@ -4,6 +4,4 @@
 sudo easy_install pip
 
 # Set up Virtualenv for Python
-sudo pip install --upgrade virtualenv
-
-# EOF
+# sudo pip install --upgrade virtualenv
