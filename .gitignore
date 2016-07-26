@@ -7,3 +7,4 @@ tmux/plugins/
 vim/bundle/
 lbin/
 *.DS_Store
+.DS_Store
