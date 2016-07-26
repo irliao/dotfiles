@@ -55,10 +55,6 @@ alias net="netstat"
 alias mirrorsite='wget -m -k -K -E -e robots=off' # mirror a website
 alias peek='tee >(cat 1>&2)' # mirror stdout to stderr, useful for seeing data going through a pipe
 
-# Directories
-alias bs="cd ~/BitTorrent\ Sync"
-alias vm="cd ~/Virtual\ Machines"
-
 # Git
 alias gr='cd "$(git root)"' # cd to git root directory
 alias ga="git add"
@@ -85,6 +81,8 @@ alias saf="cd ${DEVPATH}/safari-extensions"
 alias web="cd ${DEVPATH}/irliao.github.io"
 alias rea="cd ${DEVPATH}/react-tutorials"
 alias ghc="cd ${DEVPATH}/clones"
+alias bs="cd ~/BitTorrent\ Sync"
+alias vm="cd ~/Virtual\ Machines"
 
 # History
 alias hs="history"
@@ -129,3 +127,4 @@ alias osxCancelAllPrinterJobs="cancel -a -"
 alias osxXCodeVersion="/usr/bin/xcodebuild -version"
 alias osxChromeNoCSR="open -a Google\ Chrome --args --disable-web-security -–allow-file-access-from-files"
 alias osxAllPortStatus="netstat -anp tcp && lsof -i tcp"
+
