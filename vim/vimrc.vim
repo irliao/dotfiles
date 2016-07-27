@@ -89,6 +89,9 @@ Plug 'ctrlpvim/ctrlp.vim' " Fuzzy file, buffer, mru, tag, etc finder
 Plug 'rking/ag.vim' " use AG in Vim faster
 Plug 'junegunn/vim-easy-align' " alignment tool
 Plug 'ervandew/supertab' " tab completion going down list
+Plug 'haya14busa/incsearch.vim' " incrementally highlights all pattern
+Plug 'tpope/vim-surround' " change surrounding (ex: parentheses, brackets, quotes, etc)
+Plug 'tpope/vim-repeat' " epeating supported plugin maps with '.'
 
 " visual
 Plug 'mhinz/vim-startify' " fancy start screen
@@ -141,11 +144,11 @@ set tenc=utf-8
 " Vim custom settings
 set encoding=utf-8
 set modeline " ???!!! something about setting vars specific to files
-set backspace=indent,eol,start " custom configure backspace
+" set backspace=indent,eol,start " custom configure backspace
+set backspace=eol,start,indent " backspacing over line breaks and start of insert
 set linespace=1
 set fileformats=unix,dos,mac " open files from mac/dos
 set exrc " load .exrc (rc for vi) if present
-set hidden " allow auto-hiding of edited buffers
 set tags+=.tags
 set shortmess=atI
 set complete-=i
@@ -154,6 +157,11 @@ set completeopt-=preview
 set autochdir " automatically set current directory to directory of last opened file
 set clipboard=unnamed " yanks to OSX clipboard instead TODO: requires Brew installed Vim
 " set paste " WARN: no used due to vim-bracketed-paste fixing paste
+" set nohidden " disable unsaved buffers
+set hidden " hide buffers
+set nostartofline " don't move the cursor to the start of line
+set ttyfast " makes some actions smoother (?)
+set shortmess=I " no startup messages
 
 " auto-completion settings
 set wildmenu " visual autocomplete for Vim command menu
@@ -167,7 +175,7 @@ set nowrap " display long lines as is
 " set textwidth=0 " disable auto newline during Insert mode
 " set whichwrap+=<,>,h,l " scrolling past end of line begins at start of next line
 " set linebreak " wrap lines at convenient points
-set textwidth=110
+set textwidth=0 " original setting: set textwidth=110
 let &wrapmargin= &textwidth
 set formatoptions=croql
 
@@ -182,6 +190,8 @@ set splitright " all new splits (ex. vssplit) open on right side
 set noshowmode " hide Vim mode indicator
 set fillchars+=stl:\ ,stlnc:\ " disable statusline fillchars
 set laststatus=2 " always display statusline (e.g. Airline)
+set ch=2 " statusline height
+set statusline=%-30.50(%n\ %f\ %m%h%r%w%)%l/%L\ (%p%%),\ %c\ %<%=%(\(%{bufnr(\"#\")}\ %{bufname(\"#\")})%)
 " set showtabline=2 " always display the tabline, even if there is only one tab
 set showcmd " show last command in the bottom right
 set splitbelow " new window opens below current one
@@ -201,6 +211,7 @@ set hlsearch " highlight search results
 set ignorecase " ignoring cases for search
 set smartcase  " searches with case if any upper-case chars used
 set magic " for regular expression
+match ErrorMsg '^\(<\|=\|>\)\{7\}\([^=].\+\)\?$' " highlight VCS conflict markers
 
 " identation
 set autoindent
@@ -239,6 +250,17 @@ set nowb
 " set backupdir=~/.vim/tmp/backup/
 " set undodir=~/.vim/tmp/undo/
 
+" TODO: broken...
+" highlight the current line when you do a search, and remove the highlight when the cursor moves.
+" hi CursorLine cterm=reverse
+" com! LINE :exe 'se cul'
+" au CursorMoved * :se nocul
+" au CursorMovedI * :se nocul
+" noremap n nzz:LINE<CR>
+" noremap N Nzz:LINE<CR>
+" noremap * *zz:LINE<CR>
+" noremap # #zz:LINE<CR>
+
 " Color theme settings
 set background=dark
 if has("gui_running")
@@ -258,6 +280,11 @@ endif
 
 " SuperTab settings
 let g:SuperTabDefaultCompletionType = "<c-n>" " <tab> completion going -down- list
+
+" Incsearch settings
+map /  <Plug>(incsearch-forward)
+map ?  <Plug>(incsearch-backward)
+map g/ <Plug>(incsearch-stay)
 
 " Syntastic settings
 set statusline+=%#warningmsg#
@@ -281,6 +308,7 @@ let g:syntastic_bash_checkers=['shellcheck']
 
 " Airline settings
 let g:airline_theme='term' " use 'badwolf' for high contrast
+let g:airline#extensions#tabline#show_buffers = 0 " hide buffers (prevents closed buffer showing in tab list)
 let g:airline#extensions#tabline#enabled = 1 " displays all buffers (WARN: even if closed) if only one tab, required for tabline numbering to work
 let g:airline#extensions#tabline#left_sep = ''
 let g:airline#extensions#tabline#right_sep = ''
@@ -434,9 +462,33 @@ nnoremap <leader>S :split<Space>
 vmap / gc " comment out visually selected lines
 nnoremap <leader>R :nohlsearch<cr>:diffupdate<cr>:syntax sync fromstart<cr><c-l> " redraw screen
 
+" so wrapped lines are rec by j/k
+nmap j gj
+nmap k gk
+
+" remap jump to beginning & end of line
+nnoremap B ^
+nnoremap E $
+
+vnoremap B ^
+vnoremap E $
+vnoremap $ <nop>
+vnoremap ^ <nop>
+
+" ; -> :. less shift
+" nnoremap ; :
+" make :W save too
+command! W write
+
+"map kj sequence to escape
+inoremap kj <ESC>
+
 " move screenline instead of bufferline
 noremap <C-J> gj
 noremap <C-K> gk
+
+"map space to unhighlight search term
+nnoremap <silent> <Space> :nohlsearch<Bar>:echo<CR>
 
 " utility binding, WARN: some mappings CANNOT have trailing comments
 map 0 ^
@@ -472,7 +524,7 @@ nnoremap <leader>tm :SignatureToggle<CR>
 nnoremap <leader>tmc :delmarks!<CR>:SignatureRefresh<CR> " clear and refresh marks for current buffer
 nnoremap <leader>tmr :SignatureRefresh<CR>
 nnoremap <leader>tn :Startify<CR>
-nnoremap <leader>tt :TagbarToggle<CR>
+nnoremap <leader>tt :TagbarToggle<CR> " requires ctags
 nnoremap <leader>tu :UndotreeToggle<CR>
 nnoremap <leader>ts :SyntasticToggle<CR>
 nnoremap <leader>tf :CtrlP<CR>
@@ -492,6 +544,17 @@ autocmd FileType jsx noremap <buffer> <leader>tb :call JsxBeautify()<cr>
 autocmd FileType html noremap <buffer> <leader>tb :call HtmlBeautify()<cr>
 autocmd FileType css noremap <buffer> <leader>tb :call CSSBeautify()<cr>
 
+" iTerm2 specific settings
+" cursor shapes for different mode
+let &t_SI = "\<Esc>]50;CursorShape=1\x7"
+let &t_SR = "\<Esc>]50;CursorShape=2\x7"
+let &t_EI = "\<Esc>]50;CursorShape=0\x7"
+
+" cursor shapes for different mode running in Tmux
+" let &t_SI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=1\x7\<Esc>\\"
+" let &t_SR = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=2\x7\<Esc>\\"
+" let &t_EI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=0\x7\<Esc>\\"
+"
 " Unused settings
 
 " " NerdTree settings

@@ -11,13 +11,12 @@
     },
     {
         "shell": [
-          "git submodule update --remote dotbot"
+          "git submodule init"
         ]
     },
     {
         "link": {
             "~/.dotfiles": "",
-            "~/.amethyst": "amethyst/amethyst.json",
             "~/.atom": "atom",
             "~/.bin": "bin",
             "~/.cheat": "cheat",
@@ -28,6 +27,7 @@
             "~/.gitignore_global": "git/gitignore_global",
             "~/.gvimrc": "vim/gvimrc.vim",
             "~/.hammerspoon": "hammerspoon",
+            "~/.ideavimrc": "vim/ideavimrc.vim",
             "~/.jsbeautifyrc": "node/jsbeautifyrc.json",
             "~/.nvmrc": "node/nvmrc",
             "~/.spacemacs": "emacs/spacemacs.el",
@@ -48,8 +48,7 @@
     },
     {
         "shell": [
-          "git submodule update --init --recursive",
-          "Installing submodules"
+          "git submodule update"
         ]
 
     }

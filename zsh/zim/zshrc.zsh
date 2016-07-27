@@ -26,6 +26,7 @@ export PATH="/usr/local/bin:${HOME}/.bin:/usr/local/sbin:/usr/bin:/bin:/usr/sbin
 export ICLOUD="${HOME}/Library/Mobile Documents/com~apple~CloudDocs/"
 export DEVPATH="${HOME}/Developments"
 export EDITOR='vim'
+export MUX='mux' # use 'ztmux' for Tmux integration
 
 # Maven (mvn), bin exists local dir ~/.lbin to avoid pushing private files
 # export PATH="${HOME}/.lbin/apache-maven-3.3.9/bin:$PATH"
@@ -99,9 +100,9 @@ if [[ (-f "${HOME}/.ztmux") && ($TERM_PROGRAM == "Apple_Terminal") ]]; then
   source "${HOME}/.ztmux"
 else # iTerm2
   # iTerm2 shell integration with unix shell
-  if [[ ! -e "${HOME}/.iterm2_shell_integration.zsh" ]]; then
+  if [[ ! -h "${HOME}/.iterm2_shell_integration.zsh" ]]; then # check if file is Symlink
     # Custom shell loading for iTerm
-    # ln -s ${HOME}/.dotfiles/config/terminal/iterm2_shell_integration.zsh ${HOME}/.iterm2_shell_integration.zsh;
+    ln -s ${HOME}/.dotfiles/config/terminal/iterm2_shell_integration.zsh ${HOME}/.iterm2_shell_integration.zsh;
   fi
   # use iterm2_shell_integration.`basename $SHELL` when dealing with multiple shells
   test -e ${HOME}/.iterm2_shell_integration.zsh && source ${HOME}/.iterm2_shell_integration.zsh;
@@ -109,7 +110,15 @@ else # iTerm2
   # load Base16 shell... should be the same as iTerm2's Preset to avoid visible color changing
   BASE16_SHELL="$HOME/.dotfiles/term/base16-scripts/base16-default-dark.sh"
   [[ -s $BASE16_SHELL ]] && source $BASE16_SHELL
+
+  # integrate iTerm2 with Tmux
+  if [[ $MUX = "ztmux" ]]; then
+    source "${HOME}/.ztmux"
+  fi
 fi
+
+# Clears the "Last login" message at startup
+clear
 
 # Unused settings
 #
