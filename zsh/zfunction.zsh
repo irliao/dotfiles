@@ -27,12 +27,13 @@ fs() {
 	fi;
 }
 
-# TODO: fix, does not work yet
 # Rename title displayed from tabs in iTerm
-title ()
-{
-    TITLE=$*;
-    export PROMPT_COMMAND='echo -ne "\033]0;$TITLE\007"'
+title () {
+  if [[ $# == 0 ]] then
+    echo -ne "\e]1;$PWD\a"
+  else
+    echo -ne "\e]1;$@\a"
+  fi
 }
 
 # Show short directory path

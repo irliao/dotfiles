@@ -77,6 +77,7 @@ prompt_mingit_precmd() {
   # PROMPT="$(gst_get_prefix)$(gst_get_pwd)$(parse_git_dirty)$(git_prompt_info)$(gst_get_suffix)"
   PROMPT="$(gst_get_prefix)$(gst_get_pwd)$(parse_git_dirty)$(git_prompt_info)$(gst_get_suffix)"
   RPROMPT=''
+  echo -ne "\e]1;$PWD\a" # set tab title for iTerm2
 }
 
 prompt_mingit_setup() {
