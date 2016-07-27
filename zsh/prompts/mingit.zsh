@@ -1,6 +1,5 @@
 #
 # mingit theme
-# https://github.com/shashankmehta/dotfiles/blob/master/thesetup/zsh/.oh-my-zsh/custom/themes/mingit.zsh-theme
 # ❯ ➜
 #
 
@@ -45,8 +44,6 @@
 #   fi
 # }
 
-# TODO: possibly migrate this to display in Tmux instead
-# Print Node version if different than default from ~/.nvmrc
 node_ver_status() {
   local ver=$(node --version)
   [ "$(cat ~/.nvmrc)" != "$ver" ] && echo "%F{yellow}($ver)%f"
@@ -74,7 +71,6 @@ gst_get_rprompt() {
 }
 
 prompt_mingit_precmd() {
-  # PROMPT="$(gst_get_prefix)$(gst_get_pwd)$(parse_git_dirty)$(git_prompt_info)$(gst_get_suffix)"
   PROMPT="$(gst_get_prefix)$(gst_get_pwd)$(parse_git_dirty)$(git_prompt_info)$(gst_get_suffix)"
   RPROMPT=''
   echo -ne "\e]1;$PWD\a" # set tab title for iTerm2

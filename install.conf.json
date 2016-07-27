@@ -38,7 +38,7 @@
             "~/.vimrc": "vim/vimrc.vim",
             "~/.zalias": "zsh/zalias.zsh",
             "~/.zfunction": "zsh/zfunction.zsh",
-            "~/.zim/modules/prompt/functions/prompt_mingit_setup": "zsh/prompts/mingit.zsh",
+            "~/.zim": "submodules/zim",
             "~/.zimrc": "zsh/zim/zimrc.zsh",
             "~/.zlogin": "zsh/zim/zlogin.zsh",
             "~/.zprompt": "zsh/prompts/mingit.zsh",

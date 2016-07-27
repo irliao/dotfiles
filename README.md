@@ -30,6 +30,21 @@ Run dotbot's install script
 ./install.sh
 ```
 
+## Update
+
+Update Git Submodules
+
+```
+git submodule foreach git pull origin master
+```
+
+## Zsh Setup
+
+Remember to provide 'mingit' as a symlinked function to Zim
+```
+ln -s ~/.dotfiles/zsh/prompts/mingit.zsh ~/.zim/modules/prompt/functions/prompt_mingit_setup
+```
+
 
 ## OSX Setup
 
@@ -64,7 +79,7 @@ Install Tmux using Brew
 brew install tmux
 ```
 
-## Vim Setup 
+## Vim Setup
 
 Install xCode from App Store
 
