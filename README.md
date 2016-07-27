@@ -19,6 +19,11 @@ Go in the repo and update dotbot
 ```
 cd ~/.dotfiles && git submodule update --remote ./dotbot
 ```
+Run script (init.sh) to setup git submodules
+
+```
+./init.sh
+```
 Run dotbot's install script
 
 ```
