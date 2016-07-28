@@ -73,7 +73,17 @@ gst_get_rprompt() {
 prompt_mingit_precmd() {
   PROMPT="$(gst_get_prefix)$(gst_get_pwd)$(parse_git_dirty)$(git_prompt_info)$(gst_get_suffix)"
   RPROMPT=''
-  echo -ne "\e]1;$PWD\a" # set tab title for iTerm2
+  PS2=''
+  # echo -ne "\e]1;$PWD\a" # auto set tab title for iTerm2 TODO: fix conflict with manual set
+}
+
+# TODO: verify this is working properly as preexec
+preexec () {
+    if [[ "$TERM" == "screen" ]]; then
+        local CMD=${1[(wr)^(*=*|sudo|-*)]}
+        echo -n "\ek$CMD\e\\"
+    fi
+    echo -n "\n" # Needed so that we don't overwrite the lowest bar for the PS1 prompt.
 }
 
 prompt_mingit_setup() {
