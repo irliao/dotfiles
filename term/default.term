@@ -237,7 +237,7 @@
 	<key>ShowRepresentedURLPathInTitle</key>
 	<true/>
 	<key>ShowShellCommandInTitle</key>
-	<false/>
+	<true/>
 	<key>ShowTTYNameInTitle</key>
 	<false/>
 	<key>ShowTerminalInDockIcon</key>

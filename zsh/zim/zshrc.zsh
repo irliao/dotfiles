@@ -17,7 +17,7 @@ fpath=(~/.dotfiles/zsh/completions $fpath)
 autoload -U compinit && compinit
 
 # Brew installed Zsh - access to online help
-unalias run-help
+# unalias run-help # TODO: broken
 autoload run-help
 HELPDIR=/usr/local/share/zsh/help
 
@@ -27,9 +27,6 @@ export ICLOUD="${HOME}/Library/Mobile Documents/com~apple~CloudDocs/"
 export DEVPATH="${HOME}/Developments"
 export EDITOR='vim'
 export MUX='mux' # use 'ztmux' for Tmux integration
-
-# Maven (mvn), bin exists local dir ~/.lbin to avoid pushing private files
-# export PATH="${HOME}/.lbin/apache-maven-3.3.9/bin:$PATH"
 
 # Ruby
 if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
@@ -50,9 +47,6 @@ eval "$(thefuck --alias)"
 # You can use whatever you want as an alias, like for Mondays:
 eval "$(thefuck --alias fk)"
 
-# Hub
-# eval "$(hub alias -s)"
-
 # Key bindings matching Mac OSX
 bindkey "^A" beginning-of-line
 bindkey "^B" beginning-of-line # to use in tmux
@@ -64,10 +58,16 @@ bindkey "^Y" accept-and-hold
 bindkey "^N" insert-last-word
 bindkey "^H" beginning-of-history
 
-# Bash profile... exports local variables
+# Local profile... exports local (or private) variables
+if [[ -f "${HOME}/.local_profile" ]]; then
+    source "${HOME}/.local_profile";
+fi
+
+# Bash profile
 if [[ -f "${HOME}/.bash_profile" ]]; then
     source "${HOME}/.bash_profile";
 fi
+
 
 # Custom functions
 if [[ -f "${HOME}/.zfunction" ]]; then
