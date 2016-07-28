@@ -454,6 +454,10 @@ noremap <Down> <NOP>
 noremap <Left> <NOP>
 noremap <Right> <NOP>
 
+" add empty line above or below the current line
+map <Enter> o<Esc>
+map <S-Enter> O<Esc>
+
 " split (buffer) navigation binding
 nnoremap <leader>s :vsplit<Space>
 nnoremap <leader>S :split<Space>
