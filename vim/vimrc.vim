@@ -427,8 +427,12 @@ nnoremap ]<space>  :<c-u>put =repeat(nr2char(10), v:count1)<cr>
 let mapleader = ","
 set mouse+=a " enable mouse mode (scrolling, selection, etc)
 if &term =~ '^screen'
-  " tmux knows the extended mouse mode
-  set ttymouse=xterm2
+  if has('mouse_sgr')
+    set ttymouse=sgr
+  else
+    " tmux knows the extended mouse mode
+    set ttymouse=xterm2
+  endif
 endif
 " set timeoutlen=50 " WARN: DO NOT enable, enabling this will make <leader> maps unusable
 " set timeout timeoutlen=1000 ttimeoutlen=100 " TODO: verify this fixes slow O inserts

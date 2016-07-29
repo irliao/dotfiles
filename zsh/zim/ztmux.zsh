@@ -31,5 +31,5 @@ if [[ -z "$TMUX" && -z "$EMACS" && -z "$VIM" ]]; then
 
   # TODO: start tmux with -2 option to support 256 colors
   # Attach to the 'zim' session or to the last session used.
-  exec tmux $tmux_iterm_integration attach # use: attach vs attach-session
+  exec tmux $tmux_iterm_integration attach -d # use: attach vs attach-session
 fi

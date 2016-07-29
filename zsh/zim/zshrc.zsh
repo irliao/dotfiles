@@ -10,6 +10,7 @@ fi
 skip_global_compinit=1 # faster Zsh startup
 zprompt_theme='mingit' # custom prompt theme
 DEFAULT_USER="irliao" # replaces user@hostname with specified username
+export LINES=60
 compctl -g '~/.teamocil/*(:t:r)' teamocil # autocompletion for Teamocil
 
 # Autocompletion
