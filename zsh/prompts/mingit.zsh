@@ -50,12 +50,10 @@ node_ver_status() {
 }
 
 gst_get_prefix() {
-  # print "%(?:%F{6}➜ :%F{6}➜ )%f"
   print "%(?:%F{6} :%F{6} )%f"
 }
 
 gst_get_suffix() {
-  # print "%(?:%F{2}❯ :%F{1}❯ %s)%f"
   print "%(?:%F{2}$ :%F{1}$ )%f"
 }
 
@@ -71,14 +69,14 @@ gst_get_rprompt() {
 }
 
 prompt_mingit_precmd() {
-  PROMPT="$(gst_get_prefix)$(gst_get_pwd)$(parse_git_dirty)$(git_prompt_info)$(gst_get_suffix)"
-  RPROMPT=''
-  PS2=''
+  PROMPT="$(gst_get_prefix)$(gst_get_pwd)$(parse_git_dirty)$(git_prompt_info)$(gst_get_suffix)%E"
+  # RPROMPT=''
+  # PS2=''
   # echo -ne "\e]1;$PWD\a" # auto set tab title for iTerm2 TODO: fix conflict with manual set
 }
 
 # TODO: verify this is working properly as preexec
-preexec () {
+test_preexec () {
     if [[ "$TERM" == "screen" ]]; then
         local CMD=${1[(wr)^(*=*|sudo|-*)]}
         echo -n "\ek$CMD\e\\"

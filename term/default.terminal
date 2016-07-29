@@ -216,6 +216,18 @@
 	dmVy0RcYVHJvb3SAAQgRGiMtMjc7QUhOW2KMjpCVoKmxtL3P0tcAAAAAAAABAQAAAAAA
 	AAAZAAAAAAAAAAAAAAAAAAAA2Q==
 	</data>
+<<<<<<< Updated upstream
+||||||| merged common ancestors
+	<key>SetLanguageEnvironmentVariables</key>
+	<true/>
+	<key>ShouldRestoreContent</key>
+	<false/>
+=======
+	<key>SetLanguageEnvironmentVariables</key>
+	<true/>
+	<key>ShouldRestoreContent</key>
+	<true/>
+>>>>>>> Stashed changes
 	<key>ShowActiveProcessArgumentsInTitle</key>
 	<true/>
 	<key>ShowActiveProcessInTabTitle</key>
@@ -229,7 +241,7 @@
 	<key>ShowComponentsWhenTabHasCustomTitle</key>
 	<false/>
 	<key>ShowDimensionsInTitle</key>
-	<false/>
+	<true/>
 	<key>ShowRepresentedURLInTabTitle</key>
 	<false/>
 	<key>ShowRepresentedURLInTitle</key>
@@ -272,14 +284,28 @@
 	<false/>
 	<key>VisualBell</key>
 	<false/>
+	<key>WindowTitle</key>
+	<string>Terminal</string>
 	<key>columnCount</key>
+<<<<<<< Updated upstream
 	<integer>240</integer>
+||||||| merged common ancestors
+	<integer>120</integer>
+=======
+	<integer>204</integer>
+>>>>>>> Stashed changes
 	<key>name</key>
 	<string>default</string>
 	<key>rowCount</key>
+<<<<<<< Updated upstream
 	<integer>80</integer>
 	<key>scrollOnInput</key>
 	<true/>
+||||||| merged common ancestors
+	<integer>120</integer>
+=======
+	<integer>64</integer>
+>>>>>>> Stashed changes
 	<key>shellExitAction</key>
 	<integer>0</integer>
 	<key>type</key>
