@@ -9,16 +9,13 @@ if [[ -s ${ZDOTDIR:-${HOME}}/.zim/init.zsh ]]; then
   source ${ZDOTDIR:-${HOME}}/.zim/init.zsh
 fi
 
-zpacman_frontend='pacaur'
-zpacman_helper='aur'
-
 # skip_global_compinit=1 # faster Zsh startup
 zprompt_theme='mingit' # custom prompt theme
-# DEFAULT_USER="irliao" # replaces user@hostname with specified username
+DEFAULT_USER="irliao" # replaces user@hostname with specified username
 
 # Autocompletion
 fpath=(~/.dotfiles/zsh/completions $fpath)
-#) autoload -U compinit && compinit
+autoload -U compinit && compinit
 
 # Environment variables
 export PATH="/usr/local/bin:${HOME}/.bin:/usr/local/sbin:/usr/bin:/bin:/usr/sbin:/sbin"

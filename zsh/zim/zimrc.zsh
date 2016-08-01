@@ -9,7 +9,7 @@
 # Select what modules you would like enabled.
 # The second line of modules may depend on options set by modules in the first line.
 # These dependencies are noted on the respective module's README.md.
-zmodules=(pacman \
+zmodules=(\
           directory \
           environment \
           git \
@@ -81,7 +81,8 @@ zssh_ids=(id_rsa)
 #
 
 # Set (optional) pacman front-end.
-zpacman_frontend='powerpill'
+zpacman_frontend='helper_here'
 
 # Load any helper scripts as defined here
 zpacman_helper=(aur)
+
