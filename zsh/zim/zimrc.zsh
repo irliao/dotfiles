@@ -9,9 +9,18 @@
 # Select what modules you would like enabled.
 # The second line of modules may depend on options set by modules in the first line.
 # These dependencies are noted on the respective module's README.md.
-zmodules=(directory environment git history input utility custom \
-          syntax-highlighting history-substring-search prompt completion)
-
+zmodules=(pacman \
+          directory \
+          environment \
+          git \
+          history \
+          input \
+          utility \
+          custom \
+          syntax-highlighting \
+          history-substring-search \
+          prompt \
+          completion)
 
 ###################
 # MODULE SETTINGS #
@@ -23,10 +32,14 @@ zmodules=(directory environment git history input utility custom \
 
 # Set your desired prompt here
 zprompt_theme='mingit' # custom prompt theme
-# zprompt_theme='gitster'
-# zprompt_theme='pure'
-# zprompt_theme='purest'
-# zprompt_theme='gitster'
+
+#
+# Completion
+#
+
+# set an optional host-specific filename for the completion cache file
+# if none is provided, the default '.zcompdump' is used.
+zcompdump_file=".zcompdump-${HOST}-${ZSH_VERSION}"
 
 #
 # Utility
@@ -34,7 +47,15 @@ zprompt_theme='mingit' # custom prompt theme
 
 # Uncomment to enable command correction prompts; 'setopt CORRECT'
 # See: http://zsh.sourceforge.net/Doc/Release/Options.html#Input_002fOutput
-# zcorrection='true'
+zcorrection='true'
+
+#
+# Input
+#
+
+# Uncomment to enable double-dot expansion.
+# This appends '../' to your input for each '.' you type after an initial '..'
+zdouble_dot_expand='true'
 
 #
 # Syntax-Highlighting
@@ -52,7 +73,7 @@ zhighlighters=(main brackets cursor)
 #
 
 # Load these ssh identities with the ssh module
-#zssh_ids=(id_rsa)
+zssh_ids=(id_rsa)
 
 
 #
@@ -60,7 +81,7 @@ zhighlighters=(main brackets cursor)
 #
 
 # Set (optional) pacman front-end.
-#zpacman_frontend='powerpill'
+zpacman_frontend='powerpill'
 
 # Load any helper scripts as defined here
-#zpacman_helper=(aur)
+zpacman_helper=(aur)

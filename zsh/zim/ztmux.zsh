@@ -26,7 +26,7 @@ if [[ -z "$TMUX" && -z "$EMACS" && -z "$VIM" ]]; then
     tmux_session='zim'
     tmux \
       new-session -d -s "$tmux_session" \; \
-      set-option -t "$tmux_session" destroy-unattached off &> /dev/null
+      set-option -t "$tmux_session" destroy-unattached on &> /dev/null
   fi
 
   # TODO: start tmux with -2 option to support 256 colors

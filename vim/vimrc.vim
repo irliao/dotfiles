@@ -270,10 +270,9 @@ if has("gui_running")
   let g:rehash256 = 1 " attempts to bring the 256 color version as close as possible to the the default (dark) GUI version
   set guifont="Hack Regular:12"
 else
-  let base16colorspace= 256
-  let g:hybrid_reduced_contrast = 1 " Remove this line if using the default palette.
-  let g:molokai_original = 1
- 	let g:rehash256 = 1
+  " let g:hybrid_reduced_contrast = 1 " Remove this line if using the default palette.
+  " let g:molokai_original = 1
+  " let g:rehash256 = 1
   set t_Co=256 " iTerm2 256 color mode for Airline highlight
   colorscheme hybrid
 endif

@@ -2,25 +2,23 @@
 # User configuration sourced by interactive shells
 #
 
+# . `brew --prefix`/etc/profile.d/z.sh
+
 # Source zim's init.zh, which sources ~/.zimrc, which decides prompt theme
 if [[ -s ${ZDOTDIR:-${HOME}}/.zim/init.zsh ]]; then
   source ${ZDOTDIR:-${HOME}}/.zim/init.zsh
 fi
 
-skip_global_compinit=1 # faster Zsh startup
+zpacman_frontend='pacaur'
+zpacman_helper='aur'
+
+# skip_global_compinit=1 # faster Zsh startup
 zprompt_theme='mingit' # custom prompt theme
-DEFAULT_USER="irliao" # replaces user@hostname with specified username
-export LINES=60
-compctl -g '~/.teamocil/*(:t:r)' teamocil # autocompletion for Teamocil
+# DEFAULT_USER="irliao" # replaces user@hostname with specified username
 
 # Autocompletion
 fpath=(~/.dotfiles/zsh/completions $fpath)
-autoload -U compinit && compinit
-
-# Brew installed Zsh - access to online help
-# unalias run-help # TODO: broken
-autoload run-help
-HELPDIR=/usr/local/share/zsh/help
+#) autoload -U compinit && compinit
 
 # Environment variables
 export PATH="/usr/local/bin:${HOME}/.bin:/usr/local/sbin:/usr/bin:/bin:/usr/sbin:/sbin"
@@ -98,7 +96,10 @@ if [[ (-f "${HOME}/.ztmux") && ($TERM_PROGRAM == "Apple_Terminal") ]]; then
   #   source "${HOME}/.vim/gruvbox_256palette_osx.sh";
   # fi
 
-  source "${HOME}/.ztmux"
+  # BASE16_SHELL=$HOME/.config/base16-shell/
+  # [ -n "$PS1" ] && [ -s $BASE16_SHELL/profile_helper.sh ] && eval "$($BASE16_SHELL/profile_helper.sh)"
+
+  #source "${HOME}/.ztmux"
 else # iTerm2
   # iTerm2 shell integration with unix shell
   if [[ ! -h "${HOME}/.iterm2_shell_integration.zsh" ]]; then # check if file is Symlink
@@ -119,7 +120,7 @@ else # iTerm2
 fi
 
 # Clears the "Last login" message at startup
-clear
+clear;
 
 # Unused settings
 #
