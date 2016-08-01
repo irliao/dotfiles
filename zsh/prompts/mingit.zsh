@@ -14,40 +14,10 @@
 #   fi
 # }
 
-# rbenv_version_status() {
-#   local ver=$(rbenv version-name)
-#   [ "$(rbenv global)" != "$ver" ] && echo "[$ver]"
-# }
-
-# virtualenv_info() {
-#   [ $VIRTUAL_ENV ] && echo '('%F{blue}`basename $VIRTUAL_ENV`%f') '
-# }
-
-# current_branch() {
-#   ref=$(git symbolic-ref HEAD 2> /dev/null) || return
-#   echo ${ref#refs/heads/}
-# }
-
 # git_custom_prompt_info() {
 #   ref=$(git symbolic-ref HEAD 2> /dev/null) || return
 #   echo "$ZSH_THEME_GIT_PROMPT_PREFIX${ref#refs/heads/}$(parse_git_dirty)$ZSH_THEME_GIT_PROMPT_SUFFIX"
 # }
-
-# # TODO: get this to return untrack correctly without lag
-# git_get_status() {
-#   gitstat=$(git status 2>/dev/null | grep '\(# Untracked\|# Changes\|# Changed but not updated:\)')
-
-#   if [[ $(echo ${gitstat} | grep -c "^\(# Untracked files:\|# Changed but not updated:\)$") > 0 ]]; then
-# 	  print "$ZSH_THEME_GIT_PROMPT_UNTRACKED"
-#   else
-#     print "$(parse_git_dirty)"
-#   fi
-# }
-
-node_ver_status() {
-  local ver=$(node --version)
-  [ "$(cat ~/.nvmrc)" != "$ver" ] && echo "%F{yellow}($ver)%f"
-}
 
 gst_get_prefix() {
   print "%(?:%F{6} :%F{6} )%f"
@@ -58,9 +28,9 @@ gst_get_suffix() {
 }
 
 gst_get_pwd() {
-  prompt_short_dir="$(short_pwd)"
-  git_root="$(command git rev-parse --show-toplevel 2> /dev/null)"
-  prompt_short_dir="${prompt_short_dir#${$(short_pwd $git_root):h}/}"
+  local prompt_short_dir="$(short_pwd)"
+  local git_root="$(command git rev-parse --show-toplevel 2> /dev/null)"
+  local prompt_short_dir="${prompt_short_dir#${$(short_pwd $git_root):h}/}"
   print "%F{8}${prompt_short_dir}%f"
 }
 
@@ -69,36 +39,29 @@ gst_get_rprompt() {
 }
 
 prompt_mingit_precmd() {
-  PROMPT="$(gst_get_prefix)$(gst_get_pwd)$(parse_git_dirty)$(git_prompt_info)$(gst_get_suffix)%E"
-  # RPROMPT=''
-  # PS2=''
-  # echo -ne "\e]1;$PWD\a" # auto set tab title for iTerm2 TODO: fix conflict with manual set
+  # hzle -N zle-line-init
+  #) zle -N zle-keymap-select
+  # zle -N zle-line-finish
+
+  PROMPT="$(gst_get_prefix)$(gst_get_pwd)$(parse_git_dirty)$(git_prompt_info)$(gst_get_suffix)"
 }
 
-# TODO: verify this is working properly as preexec
-test_preexec () {
-    if [[ "$TERM" == "screen" ]]; then
-        local CMD=${1[(wr)^(*=*|sudo|-*)]}
-        echo -n "\ek$CMD\e\\"
-    fi
-    echo -n "\n" # Needed so that we don't overwrite the lowest bar for the PS1 prompt.
-}
+# function zle-line-init zle-line-finish zle-keymap-select {
+#   zle reset-prompt
+#   zle -R
+# }
 
 prompt_mingit_setup() {
-	export PROMPT_EOL_MARK='' # prevent percentage showing up if output doesn't end with a newline
-  setopt LOCAL_OPTIONS
-  unsetopt XTRACE KSH_ARRAYS
-  prompt_opts=(cr percent subst)
-
   ZSH_THEME_GIT_PROMPT_PREFIX=""
   ZSH_THEME_GIT_PROMPT_SUFFIX="%f"
   ZSH_THEME_GIT_PROMPT_DIRTY=" %F{1}"
   ZSH_THEME_GIT_PROMPT_CLEAN=" %F{6}"
   # ZSH_THEME_GIT_PROMPT_UNTRACKED=" %F{3}"
-
+  #
   autoload -Uz add-zsh-hook
   add-zsh-hook precmd prompt_mingit_precmd
-  # TODO: implement hook for cwdcmd
+
+  prompt_opts=(cr percent subst)
 }
 
 prompt_mingit_setup "$@"

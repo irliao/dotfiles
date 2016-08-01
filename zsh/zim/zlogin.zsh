@@ -1,5 +1,5 @@
 #
-# startup file read in interactive login shells
+# Startup file read in interactive login shells
 #
 # The following code helps us by optimizing the existing framework.
 # This includes zcompile, zcompdump, etc.
@@ -19,7 +19,9 @@
   setopt EXTENDED_GLOB
 
   # zcompile the completion cache; siginificant speedup.
-  zcompare ${ZDOTDIR:-${HOME}}/.zcompdump
+  for file in ${ZDOTDIR:-${HOME}}/.zcomp^(*.zwc)(.); do
+    zcompare ${file}
+  done
 
   # zcompile .zshrc
   zcompare ${ZDOTDIR:-${HOME}}/.zshrc
@@ -30,9 +32,15 @@
   zcompare ${zim_mods}/pacman/init.zsh
   zcompare ${zim_mods}/spectrum/init.zsh
   zcompare ${zim_mods}/completion/init.zsh
+  zcompare ${zim_mods}/fasd/init.zsh
 
   # zcompile all .zsh files in the custom module
   for file in ${zim_mods}/custom/**/^(README.md|*.zwc)(.); do
+    zcompare ${file}
+  done
+
+  # zcompile all autoloaded functions
+  for file in ${zim_mods}/**/functions/^(*.zwc)(.); do
     zcompare ${file}
   done
 
@@ -44,4 +52,5 @@
 
   # zsh-histery-substring-search
   zcompare ${zim_mods}/history-substring-search/external/zsh-history-substring-search.zsh
-) &!
+
+  ) &!
