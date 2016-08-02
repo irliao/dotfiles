@@ -141,7 +141,7 @@ set fencs=ucs-bom,utf-8
 " Internal encoding used by Vim buffers, help and commands.
 set enc=utf-8
 " Terminal encoding used for input and terminal display.
-set tenc=utf-8
+" set tenc=utf-8
 
 " Vim custom settings
 set encoding=utf-8
@@ -190,10 +190,10 @@ set ruler " show position in line
 set cursorline " use '_' character for cursor
 set splitright " all new splits (ex. vssplit) open on right side
 set noshowmode " hide Vim mode indicator
-set fillchars+=stl:\ ,stlnc:\ " disable statusline fillchars
+" set fillchars+=stl:\ ,stlnc:\ " disable statusline fillchars
 set laststatus=2 " always display statusline (e.g. Airline)
-set ch=2 " statusline height
-set statusline=%-30.50(%n\ %f\ %m%h%r%w%)%l/%L\ (%p%%),\ %c\ %<%=%(\(%{bufnr(\"#\")}\ %{bufname(\"#\")})%)
+" set ch=2 " statusline height
+" set statusline=%-30.50(%n\ %f\ %m%h%r%w%)%l/%L\ (%p%%),\ %c\ %<%=%(\(%{bufnr(\"#\")}\ %{bufname(\"#\")})%)
 " set showtabline=2 " always display the tabline, even if there is only one tab
 set showcmd " show last command in the bottom right
 set splitbelow " new window opens below current one
@@ -203,7 +203,7 @@ set ambiwidth=double
 " disable visual alert for errors
 set noerrorbells " disable error bells
 set novisualbell " disable bell
-set t_vb=
+" set t_vb=
 
 " search
 set showmatch " highlight matching code such as {},(),[]
@@ -275,13 +275,16 @@ else
   " let g:hybrid_reduced_contrast = 1 " Remove this line if using the default palette.
   " let g:molokai_original = 1
   " let g:rehash256 = 1
-  " set t_Co=256 " iTerm2 256 color mode for Airline highlight
-  " colorscheme hybrid
+ "  set t_Co=256 " iTerm2 256 color mode for Airline highlight
+ " colorscheme hybrid
 
-  colorscheme badwolf
+ colorscheme badwolf
   let g:badwolf_darkgutter = 0
   let g:badwolf_tabline = 1
 
+  " let base16colorspace=256
+ "  let g:base16_shell_path='~/.config/base16-shell/scripts/'
+"  colorscheme base16-default-dark
 endif
 
 " SuperTab settings
@@ -547,6 +550,21 @@ autocmd FileType json noremap <buffer> <leader>tb :call JsonBeautify()<cr>
 autocmd FileType jsx noremap <buffer> <leader>tb :call JsxBeautify()<cr>
 autocmd FileType html noremap <buffer> <leader>tb :call HtmlBeautify()<cr>
 autocmd FileType css noremap <buffer> <leader>tb :call CSSBeautify()<cr>
+
+" Make Vim recognize XTerm escape sequences for Page and Arrow
+" keys combined with modifiers such as Shift, Control, and Alt.
+" See http://www.reddit.com/r/vim/comments/1a29vk/_/c8tze8p
+if &term =~ '^screen'
+  " Page keys http://sourceforge.net/p/tmux/tmux-code/ci/master/tree/FAQ
+  execute "set t_kP=\e[5;*~"
+  execute "set t_kN=\e[6;*~"
+
+  " Arrow keys http://unix.stackexchange.com/a/34723
+  execute "set <xUp>=\e[1;*A"
+  execute "set <xDown>=\e[1;*B"
+  execute "set <xRight>=\e[1;*C"
+  execute "set <xLeft>=\e[1;*D"
+endif
 
 " change cursor for Tmux in iTerm2
 if exists('$TMUX')

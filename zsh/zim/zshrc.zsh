@@ -107,6 +107,9 @@ fi
 #   export TERM='screen-256color'
 # fi
 
+# BASE16_SHELL=$HOME/.config/base16-shell/
+# [ -n "$PS1" ] && [ -s $BASE16_SHELL/profile_helper.sh ] && eval "$($BASE16_SHELL/profile_helper.sh)"
+
 # Auto start Tmux (only when using Zim and default Apple Terminal)
 if [[ (-h "${HOME}/.ztmux") && ($TERM_PROGRAM == "Apple_Terminal") ]]; then
   if [[ -h "${HOME}/.iterm2_shell_integration.zsh" ]]; then
