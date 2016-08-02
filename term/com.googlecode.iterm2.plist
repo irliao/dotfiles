@@ -677,27 +677,13 @@
 		<integer>1</integer>
 	</dict>
 	<key>NSWindow Frame Preferences</key>
-<<<<<<< Updated upstream
-	<string>269 442 606 456 0 0 1440 900 </string>
-	<key>NSWindow Frame SUUpdateAlert</key>
-	<string>410 382 620 392 0 0 1440 900 </string>
-||||||| merged common ancestors
-	<string>269 442 606 456 0 0 1440 900 </string>
-=======
 	<string>269 429 606 456 0 0 1440 900 </string>
 	<key>NSWindow Frame SUUpdateAlert</key>
 	<string>410 382 620 392 0 0 1440 900 </string>
->>>>>>> Stashed changes
 	<key>NSWindow Frame iTerm Window 0</key>
-<<<<<<< Updated upstream
-	<string>1861 77 472 797 1440 -320 2560 1440 </string>
-||||||| merged common ancestors
-	<string>198 371 570 377 0 0 1440 900 </string>
-=======
 	<string>0 523 570 377 0 0 1440 900 </string>
 	<key>NSWindow Frame iTerm Window 1</key>
 	<string>0 4 1438 896 0 0 1440 900 </string>
->>>>>>> Stashed changes
 	<key>New Bookmarks</key>
 	<array>
 		<dict>
@@ -1459,17 +1445,9 @@
 	<key>SUHasLaunchedBefore</key>
 	<true/>
 	<key>SULastCheckTime</key>
-<<<<<<< Updated upstream
 	<date>2016-07-28T17:00:21Z</date>
 	<key>SUSendProfileInfo</key>
 	<false/>
-||||||| merged common ancestors
-	<date>2016-07-27T17:00:21Z</date>
-	<key>SUSendProfileInfo</key>
-	<false/>
-=======
-	<date>2016-07-28T01:47:00Z</date>
->>>>>>> Stashed changes
 	<key>ShowBookmarkName</key>
 	<false/>
 	<key>ShowFullScreenTabBar</key>
