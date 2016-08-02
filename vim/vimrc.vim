@@ -92,6 +92,7 @@ Plug 'ervandew/supertab' " tab completion going down list
 Plug 'haya14busa/incsearch.vim' " incrementally highlights all pattern
 Plug 'tpope/vim-surround' " change surrounding (ex: parentheses, brackets, quotes, etc)
 Plug 'tpope/vim-repeat' " epeating supported plugin maps with '.'
+Plug 'sjl/gundo.vim' " visualize unndo tree
 
 " visual
 Plug 'mhinz/vim-startify' " fancy start screen
@@ -117,6 +118,7 @@ Plug 'w0ng/vim-hybrid'
 Plug 'morhetz/gruvbox'
 Plug 'hukl/smyck-color-scheme'
 Plug 'chriskempson/base16-vim'
+Plug 'sjl/badwolf'
 
 " autocompletion
 Plug 'ervandew/supertab'
@@ -218,9 +220,9 @@ set autoindent
 set smartindent
 set smarttab
 set shiftwidth=2
-set softtabstop=2
+set softtabstop=2 " number of spaces in tab when editing
 set tabstop=2
-set expandtab " use spaces instead of tabs
+set expandtab " tabs are spaces
 
 " lines visible when scrolling past window
 set scrolloff=5 " lines from top and bottom
@@ -273,8 +275,13 @@ else
   " let g:hybrid_reduced_contrast = 1 " Remove this line if using the default palette.
   " let g:molokai_original = 1
   " let g:rehash256 = 1
-  set t_Co=256 " iTerm2 256 color mode for Airline highlight
-  colorscheme hybrid
+  " set t_Co=256 " iTerm2 256 color mode for Airline highlight
+  " colorscheme hybrid
+
+  colorscheme badwolf
+  let g:badwolf_darkgutter = 0
+  let g:badwolf_tabline = 1
+
 endif
 
 " SuperTab settings
@@ -306,7 +313,7 @@ let g:syntastic_bash_checkers=['shellcheck']
 " set autoread
 
 " Airline settings
-let g:airline_theme='term' " use 'badwolf' for high contrast
+let g:airline_theme='badwolf' " use 'badwolf' for high contrast
 let g:airline#extensions#tabline#show_buffers = 0 " hide buffers (prevents closed buffer showing in tab list)
 let g:airline#extensions#tabline#enabled = 1 " displays all buffers (WARN: even if closed) if only one tab, required for tabline numbering to work
 let g:airline#extensions#tabline#left_sep = ''
@@ -335,21 +342,13 @@ autocmd BufWinLeave * call clearmatches()
 " Ctrl-P settings
 let g:ctrlp_map = '<C-p>'
 let g:ctrlp_cmd = 'CtrlP'
-let g:ctrlp_working_path_mode = 'ra'
-set wildignore+=*/tmp/*,*.so,*.swp,*.zip     " Linux/MacOSX
-" set wildignore+=*\\tmp\\*,*.swp,*.zip,*.exe  " Windows
-let g:ctrlp_user_command = 'find %s -type f' " MacOSX/Linux
-" let g:ctrlp_user_command = 'dir %s /-n /b /s /a-d' " Windows
-let g:ctrlp_working_path_mode = 0
+let g:ctrlp_match_window = 'bottom,order:ttb' " match top to bottom
+let g:ctrlp_switch_buffer = 0 " always open files in new buffer
+let g:ctrlp_working_path_mode = 0 " auto change directory with session
+let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""' " does not work with ctrlp_show_hidden and ctrlp_custom_ignore
 let g:ctrlp_max_height = 5
-let g:ctrlp_custom_ignore = 'node_modules\|^\.DS_Store\|^\.git\|^\.coffee'
 let g:ctrlp_max_files=20000
 let g:ctrlp_max_depth=20
-if executable("pt")
-  let g:ctrlp_user_command = 'pt %s --ignore "*.class" -l --nocolor -g ""'
-elseif executable("ag")
-  let g:ctrlp_user_command = 'ag %s --ignore "*.class" -l --nocolor -g ""'
-endif
 
 " Silver Searcher settings
 if executable('ag')
@@ -469,18 +468,16 @@ nnoremap <leader>S :split<Space>
 vmap / gc " comment out visually selected lines
 nnoremap <leader>R :nohlsearch<cr>:diffupdate<cr>:syntax sync fromstart<cr><c-l> " redraw screen
 
-" so wrapped lines are rec by j/k
-nmap j gj
-nmap k gk
+" move vertically by visual line
+nnoremap j gj
+nnoremap k gk
 
 " remap jump to beginning & end of line
 nnoremap B ^
 nnoremap E $
 
-vnoremap B ^
-vnoremap E $
-vnoremap $ <nop>
-vnoremap ^ <nop>
+" highlight last inserted text
+nnoremap gV `[v`]
 
 " ; -> :. less shift
 " nnoremap ; :
@@ -551,11 +548,20 @@ autocmd FileType jsx noremap <buffer> <leader>tb :call JsxBeautify()<cr>
 autocmd FileType html noremap <buffer> <leader>tb :call HtmlBeautify()<cr>
 autocmd FileType css noremap <buffer> <leader>tb :call CSSBeautify()<cr>
 
-" iTerm2 specific settings
+" change cursor for Tmux in iTerm2
+if exists('$TMUX')
+    let &t_SI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=1\x7\<Esc>\\"
+    let &t_EI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=0\x7\<Esc>\\"
+else
+    let &t_SI = "\<Esc>]50;CursorShape=1\x7"
+    let &t_EI = "\<Esc>]50;CursorShape=0\x7"
+endif
+
+" iTerm2 specificsettings
 " cursor shapes for different mode
-let &t_SI = "\<Esc>]50;CursorShape=1\x7"
-let &t_SR = "\<Esc>]50;CursorShape=2\x7"
-let &t_EI = "\<Esc>]50;CursorShape=0\x7"
+" let &t_SI = "\<Esc>]50;CursorShape=1\x7"
+" let &t_SR = "\<Esc>]50;CursorShape=2\x7"
+" let &t_EI = "\<Esc>]50;CursorShape=0\x7"
 
 " cursor shapes for different mode running in Tmux
 " let &t_SI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=1\x7\<Esc>\\"

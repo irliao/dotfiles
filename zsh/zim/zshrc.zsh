@@ -54,6 +54,31 @@ bindkey "^Y" accept-and-hold
 bindkey "^N" insert-last-word
 bindkey "^H" beginning-of-history
 
+# Use vim cli mode
+bindkey '^P' up-history
+bindkey '^N' down-history
+
+# Use vim cli mode
+bindkey '^P' up-history
+bindkey '^N' down-history
+
+# ctrl-r starts searching history backward
+bindkey '^r' history-incremental-search-backward
+
+function zle-line-init zle-keymap-select {
+    VIM_PROMPT="%{$fg_bold[yellow]%} [% NORMAL]%  %{$reset_color%}"
+    RPS1="${${KEYMAP/(vicmd|opp)/$VIM_PROMPT}/(main|viins)/}"
+    # RPS1="${${KEYMAP/vicmd/$VIM_PROMPT}/(main|viins)/} $(git_custom_status) $EPS1"
+    zle reset-prompt
+}
+
+zle -N zle-line-init
+zle -N zle-keymap-select
+export KEYTIMEOUT=20
+bindkey -v
+
+setopt MENU_COMPLETE
+
 # Local profile... exports local (or private) variables
 if [[ -f "${HOME}/.local_profile" ]]; then
     source "${HOME}/.local_profile";
@@ -83,8 +108,8 @@ fi
 # fi
 
 # Auto start Tmux (only when using Zim and default Apple Terminal)
-if [[ (-f "${HOME}/.ztmux") && ($TERM_PROGRAM == "Apple_Terminal") ]]; then
-  if [[ -f "${HOME}/.iterm2_shell_integration.zsh" ]]; then
+if [[ (-h "${HOME}/.ztmux") && ($TERM_PROGRAM == "Apple_Terminal") ]]; then
+  if [[ -h "${HOME}/.iterm2_shell_integration.zsh" ]]; then
     rm "${HOME}/.iterm2_shell_integration.zsh" && echo "removed ~/.iterm2_shell_integration.zsh";
   fi
 
@@ -96,7 +121,8 @@ if [[ (-f "${HOME}/.ztmux") && ($TERM_PROGRAM == "Apple_Terminal") ]]; then
   # BASE16_SHELL=$HOME/.config/base16-shell/
   # [ -n "$PS1" ] && [ -s $BASE16_SHELL/profile_helper.sh ] && eval "$($BASE16_SHELL/profile_helper.sh)"
 
-  #source "${HOME}/.ztmux"
+  # tmux source-file ~/.ztmux
+  source ${HOME}/.ztmux
 else # iTerm2
   # iTerm2 shell integration with unix shell
   if [[ ! -h "${HOME}/.iterm2_shell_integration.zsh" ]]; then # check if file is Symlink
@@ -111,9 +137,9 @@ else # iTerm2
   [[ -s $BASE16_SHELL ]] && source $BASE16_SHELL
 
   # integrate iTerm2 with Tmux
-  if [[ $MUX = "ztmux" ]]; then
-    source "${HOME}/.ztmux"
-  fi
+  # if [[ $MUX = "ztmux" ]]; then
+  #   source "${HOME}/.ztmux"
+  # fi
 fi
 
 # Clears the "Last login" message at startup

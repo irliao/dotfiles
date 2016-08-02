@@ -1,35 +1,25 @@
-#!/bin/zsh
+# Aliases
+alias ta="tmux attach-session"
+alias tl="tmux list-sessions"
 
-#
-# Defines tmux aliases and provides for auto launching it at start-up.
-# Source: https://github.com/sorin-ionescu/prezto/blob/master/modules/tmux/init.zsh
-#
-
-# Return if requirements are not found.
-if (( ! $+commands[tmux] )); then
-  return 1
-fi
-
-#
 # Auto Start
-#
+if [[ -z "$TMUX" ]]; then
+  tmux_session='#OMZ'
 
-if [[ "$TERM_PROGRAM" == 'iTerm.app' ]]; then
-  tmux_iterm_integration='-CC'
-fi
+  if ! tmux has-session -t "$tmux_session" 2> /dev/null; then
+    # Disable the destruction of unattached sessions globally.
+    tmux set-option -g destroy-unattached off &> /dev/null
 
-if [[ -z "$TMUX" && -z "$EMACS" && -z "$VIM" ]]; then
-  tmux start-server
+    # Create a new session.
+    tmux new-session -d -s "$tmux_session"
 
-  # Create a 'zim' session if no session has been defined in tmux.conf.
-  if ! tmux has-session 2> /dev/null; then
-    tmux_session='zim'
-    tmux \
-      new-session -d -s "$tmux_session" \; \
-      set-option -t "$tmux_session" destroy-unattached on &> /dev/null
+    # Disable the destruction of the new, unattached session.
+    tmux set-option -t "$tmux_session" destroy-unattached off &> /dev/null
+
+    # Enable the destruction of unattached sessions globally to prevent
+    # an abundance of open, detached sessions.
+    tmux set-option -g destroy-unattached on &> /dev/null
   fi
 
-  # TODO: start tmux with -2 option to support 256 colors
-  # Attach to the 'zim' session or to the last session used.
-  exec tmux $tmux_iterm_integration attach -d # use: attach vs attach-session
+  exec tmux new-session -t "$tmux_session"
 fi
