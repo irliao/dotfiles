@@ -9,18 +9,8 @@
 # Select what modules you would like enabled.
 # The second line of modules may depend on options set by modules in the first line.
 # These dependencies are noted on the respective module's README.md.
-zmodules=(\
-          directory \
-          environment \
-          git \
-          history \
-          input \
-          utility \
-          custom \
-          syntax-highlighting \
-          history-substring-search \
-          prompt \
-          completion)
+zmodules=(directory environment git history input utility custom \
+          syntax-highlighting history-substring-search prompt completion)
 
 ###################
 # MODULE SETTINGS #
@@ -39,7 +29,7 @@ zprompt_theme='mingit' # custom prompt theme
 
 # set an optional host-specific filename for the completion cache file
 # if none is provided, the default '.zcompdump' is used.
-zcompdump_file=".zcompdump-${HOST}-${ZSH_VERSION}"
+# zcompdump_file=".zcompdump-${HOST}-${ZSH_VERSION}"
 
 #
 # Utility
@@ -55,7 +45,7 @@ zcorrection='true'
 
 # Uncomment to enable double-dot expansion.
 # This appends '../' to your input for each '.' you type after an initial '..'
-zdouble_dot_expand='true'
+# zdouble_dot_expand='true'
 
 #
 # Syntax-Highlighting
@@ -73,7 +63,7 @@ zhighlighters=(main brackets cursor)
 #
 
 # Load these ssh identities with the ssh module
-zssh_ids=(id_rsa)
+# zssh_ids=(id_rsa)
 
 
 #
@@ -81,8 +71,8 @@ zssh_ids=(id_rsa)
 #
 
 # Set (optional) pacman front-end.
-zpacman_frontend='helper_here'
+# zpacman_frontend='helper_here'
 
 # Load any helper scripts as defined here
-zpacman_helper=(aur)
+# zpacman_helper=(aur)
 
