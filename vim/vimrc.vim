@@ -263,6 +263,7 @@ set nowb
 " noremap * *zz:LINE<CR>
 " noremap # #zz:LINE<CR>
 
+
 " Color theme settings
 set background=dark
 if has("gui_running")
@@ -275,16 +276,12 @@ else
   " let g:hybrid_reduced_contrast = 1 " Remove this line if using the default palette.
   " let g:molokai_original = 1
   " let g:rehash256 = 1
- "  set t_Co=256 " iTerm2 256 color mode for Airline highlight
- " colorscheme hybrid
+  " set t_Co=256 " iTerm2 256 color mode for Airline highlight
+  " colorscheme hybrid
 
- colorscheme badwolf
+  colorscheme badwolf
   let g:badwolf_darkgutter = 0
   let g:badwolf_tabline = 1
-
-  " let base16colorspace=256
- "  let g:base16_shell_path='~/.config/base16-shell/scripts/'
-"  colorscheme base16-default-dark
 endif
 
 " SuperTab settings
@@ -539,6 +536,9 @@ nnoremap <leader>tf :CtrlP<CR>
 nnoremap <leader>tc :call ToggleCursorCross()<CR>
 nnoremap <leader>th :call ToggleHighlight()<CR>
 nnoremap <leader>td :call DiffWithSaved()<CR>
+
+autocmd FileType xml,html set mps+=<:>
+autocmd FileType c,cpp,java set mps+==:;
 
 " syntastic binding
 nnoremap <leader>sp :lprevious<CR> " go to previous error from Syntastic check, use ':lnext" for next error

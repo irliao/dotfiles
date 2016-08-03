@@ -81,6 +81,7 @@ hs.hotkey.bind(super, 'PAGEDOWN', rightBottomScreen) -- right bottom
 -- TODO: figure out how to setup different hotkeys for different usernames
 -- Application opener hotkeys
 hs.hotkey.bind(super, "C", function() openApplication("Safari Technology Preview") end)
+hs.hotkey.bind(hyper, "C", function() openApplication("Google Chrome") end)
 hs.hotkey.bind(super, "E", function() openApplication("Sublime Text") end)
 hs.hotkey.bind(super, "F", function() openApplication("Finder") end)
 hs.hotkey.bind(super, "G", function() openApplication("Google Chrome") end)

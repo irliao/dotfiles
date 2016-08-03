@@ -24,9 +24,6 @@ export DEVPATH="${HOME}/Developments"
 export EDITOR='vim'
 export MUX='mux' # use 'ztmux' for Tmux integration
 
-# Ruby
-if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
-
 # Brew
 export HOMEBREW_CASK_OPTS="--appdir=/Applications --caskroom=/opt/homebrew-cask/Caskroom" # install path
 export HOMEBREW_NO_ANALYTICS=1 # opt-out of analytics
@@ -40,7 +37,6 @@ export CHEATCOLORS=true
 
 # The Fuck
 eval "$(thefuck --alias)"
-# You can use whatever you want as an alias, like for Mondays:
 eval "$(thefuck --alias fk)"
 
 # Key bindings matching Mac OSX
@@ -61,9 +57,6 @@ bindkey '^N' down-history
 # Use vim cli mode
 bindkey '^P' up-history
 bindkey '^N' down-history
-
-# ctrl-r starts searching history backward
-bindkey '^r' history-incremental-search-backward
 
 function zle-line-init zle-keymap-select {
     VIM_PROMPT="%{$fg_bold[yellow]%} [% NORMAL]%  %{$reset_color%}"
@@ -89,7 +82,6 @@ if [[ -f "${HOME}/.bash_profile" ]]; then
     source "${HOME}/.bash_profile";
 fi
 
-
 # Custom functions
 if [[ -f "${HOME}/.zfunction" ]]; then
     source "${HOME}/.zfunction"
@@ -100,31 +92,16 @@ if [[ -f "${HOME}/.zalias" ]]; then
     source "${HOME}/.zalias"
 fi
 
-# Support 256 colors
-# if [ -e /usr/share/terminfo/x/xterm-256color ]; then
-#   export TERM='xterm-256color'
-# else
-#   export TERM='screen-256color'
-# fi
-
-# BASE16_SHELL=$HOME/.config/base16-shell/
-# [ -n "$PS1" ] && [ -s $BASE16_SHELL/profile_helper.sh ] && eval "$($BASE16_SHELL/profile_helper.sh)"
+# Load colorscheme... should match Terminal/iTerm2 color profile
+BASE16_SHELL="$HOME/.dotfiles/term/base16-default-dark.sh"
+[[ -s $BASE16_SHELL ]] && source $BASE16_SHELL
 
 # Auto start Tmux (only when using Zim and default Apple Terminal)
-if [[ (-h "${HOME}/.ztmux") && ($TERM_PROGRAM == "Apple_Terminal") ]]; then
+if [[ ($TERM_PROGRAM == "Apple_Terminal") ]]; then
   if [[ -h "${HOME}/.iterm2_shell_integration.zsh" ]]; then
     rm "${HOME}/.iterm2_shell_integration.zsh" && echo "removed ~/.iterm2_shell_integration.zsh";
   fi
 
-  # Overload system default 256-color palette with precise gruvbox colors
-  # if [[ -f "${HOME}/.vim/gruvbox_256palette_osx.sh" ]]; then
-  #   source "${HOME}/.vim/gruvbox_256palette_osx.sh";
-  # fi
-
-  # BASE16_SHELL=$HOME/.config/base16-shell/
-  # [ -n "$PS1" ] && [ -s $BASE16_SHELL/profile_helper.sh ] && eval "$($BASE16_SHELL/profile_helper.sh)"
-
-  # tmux source-file ~/.ztmux
   source ${HOME}/.ztmux
 else # iTerm2
   # iTerm2 shell integration with unix shell
@@ -134,15 +111,6 @@ else # iTerm2
   fi
   # use iterm2_shell_integration.`basename $SHELL` when dealing with multiple shells
   test -e ${HOME}/.iterm2_shell_integration.zsh && source ${HOME}/.iterm2_shell_integration.zsh;
-
-  # load Base16 shell... should be the same as iTerm2's Preset to avoid visible color changing
-  BASE16_SHELL="$HOME/.dotfiles/term/base16-scripts/base16-default-dark.sh"
-  [[ -s $BASE16_SHELL ]] && source $BASE16_SHELL
-
-  # integrate iTerm2 with Tmux
-  # if [[ $MUX = "ztmux" ]]; then
-  #   source "${HOME}/.ztmux"
-  # fi
 fi
 
 # Clears the "Last login" message at startup

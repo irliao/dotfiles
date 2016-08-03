@@ -26,6 +26,7 @@ alias ..3="cd ../../.."
 alias ..4="cd ../../../.."
 alias ..5="cd ../../../../.."
 alias isLoginShell="if [[ -o login ]]; then; print yes; else; print no; fi"
+alias zsync="source ${ZDOTDIR:-${HOME}}/.zlogin"
 
 # Tmux
 alias tmk="tmux kill-server"
