@@ -14,12 +14,12 @@ local winLeft = nil
 
 -- Focus window into Left or Right
 function focusLeftRight()
-  -- TODO: migrate old implementation
-  -- if hs.window.focusedWindow():focusWindowWest() then
-  --   return
-  -- else
-  --   hs.window.focusedWindow():focusWindowEast()
-  -- end
+  -- TODO: implement Tmux like window focus
+  if hs.window.focusedWindow():focusWindowWest() then
+    return
+  else
+    hs.window.focusedWindow():focusWindowEast()
+  end
 
 end
 
@@ -159,7 +159,7 @@ function applicationWatcher(appName, eventType, appObject)
             -- centerScreen()
         elseif (appName == "Terminal") then
             openTerminalFullScreen()
-        elseif (appName == "iTerm2") then          
+        elseif (appName == "iTerm2") then
             openiTermFullScreen()
         else
             maxScreen()
