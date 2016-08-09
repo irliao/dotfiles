@@ -1,157 +1,100 @@
-let mapleader = '-'
+set gdefault
+set ignorecase
 
-set hlsearch
-set scrolloff=3
-set smartcase
-set showmode
-set history=1000
-set surround " activate the vim-surround key bindings"
 
-" maps
-nnoremap <C-l> <C-w>l
-nnoremap <C-k> <C-w>k
-nnoremap <C-j> <C-w>j
-nnoremap <C-h> <C-w>h
+" ============================================================================
+" Movement
+" ============================================================================
 
-nnoremap gh gT
-nnoremap gl gt
+" Scroll screen with the cursor
+noremap <C-j> gj<C-e>
+noremap <C-k> gk<C-y>
 
-" onoremap iv i[
-" onoremap av a[
+" Left / right
+noremap <C-h> h
+noremap <C-l> l
 
-" easy window navigation
-nnoremap <c-l> <c-w>l
-nnoremap <c-j> <c-w>j
-nnoremap <c-h> <c-w>h
-nnoremap <c-k> <c-w>k
-nnoremap gr gT
-nnoremap <c-s-tab> gT
-nnoremap <c-tab> gt
-nnoremap <C-w>x :vs<CR>:q<C-w>l
-nnoremap <C-w>v :vs<CR>:q<C-w>j
+" Insert mode
+inoremap <C-k> <Up>
+inoremap <C-j> <Down>
+inoremap <C-l> <Right>
+inoremap <C-h> <Left>
 
-nnoremap <C-u> :action FindUsages<cr>
-nnoremap <C-S-u> :action HighlightUsagesInFile<cr>
+" Previous / next match
+noremap H ,
+noremap L ;
 
-" code refactoring
-nnoremap cre :action RenameElement<cr>
-nnoremap cs :action ChangeSignature<cr>
-nnoremap cts :action ChangeTypeSignature<cr>
+" Home row beginning / end of line
+noremap h ^
+noremap l $
 
-" unimpaired mappings
-nnoremap [<Space> O<esc>j
-nnoremap ]<Space> o<esc>k
-nnoremap [m :action MethodUp<cr>
-nnoremap ]m :action MethodDown<cr>
-nnoremap [c :action VcsShowPrevChangeMarker<cr>
-nnoremap ]c :action VcsShowNextChangeMarker<cr>
+" Previous / next word
+noremap k #
+noremap j *
 
-nnoremap <C-p> :action GotoFile<CR>
-nnoremap <C-S-p> :action GotoClass<CR>
-nnoremap <C-s> :action GotoSymbol<CR>
-nnoremap <C-a> :action GotoAction<CR>
+" ============================================================================
+" Editing
+" ============================================================================
 
-nnoremap K :action GotoDeclaration<CR>
-nnoremap gK :action GotoTypeDeclaration<CR>
-nnoremap gje :action GoToErrorGroup<CR>
-nnoremap gji :action GotoImplementation<CR>
-nnoremap gs :action GotoSuperMethod<CR>
-nnoremap gjt :action GotoTest<CR>
+" Escape
+inoremap jk <Esc>`^
+inoremap <C-q> <Esc>`^
+noremap <C-q> <Esc>
+vnoremap <C-q> <Esc>
+cmap <C-q> <C-c>
 
-nnoremap gb0 :action GotoBookmark0 <CR>
-nnoremap gb1 :action GotoBookmark1<CR>
-nnoremap gb2 :action GotoBookmark2<CR>
-nnoremap gb3 :action GotoBookmark3<CR>
-nnoremap gb4 :action GotoBookmark4<CR>
-nnoremap gb5 :action GotoBookmark5<CR>
-nnoremap gb6 :action GotoBookmark6<CR>
-nnoremap gb7 :action GotoBookmark7<CR>
-nnoremap gb8 :action GotoBookmark8<CR>
-nnoremap gb9 :action GotoBookmark9<CR>
-nnoremap gjl :action GoToLinkTarget<CR>
+" Moving blocks of text in visual mode
+vnoremap < <gv
+vnoremap > >gv
 
-nnoremap gnb :action GotoNextBookmark<CR>
-nnoremap gne :action GotoNextError<CR>
-nnoremap gnx :action GotoNextIncompletePropertyAction<CR>
-nnoremap gpb :action GotoPreviousBookmark<CR>
-nnoremap gep :action GotoPreviousError<CR>
+" Select all text
+map <Space>a ggVG
 
-" will be replaced as soon as onoremap works
-nnoremap civ ci[
-nnoremap div di[
-nnoremap yiv yi[
-nnoremap cav ca[
-nnoremap dav da[
-nnoremap yav ya[
+" Copy until the end of the line
+noremap Y y$
 
-" easy system clipboard copy/paste
-noremap "+y "*y
-noremap "+Y "*Y
-noremap "+p "*p
-noremap "+P "*P
-noremap <C-S-c> "*y
-noremap <C-S-v> "*P
+" Indent everything
+noremap <Space>I ggvG=
 
-" built-in navigation to navigated items works better
-nnoremap <c-o> :action Back<cr>
-nnoremap <c-i> :action Forward<cr>
-" but preserve ideavim defaults
-nnoremap <C-S-o> <c-o>
-nnoremap <C-S-i> <c-i>
+" Indent selection in visual mode
+vnoremap <Space>i =
 
-" generate
-nnoremap <leader>gt :action GenerateTestMethod<CR>
-nnoremap <leader>gs :action GenerateSetUpMethod<CR>
-nnoremap <leader>gG :action GenerateGetter<CR>
-nnoremap <leader>gS :action GenerateSetter<CR>
-nnoremap <leader>ga :action GenerateGetterAndSetter<CR>
-nnoremap <leader>ge :action GenerateEquals<CR>
-nnoremap <leader>gc :action GenerateConstructor<CR>
-nnoremap <leader>G :action Generate<CR>
+" Indent the current line
+noremap <Space>i v=
 
-" enter newlines
-nnoremap <CR> :action EditorEnter<CR>
-inoremap <CR> <C-o>:action EditorEnter<CR>
+" Change current word - kill
+noremap K ciw
 
-" windows
-nnoremap gwm :action ActivateEventLogToolWindow<CR>
-nnoremap gwg :action ActivateGradleToolWindow<CR>
-nnoremap gwd :action ActivateDebugToolWindow<CR>
-nnoremap gwr :action ActivateRunToolWindow<CR>
-nnoremap gwb :action ViewBreakpoints<CR>
+" Change in double quotes
+noremap J ci"
 
-" imaps
-inoremap <C-A-c> {@code }<C-o>h
-inoremap <C-A-l> {@link }<C-o>h
-inoremap <C-S-k> <C-o>k
-inoremap <C-S-j> <C-o>j
-inoremap <C-S-l> <C-o>l
-inoremap <C-S-h> <C-o>h
-inoremap <C-a> <Esc>I
-inoremap <C-e> <Esc>A
+" Join lines
+nnoremap <Space>J J
 
-nnoremap gjK :action QuickJavaDoc<CR>
-nnoremap ]] :action MethodDown<CR>
-nnoremap [[ :action MethodUp<CR>
 
-nnoremap <Space> :nohl<CR>
-nnoremap <leader>R :action Rerun<CR>
-nnoremap <leader>rt :action RerunTests<CR>
-nnoremap <leader>rf :action RerunFailedTests<CR>
+" ============================================================================
+" Editor control
+" ============================================================================
 
-nnoremap <leader>go :action OverrideMethods<CR>
-nnoremap <leader>d 0w:action ShowIntentionActions<CR>
+" Enter the command-line mode
+noremap <CR> :
 
-nnoremap <leader>gn :action NewClass<CR>
+" Reload .ideavimrc
+nnoremap <Space>vs :source ~/.ideavimrc<CR>
 
-" debugger
-nnoremap i :ForceStepInto
-nnoremap o :ForceStepOver
-nnoremap p :Stepout
-nnoremap n :action ToggleLineBreakpoint<CR>
-nnoremap m :action ToggleMethodBreakpoint<CR>
-nnoremap <CR> :action Resume<CR>
 
-" templates
-inoremap <C-k> <C-o>:action NextTemplateVariable<CR>
-inoremap <C-j> <C-o>:action PreviousTemplateVariable<CR>
+" ============================================================================
+" IDE actions
+" ============================================================================
+
+nnoremap / :action Find<CR>
+nnoremap n :action FindNext<CR>
+nnoremap N :action FindPrevious<CR>
+nnoremap U :action $Redo<CR>
+nnoremap ; :action AceJumpAction<CR>
+nnoremap <Space>o :action GotoClass<CR>
+nnoremap <Space>O :action GotoFile<CR>
+nnoremap <Space>d :action CloseContent<CR>
+nnoremap <Space>j :action RecentFiles<CR>
+nnoremap <Space>k :action FileStructurePopup<CR>
+nnoremap <Space>h :action QuickJavaDoc<CR>

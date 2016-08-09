@@ -219,11 +219,11 @@
 	</item>
 
 	<item>
-	    <name>H,J,K,L direction control in Finder</name>
+	    <name>H,J,K,L direction control in Finder and iTunes</name>
 	   	<appendix>* H,J,K,L to cursor L,D,U,R for navigation</appendix>
 	    <appendix>* Only applies when not editing text</appendix>
-	    <identifier>private.finder.hjkl_ldur</identifier>
-	    <only>FINDER</only>
+	    <identifier>private.apps.hjkl_ldur</identifier>
+	    <only>FINDER, ITUNES</only>
 	    <uielementrole_not>AXTextArea, AXTextField</uielementrole_not>
 	    <modifier_only>
 		      ModifierFlag::NONE,

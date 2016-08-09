@@ -17,7 +17,6 @@
     {
         "link": {
             "~/.dotfiles": "",
-            "~/.atom": "atom",
             "~/.bin": "bin",
             "~/.cheat": "cheat",
             "~/.config": "config",
@@ -27,6 +26,7 @@
             "~/.gitignore_global": "git/gitignore_global",
             "~/.gvimrc": "vim/gvimrc.vim",
             "~/.hammerspoon": "hammerspoon",
+            "~/.ideavimrc": "vim/ideavimrc.vim",
             "~/.jsbeautifyrc": "node/jsbeautifyrc.json",
             "~/.nvmrc": "node/nvmrc",
             "~/.spacemacs": "emacs/spacemacs.el",
