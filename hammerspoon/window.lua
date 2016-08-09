@@ -9,13 +9,18 @@
 -- hs.window.highlight.ui.frameColor = {1,0.9,0,0.80} -- red
 -- hs.window.highlight.start()
 
+local winRight = nil
+local winLeft = nil
+
 -- Focus window into Left or Right
 function focusLeftRight()
-  if hs.window.focusedWindow():focusWindowWest() then
-    return
-  else
-    hs.window.focusedWindow():focusWindowEast()
-  end
+  -- TODO: migrate old implementation
+  -- if hs.window.focusedWindow():focusWindowWest() then
+  --   return
+  -- else
+  --   hs.window.focusedWindow():focusWindowEast()
+  -- end
+
 end
 
 -- Resize window into Left, Right, or Full

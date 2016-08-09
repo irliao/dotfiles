@@ -11,7 +11,7 @@ function chpwd() {
 
 # $cd also does $ls
 # cd() { builtin cd "$@" && ls && printf ""; }
-# bd() { builtin cd - && ls ~- && printf ""; }
+bd() { builtin cd - && ls ~- && printf ""; }
 
 # Make and go to directory
 md() { [[ -n ${1} ]] && mkdir -p ${1} && builtin cd ${1}; }
@@ -31,13 +31,13 @@ fs() {
 }
 
 # Rename title displayed from tabs in iTerm
-# title () {
-#   if [[ $# == 0 ]] then
-#     echo -ne "\e]1;$PWD\a"
-#   else
-#     echo -ne "\e]1;$@\a"
-#   fi
-# }
+title () {
+  if [[ $# == 0 ]] then
+    echo -ne "\e]1;$PWD\a"
+  else
+    echo -ne "\e]1;$@\a"
+  fi
+}
 
 # Show short directory path
 swd() { echo "$(pwd | sed -e "s,^$HOME,~,")" }
