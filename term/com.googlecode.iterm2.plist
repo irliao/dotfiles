@@ -637,7 +637,7 @@
 	<key>IndicateBellsInDockBadgeLabel</key>
 	<false/>
 	<key>JobName</key>
-	<true/>
+	<false/>
 	<key>KillJobsInServersOnQuit</key>
 	<false/>
 	<key>LoadPrefsFromCustomFolder</key>
@@ -681,9 +681,9 @@
 	<key>NSWindow Frame SUUpdateAlert</key>
 	<string>410 382 620 392 0 0 1440 900 </string>
 	<key>NSWindow Frame SharedPreferences</key>
-	<string>501 159 796 473 0 0 1440 900 </string>
+	<string>4123 346 770 381 4000 -44 900 1440 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
-	<string>1440 203 570 377 1440 -320 2560 1440 </string>
+	<string>4000 -17 899 1413 4000 -44 900 1440 </string>
 	<key>New Bookmarks</key>
 	<array>
 		<dict>
@@ -1384,7 +1384,7 @@
 	<key>NoSyncNeverRemindPrefsChangesLostForFile</key>
 	<true/>
 	<key>NoSyncNeverRemindPrefsChangesLostForFile_selection</key>
-	<integer>1</integer>
+	<integer>0</integer>
 	<key>NoSyncPermissionToShowTip</key>
 	<false/>
 	<key>NoSyncTimeOfFirstLaunchOfVersionWithTip</key>
@@ -1445,7 +1445,7 @@
 	<key>SUHasLaunchedBefore</key>
 	<true/>
 	<key>SULastCheckTime</key>
-	<date>2016-08-04T22:35:26Z</date>
+	<date>2016-08-08T15:59:39Z</date>
 	<key>SUSendProfileInfo</key>
 	<false/>
 	<key>ShowBookmarkName</key>
@@ -1477,6 +1477,10 @@
 	<key>UseBorder</key>
 	<false/>
 	<key>WindowNumber</key>
+	<false/>
+	<key>findIgnoreCase_iTerm</key>
+	<true/>
+	<key>findRegex_iTerm</key>
 	<false/>
 	<key>iTerm Version</key>
 	<string>3.0.5</string>

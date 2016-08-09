@@ -44,7 +44,7 @@ end
 -- Window management hotkeys
 -- hs.hotkey.bind(super, '1', function() hs.window.focusedWindow():focusWindowWest() end)
 -- hs.hotkey.bind(super, '2', function() hs.window.focusedWindow():focusWindowEast() end)
-hs.hotkey.bind(super, 'A', focusLeftRight)
+-- hs.hotkey.bind(super, 'A', focusLeftRight) -- TODO: reenable when new implementation is done
 hs.hotkey.bind(super, 'S', resizeLeftRightFull)
 hs.hotkey.bind(hyper, 'S', resizeTopBottomFull) -- simulate Caps + Shift + S for vertical divide
 hs.hotkey.bind(super, 'R', function() hs.reload() end)
@@ -82,6 +82,7 @@ hs.hotkey.bind(super, 'PAGEDOWN', rightBottomScreen) -- right bottom
 -- Application opener hotkeys
 hs.hotkey.bind(super, "C", function() openApplication("Safari Technology Preview") end)
 hs.hotkey.bind(hyper, "C", function() openApplication("Google Chrome") end)
+hs.hotkey.bind(super, "D", function() openApplication("Dash") end)
 hs.hotkey.bind(super, "E", function() openApplication("Sublime Text") end)
 hs.hotkey.bind(super, "F", function() openApplication("Finder") end)
 hs.hotkey.bind(super, "G", function() openApplication("Google Chrome") end)
