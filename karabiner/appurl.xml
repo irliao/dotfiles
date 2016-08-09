@@ -45,6 +45,10 @@
 		<name>KeyCode::VK_OPEN_URL_APP_Hammerspoon</name>
 		<url type="file">/Applications/Hammerspoon.app</url>
 	</vkopenurldef>
+  <vkopenurldef>
+    <name>KeyCode::VK_OPEN_URL_APP_ITUNES</name>
+    <url type="file">/Applications/iTunes.app</url>
+  </vkopenurldef>
 	<vkopenurldef>
 		<name>KeyCode::VK_OPEN_URL_APP_JSONQuery</name>
 		<url type="file">/Applications/JSON Query.app</url>
@@ -88,7 +92,7 @@
 	<vkopenurldef>
     	<name>KeyCode::VK_OPEN_URL_APP_Karabiner_ReloadXML</name>
     	<url type="file">/Applications/Karabiner.app/Contents/Applications/Utilities/ReloadXML.app</url>
-  	</vkopenurldef>  
+  	</vkopenurldef>
 	<vkopenurldef>
 		<name>KeyCode::VK_OPEN_URL_APP_Vmware</name>
 		<url type="file">/Applications/VMware Fusion.app</url>
