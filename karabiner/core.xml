@@ -61,6 +61,7 @@
 		<appendix>* Option_R + [ to show prev tab</appendix>
 		<appendix>* Option_R + ] to show next tab</appendix>
 		<appendix>* Option_R + SPACE to go to search bar</appendix>
+    <appendix>* Commmand_R + : to show web console</appendix>
 		<identifier>private.shortcuts.safari</identifier>
 
 		<block>
@@ -93,7 +94,7 @@
 				KeyCode::L, ModifierFlag::COMMAND_L | ModifierFlag::SHIFT_L
 			</autogen>
 
-			<!-- Show web inspector -->
+			<!-- Web inspector -->
 			<autogen>
 				--KeyToKey--
 				KeyCode::I, ModifierFlag::OPTION_R | ModifierFlag::NONE,
@@ -120,7 +121,14 @@
 				KeyCode::SPACE, ModifierFlag::OPTION_R | ModifierFlag::NONE,
 				KeyCode::L, ModifierFlag::COMMAND_L | ModifierFlag::NONE
 			</autogen>
-		</block>
+
+      <!-- Web Console -->
+      <autogen>
+        --KeyToKey--
+        KeyCode::SEMICOLON, ModifierFlag::COMMAND_R | ModifierFlag::NONE,
+				KeyCode::C, ModifierFlag::COMMAND_L | ModifierFlag::OPTION_L
+      </autogen>
+    </block>
 
 		<!-- Show extension builder for Safari via Hammerspoon -->
 		<block>
