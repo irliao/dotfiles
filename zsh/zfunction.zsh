@@ -39,6 +39,15 @@ title () {
   fi
 }
 
+# Destroy processes on PORT
+killPort() {
+  if [ -z "$1" ]; then
+    echo "Usage: killPort [numeric port identifier]" >&2
+    return 1
+  fi
+  lsof -i TCP:$1 | awk '/LISTEN/{print $2}' | xargs kill -9
+}
+
 # Show short directory path
 swd() { echo "$(pwd | sed -e "s,^$HOME,~,")" }
 
