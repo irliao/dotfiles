@@ -489,7 +489,7 @@
 	<key>FlashTabBarInFullscreen</key>
 	<false/>
 	<key>FocusFollowsMouse</key>
-	<true/>
+	<false/>
 	<key>GlobalKeyMap</key>
 	<dict>
 		<key>0x19-0x60000</key>
@@ -681,13 +681,15 @@
 	<key>NSWindow Frame SUUpdateAlert</key>
 	<string>2410 466 620 392 1440 -320 2560 1440 </string>
 	<key>NSWindow Frame SharedPreferences</key>
-	<string>2445 34 796 473 1440 -320 2560 1440 </string>
+	<string>-115 1197 796 473 -1120 900 2560 1440 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
-	<string>1440 -21 1004 601 1440 -320 2560 1440 </string>
+	<string>0 331 570 377 0 0 1440 900 </string>
 	<key>New Bookmarks</key>
 	<array>
 		<dict>
 			<key>ASCII Anti Aliased</key>
+			<true/>
+			<key>Allow Title Setting</key>
 			<true/>
 			<key>Ambiguous Double Width</key>
 			<false/>
@@ -1339,10 +1341,12 @@
 			<false/>
 			<key>Shortcut</key>
 			<string></string>
+			<key>Show Mark Indicators</key>
+			<true/>
 			<key>Silence Bell</key>
 			<true/>
 			<key>Sync Title</key>
-			<false/>
+			<true/>
 			<key>Tags</key>
 			<array/>
 			<key>Terminal Type</key>
@@ -1447,7 +1451,7 @@
 	<key>SUHasLaunchedBefore</key>
 	<true/>
 	<key>SULastCheckTime</key>
-	<date>2016-08-15T16:10:35Z</date>
+	<date>2016-08-17T16:19:37Z</date>
 	<key>SUSendProfileInfo</key>
 	<false/>
 	<key>ShowBookmarkName</key>
