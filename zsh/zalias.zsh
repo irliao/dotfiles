@@ -20,6 +20,7 @@ alias ll="ls -FGlAhp" # ls -lh
 alias kk="clear"
 alias src="source"
 alias comp="diff -qr" # compare 2 input directories
+alias qfind='find . -name '
 alias ..="cd .."
 alias ..2="cd ../.."
 alias ..3="cd ../../.."
