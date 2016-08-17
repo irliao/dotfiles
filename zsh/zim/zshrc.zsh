@@ -10,7 +10,7 @@ if [[ -s ${ZDOTDIR:-${HOME}}/.zim/init.zsh ]]; then
 fi
 
 # skip_global_compinit=1 # faster Zsh startup
-zprompt_theme='mingit' # custom prompt theme
+# zprompt_theme='mingit' # custom prompt theme
 DEFAULT_USER="irliao" # replaces user@hostname with specified username
 
 # Autocompletion
@@ -40,17 +40,17 @@ eval "$(thefuck --alias)"
 eval "$(thefuck --alias fk)"
 
 # Key bindings matching Mac OSX
-# bindkey "^A" beginning-of-line
-# bindkey "^B" beginning-of-line # to use in tmux
-# bindkey "^E" end-of-line
-# bindkey "^K" kill-line
-# bindkey "^R" history-incremental-search-backward
-# bindkey "^P" history-search-backward
-# bindkey "^Y" accept-and-hold
-# bindkey "^N" insert-last-word
-# bindkey "^H" beginning-of-history
-# bindkey '^P' up-history
-# bindkey '^N' down-history
+bindkey "^A" beginning-of-line
+bindkey "^B" beginning-of-line # to use in tmux
+bindkey "^E" end-of-line
+bindkey "^K" kill-line
+bindkey "^R" history-incremental-search-backward
+bindkey "^P" history-search-backward
+bindkey "^Y" accept-and-hold
+bindkey "^N" insert-last-word
+bindkey "^H" beginning-of-history
+bindkey '^P' up-history
+bindkey '^N' down-history
 
 function zle-line-init zle-keymap-select {
     VIM_PROMPT="%{$fg_bold[yellow]%} [% NORMAL]%  %{$reset_color%}"

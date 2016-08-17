@@ -2,6 +2,10 @@
 
 irliao's dotfiles
 
+## TODO:
+* fix shift-Tab issue (somehow fixed by sourcing ~/.zshrc)
+* fix vim-tab not auto-completing (somehow fixed by removing ~/.zcompdump && compinit)
+
 ## Installation
 
 Clone the repo
