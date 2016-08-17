@@ -1,25 +1,27 @@
-# Aliases
-alias ta="tmux attach-session"
-alias tl="tmux list-sessions"
+# Return if requirements are not found.
+if (( ! $+commands[tmux] )); then
+  return 1
+fi
 
+#
 # Auto Start
-if [[ -z "$TMUX" ]]; then
-  tmux_session='#OMZ'
+#
 
-  if ! tmux has-session -t "$tmux_session" 2> /dev/null; then
-    # Disable the destruction of unattached sessions globally.
-    tmux set-option -g destroy-unattached off &> /dev/null
+if [[ "$TERM_PROGRAM" = 'iTerm.app' ]]; then
+  _tmux_iterm_integration='-CC'
+fi
 
-    # Create a new session.
-    tmux new-session -d -s "$tmux_session"
+if [[ -z "$TMUX" && -z "$EMACS" && -z "$VIM" ]]; then
+  tmux start-server
 
-    # Disable the destruction of the new, unattached session.
-    tmux set-option -t "$tmux_session" destroy-unattached off &> /dev/null
-
-    # Enable the destruction of unattached sessions globally to prevent
-    # an abundance of open, detached sessions.
-    tmux set-option -g destroy-unattached on &> /dev/null
+  # Create a 'prezto' session if no session has been defined in tmux.conf.
+  if ! tmux has-session 2> /dev/null; then
+    tmux_session='zim'
+    tmux \
+      new-session -d -s "$tmux_session" \; \
+      set-option -t "$tmux_session" destroy-unattached off &> /dev/null
   fi
 
-  exec tmux new-session -t "$tmux_session"
+  # Attach to the 'prezto' session or to the last session used.
+  exec tmux $_tmux_iterm_integration attach-session
 fi
