@@ -10,11 +10,6 @@
         "clean": ["~"]
     },
     {
-        "shell": [
-          "git submodule init"
-        ]
-    },
-    {
         "link": {
             "~/.dotfiles": "",
             "~/.bin": "bin",
@@ -26,10 +21,8 @@
             "~/.gitignore_global": "git/gitignore_global",
             "~/.gvimrc": "vim/gvimrc.vim",
             "~/.hammerspoon": "hammerspoon",
-            "~/.ideavimrc": "vim/ideavimrc.vim",
             "~/.jsbeautifyrc": "node/jsbeautifyrc.json",
             "~/.nvmrc": "node/nvmrc",
-            "~/.spacemacs": "emacs/spacemacs.el",
             "~/.teamocil": "tmux/teamocil",
             "~/.tmux": "tmux",
             "~/.tmux.conf": "tmux/tmux.conf",
@@ -47,7 +40,7 @@
     },
     {
         "shell": [
-          "git submodule update"
+          ["git submodule update --init --recursive", "Installing submodules"]
         ]
 
     }

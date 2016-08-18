@@ -39,18 +39,6 @@ export CHEATCOLORS=true
 eval "$(thefuck --alias)"
 eval "$(thefuck --alias fk)"
 
-# Key bindings matching Mac OSX
-bindkey "^A" beginning-of-line
-bindkey "^B" beginning-of-line # to use in tmux
-bindkey "^E" end-of-line
-bindkey "^K" kill-line
-bindkey "^R" history-incremental-search-backward
-bindkey "^P" history-search-backward
-bindkey "^Y" accept-and-hold
-bindkey "^N" insert-last-word
-bindkey "^H" beginning-of-history
-bindkey '^P' up-history
-bindkey '^N' down-history
 
 function zle-line-init zle-keymap-select {
     VIM_PROMPT="%{$fg_bold[yellow]%} [% NORMAL]%  %{$reset_color%}"
@@ -96,6 +84,19 @@ if [[ ($TERM_PROGRAM == "Apple_Terminal") ]]; then
     rm "${HOME}/.iterm2_shell_integration.zsh" && echo "removed ~/.iterm2_shell_integration.zsh";
   fi
 
+  # Key bindings matching Mac OSX
+  bindkey "^A" beginning-of-line
+  bindkey "^B" beginning-of-line # to use in tmux
+  bindkey "^E" end-of-line
+  bindkey "^K" kill-line
+  bindkey "^R" history-incremental-search-backward
+  bindkey "^P" history-search-backward
+  bindkey "^Y" accept-and-hold
+  bindkey "^N" insert-last-word
+  bindkey "^H" beginning-of-history
+  bindkey '^P' up-history
+  bindkey '^N' down-history
+
   source ${HOME}/.ztmux
 else # iTerm2
   # iTerm2 shell integration with unix shell
@@ -117,5 +118,6 @@ clear;
 # NPM_PACKAGES_BIN="${HOME}/.node_modules_global/bin" # include in PATH if setting prefix with .npmrc
 # unset MANPATH
 # export MANPATH="$NPM_PACKAGES/share/man:$(manpath)" # include manuals from npm modules
+#
 
 

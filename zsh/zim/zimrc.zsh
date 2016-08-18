@@ -56,7 +56,7 @@ zprompt_theme='mingit' # custom prompt theme
 #   https://github.com/zsh-users/zsh-syntax-highlighting/blob/master/docs/highlighters.md
 # For (u)rxvt and gnome-terminal users,
 # removing the 'cursor' highlighter will fix the disappearing cursor problem
-zhighlighters=(main brackets)
+zhighlighters=(main brackets cursor)
 
 #
 # SSH
