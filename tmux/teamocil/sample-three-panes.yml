@@ -1,9 +1,0 @@
-windows:
-  - name: sample-three-panes
-    root: ~/
-    layout: main-vertical
-    panes:
-      - echo "pane 1"
-      - commands:
-        - echo "pane 2"
-      - echo "pane 3"
