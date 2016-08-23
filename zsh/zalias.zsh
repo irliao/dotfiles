@@ -32,6 +32,7 @@ alias fixvim="rm ~/.zcompdump*"
 
 # Tmux
 alias tmk="tmux kill-server"
+alias tmu="tmux source-file ~/.tmux.conf"
 alias getTmuxLayout='tmux list-windows -F "#{window_active} #{window_layout}" | grep "^1" | cut -d " " -f 2'
 alias tl="teamocil"
 alias tle="teamocil --edit"
