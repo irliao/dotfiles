@@ -58,6 +58,7 @@ zprompt_theme='mingit' # custom prompt theme
 # removing the 'cursor' highlighter will fix the disappearing cursor problem
 zhighlighters=(main brackets cursor)
 
+
 #
 # SSH
 #
@@ -71,7 +72,7 @@ zhighlighters=(main brackets cursor)
 #
 
 # Set (optional) pacman front-end.
-# zpacman_frontend='helper_here'
+# zpacman_frontend='powerpill'
 
 # Load any helper scripts as defined here
 # zpacman_helper=(aur)

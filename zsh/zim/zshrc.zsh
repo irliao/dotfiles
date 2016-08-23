@@ -2,27 +2,23 @@
 # User configuration sourced by interactive shells
 #
 
-# . `brew --prefix`/etc/profile.d/z.sh
-
 # Source zim's init.zh, which sources ~/.zimrc, which decides prompt theme
 if [[ -s ${ZDOTDIR:-${HOME}}/.zim/init.zsh ]]; then
   source ${ZDOTDIR:-${HOME}}/.zim/init.zsh
 fi
 
-# skip_global_compinit=1 # faster Zsh startup
-# zprompt_theme='mingit' # custom prompt theme
+skip_global_compinit=1 # faster Zsh startup
+zprompt_theme='mingit' # custom prompt theme
 DEFAULT_USER="irliao" # replaces user@hostname with specified username
 
 # Autocompletion
-fpath=(~/.dotfiles/zsh/completions $fpath)
-autoload -U compinit && compinit
+# fpath=(~/.dotfiles/zsh/completions $fpath)
+# autoload -U compinit && compinit
 
 # Environment variables
 export PATH="/usr/local/bin:${HOME}/.bin:/usr/local/sbin:/usr/bin:/bin:/usr/sbin:/sbin"
-export ICLOUD="${HOME}/Library/Mobile Documents/com~apple~CloudDocs/"
-export DEVPATH="${HOME}/Developments"
 export EDITOR='vim'
-export MUX='mux' # use 'ztmux' for Tmux integration
+export DEVPATH="${HOME}/Developments"
 
 # Brew
 export HOMEBREW_CASK_OPTS="--appdir=/Applications --caskroom=/opt/homebrew-cask/Caskroom" # install path
@@ -36,6 +32,7 @@ source $(brew --prefix nvm)/nvm.sh
 export CHEATCOLORS=true
 
 # The Fuck
+#
 eval "$(thefuck --alias)"
 eval "$(thefuck --alias fk)"
 
@@ -46,13 +43,12 @@ function zle-line-init zle-keymap-select {
     # RPS1="${${KEYMAP/vicmd/$VIM_PROMPT}/(main|viins)/} $(git_custom_status) $EPS1"
     zle reset-prompt
 }
-
 zle -N zle-line-init
 zle -N zle-keymap-select
-export KEYTIMEOUT=20
-bindkey -v
 
-setopt MENU_COMPLETE
+bindkey -v
+# export KEYTIMEOUT=20
+# setopt MENU_COMPLETE
 
 # Local profile... exports local (or private) variables
 if [[ -f "${HOME}/.local_profile" ]]; then
@@ -74,36 +70,48 @@ if [[ -f "${HOME}/.zalias" ]]; then
     source "${HOME}/.zalias"
 fi
 
-# Load colorscheme... should match Terminal/iTerm2 color profile
+# Use 256 color terminal
+# export TERM=xterm-256color
+
+# Load colorscheme... match Terminal/iTerm2 color profile for precise theme display
 BASE16_SHELL="$HOME/.dotfiles/term/base16-default-dark.sh"
 [[ -s $BASE16_SHELL ]] && source $BASE16_SHELL
 
-# Auto start Tmux (only when using Zim and default Apple Terminal)
-if [[ ($TERM_PROGRAM == "Apple_Terminal") ]]; then
+# Term specific customizations
+if [[ ($TERM_PROGRAM == "Apple_Terminal") ]]; then # Apple Terminal
   if [[ -h "${HOME}/.iterm2_shell_integration.zsh" ]]; then
     rm "${HOME}/.iterm2_shell_integration.zsh" && echo "removed ~/.iterm2_shell_integration.zsh";
   fi
 
-  # Key bindings matching Mac OSX
+  # Key bindings
   bindkey "^A" beginning-of-line
-  bindkey "^B" beginning-of-line # to use in tmux
   bindkey "^E" end-of-line
   bindkey "^K" kill-line
+  bindkey '^Z' up-history
+  bindkey "^H" beginning-of-history
   bindkey "^R" history-incremental-search-backward
   bindkey "^P" history-search-backward
   bindkey "^Y" accept-and-hold
   bindkey "^N" insert-last-word
-  bindkey "^H" beginning-of-history
-  bindkey '^P' up-history
-  bindkey '^N' down-history
+  bindkey '^X' down-history
 
-  source ${HOME}/.ztmux
+  test -e $HOME/.ztmux && source $HOME/.ztmux
 else # iTerm2
-  # iTerm2 shell integration with unix shell
+  # iTerm2 shell integration with Unix shell
   if [[ ! -h "${HOME}/.iterm2_shell_integration.zsh" ]]; then # check if file is Symlink
     # Custom shell loading for iTerm
     ln -s ${HOME}/.dotfiles/config/terminal/iterm2_shell_integration.zsh ${HOME}/.iterm2_shell_integration.zsh;
   fi
+
+  # Rename title displayed from tabs in iTerm
+  function title () {
+    if [[ $# == 0 ]] then
+      echo -ne "\e]1;$PWD\a"
+    else
+      echo -ne "\e]1;$@\a"
+    fi
+  }
+
   # use iterm2_shell_integration.`basename $SHELL` when dealing with multiple shells
   test -e ${HOME}/.iterm2_shell_integration.zsh && source ${HOME}/.iterm2_shell_integration.zsh;
 fi
@@ -119,5 +127,4 @@ clear;
 # unset MANPATH
 # export MANPATH="$NPM_PACKAGES/share/man:$(manpath)" # include manuals from npm modules
 #
-
 

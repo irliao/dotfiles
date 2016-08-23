@@ -173,6 +173,12 @@
 	<false/>
 	<key>BookmarkRestorations</key>
 	<false/>
+	<key>CharacterEncoding</key>
+	<integer>4</integer>
+	<key>CommandString</key>
+	<string></string>
+	<key>ConvertNewlinesOnPaste</key>
+	<true/>
 	<key>CursorBlink</key>
 	<true/>
 	<key>CursorColor</key>
@@ -185,7 +191,13 @@
 	AAAZAAAAAAAAAAAAAAAAAAAA2Q==
 	</data>
 	<key>CursorType</key>
-	<integer>0</integer>
+	<integer>1</integer>
+	<key>DisableANSIColor</key>
+	<false/>
+	<key>EastAsianAmbiguousWide</key>
+	<false/>
+	<key>EscapeNonASCIICharacters</key>
+	<false/>
 	<key>Font</key>
 	<data>
 	YnBsaXN0MDDUAQIDBAUGGBlYJHZlcnNpb25YJG9iamVjdHNZJGFyY2hpdmVyVCR0b3AS
@@ -201,6 +213,10 @@
 	<integer>1</integer>
 	<key>ProfileCurrentVersion</key>
 	<real>2.04</real>
+	<key>RunCommandAsShell</key>
+	<true/>
+	<key>ScrollAlternateScreen</key>
+	<true/>
 	<key>SelectionColor</key>
 	<data>
 	YnBsaXN0MDDUAQIDBAUGFRZYJHZlcnNpb25YJG9iamVjdHNZJGFyY2hpdmVyVCR0b3AS
@@ -210,8 +226,12 @@
 	dmVy0RcYVHJvb3SAAQgRGiMtMjc7QUhOW2KMjpCVoKmxtL3P0tcAAAAAAAABAQAAAAAA
 	AAAZAAAAAAAAAAAAAAAAAAAA2Q==
 	</data>
+	<key>SetLanguageEnvironmentVariables</key>
+	<true/>
 	<key>ShouldLimitScrollback</key>
 	<integer>0</integer>
+	<key>ShouldRestoreContent</key>
+	<true/>
 	<key>ShowActiveProcessArgumentsInTitle</key>
 	<false/>
 	<key>ShowActiveProcessInTabTitle</key>
@@ -242,6 +262,10 @@
 	<false/>
 	<key>ShowWindowSettingsNameInTitle</key>
 	<false/>
+	<key>StrictVTKeypad</key>
+	<false/>
+	<key>TerminalType</key>
+	<string>xterm-256color</string>
 	<key>TextBoldColor</key>
 	<data>
 	YnBsaXN0MDDUAQIDBAUGFRZYJHZlcnNpb25YJG9iamVjdHNZJGFyY2hpdmVyVCR0b3AS
@@ -260,12 +284,18 @@
 	dmVy0RcYVHJvb3SAAQgRGiMtMjc7QUhOW2KMjpCVoKmxtL3P0tcAAAAAAAABAQAAAAAA
 	AAAZAAAAAAAAAAAAAAAAAAAA2Q==
 	</data>
+	<key>UseBoldFonts</key>
+	<false/>
+	<key>UseBrightBold</key>
+	<false/>
 	<key>VisualBell</key>
 	<false/>
 	<key>WindowTitle</key>
 	<string></string>
 	<key>columnCount</key>
-	<integer>120</integer>
+	<integer>204</integer>
+	<key>deleteSendsBackspace</key>
+	<false/>
 	<key>keyMapBoundKeys</key>
 	<dict>
 		<key>$F700</key>
@@ -606,7 +636,7 @@
 		<string>[6;7~</string>
 	</dict>
 	<key>name</key>
-	<string>Default</string>
+	<string>Dev</string>
 	<key>noWarnProcesses</key>
 	<array>
 		<dict>
@@ -655,10 +685,12 @@
 		</dict>
 	</array>
 	<key>rowCount</key>
-	<integer>80</integer>
+	<integer>64</integer>
 	<key>shellExitAction</key>
 	<integer>1</integer>
 	<key>type</key>
 	<string>Window Settings</string>
+	<key>warnOnShellCloseAction</key>
+	<integer>1</integer>
 </dict>
 </plist>

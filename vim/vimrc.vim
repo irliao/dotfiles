@@ -93,6 +93,7 @@ Plug 'haya14busa/incsearch.vim' " incrementally highlights all pattern
 Plug 'tpope/vim-surround' " change surrounding (ex: parentheses, brackets, quotes, etc)
 Plug 'tpope/vim-repeat' " epeating supported plugin maps with '.'
 Plug 'sjl/gundo.vim' " visualize unndo tree
+Plug 'tmux-plugins/vim-tmux' " editor helper for .tmux.conf files
 
 " visual
 Plug 'mhinz/vim-startify' " fancy start screen
@@ -201,9 +202,9 @@ set splitright " new window opens to the right of current one
 set ambiwidth=double
 
 " disable visual alert for errors
-set noerrorbells " disable error bells
-set novisualbell " disable bell
-" set t_vb=
+set noerrorbells " disable error bell
+set novisualbell " disable visual bell
+set t_vb= " disable visual flash
 
 " search
 set showmatch " highlight matching code such as {},(),[]
@@ -263,7 +264,6 @@ set nowb
 " noremap * *zz:LINE<CR>
 " noremap # #zz:LINE<CR>
 
-
 " Color theme settings
 set background=dark
 if has("gui_running")
@@ -273,15 +273,16 @@ if has("gui_running")
   let g:rehash256 = 1 " attempts to bring the 256 color version as close as possible to the the default (dark) GUI version
   set guifont="Hack Regular:12"
 else
+
   " let g:hybrid_reduced_contrast = 1 " Remove this line if using the default palette.
   " let g:molokai_original = 1
   " let g:rehash256 = 1
-  " set t_Co=256 " iTerm2 256 color mode for Airline highlight
-  " colorscheme hybrid
+  set t_Co=256 " iTerm2 256 color mode for Airline highlight
+  colorscheme hybrid
 
-  colorscheme badwolf
-  let g:badwolf_darkgutter = 0
-  let g:badwolf_tabline = 1
+  " colorscheme badwolf
+  " let g:badwolf_darkgutter = 0
+  " let g:badwolf_tabline = 1
 endif
 
 " SuperTab settings
@@ -450,7 +451,7 @@ nmap <leader>9 <Plug>AirlineSelectTab9
 nmap <leader>- <Plug>AirlineSelectPrevTab
 nmap <leader>= <Plug>AirlineSelectNextTab
 
-" disable arrow keys in Insert mode
+" disable arrow keys in Navigation mode
 noremap <Up> <NOP>
 noremap <Down> <NOP>
 noremap <Left> <NOP>
@@ -472,10 +473,6 @@ nnoremap <leader>R :nohlsearch<cr>:diffupdate<cr>:syntax sync fromstart<cr><c-l>
 nnoremap j gj
 nnoremap k gk
 
-" remap jump to beginning & end of line
-nnoremap B ^
-nnoremap E $
-
 " highlight last inserted text
 nnoremap gV `[v`]
 
@@ -494,10 +491,15 @@ noremap <C-K> gk
 "map space to unhighlight search term
 nnoremap <silent> <Space> :nohlsearch<Bar>:echo<CR>
 
-" utility binding, WARN: some mappings CANNOT have trailing comments
+" TODO: make mapping match ones defined in ~/.zshrc
+" navigation binding
 map 0 ^
 nnoremap ) }
 nnoremap ( {
+nnoremap B ^
+nnoremap E $
+
+" utility binding, WARN: some mappings CANNOT have trailing comments
 noremap U :redo<CR> " revert last undo
 nnoremap <leader><Tab> <C-w><C-w><CR> " go to previous pane within Vim
 nnoremap <leader>j <C-d> " scroll down:delmarks! half a page
@@ -566,7 +568,8 @@ if &term =~ '^screen'
   execute "set <xLeft>=\e[1;*D"
 endif
 
-" change cursor for Tmux in iTerm2
+" TODO: enable only when using iTerm
+" change cursor for Tmux in iTerm
 if exists('$TMUX')
     let &t_SI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=1\x7\<Esc>\\"
     let &t_EI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=0\x7\<Esc>\\"
