@@ -1,17 +1,26 @@
 #
+#
 # Executes commands at the start of an interactive session started by zshrc.
 #
 
-# useful var: $OSTYPE
+# useful var: $OSTYPE - Darwin(Mac), Unix, or Linux
 
+# List files on directory change
+# same as overriding cd() { builtin cd "$@" && ls && printf ""; }
 function chpwd() {
   emulate -L zsh
   ls
 }
 
-# $cd also does $ls
-# cd() { builtin cd "$@" && ls && printf ""; }
+# Change to previous directory
 bd() { builtin cd - && ls ~- && printf ""; }
+
+# TODO: display warning if currently not in git directory
+# Change to git root directory
+rd() { cd $(git rev-parse --show-cdup); }
+
+# Show short directory path
+swd() { echo "$(pwd | sed -e "s,^$HOME,~,")" }
 
 # Make and go to directory
 md() { [[ -n ${1} ]] && mkdir -p ${1} && builtin cd ${1}; }
@@ -30,26 +39,14 @@ fs() {
 	fi;
 }
 
-# Rename title displayed from tabs in iTerm
-title () {
-  if [[ $# == 0 ]] then
-    echo -ne "\e]1;$PWD\a"
-  else
-    echo -ne "\e]1;$@\a"
-  fi
-}
-
 # Destroy processes on PORT
-killPort() {
+killport() {
   if [ -z "$1" ]; then
     echo "Usage: killPort [numeric port identifier]" >&2
     return 1
   fi
   lsof -i TCP:$1 | awk '/LISTEN/{print $2}' | xargs kill -9
 }
-
-# Show short directory path
-swd() { echo "$(pwd | sed -e "s,^$HOME,~,")" }
 
 # TODO: example code for prompting user input
 # if ! zplug check --verbose; then
@@ -62,7 +59,7 @@ swd() { echo "$(pwd | sed -e "s,^$HOME,~,")" }
 # TODO: implement https://github.com/herrbischoff/awesome-osx-command-line/blob/master/functions.md
 finder() { }
 
-# TODO: support multiple params
+# TODO: test multiple files as params
 # Vim All- edit all files in directory (default current if left blank) with Vim in tabs
 va() {
   if [[ $# == 0 ]] then
@@ -85,6 +82,7 @@ ff() {
 	name=${2:-1} # if $2 else $1
 	find "$dir" -type f -name "$name"
 }
+
 fd() {
     target=`osascript -e 'tell application "Finder" to if (count of Finder windows) > 0 then get POSIX path of (target of front Finder window as text)'`
     if [[ $target != "" ]]; then
