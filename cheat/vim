@@ -1,3 +1,6 @@
+# Macros
+
+:%g!/price/d    delete every line that doesn't contain "price"
 # File management
 
 :e              reload file
