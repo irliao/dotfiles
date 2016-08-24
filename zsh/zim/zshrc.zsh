@@ -11,10 +11,6 @@ skip_global_compinit=1 # faster Zsh startup
 zprompt_theme='mingit' # custom prompt theme
 DEFAULT_USER="irliao" # replaces user@hostname with specified username
 
-# Autocompletion
-# fpath=(~/.dotfiles/zsh/completions $fpath)
-# autoload -U compinit && compinit
-
 # Environment variables
 export PATH="/usr/local/bin:${HOME}/.bin:/usr/local/sbin:/usr/bin:/bin:/usr/sbin:/sbin"
 export EDITOR='vim'
@@ -32,10 +28,8 @@ source $(brew --prefix nvm)/nvm.sh
 export CHEATCOLORS=true
 
 # The Fuck
-#
 eval "$(thefuck --alias)"
 eval "$(thefuck --alias fk)"
-
 
 function zle-line-init zle-keymap-select {
     VIM_PROMPT="%{$fg_bold[yellow]%} [% NORMAL]%  %{$reset_color%}"
@@ -45,10 +39,10 @@ function zle-line-init zle-keymap-select {
 }
 zle -N zle-line-init
 zle -N zle-keymap-select
+export KEYTIMEOUT=1 # 0.4 to 0.1 sec delay in Vim mode display change, raise value if other commands getting issues
 
-bindkey -v
-# export KEYTIMEOUT=20
-# setopt MENU_COMPLETE
+# Ambiguous completion will insert first match instead of listing other possibilities or beeping
+setopt MENU_COMPLETE
 
 # Local profile... exports local (or private) variables
 [[ -f "${HOME}/.local_profile" ]] && source "${HOME}/.local_profile"
@@ -76,6 +70,7 @@ if [[ ($TERM_PROGRAM == "Apple_Terminal") ]]; then # Apple Terminal
   fi
 
   # Key bindings
+  bindkey -v
   bindkey "^A" beginning-of-line
   bindkey "^E" end-of-line
   bindkey "^K" kill-line
@@ -113,6 +108,11 @@ clear;
 
 # Unused settings
 #
+
+# Autocompletion
+# fpath=(~/.dotfiles/zsh/completions $fpath)
+# autoload -U compinit && compinit
+
 # PATH configured to work with NPM global installs (without sudo)
 # NPM_PACKAGES="${HOME}/.node_modules_global"
 # NPM_PACKAGES_BIN="${HOME}/.node_modules_global/bin" # include in PATH if setting prefix with .npmrc

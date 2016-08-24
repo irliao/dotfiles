@@ -39,6 +39,7 @@ alias printTmuxCopyModeKeys='tmux list-keys -t vi-copy'
 alias printTmuxOptions='tmux show-options -g'
 alias enableAutoTmux="ln -s ~/.dotfiles/zsh/zim/ztmux.zsh ~/.ztmux"
 alias disableAutoTmux="rm ~/.ztmux && killall tmux"
+alias printTmuxColors="source ~/.bin/tmux_colors.sh"
 
 # Tmux
 alias tmk="tmux kill-server"
@@ -105,6 +106,7 @@ alias historyTop='history | sort -rn | head'
 alias historyClear='history -c'
 
 # OSX
+alias osxClipboardNoFormat="pbpaste | textutil -convert txt -stdin -stdout -encoding 30 | pbcopy"
 alias osxOpeniCloud="cd $HOME/Library/Mobile Documents/com~apple~CloudDocs/"
 alias osxResetSpotlight="sudo mdutil -E /" # / can be replaced by any path to volume
 alias osxShowSpotlightIndex="sudo mdls /" # / can be replaced by any path to show as root
