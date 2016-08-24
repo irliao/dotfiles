@@ -51,24 +51,16 @@ bindkey -v
 # setopt MENU_COMPLETE
 
 # Local profile... exports local (or private) variables
-if [[ -f "${HOME}/.local_profile" ]]; then
-    source "${HOME}/.local_profile";
-fi
+[[ -f "${HOME}/.local_profile" ]] && source "${HOME}/.local_profile"
 
 # Bash profile
-if [[ -f "${HOME}/.bash_profile" ]]; then
-    source "${HOME}/.bash_profile";
-fi
+[[ -f "${HOME}/.bash_profile" ]] && source "${HOME}/.bash_profile"
 
 # Custom functions
-if [[ -f "${HOME}/.zfunction" ]]; then
-    source "${HOME}/.zfunction"
-fi
+[[ -f "${HOME}/.zfunction" ]] && source "${HOME}/.zfunction"
 
 # Custom aliases, should source after custom functions incase aliasing functions
-if [[ -f "${HOME}/.zalias" ]]; then
-    source "${HOME}/.zalias"
-fi
+[[ -f "${HOME}/.zalias" ]] && source "${HOME}/.zalias"
 
 # Use 256 color terminal
 # export TERM=xterm-256color

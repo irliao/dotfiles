@@ -189,7 +189,6 @@ set formatoptions=croql
 set number " line numbering
 set ruler " show position in line
 set cursorline " use '_' character for cursor
-set splitright " all new splits (ex. vssplit) open on right side
 set noshowmode " hide Vim mode indicator
 " set fillchars+=stl:\ ,stlnc:\ " disable statusline fillchars
 set laststatus=2 " always display statusline (e.g. Airline)
