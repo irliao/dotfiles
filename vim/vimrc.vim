@@ -94,6 +94,7 @@ Plug 'tpope/vim-surround' " change surrounding (ex: parentheses, brackets, quote
 Plug 'tpope/vim-repeat' " epeating supported plugin maps with '.'
 Plug 'sjl/gundo.vim' " visualize unndo tree
 Plug 'tmux-plugins/vim-tmux' " editor helper for .tmux.conf files
+Plug 'terryma/vim-multiple-cursors'
 
 " visual
 Plug 'mhinz/vim-startify' " fancy start screen
@@ -486,6 +487,9 @@ inoremap kj <ESC>
 " move screenline instead of bufferline
 noremap <C-J> gj
 noremap <C-K> gk
+
+" don't copy the contents of an overwritten selection.
+vnoremap p "_dP
 
 "map space to unhighlight search term
 nnoremap <silent> <Space> :nohlsearch<Bar>:echo<CR>
