@@ -191,7 +191,7 @@ set number " line numbering
 set ruler " show position in line
 set cursorline " use '_' character for cursor
 set noshowmode " hide Vim mode indicator
-" set fillchars+=stl:\ ,stlnc:\ " disable statusline fillchars
+set fillchars+=stl:\ ,stlnc:\ " disable statusline fillchars
 set laststatus=2 " always display statusline (e.g. Airline)
 " set ch=2 " statusline height
 " set statusline=%-30.50(%n\ %f\ %m%h%r%w%)%l/%L\ (%p%%),\ %c\ %<%=%(\(%{bufnr(\"#\")}\ %{bufname(\"#\")})%)
@@ -199,7 +199,7 @@ set laststatus=2 " always display statusline (e.g. Airline)
 set showcmd " show last command in the bottom right
 set splitbelow " new window opens below current one
 set splitright " new window opens to the right of current one
-set ambiwidth=double
+set ambiwidth=single
 
 " disable visual alert for errors
 set noerrorbells " disable error bell

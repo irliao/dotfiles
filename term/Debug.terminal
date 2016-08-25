@@ -215,7 +215,7 @@
 	<key>RunCommandAsShell</key>
 	<true/>
 	<key>ScrollAlternateScreen</key>
-	<false/>
+	<true/>
 	<key>SelectionColor</key>
 	<data>
 	YnBsaXN0MDDUAQIDBAUGFRZYJHZlcnNpb25YJG9iamVjdHNZJGFyY2hpdmVyVCR0b3AS
@@ -230,7 +230,7 @@
 	<key>ShouldLimitScrollback</key>
 	<integer>0</integer>
 	<key>ShouldRestoreContent</key>
-	<false/>
+	<true/>
 	<key>ShowActiveProcessArgumentsInTitle</key>
 	<true/>
 	<key>ShowActiveProcessInTabTitle</key>
@@ -258,7 +258,7 @@
 	<key>ShowTTYNameInTitle</key>
 	<false/>
 	<key>ShowTerminalInDockIcon</key>
-	<false/>
+	<true/>
 	<key>ShowWindowSettingsNameInTitle</key>
 	<false/>
 	<key>StrictVTKeypad</key>
@@ -640,13 +640,17 @@
 	<array>
 		<dict>
 			<key>ProcessName</key>
+			<string>screen</string>
+		</dict>
+		<dict>
+			<key>ProcessName</key>
 			<string>tmux</string>
 		</dict>
 	</array>
 	<key>rowCount</key>
 	<integer>64</integer>
 	<key>shellExitAction</key>
-	<integer>0</integer>
+	<integer>2</integer>
 	<key>type</key>
 	<string>Window Settings</string>
 	<key>warnOnShellCloseAction</key>

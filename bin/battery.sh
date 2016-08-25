@@ -1,5 +1,3 @@
-#!/bin/bash
-
 usage() {
 cat <<EOF
 battery: usage:
