@@ -11,10 +11,23 @@ skip_global_compinit=1 # faster Zsh startup
 zprompt_theme='mingit' # custom prompt theme
 DEFAULT_USER="irliao" # replaces user@hostname with specified username
 
+# TODO: consider migrating some code to ~/.zshenv
+# autoload -U compinit && compinit
+
 # Environment variables
-export PATH="/usr/local/bin:${HOME}/.bin:/usr/local/sbin:/usr/bin:/bin:/usr/sbin:/sbin"
+typeset -U PATH # remove duplicate entries in Path
+PATH="/usr/local/bin:${HOME}/.bin:/usr/local/sbin:/usr/bin:/bin:/usr/sbin:/sbin"
+path=(
+ /usr/local/{bin,sbin}
+  $path
+)
 export EDITOR='vim'
+export PAGER='less'
 export DEVPATH="${HOME}/Developments"
+
+if [[ -z "$LANG" ]]; then
+  export LANG='en_US.UTF-8'
+fi
 
 # Brew
 export HOMEBREW_CASK_OPTS="--appdir=/Applications --caskroom=/opt/homebrew-cask/Caskroom" # install path
@@ -32,6 +45,7 @@ eval "$(thefuck --alias)"
 eval "$(thefuck --alias fk)"
 
 function zle-line-init zle-keymap-select {
+    [[ -f "${HOME}/.bash_local" ]] && source "${HOME}/.bash_local"
     VIM_PROMPT="%{$fg_bold[yellow]%} [% NORMAL]%  %{$reset_color%}"
     RPS1="${${KEYMAP/(vicmd|opp)/$VIM_PROMPT}/(main|viins)/}"
     # RPS1="${${KEYMAP/vicmd/$VIM_PROMPT}/(main|viins)/} $(git_custom_status) $EPS1"
@@ -43,6 +57,8 @@ export KEYTIMEOUT=1 # 0.4 to 0.1 sec delay in Vim mode display change, raise val
 
 # Ambiguous completion will insert first match instead of listing other possibilities or beeping
 setopt MENU_COMPLETE
+
+# autoload -U promptinit && promptinit
 
 # Local profile... exports local (or private) variables
 [[ -f "${HOME}/.local_profile" ]] && source "${HOME}/.local_profile"
@@ -82,7 +98,8 @@ if [[ ($TERM_PROGRAM == "Apple_Terminal") ]]; then # Apple Terminal
   bindkey "^N" insert-last-word
   bindkey '^X' down-history
 
-  test -e $HOME/.ztmux && source $HOME/.ztmux
+  # test -e ${HOME}/.ztmux && source ${HOME}/.ztmux
+  [[ -f "${HOME}/.ztmux" ]] && source "${HOME}/.ztmux"
 else # iTerm2
   # iTerm2 shell integration with Unix shell
   if [[ ! -h "${HOME}/.iterm2_shell_integration.zsh" ]]; then # check if file is Symlink
