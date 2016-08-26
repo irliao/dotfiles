@@ -16,20 +16,44 @@ DEFAULT_USER="irliao" # replaces user@hostname with specified username
 
 # Environment variables
 typeset -U PATH # remove duplicate entries in Path
-PATH="/usr/local/bin:${HOME}/.bin:/usr/local/sbin:/usr/bin:/bin:/usr/sbin:/sbin"
+typeset -U path
 path=(
  /usr/local/{bin,sbin}
   $path
 )
+export LESS_TERMCAP_mb=$'\E[01;31m'
+export LESS_TERMCAP_md=$'\E[01;31m'
+export LESS_TERMCAP_me=$'\E[0m'
+export LESS_TERMCAP_se=$'\E[0m'
+export LESS_TERMCAP_so=$'\E[01;44;33m'
+export LESS_TERMCAP_ue=$'\E[0m'
+export LESS_TERMCAP_us=$'\E[01;32m'
 export EDITOR='vim'
 export PAGER='less'
+export LESS="-R"
 export DEVPATH="${HOME}/Developments"
+export PATH="/usr/local/bin:${HOME}/.bin:/usr/local/sbin:/usr/bin:/bin:/usr/sbin:/sbin"
+export HISTCONTROL=erasedups  # Ignore duplicate entries in history
+export HISTIGNORE="&:ls:ll:la:l.:pwd:exit:clear:clr:[bf]g"
+
+ # SHOPT=`which shopt`
+ #  if [ -z SHOPT ]; then
+ #      shopt -s histappend        # Append history instead of overwriting
+ #      shopt -s cdspell           # Correct minor spelling errors in cd command
+ #      shopt -s dotglob           # includes dotfiles in pathname expansion
+ #      shopt -s checkwinsize      # If window size changes, redraw contents
+ #      shopt -s cmdhist           # Multiline commands are a single command in history.
+ #      shopt -s extglob           # Allows basic regexps in bash.
+ #  fi
+ #  set ignoreeof on           # Typing EOF (CTRL+D) will not exit interactive sessions
 
 if [[ -z "$LANG" ]]; then
   export LANG='en_US.UTF-8'
 fi
 
+
 # Brew
+# brew analytics off
 export HOMEBREW_CASK_OPTS="--appdir=/Applications --caskroom=/opt/homebrew-cask/Caskroom" # install path
 export HOMEBREW_NO_ANALYTICS=1 # opt-out of analytics
 
@@ -58,7 +82,9 @@ export KEYTIMEOUT=1 # 0.4 to 0.1 sec delay in Vim mode display change, raise val
 # Ambiguous completion will insert first match instead of listing other possibilities or beeping
 setopt MENU_COMPLETE
 
-# autoload -U promptinit && promptinit
+# Make prompt prettier
+ autoload -U promptinit && promptinit
+ promptinit
 
 # Local profile... exports local (or private) variables
 [[ -f "${HOME}/.local_profile" ]] && source "${HOME}/.local_profile"
@@ -86,20 +112,19 @@ if [[ ($TERM_PROGRAM == "Apple_Terminal") ]]; then # Apple Terminal
   fi
 
   # Key bindings
-  bindkey -v
-  bindkey "^A" beginning-of-line
-  bindkey "^E" end-of-line
-  bindkey "^K" kill-line
-  bindkey '^Z' up-history
-  bindkey "^H" beginning-of-history
-  bindkey "^R" history-incremental-search-backward
-  bindkey "^P" history-search-backward
-  bindkey "^Y" accept-and-hold
-  bindkey "^N" insert-last-word
-  bindkey '^X' down-history
+  # bindkey -v # use vim keys
+  # bindkey "^A" beginning-of-line
+  # bindkey "^E" end-of-line
+  # bindkey "^K" kill-line
+  # bindkey '^Z' up-history
+  # bindkey "^H" beginning-of-history
+  # bindkey "^R" history-incremental-search-backward
+  # bindkey "^P" history-search-backward
+  # bindkey "^Y" accept-and-hold
+  # bindkey "^N" insert-last-word
+  # bindkey '^X' down-history
 
-  # test -e ${HOME}/.ztmux && source ${HOME}/.ztmux
-  [[ -f "${HOME}/.ztmux" ]] && source "${HOME}/.ztmux"
+  test -e ${HOME}/.ztmux && source ${HOME}/.ztmux
 else # iTerm2
   # iTerm2 shell integration with Unix shell
   if [[ ! -h "${HOME}/.iterm2_shell_integration.zsh" ]]; then # check if file is Symlink
