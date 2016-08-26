@@ -18,8 +18,7 @@ alias al="ls -lar"
 alias sl="ls -r" # ls reverse
 alias lr="l -r" # l reverse
 alias ll="ls -FGlAhp" # ls -lh
-alias kk="clear"
-alias src="source"
+alias clr='clear;echo "Currently logged in on $(tty), as $(whoami) in directory $(pwd)."'
 alias comp="diff -qr" # compare 2 input directories
 alias qfind='find . -name '
 alias ..="cd ../"
@@ -32,7 +31,6 @@ alias ..5="cd ../../../../../"
 
 # Debug
 alias isLoginShell="if [[ -o login ]]; then; print yes; else; print no; fi"
-alias zsync="source ${ZDOTDIR:-${HOME}}/.zlogin"
 alias fixvim="rm ~/.zcompdump* && compinit"
 alias printTmuxPaneSize='tmux list-panes -F "#{pane_width}x#{pane_height}"' # desired window size: x=204, y=64
 alias printTmuxCopyModeKeys='tmux list-keys -t vi-copy'
@@ -42,6 +40,8 @@ alias disableAutoTmux="rm ~/.ztmux && killall tmux"
 alias printTmuxColors="source ~/.bin/tmux_colors.sh"
 
 # Tmux
+alias tmux='TERM=xterm-256color \tmux'
+# alias tmk="tmux ls | grep : | cut -d. -f1 | awk '{print substr($1, 0, length($1)-1)}' | xargs kill"
 alias tmk="tmux kill-server"
 alias tmu="tmux source-file ~/.tmux.conf"
 alias getTmuxLayout='tmux list-windows -F "#{window_active} #{window_layout}" | grep "^1" | cut -d " " -f 2'

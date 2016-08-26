@@ -19,6 +19,8 @@
         required = true
 [core]
         excludesfile = /Users/irliao/.gitignore_global
+        fileMode = false # ignore file mode difference
+        autocrlf = input # better cross-platform line ending handling
 [web]
         browser = safari
 [pager]

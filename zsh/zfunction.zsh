@@ -39,6 +39,16 @@ fs() {
 	fi;
 }
 
+# Shows what shell you are currently on
+shell () {
+  ps | grep `echo $$` | awk '{ print $4 }'
+}
+
+# Kill process on port
+portslay () {
+    kill -9 `lsof -i tcp:$1 | tail -1 | awk '{ print $2;}'`
+}
+
 # Destroy processes on PORT
 killport() {
   if [ -z "$1" ]; then
