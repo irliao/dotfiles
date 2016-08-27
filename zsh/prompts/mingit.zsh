@@ -19,18 +19,18 @@
 # }
 
 gst_get_prefix() {
-  print "%(?:%F{6} :%F{6} )%f"
+  print "%(?:%F{6} :%F{6} %s)%f"
 }
 
 gst_get_suffix() {
-  print "%(?:%F{2}$ :%F{1}$ )%f"
+  print "%(?:%F{2}$ :%F{1}$ %s)%f"
 }
 
 gst_get_pwd() {
   prompt_short_dir="$(short_pwd)"
-  git_root="$(command git rev-parse --show-toplevel 2> /dev/null)"
+  git_root="$(command git rev-parse --show-toplevel 2> /dev/null)" && \
   prompt_short_dir="${prompt_short_dir#${$(short_pwd $git_root):h}/}"
-  print "%F{8}${prompt_short_dir}%f"
+  print ${prompt_short_dir}
 }
 
 # gst_get_rprompt() {
@@ -38,7 +38,7 @@ gst_get_pwd() {
 # }
 
 prompt_mingit_precmd() {
-  PROMPT="$(gst_get_prefix)$(gst_get_pwd)$(parse_git_dirty)$(git_prompt_info)$(gst_get_suffix)"
+  PROMPT="$(gst_get_prefix)%F{8}$(gst_get_pwd)%f$(parse_git_dirty)$(git_prompt_info)$(gst_get_suffix)"
 }
 
 # function zle-line-init zle-line-finish zle-keymap-select {
@@ -52,9 +52,6 @@ prompt_mingit_setup() {
   ZSH_THEME_GIT_PROMPT_DIRTY=" %F{1}"
   ZSH_THEME_GIT_PROMPT_CLEAN=" %F{6}"
 
-  emulate -L zsh
-  # setopt LOCAL_OPTIONS EXTENDED_GLOB # extended globbing is needed for listing autoloadable function directories
-  # unsetopt XTRACE KSH_ARRAYS
 
   autoload -Uz add-zsh-hook
 
@@ -71,7 +68,7 @@ prompt_mingit_setup() {
   # add-zsh-hook preexec _terminal-unset-terminal-app-proxy-icon
 
   add-zsh-hook precmd prompt_mingit_precmd
-  prompt_opts=(cr percent subst)
+  prompt_opts=(cr subst percent)
 }
 
 prompt_mingit_setup "$@"

@@ -1,7 +1,7 @@
 # return if tmux not installed
-# if (( ! $+commands[tmux] )); then
-#   return 1
-# fi
+if (( ! $+commands[tmux] )); then
+  return 1
+fi
 
 # autostart tmux without first creating an unused session
 # if [[ -z "$TMUX" && -z "EMACS" && -z "$VIM" && ( [[ -n "$SSH_TTY"]] || [[ -z "$SSH_TTY" ]] ) ]]; then # TODO: check if -z $EMACS && -z $VIM is needed

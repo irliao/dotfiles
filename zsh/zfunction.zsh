@@ -39,10 +39,36 @@ fs() {
 	fi;
 }
 
+takeover() {
+    # create a temporary session that displays the "how to go back" message
+    tmp='takeover temp session'
+    if ! tmux has-session -t "$tmp"; then
+        tmux new-session -d -s "$tmp"
+        tmux set-option -t "$tmp" set-remain-on-exit on
+        tmux new-window -kt "$tmp":0 \
+            'echo "Use Prefix + L (i.e. ^B L) to return to session."'
+    fi
+
+    # switch any clients attached to the target session to the temp session
+    session="$1"
+    for client in $(tmux list-clients -t "$session" | cut -f 1 -d :); do
+        tmux switch-client -c "$client" -t "$tmp"
+    done
+
+    # attach to the target session
+    tmux attach -t "$session"
+}
+
 # Shows what shell you are currently on
 shell () {
   ps | grep `echo $$` | awk '{ print $4 }'
 }
+
+
+	elinks() {
+        	STY= `which elinks` $*
+	        echo -ne \\033]0\;\\007;
+	}
 
 # Kill process on port
 portslay () {
