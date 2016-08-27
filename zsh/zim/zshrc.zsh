@@ -69,7 +69,6 @@ eval "$(thefuck --alias)"
 eval "$(thefuck --alias fk)"
 
 function zle-line-init zle-keymap-select {
-    [[ -f "${HOME}/.bash_local" ]] && source "${HOME}/.bash_local"
     VIM_PROMPT="%{$fg_bold[yellow]%} [% NORMAL]%  %{$reset_color%}"
     RPS1="${${KEYMAP/(vicmd|opp)/$VIM_PROMPT}/(main|viins)/}"
     # RPS1="${${KEYMAP/vicmd/$VIM_PROMPT}/(main|viins)/} $(git_custom_status) $EPS1"
@@ -77,14 +76,10 @@ function zle-line-init zle-keymap-select {
 }
 zle -N zle-line-init
 zle -N zle-keymap-select
-export KEYTIMEOUT=1 # 0.4 to 0.1 sec delay in Vim mode display change, raise value if other commands getting issues
+# export KEYTIMEOUT=1 # 0.4 to 0.1 sec delay in Vim mode display change, raise value if other commands getting issues
 
 # Ambiguous completion will insert first match instead of listing other possibilities or beeping
 setopt MENU_COMPLETE
-
-# Make prompt prettier
- autoload -U promptinit && promptinit
- promptinit
 
 # Local profile... exports local (or private) variables
 [[ -f "${HOME}/.local_profile" ]] && source "${HOME}/.local_profile"
@@ -99,11 +94,11 @@ setopt MENU_COMPLETE
 [[ -f "${HOME}/.zalias" ]] && source "${HOME}/.zalias"
 
 # Use 256 color terminal
-# export TERM=xterm-256color
+export TERM=xterm-256color
 
 # Load colorscheme... match Terminal/iTerm2 color profile for precise theme display
-BASE16_SHELL="$HOME/.dotfiles/term/base16-default-dark.sh"
-[[ -s $BASE16_SHELL ]] && source $BASE16_SHELL
+# BASE16_SHELL="$HOME/.dotfiles/term/base16-default-dark.sh"
+# [[ -s $BASE16_SHELL ]] && source $BASE16_SHELL
 
 # Term specific customizations
 if [[ ($TERM_PROGRAM == "Apple_Terminal") ]]; then # Apple Terminal
@@ -112,17 +107,17 @@ if [[ ($TERM_PROGRAM == "Apple_Terminal") ]]; then # Apple Terminal
   fi
 
   # Key bindings
-  # bindkey -v # use vim keys
-  # bindkey "^A" beginning-of-line
-  # bindkey "^E" end-of-line
-  # bindkey "^K" kill-line
-  # bindkey '^Z' up-history
-  # bindkey "^H" beginning-of-history
-  # bindkey "^R" history-incremental-search-backward
-  # bindkey "^P" history-search-backward
-  # bindkey "^Y" accept-and-hold
-  # bindkey "^N" insert-last-word
-  # bindkey '^X' down-history
+  bindkey -v # use vim keys
+  bindkey "^A" beginning-of-line
+  bindkey "^E" end-of-line
+  bindkey "^K" kill-line
+  bindkey '^Z' up-history
+  bindkey "^H" beginning-of-history
+  bindkey "^R" history-incremental-search-backward
+  bindkey "^P" history-search-backward
+  bindkey "^Y" accept-and-hold
+  bindkey "^N" insert-last-word
+  bindkey '^X' down-history
 
   test -e ${HOME}/.ztmux && source ${HOME}/.ztmux
 else # iTerm2
@@ -146,7 +141,7 @@ else # iTerm2
 fi
 
 # Clears the "Last login" message at startup
-clear;
+# clear;
 
 # Unused settings
 #
