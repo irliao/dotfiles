@@ -169,7 +169,7 @@
 	<key>BellBounce</key>
 	<false/>
 	<key>BlinkText</key>
-	<false/>
+	<true/>
 	<key>BookmarkRestorations</key>
 	<false/>
 	<key>CharacterEncoding</key>
@@ -179,7 +179,7 @@
 	<key>ConvertNewlinesOnPaste</key>
 	<true/>
 	<key>CursorBlink</key>
-	<true/>
+	<false/>
 	<key>CursorColor</key>
 	<data>
 	YnBsaXN0MDDUAQIDBAUGFRZYJHZlcnNpb25YJG9iamVjdHNZJGFyY2hpdmVyVCR0b3AS
@@ -215,7 +215,7 @@
 	<key>RunCommandAsShell</key>
 	<true/>
 	<key>ScrollAlternateScreen</key>
-	<false/>
+	<true/>
 	<key>SelectionColor</key>
 	<data>
 	YnBsaXN0MDDUAQIDBAUGFRZYJHZlcnNpb25YJG9iamVjdHNZJGFyY2hpdmVyVCR0b3AS
@@ -230,35 +230,37 @@
 	<key>ShouldLimitScrollback</key>
 	<integer>0</integer>
 	<key>ShouldRestoreContent</key>
-	<false/>
+	<true/>
 	<key>ShowActiveProcessArgumentsInTitle</key>
 	<true/>
 	<key>ShowActiveProcessInTabTitle</key>
-	<false/>
+	<true/>
 	<key>ShowActiveProcessInTitle</key>
-	<false/>
+	<true/>
 	<key>ShowActivityIndicatorInTab</key>
 	<false/>
 	<key>ShowCommandKeyInTitle</key>
-	<false/>
+	<true/>
 	<key>ShowComponentsWhenTabHasCustomTitle</key>
 	<false/>
 	<key>ShowDimensionsInTitle</key>
-	<false/>
+	<true/>
 	<key>ShowRepresentedURLInTabTitle</key>
-	<false/>
+	<true/>
 	<key>ShowRepresentedURLInTitle</key>
-	<false/>
+	<true/>
 	<key>ShowRepresentedURLPathInTabTitle</key>
-	<false/>
+	<true/>
 	<key>ShowRepresentedURLPathInTitle</key>
-	<false/>
+	<true/>
 	<key>ShowShellCommandInTitle</key>
-	<false/>
+	<true/>
+	<key>ShowTTYNameInTabTitle</key>
+	<true/>
 	<key>ShowTTYNameInTitle</key>
-	<false/>
+	<true/>
 	<key>ShowTerminalInDockIcon</key>
-	<false/>
+	<true/>
 	<key>ShowWindowSettingsNameInTitle</key>
 	<false/>
 	<key>StrictVTKeypad</key>
@@ -284,15 +286,15 @@
 	AAAZAAAAAAAAAAAAAAAAAAAA2Q==
 	</data>
 	<key>UseBoldFonts</key>
-	<false/>
+	<true/>
 	<key>UseBrightBold</key>
-	<false/>
+	<true/>
 	<key>VisualBell</key>
-	<false/>
+	<true/>
 	<key>WindowTitle</key>
-	<string></string>
+	<string>Terminal</string>
 	<key>columnCount</key>
-	<integer>204</integer>
+	<integer>80</integer>
 	<key>deleteSendsBackspace</key>
 	<false/>
 	<key>keyMapBoundKeys</key>
@@ -644,7 +646,7 @@
 		</dict>
 	</array>
 	<key>rowCount</key>
-	<integer>64</integer>
+	<integer>24</integer>
 	<key>shellExitAction</key>
 	<integer>0</integer>
 	<key>type</key>
