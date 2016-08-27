@@ -8,11 +8,7 @@ if [[ -s ${ZDOTDIR:-${HOME}}/.zim/init.zsh ]]; then
 fi
 
 skip_global_compinit=1 # faster Zsh startup
-zprompt_theme='mingit' # custom prompt theme
 DEFAULT_USER="irliao" # replaces user@hostname with specified username
-
-# TODO: consider migrating some code to ~/.zshenv
-# autoload -U compinit && compinit
 
 # Environment variables
 typeset -U PATH # remove duplicate entries in Path
@@ -21,6 +17,8 @@ path=(
  /usr/local/{bin,sbin}
   $path
 )
+
+setopt NO_HUP
 export LESS_TERMCAP_mb=$'\E[01;31m'
 export LESS_TERMCAP_md=$'\E[01;31m'
 export LESS_TERMCAP_me=$'\E[0m'
@@ -51,9 +49,8 @@ if [[ -z "$LANG" ]]; then
   export LANG='en_US.UTF-8'
 fi
 
-
 # Brew
-# brew analytics off
+fpath=("/usr/local/bin/" $fpath)
 export HOMEBREW_CASK_OPTS="--appdir=/Applications --caskroom=/opt/homebrew-cask/Caskroom" # install path
 export HOMEBREW_NO_ANALYTICS=1 # opt-out of analytics
 
@@ -76,7 +73,7 @@ function zle-line-init zle-keymap-select {
 }
 zle -N zle-line-init
 zle -N zle-keymap-select
-# export KEYTIMEOUT=1 # 0.4 to 0.1 sec delay in Vim mode display change, raise value if other commands getting issues
+export KEYTIMEOUT=1 # 0.4 to 0.1 sec delay in Vim mode display change, raise value if other commands getting issues
 
 # Ambiguous completion will insert first match instead of listing other possibilities or beeping
 setopt MENU_COMPLETE
