@@ -38,6 +38,7 @@ alias printTmuxOptions='tmux show-options -g'
 alias enableAutoTmux="ln -s ~/.dotfiles/zsh/zim/ztmux.zsh ~/.ztmux"
 alias disableAutoTmux="rm ~/.ztmux && killall tmux"
 alias printTmuxColors="source ~/.bin/tmux_colors.sh"
+alias printTTYs="ps -a"
 
 # Tmux
 alias tmux='TERM=xterm-256color \tmux'
