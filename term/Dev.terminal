@@ -294,7 +294,7 @@
 	<key>WindowTitle</key>
 	<string>Terminal</string>
 	<key>columnCount</key>
-	<integer>80</integer>
+	<integer>204</integer>
 	<key>deleteSendsBackspace</key>
 	<false/>
 	<key>keyMapBoundKeys</key>
@@ -646,7 +646,7 @@
 		</dict>
 	</array>
 	<key>rowCount</key>
-	<integer>24</integer>
+	<integer>60</integer>
 	<key>shellExitAction</key>
 	<integer>0</integer>
 	<key>type</key>
