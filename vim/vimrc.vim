@@ -103,6 +103,7 @@ Plug 'vim-airline/vim-airline-themes' " themes for Airline
 Plug 'tpope/vim-fugitive' " Git wrapper, install vim-git if Vim version < 7.2
 Plug 'airblade/vim-gitgutter' " show Git diff in gutter
 Plug 'kshenoy/vim-signature' " mark navigator
+Plug 'ervandew/screen'
 
 " language specific
 Plug 'pangloss/vim-javascript', { 'for': 'javascript' }
@@ -274,10 +275,10 @@ if has("gui_running")
   set guifont="Hack Regular:12"
 else
 
-  " let g:hybrid_reduced_contrast = 1 " Remove this line if using the default palette.
+  let g:hybrid_reduced_contrast = 1 " Remove this line if using the default palette.
   " let g:molokai_original = 1
   " let g:rehash256 = 1
-  set t_Co=256 " iTerm2 256 color mode for Airline highlight
+  " set t_Co=256 " iTerm2 256 color mode for Airline highlight
   colorscheme hybrid
 
   " colorscheme badwolf
@@ -559,27 +560,27 @@ autocmd FileType css noremap <buffer> <leader>tb :call CSSBeautify()<cr>
 " Make Vim recognize XTerm escape sequences for Page and Arrow
 " keys combined with modifiers such as Shift, Control, and Alt.
 " See http://www.reddit.com/r/vim/comments/1a29vk/_/c8tze8p
-if &term =~ '^screen'
-  " Page keys http://sourceforge.net/p/tmux/tmux-code/ci/master/tree/FAQ
-  execute "set t_kP=\e[5;*~"
-  execute "set t_kN=\e[6;*~"
+" if &term =~ '^screen'
+"   " Page keys http://sourceforge.net/p/tmux/tmux-code/ci/master/tree/FAQ
+"   execute "set t_kP=\e[5;*~"
+"   execute "set t_kN=\e[6;*~"
 
-  " Arrow keys http://unix.stackexchange.com/a/34723
-  execute "set <xUp>=\e[1;*A"
-  execute "set <xDown>=\e[1;*B"
-  execute "set <xRight>=\e[1;*C"
-  execute "set <xLeft>=\e[1;*D"
-endif
+"   " Arrow keys http://unix.stackexchange.com/a/34723
+"   execute "set <xUp>=\e[1;*A"
+"   execute "set <xDown>=\e[1;*B"
+"   execute "set <xRight>=\e[1;*C"
+"   execute "set <xLeft>=\e[1;*D"
+" endif
 
 " TODO: enable only when using iTerm
 " change cursor for Tmux in iTerm
-if exists('$TMUX')
-    let &t_SI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=1\x7\<Esc>\\"
-    let &t_EI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=0\x7\<Esc>\\"
-else
-    let &t_SI = "\<Esc>]50;CursorShape=1\x7"
-    let &t_EI = "\<Esc>]50;CursorShape=0\x7"
-endif
+" if exists('$TMUX')
+"     let &t_SI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=1\x7\<Esc>\\"
+"     let &t_EI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=0\x7\<Esc>\\"
+" else
+"     let &t_SI = "\<Esc>]50;CursorShape=1\x7"
+"     let &t_EI = "\<Esc>]50;CursorShape=0\x7"
+" endif
 
 " iTerm2 specificsettings
 " cursor shapes for different mode

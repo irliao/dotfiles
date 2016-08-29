@@ -19,7 +19,7 @@ gst_get_pwd() {
 
 prompt_mingit_precmd() {
   PROMPT="$(gst_get_prefix)%F{8}$(gst_get_pwd)%f$(parse_git_dirty)$(git_prompt_info)$(gst_get_suffix)"
-  RPROMPT=""
+  PROMPT="$PROMPT"'$([ -n "$TMUX" ] && tmux setenv TMUXPWD_$(tmux display -p "#D" | tr -d %) "$PWD")'
 }
 
 prompt_mingit_setup() {
