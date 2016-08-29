@@ -41,6 +41,7 @@ alias printTmuxColors="source ~/.bin/tmux_colors.sh"
 alias printTTYs="ps -a"
 
 # Tmux
+alias tmx='TERM=xterm-256color tmx'
 alias tmux='TERM=xterm-256color \tmux'
 # alias tmk="tmux ls | grep : | cut -d. -f1 | awk '{print substr($1, 0, length($1)-1)}' | xargs kill"
 alias tmk="tmux kill-server"

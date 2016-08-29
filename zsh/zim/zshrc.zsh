@@ -13,12 +13,12 @@ DEFAULT_USER="irliao" # replaces user@hostname with specified username
 # Environment variables
 typeset -U PATH # remove duplicate entries in Path
 typeset -U path
+typeset -U fpath
 path=(
  /usr/local/{bin,sbin}
   $path
 )
 
-# setopt NO_HUP
 export LESS_TERMCAP_mb=$'\E[01;31m'
 export LESS_TERMCAP_md=$'\E[01;31m'
 export LESS_TERMCAP_me=$'\E[0m'
@@ -26,28 +26,20 @@ export LESS_TERMCAP_se=$'\E[0m'
 export LESS_TERMCAP_so=$'\E[01;44;33m'
 export LESS_TERMCAP_ue=$'\E[0m'
 export LESS_TERMCAP_us=$'\E[01;32m'
+export VISUAL='vim'
 export EDITOR='vim'
 export LESS="-R"
 export PAGER='less'
 export DEVPATH="${HOME}/Developments"
 export PATH="/usr/local/bin:${HOME}/.bin:/usr/local/sbin:/usr/bin:/bin:/usr/sbin:/sbin"
-export HISTCONTROL=erasedups  # Ignore duplicate entries in history
-export HISTIGNORE="&:ls:ll:la:l.:pwd:exit:clear:clr:[bf]g"
+# export DISABLE_AUTO_TITLE=true
+# export HISTCONTROL=erasedups  # Ignore duplicate entries in history
+# export HISTIGNORE="&:ls:ll:la:l.:pwd:exit:clear:clr:[bf]g"
 
- # SHOPT=`which shopt`
- #  if [ -z SHOPT ]; then
- #      shopt -s histappend        # Append history instead of overwriting
- #      shopt -s cdspell           # Correct minor spelling errors in cd command
- #      shopt -s dotglob           # includes dotfiles in pathname expansion
- #      shopt -s checkwinsize      # If window size changes, redraw contents
- #      shopt -s cmdhist           # Multiline commands are a single command in history.
- #      shopt -s extglob           # Allows basic regexps in bash.
- #  fi
- #  set ignoreeof on           # Typing EOF (CTRL+D) will not exit interactive sessions
-
-if [[ -z "$LANG" ]]; then
-  export LANG='en_US.UTF-8'
-fi
+# if [[ -z "$LANG" ]]; then
+#   export LANG='en_US.UTF-8'
+# fi
+export LANG="en_US:en"
 
 # Brew
 fpath=("/usr/local/bin/" $fpath)
@@ -55,7 +47,7 @@ export HOMEBREW_CASK_OPTS="--appdir=/Applications --caskroom=/opt/homebrew-cask/
 export HOMEBREW_NO_ANALYTICS=1 # opt-out of analytics
 
 # Node Version Manager (nvm)
-export NVM_DIR=~/.nvm
+export NVM_DIR="${HOME}/.nvm"
 # source $(brew --prefix nvm)/nvm.sh
 
 # Cheat
@@ -76,7 +68,7 @@ eval "$(thefuck --alias fk)"
 # export KEYTIMEOUT=1 # 0.4 to 0.1 sec delay in Vim mode display change, raise value if other commands getting issues
 
 # Ambiguous completion will insert first match instead of listing other possibilities or beeping
-setopt MENU_COMPLETE
+# setopt MENU_COMPLETE
 
 # Local profile... exports local (or private) variables
 [[ -f "${HOME}/.local_profile" ]] && source "${HOME}/.local_profile"
@@ -94,10 +86,6 @@ setopt MENU_COMPLETE
 export TERM="xterm-256color"
 # export TERMINFO="$HOME/.terminfo"
 
-# Load colorscheme... match Terminal/iTerm2 color profile for precise theme display
-BASE16_SHELL="$HOME/.dotfiles/term/base16-default-dark.sh"
-[[ -s $BASE16_SHELL ]] && source $BASE16_SHELL
-
 # Term specific customizations
 if [[ ($TERM_PROGRAM == "Apple_Terminal") ]]; then # Apple Terminal
   if [[ -h "${HOME}/.iterm2_shell_integration.zsh" ]]; then
@@ -105,26 +93,20 @@ if [[ ($TERM_PROGRAM == "Apple_Terminal") ]]; then # Apple Terminal
   fi
 
   # Key bindings
+  # stty -ixon # gives access to ^Q
   bindkey -v # use vim keys
+  bindkey "^F" vi-cmd-mode
   bindkey "^A" beginning-of-line
   bindkey "^E" end-of-line
   bindkey "^K" kill-line
-  bindkey '^Z' up-history
-  bindkey "^H" beginning-of-history
   bindkey "^R" history-incremental-search-backward
   bindkey "^P" history-search-backward
   bindkey "^Y" accept-and-hold
   bindkey "^N" insert-last-word
-  bindkey '^X' down-history
+  # bindkey "^Q" push-line-or-edit
+  # bindkey -s "^T" "^[Isudo ^[A" # "t" for "toughguy"
 
-  # TODO: broken
-  # export ROWS=100
-  # export COLUMNS=204
-  # stty rows $ROWS
-  # stty cols $COLUMNS
-  # echo "new stty is $ROWS $COLUMNS"
-
-  test -e ${HOME}/.ztmux && source ${HOME}/.ztmux
+  [[ -f "${HOME}/.ztmux" ]] && source "${HOME}/.ztmux"
 else # iTerm2
   # iTerm2 shell integration with Unix shell
   if [[ ! -h "${HOME}/.iterm2_shell_integration.zsh" ]]; then # check if file is Symlink
@@ -133,16 +115,16 @@ else # iTerm2
   fi
 
   # Rename title displayed from tabs in iTerm
-  function title () {
-    if [[ $# == 0 ]] then
-      echo -ne "\e]1;$PWD\a"
-    else
-      echo -ne "\e]1;$@\a"
-    fi
-  }
+  # title () {
+  #   if [[ $# == 0 ]] then
+  #     echo -ne "\e]1;$PWD\a"
+  #   else
+  #     echo -ne "\e]1;$@\a"
+  #   fi
+  # }
 
   # use iterm2_shell_integration.`basename $SHELL` when dealing with multiple shells
-  test -e ${HOME}/.iterm2_shell_integration.zsh && source ${HOME}/.iterm2_shell_integration.zsh;
+  test -e ${HOME}/.iterm2_shell_integration.zsh && source ${HOME}/.iterm2_shell_integration.zsh
 fi
 
 # Clears the "Last login" message at startup
