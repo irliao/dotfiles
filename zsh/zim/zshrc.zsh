@@ -39,7 +39,7 @@ export PATH="/usr/local/bin:${HOME}/.bin:/usr/local/sbin:/usr/bin:/bin:/usr/sbin
 # if [[ -z "$LANG" ]]; then
 #   export LANG='en_US.UTF-8'
 # fi
-export LANG="en_US:en"
+# export LANG="en_US:en"
 
 # Brew
 fpath=("/usr/local/bin/" $fpath)
