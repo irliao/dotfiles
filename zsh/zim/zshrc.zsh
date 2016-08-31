@@ -47,7 +47,7 @@ export HOMEBREW_CASK_OPTS="--appdir=/Applications --caskroom=/opt/homebrew-cask/
 export HOMEBREW_NO_ANALYTICS=1 # opt-out of analytics
 
 # Node Version Manager (nvm)
-export NVM_DIR="${HOME}/.nvm"
+# export NVM_DIR="${HOME}/.nvm"
 # source $(brew --prefix nvm)/nvm.sh
 
 # Cheat
@@ -67,8 +67,8 @@ eval "$(thefuck --alias fk)"
 # zle -N zle-keymap-select
 # export KEYTIMEOUT=1 # 0.4 to 0.1 sec delay in Vim mode display change, raise value if other commands getting issues
 
-# Ambiguous completion will insert first match instead of listing other possibilities or beeping
-# setopt MENU_COMPLETE
+# Completion with more than 1 possibilities will insert first available option into prompt automatically
+setopt MENU_COMPLETE
 
 # Local profile... exports local (or private) variables
 [[ -f "${HOME}/.local_profile" ]] && source "${HOME}/.local_profile"
