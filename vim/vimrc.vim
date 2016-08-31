@@ -194,6 +194,7 @@ set cursorline " use '_' character for cursor
 set noshowmode " hide Vim mode indicator
 set fillchars+=stl:\ ,stlnc:\ " disable statusline fillchars
 set laststatus=2 " always display statusline (e.g. Airline)
+
 " set ch=2 " statusline height
 " set statusline=%-30.50(%n\ %f\ %m%h%r%w%)%l/%L\ (%p%%),\ %c\ %<%=%(\(%{bufnr(\"#\")}\ %{bufname(\"#\")})%)
 " set showtabline=2 " always display the tabline, even if there is only one tab
@@ -322,7 +323,7 @@ let g:airline#extensions#tabline#left_sep = ''
 let g:airline#extensions#tabline#right_sep = ''
 let g:airline#extensions#tabline#fnamemod = ':t' " show filename omitting filepath
 let airline#extensions#default#section_use_groupitems = 0 " disable grouping to prevent bleeding UI
-let g:airline#extensions#default#section_truncate_width = {} " disable truncation
+" let g:airline#extensions#default#section_truncate_width = {} " disable truncation
 let g:airline#extensions#tabline#tab_nr_type = 1 " display only tab number
 let g:airline#extensions#bufferline#enabled = 0 " disable bufferline
 let g:airline#extensions#tabline#exclude_preview = 0 " disable display preview window buffer
