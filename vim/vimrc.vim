@@ -122,6 +122,7 @@ Plug 'morhetz/gruvbox'
 Plug 'hukl/smyck-color-scheme'
 Plug 'chriskempson/base16-vim'
 Plug 'sjl/badwolf'
+Plug 'Lokaltog/vim-distinguished'
 
 " autocompletion
 Plug 'ervandew/supertab'
@@ -174,7 +175,7 @@ set wildignore+=*.o,*.obj,*.pyc,*.aux,*.bbl,*.blg,.git,.svn,.hg
 " set wildmode=list:longest,full " autocompletion menu layout
 
 " text wrap
-let w:m2=matchadd('ErrorMsg', '\%>80v.\+', -1) " highlight text past 80 chars
+" let w:m2=matchadd('ErrorMsg', '\%>80v.\+', -1) " highlight text past 80 chars " TODO: make a toggle function
 set nojoinspaces " suppress inserting two spaces between sentences
 set nowrap " display long lines as is
 " set textwidth=0 " disable auto newline during Insert mode
@@ -184,18 +185,15 @@ set textwidth=0 " original setting: set textwidth=110
 let &wrapmargin= &textwidth
 set formatoptions=croql
 
-" TODO: implement below
-" highlight color after textwidth
-
 " visual
 set number " line numbering
 set ruler " show position in line
 set cursorline " use '_' character for cursor
-set noshowmode " hide Vim mode indicator
 set fillchars+=stl:\ ,stlnc:\ " disable statusline fillchars
-set laststatus=2 " always display statusline (e.g. Airline)
+" set laststatus=2 " always display statusline (e.g. Airline)
+" set noshowmode " hide Vim mode indicator
 
-" set ch=2 " statusline height
+" set ch=0 " statusline height
 " set statusline=%-30.50(%n\ %f\ %m%h%r%w%)%l/%L\ (%p%%),\ %c\ %<%=%(\(%{bufnr(\"#\")}\ %{bufname(\"#\")})%)
 " set showtabline=2 " always display the tabline, even if there is only one tab
 set showcmd " show last command in the bottom right
@@ -266,8 +264,8 @@ set nowb
 " noremap * *zz:LINE<CR>
 " noremap # #zz:LINE<CR>
 
-" Color theme settings
 set background=dark
+" Color theme settings
 if has("gui_running")
   " Molokai Theme
   colorscheme molokai
@@ -275,12 +273,17 @@ if has("gui_running")
   let g:rehash256 = 1 " attempts to bring the 256 color version as close as possible to the the default (dark) GUI version
   set guifont="Hack Regular:12"
 else
+  colorscheme molokai
+  hi Normal ctermbg=none
+  hi NonText ctermbg=none
+  hi LineNr ctermbg=none
+  let g:molokai_original = 1 " use original monokai background color
+  let g:rehash256 = 1 " attempts to bring the 256 color version as close as possible to the the default (dark) GUI version
 
-  let g:hybrid_reduced_contrast = 1 " Remove this line if using the default palette.
-  " let g:molokai_original = 1
-  " let g:rehash256 = 1
   " set t_Co=256 " iTerm2 256 color mode for Airline highlight
-  colorscheme hybrid
+
+  " colorscheme hybrid
+  " let g:hybrid_reduced_contrast = 1 " Remove this line if using the default palette.
 
   " colorscheme badwolf
   " let g:badwolf_darkgutter = 0
@@ -315,8 +318,8 @@ let g:syntastic_bash_checkers=['shellcheck']
 " autocmd bufwritepost *.js silent !semistandard % --format
 " set autoread
 
-" Airline settings
-let g:airline_theme='badwolf' " use 'badwolf' for high contrast
+" Airline settings... mainly used to enable tab switch with map keys
+let g:airline_theme='airline' " use 'badwolf' for high contrast
 let g:airline#extensions#tabline#show_buffers = 0 " hide buffers (prevents closed buffer showing in tab list)
 let g:airline#extensions#tabline#enabled = 1 " displays all buffers (WARN: even if closed) if only one tab, required for tabline numbering to work
 let g:airline#extensions#tabline#left_sep = ''
