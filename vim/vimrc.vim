@@ -115,7 +115,6 @@ Plug 'elzr/vim-json', { 'for': 'json' } " highlight key:value for JSON
 Plug 'groenewege/vim-less', { 'for': 'less' }
 
 " color scheme
-Plug 'sickill/vim-monokai'
 Plug 'tomasr/molokai'
 Plug 'w0ng/vim-hybrid'
 Plug 'morhetz/gruvbox'
@@ -123,6 +122,8 @@ Plug 'hukl/smyck-color-scheme'
 Plug 'chriskempson/base16-vim'
 Plug 'sjl/badwolf'
 Plug 'Lokaltog/vim-distinguished'
+Plug 'sickill/vim-monokai'
+" Plug 'crusoexia/vim-monokai' " refined vim-monokai
 
 " autocompletion
 Plug 'ervandew/supertab'
@@ -280,6 +281,10 @@ else
   let g:molokai_original = 1 " use original monokai background color
   let g:rehash256 = 1 " attempts to bring the 256 color version as close as possible to the the default (dark) GUI version
 
+  " colorscheme monokai
+  " hi Normal ctermbg=none
+  " hi NonText ctermbg=none
+  " hi LineNr ctermbg=none
   " set t_Co=256 " iTerm2 256 color mode for Airline highlight
 
   " colorscheme hybrid
@@ -319,7 +324,7 @@ let g:syntastic_bash_checkers=['shellcheck']
 " set autoread
 
 " Airline settings... mainly used to enable tab switch with map keys
-let g:airline_theme='airline' " use 'badwolf' for high contrast
+let g:airline_theme='badwolf' " use 'badwolf' for high contrast
 let g:airline#extensions#tabline#show_buffers = 0 " hide buffers (prevents closed buffer showing in tab list)
 let g:airline#extensions#tabline#enabled = 1 " displays all buffers (WARN: even if closed) if only one tab, required for tabline numbering to work
 let g:airline#extensions#tabline#left_sep = ''
