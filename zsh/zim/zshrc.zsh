@@ -32,14 +32,8 @@ export EDITOR='vim'
 export LESS="-R"
 export PAGER='less'
 export DEVPATH="${HOME}/Developments"
-# export DISABLE_AUTO_TITLE=true
-# export HISTCONTROL=erasedups  # Ignore duplicate entries in history
-# export HISTIGNORE="&:ls:ll:la:l.:pwd:exit:clear:clr:[bf]g"
-
-# if [[ -z "$LANG" ]]; then
-#   export LANG='en_US.UTF-8'
-# fi
-# export LANG="en_US:en"
+export HISTCONTROL=erasedups  # Ignore duplicate entries in history
+export HISTIGNORE="&:ls:ll:la:l.:pwd:exit:clear:clr:[bf]g"
 
 # Brew
 fpath=("/usr/local/bin/" $fpath)
@@ -56,8 +50,6 @@ export CHEATCOLORS=true
 # The Fuck
 eval "$(thefuck --alias)"
 eval "$(thefuck --alias fk)"
-
-# export KEYTIMEOUT=1 # 0.4 to 0.1 sec delay in Vim mode display change, raise value if other commands getting issues
 
 # Completion with more than 1 possibilities will insert first available option into prompt automatically
 setopt MENU_COMPLETE
@@ -76,7 +68,6 @@ setopt MENU_COMPLETE
 
 # Use 256 color terminal
 export TERM="xterm-256color"
-# export TERMINFO="$HOME/.terminfo"
 
 # Term specific customizations
 if [[ ($TERM_PROGRAM == "Apple_Terminal") ]]; then # Apple Terminal
@@ -86,9 +77,11 @@ if [[ ($TERM_PROGRAM == "Apple_Terminal") ]]; then # Apple Terminal
 
   # Key bindings
   # stty -ixon # gives access to ^Q
+  # bindkey "^Q" push-line-or-edit
   bindkey -v # use vim keys
   bindkey "^A" beginning-of-line
-
+  bindkey "^B" backward-word
+  bindkey "^W" forward-word
   bindkey "^E" end-of-line
   bindkey "^C" kill-line
   bindkey "^Z" history-search-backward
@@ -96,8 +89,17 @@ if [[ ($TERM_PROGRAM == "Apple_Terminal") ]]; then # Apple Terminal
   bindkey "^R" history-incremental-search-backward
   bindkey "^Y" accept-and-hold
   bindkey "^N" insert-last-word
-  # bindkey "^Q" push-line-or-edit
-  # bindkey -s "^T" "^[Isudo ^[A" # "t" for "toughguy"
+  bindkey -s "^T" "^[Isudo ^[A" # prepend sudo
+
+  # Display Vi-mode in prompt
+  function zle-line-init zle-keymap-select {
+      VIM_PROMPT="%{$fg_bold[yellow]%} [% Vim]% %{$reset_color%}"
+      RPS1="${${KEYMAP/vicmd/$VIM_PROMPT}/(main|viins)/}$EPS1"
+      zle reset-prompt
+  }
+  zle -N zle-line-init
+  zle -N zle-keymap-select
+  export KEYTIMEOUT=1 # 0.4 to 0.1 sec delay in Vim mode display change, raise value if other commands getting issues
 
   [[ -f "${HOME}/.ztmux" ]] && source "${HOME}/.ztmux"
 else # iTerm2
@@ -108,13 +110,13 @@ else # iTerm2
   fi
 
   # Rename title displayed from tabs in iTerm
-  # title () {
-  #   if [[ $# == 0 ]] then
-  #     echo -ne "\e]1;$PWD\a"
-  #   else
-  #     echo -ne "\e]1;$@\a"
-  #   fi
-  # }
+  title () {
+    if [[ $# == 0 ]] then
+      echo -ne "\e]1;$PWD\a"
+    else
+      echo -ne "\e]1;$@\a"
+    fi
+  }
 
   # use iterm2_shell_integration.`basename $SHELL` when dealing with multiple shells
   test -e ${HOME}/.iterm2_shell_integration.zsh && source ${HOME}/.iterm2_shell_integration.zsh
