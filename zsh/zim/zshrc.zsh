@@ -88,6 +88,7 @@ if [[ ($TERM_PROGRAM == "Apple_Terminal") ]]; then # Apple Terminal
   # stty -ixon # gives access to ^Q
   bindkey -v # use vim keys
   bindkey "^A" beginning-of-line
+
   bindkey "^E" end-of-line
   bindkey "^C" kill-line
   bindkey "^Z" history-search-backward
