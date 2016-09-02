@@ -195,24 +195,6 @@
 				KeyCode::V, ModifierFlag::COMMAND_L | ModifierFlag::OPTION_L
 			</autogen>
 		</block>
-
-		<block>
-			<only>EVERNOTE, ALTERNOTE</only>
-			<autogen>
-				--KeyToKey--
-				KeyCode::V, ModifierFlag::OPTION_L | ModifierFlag::NONE,
-				KeyCode::V, ModifierFlag::COMMAND_L | ModifierFlag::SHIFT_L
-			</autogen>
-		</block>
-
-		<block>
-			<only>EVERNOTE</only>
-			<autogen>
-				--KeyToKey--
-				KeyCode::S, ModifierFlag::OPTION_L | ModifierFlag::NONE,
-				KeyCode::S, ModifierFlag::COMMAND_L | ModifierFlag::CONTROL_L
-			</autogen>
-		</block>
 	</item>
 
 	<item>
