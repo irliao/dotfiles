@@ -3,7 +3,7 @@
 -- Check if window is maximized
 function isWindowMaximized(win)
   if not win or win:isFullScreen() then
-    return
+    return false
   end
   local f = win:frame()
   local screen = win:screen()
@@ -22,7 +22,7 @@ function focusLeftRight()
   local screen = win:screen()
   local max = screen:frame()
 
-  if f.x > (max.x + max.w / 2) then -- right -> left
+  if f.x > (max.w / 2) then -- right -> left
     hs.window.focusedWindow():focusWindowWest()
   else -- left -> right
     hs.window.focusedWindow():focusWindowEast()
