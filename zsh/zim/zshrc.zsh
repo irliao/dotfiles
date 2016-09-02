@@ -12,8 +12,9 @@ DEFAULT_USER="irliao" # replaces user@hostname with specified username
 
 # Environment variables
 typeset -U PATH # remove duplicate entries in Path
-typeset -U path
+PATH="/usr/local/bin:${HOME}/.bin:/usr/local/sbin:/usr/bin:/bin:/usr/sbin:/sbin"
 typeset -U fpath
+typeset -U path
 path=(
  /usr/local/{bin,sbin}
   $path
@@ -31,7 +32,6 @@ export EDITOR='vim'
 export LESS="-R"
 export PAGER='less'
 export DEVPATH="${HOME}/Developments"
-export PATH="/usr/local/bin:${HOME}/.bin:/usr/local/sbin:/usr/bin:/bin:/usr/sbin:/sbin"
 # export DISABLE_AUTO_TITLE=true
 # export HISTCONTROL=erasedups  # Ignore duplicate entries in history
 # export HISTIGNORE="&:ls:ll:la:l.:pwd:exit:clear:clr:[bf]g"
@@ -57,14 +57,6 @@ export CHEATCOLORS=true
 eval "$(thefuck --alias)"
 eval "$(thefuck --alias fk)"
 
-# function zle-line-init zle-keymap-select {
-#     VIM_PROMPT="%{$fg_bold[yellow]%} [% NORMAL]%  %{$reset_color%}"
-#     RPS1="${${KEYMAP/(vicmd|opp)/$VIM_PROMPT}/(main|viins)/}"
-#     # RPS1="${${KEYMAP/vicmd/$VIM_PROMPT}/(main|viins)/} $(git_custom_status) $EPS1"
-#     zle reset-prompt
-# }
-# zle -N zle-line-init
-# zle -N zle-keymap-select
 # export KEYTIMEOUT=1 # 0.4 to 0.1 sec delay in Vim mode display change, raise value if other commands getting issues
 
 # Completion with more than 1 possibilities will insert first available option into prompt automatically
@@ -95,12 +87,12 @@ if [[ ($TERM_PROGRAM == "Apple_Terminal") ]]; then # Apple Terminal
   # Key bindings
   # stty -ixon # gives access to ^Q
   bindkey -v # use vim keys
-  bindkey "^F" vi-cmd-mode
   bindkey "^A" beginning-of-line
   bindkey "^E" end-of-line
-  bindkey "^K" kill-line
+  bindkey "^C" kill-line
+  bindkey "^Z" history-search-backward
+  bindkey "^V" vi-cmd-mode
   bindkey "^R" history-incremental-search-backward
-  bindkey "^P" history-search-backward
   bindkey "^Y" accept-and-hold
   bindkey "^N" insert-last-word
   # bindkey "^Q" push-line-or-edit

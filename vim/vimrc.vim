@@ -254,16 +254,6 @@ set nowb
 " set backupdir=~/.vim/tmp/backup/
 " set undodir=~/.vim/tmp/undo/
 
-" TODO: broken...
-" highlight the current line when you do a search, and remove the highlight when the cursor moves.
-" hi CursorLine cterm=reverse
-" com! LINE :exe 'se cul'
-" au CursorMoved * :se nocul
-" au CursorMovedI * :se nocul
-" noremap n nzz:LINE<CR>
-" noremap N Nzz:LINE<CR>
-" noremap * *zz:LINE<CR>
-" noremap # #zz:LINE<CR>
 
 set background=dark
 " Color theme settings
@@ -274,12 +264,12 @@ if has("gui_running")
   let g:rehash256 = 1 " attempts to bring the 256 color version as close as possible to the the default (dark) GUI version
   set guifont="Hack Regular:12"
 else
-  colorscheme molokai
-  hi Normal ctermbg=none
-  hi NonText ctermbg=none
-  hi LineNr ctermbg=none
-  let g:molokai_original = 1 " use original monokai background color
-  let g:rehash256 = 1 " attempts to bring the 256 color version as close as possible to the the default (dark) GUI version
+  " colorscheme molokai
+  " hi Normal ctermbg=none
+  " hi NonText ctermbg=none
+  " hi LineNr ctermbg=none
+  " let g:molokai_original = 1 " use original monokai background color
+  " let g:rehash256 = 1 " attempts to bring the 256 color version as close as possible to the the default (dark) GUI version
 
   " colorscheme monokai
   " hi Normal ctermbg=none
@@ -287,8 +277,9 @@ else
   " hi LineNr ctermbg=none
   " set t_Co=256 " iTerm2 256 color mode for Airline highlight
 
-  " colorscheme hybrid
-  " let g:hybrid_reduced_contrast = 1 " Remove this line if using the default palette.
+  colorscheme hybrid
+  let g:hybrid_reduced_contrast = 1 " Remove this line if using the default palette.
+  hi Normal ctermbg=none
 
   " colorscheme badwolf
   " let g:badwolf_darkgutter = 0
@@ -324,7 +315,7 @@ let g:syntastic_bash_checkers=['shellcheck']
 " set autoread
 
 " Airline settings... mainly used to enable tab switch with map keys
-let g:airline_theme='badwolf' " use 'badwolf' for high contrast
+let g:airline_theme='hybrid' " use 'badwolf' for high contrast
 let g:airline#extensions#tabline#show_buffers = 0 " hide buffers (prevents closed buffer showing in tab list)
 let g:airline#extensions#tabline#enabled = 1 " displays all buffers (WARN: even if closed) if only one tab, required for tabline numbering to work
 let g:airline#extensions#tabline#left_sep = ''
@@ -619,4 +610,15 @@ autocmd FileType css noremap <buffer> <leader>tb :call CSSBeautify()<cr>
 " nnoremap <silent> {Up-Mapping} :TmuxNavigateUp<cr>
 " nnoremap <silent> {Right-Mapping} :TmuxNavigateRight<cr>
 " nnoremap <silent> {Previous-Mapping} :TmuxNavigatePrevious<cr>
+
+" TODO: broken...
+" highlight the current line when you do a search, and remove the highlight when the cursor moves.
+" hi CursorLine cterm=reverse
+" com! LINE :exe 'se cul'
+" au CursorMoved * :se nocul
+" au CursorMovedI * :se nocul
+" noremap n nzz:LINE<CR>
+" noremap N Nzz:LINE<CR>
+" noremap * *zz:LINE<CR>
+" noremap # #zz:LINE<CR>
 
