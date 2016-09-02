@@ -195,6 +195,9 @@ end
 -- Move focused window to next screen if available
 function moveToNextScreen()
     local win = (hs.window.focusedWindow() and hs.window.focusedWindow() or hs.window.frontmostWindow())
+    if not win or win:isFullScreen() then
+      return
+    end
     local prevScreen = win:screen():previous()
     local nextScreen = win:screen():next()
     if prevScreen ~= nil then

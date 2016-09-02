@@ -45,20 +45,17 @@ function alertStatus()
 end
 
 -- Window management hotkeys
--- hs.hotkey.bind(super, '1', function() hs.window.focusedWindow():focusWindowWest() end)
--- hs.hotkey.bind(super, '2', function() hs.window.focusedWindow():focusWindowEast() end)
 hs.hotkey.bind(super, 'A', focusPreviousWindow)
 hs.hotkey.bind(super, 'S', resizeLeftRightFull)
 hs.hotkey.bind(hyper, 'S', resizeTopBottomFull) -- simulate Caps + Shift + S for vertical divide
 hs.hotkey.bind(super, 'R', function() hs.reload() end)
 hs.hotkey.bind(super, 'W', hideScreen)
--- hs.hotkey.bind(super, 'TAB', toggleFullScreen)
 hs.hotkey.bind(super, 'ESCAPE', moveToNextScreen)
 hs.hotkey.bind(super, 'SPACE', hs.hints.windowHints)
 hs.hotkey.bind(hyper, 'RETURN', centerScreen)
 hs.hotkey.bind(super, 'RETURN', toggleFullScreen)
-hs.hotkey.bind(super,'Tab', 'Next window',function()switcher_active_app:next()end)
-hs.hotkey.bind(hyper,'Tab','Prev window',function()switcher_active_app:previous()end)
+hs.hotkey.bind(super,'Tab', function()switcher_active_app:next()end)
+hs.hotkey.bind(hyper,'Tab', function()switcher_active_app:previous()end)
 
 -- Arrow hotkeys
 hs.hotkey.bind(super, 'LEFT', function() resizeFocusedWindow("horizontal", -25) end)
