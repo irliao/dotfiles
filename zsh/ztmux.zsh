@@ -11,10 +11,7 @@ fi
 # echo "login shell: $SHELL"
 # autostart tmux without first creating an unused session
 # if [[ -z "$TMUX" ]]; then
-if [[ -z "$TMUX" && -z "$EMACS" && -z "$VIM" ]] && ( \
-  ( [[ -n "$SSH_TTY" ]] ) ||
-  ( [[ -z "$SSH_TTY" ]] ) \
-); then
+if [[ -z "$TMUX" && -z "$EMACS" && -z "$VIM" ]] && (( [[ -n "$SSH_TTY" ]] ) || ( [[ -z "$SSH_TTY" ]] )); then
   tmux start-server
   # echo "after start server: tty: $(tty)"
   # Create a session named 'zmux' if no session has been defined in tmux.conf
