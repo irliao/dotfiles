@@ -1,26 +1,32 @@
 -- Window manipulation
 
--- -- Window focus highlight
--- hs.window.filter.ignoreAlways['Spotlight']=true -- prevent wfilter warnings from windowHighlight
--- hs.window.highlight.ui.overlay=true
--- hs.window.highlight.ui.flashDuration=0
--- hs.window.highlight.ui.overlayColor = {0,0,0,0.50} -- black, transparent
--- hs.window.highlight.ui.frameWidth = 5
--- hs.window.highlight.ui.frameColor = {1,0.9,0,0.80} -- red
--- hs.window.highlight.start()
+-- Check if window is maximized
+function isWindowMaximized(win)
+  if not win or win:isFullScreen() then
+    return
+  end
+  local f = win:frame()
+  local screen = win:screen()
+  local max = screen:frame()
 
-local winRight = nil
-local winLeft = nil
+  return f.x == max.x and f.y == max.y and f.w == max.w and f.h == max.h
+end
 
 -- Focus window into Left or Right
 function focusLeftRight()
-  -- TODO: implement Tmux like window focus
-  if hs.window.focusedWindow():focusWindowWest() then
+  local win = (hs.window.focusedWindow() and hs.window.focusedWindow() or hs.window.frontmostWindow())
+  if not win or win:isFullScreen() or isWindowMaximized(win) then
     return
-  else
+  end
+  local f = win:frame()
+  local screen = win:screen()
+  local max = screen:frame()
+
+  if f.x > (max.x + max.w / 2) then -- right -> left
+    hs.window.focusedWindow():focusWindowWest()
+  else -- left -> right
     hs.window.focusedWindow():focusWindowEast()
   end
-
 end
 
 -- Resize window into Left, Right, or Full
@@ -39,6 +45,7 @@ function resizeLeftRightFull()
     f.y = max.y
     f.w = max.w / 2
     f.h = max.h
+    hs.window.highlight.start()
   else
     -- left -> right
     if f.x == max.x and f.y == max.y then
@@ -52,6 +59,7 @@ function resizeLeftRightFull()
       f.y = max.y
       f.w = max.w
       f.h = max.h
+      hs.window.highlight.stop()
     -- other -> left
     else
       f.x = max.x
