@@ -18,5 +18,6 @@ hs.window.highlight.ui.overlayColor = {0,0,0,0.5} -- black, transparent
 hs.window.highlight.ui.frameWidth = 5
 hs.window.highlight.ui.frameColor = {1,0.9,0,0.8} -- yellow
 wf_highlight:subscribe(hs.window.filter.windowFocused, toggleWindowHighlight)
+wf_highlight:subscribe(hs.window.filter.windowUnfocused, function() hs.window.highlight.stop() end) -- TODO: test this
 
 
