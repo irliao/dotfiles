@@ -21,6 +21,11 @@
   </appdef>
 
   <appdef>
+    <appname>MACVIM</appname>
+    <equal>org.vim.MacVim</equal>
+  </appdef>
+
+  <appdef>
     <appname>SAFARI</appname>
     <equal>com.apple.Safari</equal>
   </appdef>

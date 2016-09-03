@@ -4,13 +4,13 @@
 
 # Editors
 alias o="open"
-alias s="subl -w"
 alias v="vim -p"
+alias m="mvim -p"
 
 # Unix
+alias s="source"
 alias c='clear'
 alias d='dirs -v'
-alias so="source"
 alias pbc='pbcopy'
 alias pbp='pbpaste'
 alias la="ls -la"

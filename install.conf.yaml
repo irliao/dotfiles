@@ -5,31 +5,27 @@
 - clean: ['~']
 
 - link:
-    ~/.dotfiles: ,
-    ~/.bin: bin,
-    ~/.cheat: cheat,
-    ~/.config: config,
-    ~/.editorconfig: vim/editorconfig,
-    ~/.eslintrc: node/eslintrc.json,
-    ~/.gitconfig: git/gitconfig,
-    ~/.gitignore_global: git/gitignore_global,
-    ~/.gvimrc: vim/gvimrc.vim,
-    ~/.hammerspoon: hammerspoon,
-    ~/.jsbeautifyrc: node/jsbeautifyrc.json,
-    ~/.nvmrc: node/nvmrc,
-    ~/.teamocil: tmux/teamocil,
-    ~/.tmux: tmux,
-    ~/.tmux.conf: tmux/tmux.conf,
-    ~/.vim: vim,
-    ~/.vimrc: vim/vimrc.vim,
-    ~/.zalias: zsh/zalias.zsh,
-    ~/.zfunction: zsh/zfunction.zsh,
-    ~/.zim: submodules/zim,
-    ~/.zimrc: zsh/zim/zimrc.zsh,
-    ~/.zlogin: zsh/zim/zlogin.zsh,
-    ~/.zprompt: zsh/prompts/mingit.zsh,
-    ~/.zshrc: zsh/zim/zshrc.zsh,
-    ~/.ztmux: zsh/zim/ztmux.zsh
+    ~/.dotfiles: ''
+    ~/.bin: bin
+    ~/.cheat: config/cheat
+    ~/.config: config
+    ~/.editorconfig: vim/editorconfig
+    ~/.gitconfig: git/gitconfig
+    ~/.gitignore_global: git/gitignore_global
+    ~/.hammerspoon: hammerspoon
+    ~/.karabiner: karabiner
+    ~/.npmrc: config/node/npmrc
+    ~/.tmux: tmux
+    ~/.tmux.conf: tmux/tmux.conf
+    ~/.vim: vim
+    ~/.vimrc: vim/vimrc.vim
+    ~/.zalias: zsh/zalias.zsh
+    ~/.zfunction: zsh/zfunction.zsh
+    ~/.zimrc: zsh/zim/zimrc.zsh
+    ~/.zlogin: zsh/zim/zlogin.zsh
+    ~/.zprompt: zsh/prompts/mingit.zsh
+    ~/.zshrc: zsh/zim/zshrc.zsh
+    ~/.ztmux: zsh/ztmux.zsh
 
 - shell:
   - [git submodule update --init --recursive, Installing submodules]
