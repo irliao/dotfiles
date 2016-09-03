@@ -9,9 +9,9 @@ function toggleWindowHighlight()
   end
 end
 
-wf_highlight = hs.window.filter.new()
 hs.window.filter.ignoreAlways['Spotlight']=true -- prevent wfilter warnings from windowHighlight
-hs.window.filter.ignoreAlways['Hammerspoon']=true
+wf_highlight = hs.window.filter.new()
+-- hs.window.filter.ignoreAlways['Hammerspoon']=true
 hs.window.highlight.ui.overlay=true
 hs.window.highlight.ui.overlayColor = {0,0,0,0.25} -- gray
 hs.window.highlight.ui.frameWidth = 0

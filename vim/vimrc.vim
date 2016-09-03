@@ -259,10 +259,10 @@ set background=dark
 " Color theme settings
 if has("gui_running")
   " Molokai Theme
-  colorscheme molokai
-  let g:molokai_original = 1 " use original monokai background color
-  let g:rehash256 = 1 " attempts to bring the 256 color version as close as possible to the the default (dark) GUI version
-  set guifont="Hack Regular:12"
+  colorscheme badwolf
+  " let g:molokai_original = 1 " use original monokai background color
+  " let g:rehash256 = 1 " attempts to bring the 256 color version as close as possible to the the default (dark) GUI version
+  set guifont=Source\ Code\ Pro\ for\ Powerline:h13
 else
   " colorscheme molokai
   " hi Normal ctermbg=none
@@ -459,8 +459,8 @@ noremap <Left> <NOP>
 noremap <Right> <NOP>
 
 " add empty line above or below the current line
-map <Enter> o<Esc>
-map <S-Enter> O<Esc>
+" map <Enter> o<Esc>
+" map <S-Enter> O<Esc>
 
 " split (buffer) navigation binding
 nnoremap <leader>s :vsplit<Space>
@@ -495,34 +495,35 @@ vnoremap p "_dP
 "map space to unhighlight search term
 nnoremap <silent> <Space> :nohlsearch<Bar>:echo<CR>
 
-" TODO: make mapping match ones defined in ~/.zshrc
 " navigation binding
 map 0 ^
+map 1 $
+nnoremap <C-a> ^
+nnoremap <C-e> $
 nnoremap ) }
 nnoremap ( {
-nnoremap B ^
-nnoremap E $
 
 " utility binding, WARN: some mappings CANNOT have trailing comments
 noremap U :redo<CR> " revert last undo
-nnoremap <leader><Tab> <C-w><C-w><CR> " go to previous pane within Vim
+nnoremap <leader>' <C-w><C-w><CR> " go to previous pane like Tmux
+nnoremap <leader>\ :tabn<CR> " go to next buffer/tab like Tmux
 nnoremap <leader>j <C-d> " scroll down:delmarks! half a page
 nnoremap <leader>k <C-u> " scroll up half a page
-nnoremap <leader>' :marks<CR> " TODO: consider mapping to <leader>` instead
-nnoremap <leader>" :regs<CR>
+nnoremap <leader>` :marks<CR>
+nnoremap <leader>" :registers<CR>
 nnoremap <leader>r :so $MYVIMRC<CR>
 
 " tab/buffer binding
 nnoremap <leader><BS> :ls<CR> " TODO: broken
+nnoremap <leader>n :tabnew<CR>
 nnoremap <leader>e :tabedit<Space>
 nnoremap <leader>f :tabfind<Space>
-nnoremap <leader>m :tabmove<Space>
+" nnoremap <leader>m :tabmove<Space> " TODO: figure out how to use
 nnoremap <leader>d :cd %:p:h<cr>:pwd<cr>
 nnoremap <leader>o :tabonly<CR> " close all tabs except the current one
 nnoremap <leader>p :tabedit <c-r>=expand("%:p:h")<CR>/
 nnoremap <leader>w :tabclose<CR>
 nnoremap <leader>W :tabdo :q<CR> " close all open tabs
-nnoremap <leader>\ :tabn<CR> " go to next buffer/tab
 nnoremap <leader>ta :tab ball <CR> " reopen all closed tabs/buffers
 
 " toggle plugin binding

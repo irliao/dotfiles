@@ -16,16 +16,12 @@ if [[ -z "$TMUX" && -z "$EMACS" && -z "$VIM" ]] && (( [[ -n "$SSH_TTY" ]] ) || (
   # echo "after start server: tty: $(tty)"
   # Create a session named 'zmux' if no session has been defined in tmux.conf
   if ! tmux has-session 2> /dev/null; then
-    tmux_session='zmux'
+    tmux_session='ztmux'
       tmux \
         new-session -d -s "$tmux_session" \; \
         set-option -t "$tmux_session" destroy-unattached off &> /dev/null
-        # attach-session -t "$tmux_session" \; \
   fi
 
   exec tmux attach-session
 fi
-
-# exec bash -c 'shopt -sq checkwinsize'
-
 

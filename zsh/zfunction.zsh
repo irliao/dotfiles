@@ -27,6 +27,52 @@ swd() { echo "$(pwd | sed -e "s,^$HOME,~,")" }
 # Make and go to directory
 md() { [[ -n ${1} ]] && mkdir -p ${1} && builtin cd ${1}; }
 
+e() {
+    tmux split-window -h -c "#{pane_current_path}" "vim $@"
+}
+
+ssht(){
+  ssh $* -t "tmux attach || tmux || $SHELL"
+}
+
+# Get path of frontmost Finder window
+finderPath() {
+  osascript -e 'tell application "Finder"'\
+    -e "if (${1-1} <= (count Finder windows)) then"\
+    -e "get POSIX path of (target of window ${1-1} as alias)"\
+    -e 'else' \
+    -e 'get POSIX path of (desktop as alias)'\
+    -e 'end if' \
+    -e 'end tell';
+}
+
+# Print selected files in Finder
+finderSelected() {
+    osascript <<EOT
+        tell application "Finder"
+            set theFiles to selection
+            set theList to ""
+            repeat with aFile in theFiles
+                set theList to theList & POSIX path of (aFile as alias) & "\n"
+            end repeat
+            theList
+        end tell
+EOT
+}
+
+# Change Finder view to column, icon, or list
+# args: $1 - Finder window number, $2 - view type
+finderView() {
+  osascript -e 'set cwd to do shell script "pwd"'\
+    -e 'tell application "Finder"'\
+    -e "if (${1-1} <= (count Finder windows)) then"\
+    -e "set the target of window ${1-1} to (POSIX file cwd) as string"\
+    -e "set the current view of the front Finder window to ${2-column} view"\
+    -e 'else' -e "open (POSIX file cwd) as string"\
+    -e "set the current view of the front Finder window to ${2-column} view"\
+    -e 'end if' -e 'end tell';
+}
+
 # Determine size of a file or total size of a directory
 fs() {
 	if du -b /dev/null > /dev/null 2>&1; then
@@ -66,11 +112,6 @@ takeover() {
 #   ps | grep `echo $$` | awk '{ print $4 }'
 # }
 
-# elinks() {
-        # STY= `which elinks` $*
-#         echo -ne \\033]0\;\\007;
-# }
-
 # Kill process on port
 portslay () {
     kill -9 `lsof -i tcp:$1 | tail -1 | awk '{ print $2;}'`
@@ -92,25 +133,6 @@ killport() {
 #         echo; zplug install
 #     fi
 # fi
-
-# TODO: implement https://github.com/herrbischoff/awesome-osx-command-line/blob/master/functions.md
-finder() { }
-
-# TODO: test multiple files as params
-# Vim All- edit all files in directory (default current if left blank) with Vim in tabs
-va() {
-  if [[ $# == 0 ]] then
-    vim -p ./*
-  elif [[ $# == 1 ]] then
-    if [[ (-d $@) || (-d $PWD/$@) || (-d ./$@) ]] then
-      vim -p $@/*
-    else
-      vim -p $@
-    fi
-  else
-    echo "zfunction: command 'va' currently only accepts 0 or 1 args"
-  fi
-}
 
 # TODO: fix $dir
 # Find file with name in directory
@@ -197,7 +219,6 @@ getBatteryTime() {
   echo "$bat_time"
 }
 
-# TODO: refactor + show in Tmux
 getBattery() {
 	bat_perc=$(pmset -g batt | egrep "([0-9]+\%)" -o)
   bat_time=$(pmset -g batt | egrep "([0-9]+\:[0-9]+)" -o)
@@ -208,13 +229,6 @@ getUpTime() {
   up_time=$(uptime | cut -d "," -f 3-)
   echo "$up_time"
 }
-
-# TODO: fix missing operator after + error
-battery() {
-  bat=$(pmset -g batt | egrep ([0-9]*%.*[0-9]+:[0-9]+) -o | sed 's/[[:punct:]][[:space:]]discharging[[:punct:]]//g')
-  echo "$bat"
-}
-
 
 # Get current process id
 pid () {
@@ -232,21 +246,6 @@ getWifiPassword() {
 	networkSSID=$(/System/Library/PrivateFrameworks/Apple80211.framework/Versions/Current/Resources/airport -I | awk '/ SSID/ {print substr($0, index($0, $2))}') && \
 		echo "$networkSSID" && \
 		security find-generic-password -D "AirPort network password" -a $networkSSID -gw
-}
-
-# TODO: fix ${viewType} not working
-# Set current directory's Finder view, default: list view
-# @param $1 - Finder view type: {column, icon, list}
-setFinderView() {
-	viewType=$([[ "$#" == 1 ]] && echo "$1 view" || echo "list view")
-  	osascript -e 'set cwd to do shell script "pwd"'\
-    	-e 'tell application "Finder"'\
-    	-e "if (${1-1} <= (count Finder windows)) then"\
-    	-e "set the target of window ${1-1} to (POSIX file cwd) as string"\
-    	-e "set the current view of the front Finder window to ($viewType)"\
-   		-e 'else' -e "open (POSIX file cwd) as string"\
-    	-e "set the current view of the front Finder window to ($viewType)"\
-    	-e 'end if' -e 'end tell';
 }
 
 # Show/Hide all files in Finder, default: no

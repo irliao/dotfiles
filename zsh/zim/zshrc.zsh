@@ -9,6 +9,7 @@ fi
 
 # skip_global_compinit=1 # faster Zsh startup
 DEFAULT_USER="irliao" # replaces user@hostname with specified username
+LANG=en_US.utf8
 
 # Environment variables
 typeset -U PATH # remove duplicate entries in Path
@@ -40,13 +41,6 @@ fpath=("/usr/local/bin/" $fpath)
 export HOMEBREW_CASK_OPTS="--appdir=/Applications --caskroom=/opt/homebrew-cask/Caskroom" # install path
 export HOMEBREW_NO_ANALYTICS=1 # opt-out of analytics
 
-# Node Version Manager (nvm)
-# export NVM_DIR="${HOME}/.nvm"
-# source $(brew --prefix nvm)/nvm.sh
-
-# Cheat
-export CHEATCOLORS=true
-
 # The Fuck
 eval "$(thefuck --alias)"
 eval "$(thefuck --alias fk)"
@@ -58,7 +52,7 @@ setopt MENU_COMPLETE
 [[ -f "${HOME}/.local_profile" ]] && source "${HOME}/.local_profile"
 
 # Bash profile
-[[ -f "${HOME}/.bash_profile" ]] && source "${HOME}/.bash_profile"
+# [[ -f "${HOME}/.bash_profile" ]] && source "${HOME}/.bash_profile"
 
 # Custom functions
 [[ -f "${HOME}/.zfunction" ]] && source "${HOME}/.zfunction"
@@ -85,11 +79,12 @@ if [[ ($TERM_PROGRAM == "Apple_Terminal") ]]; then # Apple Terminal
   bindkey "^E" end-of-line
   bindkey "^C" kill-line
   bindkey "^Z" history-search-backward
+  bindkey "^X" history-search-forward
   bindkey "^V" vi-cmd-mode
-  bindkey "^R" history-incremental-search-backward
+  # bindkey "^R" history-incremental-search-backward
   bindkey "^Y" accept-and-hold
   bindkey "^N" insert-last-word
-  bindkey -s "^T" "^[Isudo ^[A" # prepend sudo
+  bindkey -s "^R" "^[Isudo ^[A" # prepend sudo
 
   # Display Vi-mode in prompt
   function zle-line-init zle-keymap-select {
@@ -106,7 +101,7 @@ else # iTerm2
   # iTerm2 shell integration with Unix shell
   if [[ ! -h "${HOME}/.iterm2_shell_integration.zsh" ]]; then # check if file is Symlink
     # Custom shell loading for iTerm
-    ln -s ${HOME}/.dotfiles/config/terminal/iterm2_shell_integration.zsh ${HOME}/.iterm2_shell_integration.zsh;
+    ln -s ${HOME}/.dotfiles/config/term/iterm2_shell_integration.zsh ${HOME}/.iterm2_shell_integration.zsh;
   fi
 
   # Rename title displayed from tabs in iTerm

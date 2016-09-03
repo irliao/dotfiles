@@ -1,7 +1,0 @@
-v6.2.1
-3.9.3
-npm global packages (depth=0): 
-
-/Users/irliao/.nvm/versions/node/v6.2.1/lib
-└── npm@3.9.3
-
