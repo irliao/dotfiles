@@ -13,10 +13,10 @@ wf_highlight = hs.window.filter.new()
 hs.window.filter.ignoreAlways['Spotlight']=true -- prevent wfilter warnings from windowHighlight
 hs.window.filter.ignoreAlways['Hammerspoon']=true
 hs.window.highlight.ui.overlay=true
-hs.window.highlight.ui.flashDuration=0
-hs.window.highlight.ui.overlayColor = {0,0,0,0.5} -- black, transparent
-hs.window.highlight.ui.frameWidth = 5
-hs.window.highlight.ui.frameColor = {1,0.9,0,0.8} -- yellow
+hs.window.highlight.ui.overlayColor = {0,0,0,0.25} -- gray
+hs.window.highlight.ui.frameWidth = 0
+hs.window.highlight.ui.frameColor = {1,0.9,0,0.5} -- yellow
+hs.window.highlight.ui.flashDuration= 0
 wf_highlight:subscribe(hs.window.filter.windowFocused, toggleWindowHighlight)
 wf_highlight:subscribe(hs.window.filter.windowUnfocused, function() hs.window.highlight.stop() end) -- TODO: test this
 

@@ -99,6 +99,9 @@ defaults write NSGlobalDomain KeyRepeat -int 2
 # disable Dock hiding animation
 defaults write com.apple.Dock autohide-delay -float 0
 
+# change login screen text
+sudo defaults write /Library/Preferences/com.apple.loginwindow LoginwindowText "Hello Ian"
+
 # enable subpixel font rendering on non-apple LCDs
 defaults write NSGlobalDomain AppleFontSmoothing -int 2
 
