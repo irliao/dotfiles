@@ -317,7 +317,7 @@ let g:syntastic_bash_checkers=['shellcheck']
 " set autoread
 
 " Airline settings... mainly used to enable tab switch with map keys
-let g:airline_theme='hybrid' " use 'badwolf' for high contrast
+let g:airline_theme='term' " use 'badwolf' for high contrast
 let g:airline#extensions#tabline#show_buffers = 0 " hide buffers (prevents closed buffer showing in tab list)
 let g:airline#extensions#tabline#enabled = 1 " displays all buffers (WARN: even if closed) if only one tab, required for tabline numbering to work
 let g:airline#extensions#tabline#left_sep = ''
@@ -464,10 +464,6 @@ noremap <Right> <NOP>
 " map <Enter> o<Esc>
 " map <S-Enter> O<Esc>
 
-" split (buffer) navigation binding
-nnoremap <leader>s :vsplit<Space>
-nnoremap <leader>S :split<Space>
-
 " Visual/Select mode binding
 vmap / gc " comment out visually selected lines
 nnoremap <leader>R :nohlsearch<cr>:diffupdate<cr>:syntax sync fromstart<cr><c-l> " redraw screen
@@ -507,8 +503,8 @@ nnoremap ( {
 
 " utility binding, WARN: some mappings CANNOT have trailing comments
 noremap U :redo<CR> " revert last undo
-nnoremap <leader>' <C-w><C-w><CR> " go to previous pane like Tmux
-nnoremap <leader>\ :tabn<CR> " go to next buffer/tab like Tmux
+nnoremap <leader>a <C-w><C-w><CR> " go to previous pane like Tmux
+nnoremap <leader><Tab> :tabn<CR> " go to next buffer/tab like Tmux
 nnoremap <leader>j <C-d> " scroll down:delmarks! half a page
 nnoremap <leader>k <C-u> " scroll up half a page
 nnoremap <leader>` :marks<CR>
@@ -525,15 +521,18 @@ nnoremap <leader>r :so $MYVIMRC<CR>
 " nnoremap <silent> {Previous-Mapping} :TmuxNavigatePrevious<cr>
 
 " tab/buffer binding
-nnoremap <leader><BS> :ls<CR> " TODO: broken
-nnoremap <leader>n :tabnew<CR>
+" nnoremap <leader><BS> :ls<CR> " TODO: broken
+nnoremap <leader>n :vnew<CR>
+nnoremap <leader>s :vsplit<Space>
+nnoremap <leader>w :hide<CR> " close current pane like Tmux
+nnoremap <leader>S :split<Space>
+nnoremap <leader>N :tabnew<CR>
 nnoremap <leader>e :tabedit<Space>
 nnoremap <leader>f :tabfind<Space>
 " nnoremap <leader>m :tabmove<Space> " TODO: figure out how to use
 nnoremap <leader>d :cd %:p:h<cr>:pwd<cr>
 nnoremap <leader>o :tabonly<CR> " close all tabs except the current one
 nnoremap <leader>p :tabedit <c-r>=expand("%:p:h")<CR>/
-nnoremap <leader>w :tabclose<CR>
 nnoremap <leader>W :tabdo :q<CR> " close all open tabs
 nnoremap <leader>ta :tab ball <CR> " reopen all closed tabs/buffers
 

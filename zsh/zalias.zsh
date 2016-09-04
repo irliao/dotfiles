@@ -4,8 +4,10 @@
 
 # Editors
 alias o="open"
-alias v="vim -p"
-alias m="mvim -p"
+alias v="vim -p" # TODO: make function to open 2 files in split, 3+ files in tabs
+alias vs="vim -O" # split files horizontally
+alias vt="vim -p" # open files as separate tabs
+alias m="mvim"
 
 # Unix
 alias s="source"

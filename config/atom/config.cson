@@ -1,0 +1,34 @@
+"*":
+  "base16-syntax":
+    scheme: "Seti"
+  core:
+    audioBeep: false
+    openEmptyEditorOnStart: false
+    projectHome: "/Users/irliao/Developments"
+    themes: [
+      "seti-ui"
+      "seti-syntax"
+    ]
+  "dark-flat-ui": {}
+  editor:
+    fontFamily: "Hack"
+    fontSize: 12
+    lineHeight: 1
+    showIndentGuide: true
+  "exception-reporting":
+    userId: "f9ff38a2-e663-201e-4046-caea3e3ad0bf"
+  "platformio-ide-terminal":
+    core: {}
+  "seti-syntax": {}
+  "seti-ui":
+    compactView: true
+    disableAnimations: true
+    font: "Default Atom Font"
+    themeColor: "Yellow"
+  "terminal-plus":
+    core: {}
+    style: {}
+  "vim-mode":
+    useSmartcaseForSearch: true
+  welcome:
+    showOnStartup: false
