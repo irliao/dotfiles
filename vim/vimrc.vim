@@ -113,6 +113,7 @@ Plug 'editorconfig/editorconfig-vim' " uses ~/.editorconfig for vim-jsbeautify
 Plug 'plasticboy/vim-markdown', { 'for': 'mkd' }
 Plug 'elzr/vim-json', { 'for': 'json' } " highlight key:value for JSON
 Plug 'groenewege/vim-less', { 'for': 'less' }
+Plug 'ryym/vim-riot'
 
 " color scheme
 Plug 'tomasr/molokai'
@@ -124,6 +125,7 @@ Plug 'sjl/badwolf'
 Plug 'Lokaltog/vim-distinguished'
 Plug 'sickill/vim-monokai'
 " Plug 'crusoexia/vim-monokai' " refined vim-monokai
+Plug 'trusktr/seti.vim'
 
 " autocompletion
 Plug 'ervandew/supertab'
@@ -277,8 +279,8 @@ else
   " hi LineNr ctermbg=none
   " set t_Co=256 " iTerm2 256 color mode for Airline highlight
 
-  colorscheme hybrid
-  let g:hybrid_reduced_contrast = 1 " Remove this line if using the default palette.
+  colorscheme seti
+  " let g:hybrid_reduced_contrast = 1 " Remove this line if using the default palette.
   hi Normal ctermbg=none
 
   " colorscheme badwolf
@@ -513,6 +515,15 @@ nnoremap <leader>` :marks<CR>
 nnoremap <leader>" :registers<CR>
 nnoremap <leader>r :so $MYVIMRC<CR>
 
+" Vim-Tmux-navigator keys to go from Vim to Tmux
+" NOTE: should match the bindings defined in tmux.conf
+" let g:tmux_navigator_no_mappings = 1 " 2 - write all buffers before going from Vim to Tmux
+" nnoremap <silent> {Left-Mapping} :TmuxNavigateLeft<cr>
+" nnoremap <silent> {Down-Mapping} :TmuxNavigateDown<cr>
+" nnoremap <silent> {Up-Mapping} :TmuxNavigateUp<cr>
+" nnoremap <silent> {Right-Mapping} :TmuxNavigateRight<cr>
+" nnoremap <silent> {Previous-Mapping} :TmuxNavigatePrevious<cr>
+
 " tab/buffer binding
 nnoremap <leader><BS> :ls<CR> " TODO: broken
 nnoremap <leader>n :tabnew<CR>
@@ -603,14 +614,6 @@ autocmd FileType css noremap <buffer> <leader>tb :call CSSBeautify()<cr>
 " autocmd StdinReadPre * let s:std_in=1
 " autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
 
-" TODO: figure out if this is needed since Tmux already utilizes the plugin
-" Vim-Tmux-Navigator custom key bindings
-" let g:tmux_navigator_no_mappings = 1
-" nnoremap <silent> {Left-mapping} :TmuxNavigateLeft<cr>
-" nnoremap <silent> {Down-Mapping} :TmuxNavigateDown<cr>
-" nnoremap <silent> {Up-Mapping} :TmuxNavigateUp<cr>
-" nnoremap <silent> {Right-Mapping} :TmuxNavigateRight<cr>
-" nnoremap <silent> {Previous-Mapping} :TmuxNavigatePrevious<cr>
 
 " TODO: broken...
 " highlight the current line when you do a search, and remove the highlight when the cursor moves.
