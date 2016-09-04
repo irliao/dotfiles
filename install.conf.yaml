@@ -6,7 +6,6 @@
 
 - link:
     ~/.dotfiles: ''
-    ~/.atom: config/atom
     ~/.bin: bin
     ~/.cheat: config/cheat
     ~/.config: config
