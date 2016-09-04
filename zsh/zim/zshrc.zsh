@@ -12,14 +12,14 @@ DEFAULT_USER="irliao" # replaces user@hostname with specified username
 LANG=en_US.utf8
 
 # Environment variables
-typeset -U PATH # remove duplicate entries in Path
-PATH="/usr/local/bin:${HOME}/.bin:/usr/local/sbin:/usr/bin:/bin:/usr/sbin:/sbin"
 typeset -U fpath
 typeset -U path
 path=(
  /usr/local/{bin,sbin}
   $path
 )
+typeset -U PATH # remove duplicate entries in Path
+PATH="/usr/local/bin:${HOME}/.bin:/usr/local/sbin:/usr/bin:/bin:/usr/sbin:/sbin"
 
 export LESS_TERMCAP_mb=$'\E[01;31m'
 export LESS_TERMCAP_md=$'\E[01;31m'
@@ -40,6 +40,11 @@ export HISTIGNORE="&:ls:ll:la:l.:pwd:exit:clear:clr:[bf]g"
 fpath=("/usr/local/bin/" $fpath)
 export HOMEBREW_CASK_OPTS="--appdir=/Applications --caskroom=/opt/homebrew-cask/Caskroom" # install path
 export HOMEBREW_NO_ANALYTICS=1 # opt-out of analytics
+
+# Node
+# export NVM_DIR="$HOME/.nvm"
+# . "$(brew --prefix nvm)/nvm.sh"
+# export PATH=~/.npm-global/bin:$PATH
 
 # The Fuck
 eval "$(thefuck --alias)"

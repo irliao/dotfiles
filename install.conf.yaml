@@ -6,6 +6,7 @@
 
 - link:
     ~/.dotfiles: ''
+    ~/.atom: config/atom
     ~/.bin: bin
     ~/.cheat: config/cheat
     ~/.config: config
@@ -14,7 +15,6 @@
     ~/.gitignore_global: git/gitignore_global
     ~/.hammerspoon: hammerspoon
     ~/.karabiner: karabiner
-    ~/.npmrc: config/node/npmrc
     ~/.tmux: tmux
     ~/.tmux.conf: tmux/tmux.conf
     ~/.vim: vim
