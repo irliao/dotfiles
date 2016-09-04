@@ -6,6 +6,12 @@
 
 - link:
     ~/.dotfiles: ''
+    ~/.atom/config.cson: config/atom/config.cson
+    ~/.atom/init.coffee: config/atom/init.coffee
+    ~/.atom/keymap.cson: config/atom/keymap.cson
+    ~/.atom/packages.list: config/atom/packages.list
+    ~/.atom/snippets.cson: config/atom/snippets.cson
+    ~/.atom/styles.less: config/atom/styles.less
     ~/.bin: bin
     ~/.cheat: config/cheat
     ~/.config: config
