@@ -9,7 +9,7 @@ fi
 
 # skip_global_compinit=1 # faster Zsh startup
 DEFAULT_USER="irliao" # replaces user@hostname with specified username
-LANG=en_US.utf8
+# LANG=en_US.utf8
 
 # Environment variables
 typeset -U fpath
@@ -21,17 +21,17 @@ path=(
 typeset -U PATH # remove duplicate entries in Path
 PATH="/usr/local/bin:${HOME}/.bin:/usr/local/sbin:/usr/bin:/bin:/usr/sbin:/sbin"
 
-export LESS_TERMCAP_mb=$'\E[01;31m'
-export LESS_TERMCAP_md=$'\E[01;31m'
-export LESS_TERMCAP_me=$'\E[0m'
-export LESS_TERMCAP_se=$'\E[0m'
-export LESS_TERMCAP_so=$'\E[01;44;33m'
-export LESS_TERMCAP_ue=$'\E[0m'
-export LESS_TERMCAP_us=$'\E[01;32m'
+# export LESS_TERMCAP_mb=$'\E[01;31m'
+# export LESS_TERMCAP_md=$'\E[01;31m'
+# export LESS_TERMCAP_me=$'\E[0m'
+# export LESS_TERMCAP_se=$'\E[0m'
+# export LESS_TERMCAP_so=$'\E[01;44;33m'
+# export LESS_TERMCAP_ue=$'\E[0m'
+# export LESS_TERMCAP_us=$'\E[01;32m'
 export VISUAL='vim'
 export EDITOR='vim'
-export LESS="-R"
-export PAGER='less'
+# export LESS="-R"
+# export PAGER='less'
 export DEVPATH="${HOME}/Developments"
 export HISTCONTROL=erasedups  # Ignore duplicate entries in history
 export HISTIGNORE="&:ls:ll:la:l.:pwd:exit:clear:clr:[bf]g"
@@ -57,7 +57,7 @@ setopt MENU_COMPLETE
 [[ -f "${HOME}/.local_profile" ]] && source "${HOME}/.local_profile"
 
 # Bash profile
-# [[ -f "${HOME}/.bash_profile" ]] && source "${HOME}/.bash_profile"
+[[ -f "${HOME}/.bash_profile" ]] && source "${HOME}/.bash_profile"
 
 # Custom functions
 [[ -f "${HOME}/.zfunction" ]] && source "${HOME}/.zfunction"

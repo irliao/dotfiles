@@ -45,7 +45,7 @@ function resizeLeftRightFull()
     f.y = max.y
     f.w = max.w / 2
     f.h = max.h
-    hs.window.highlight.start()
+    -- hs.window.highlight.start()
   else
     -- left -> right
     if f.x == max.x and f.y == max.y then
@@ -59,7 +59,7 @@ function resizeLeftRightFull()
       f.y = max.y
       f.w = max.w
       f.h = max.h
-      hs.window.highlight.stop()
+      -- hs.window.highlight.stop()
     -- other -> left
     else
       f.x = max.x
