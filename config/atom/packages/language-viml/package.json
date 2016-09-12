@@ -1,0 +1,69 @@
+{
+  "_args": [
+    [
+      {
+        "raw": "/private/var/folders/tc/6vqd13rn76j90b1b3wbgw6wn9hvfxm/T/d-116812-67771-uk35wy/package.tgz",
+        "scope": null,
+        "escapedName": null,
+        "name": null,
+        "rawSpec": "/private/var/folders/tc/6vqd13rn76j90b1b3wbgw6wn9hvfxm/T/d-116812-67771-uk35wy/package.tgz",
+        "spec": "/private/var/folders/tc/6vqd13rn76j90b1b3wbgw6wn9hvfxm/T/d-116812-67771-uk35wy/package.tgz",
+        "type": "local"
+      },
+      "/private/var/folders/tc/6vqd13rn76j90b1b3wbgw6wn9hvfxm/T/apm-install-dir-116812-67771-18agf4z"
+    ]
+  ],
+  "_from": "../d-116812-67771-uk35wy/package.tgz",
+  "_id": "language-viml@1.0.0",
+  "_inCache": true,
+  "_installable": true,
+  "_location": "/language-viml",
+  "_phantomChildren": {},
+  "_requested": {
+    "raw": "/private/var/folders/tc/6vqd13rn76j90b1b3wbgw6wn9hvfxm/T/d-116812-67771-uk35wy/package.tgz",
+    "scope": null,
+    "escapedName": null,
+    "name": null,
+    "rawSpec": "/private/var/folders/tc/6vqd13rn76j90b1b3wbgw6wn9hvfxm/T/d-116812-67771-uk35wy/package.tgz",
+    "spec": "/private/var/folders/tc/6vqd13rn76j90b1b3wbgw6wn9hvfxm/T/d-116812-67771-uk35wy/package.tgz",
+    "type": "local"
+  },
+  "_requiredBy": [
+    "#USER"
+  ],
+  "_resolved": "file:../d-116812-67771-uk35wy/package.tgz",
+  "_shasum": "6fbf7d431680abbc1c7504925cbc4bb963cd5d8f",
+  "_shrinkwrap": null,
+  "_spec": "/private/var/folders/tc/6vqd13rn76j90b1b3wbgw6wn9hvfxm/T/d-116812-67771-uk35wy/package.tgz",
+  "_where": "/private/var/folders/tc/6vqd13rn76j90b1b3wbgw6wn9hvfxm/T/apm-install-dir-116812-67771-18agf4z",
+  "author": {
+    "name": "Evan Hahn"
+  },
+  "bugs": {
+    "url": "https://github.com/Alhadis/language-viml/issues"
+  },
+  "dependencies": {},
+  "description": "Vim Script language support for Atom",
+  "devDependencies": {},
+  "engines": {
+    "atom": ">0.50.0"
+  },
+  "homepage": "https://github.com/Alhadis/language-viml#readme",
+  "license": "MIT",
+  "maintainers": [
+    {
+      "name": "John Gardner",
+      "email": "<gardnerjohng@gmail.com",
+      "url": "https://github.com/Alhadis"
+    }
+  ],
+  "name": "language-viml",
+  "optionalDependencies": {},
+  "readme": "# VimL highlighting for Atom\n\n[Ported](http://atom.io/docs/v0.60.0/converting-a-text-mate-bundle) from a [VimL highlighting bundle for TextMate](https://github.com/skammer/textmate-viml).\n",
+  "readmeFilename": "README.md",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Alhadis/language-viml.git"
+  },
+  "version": "1.0.0"
+}
