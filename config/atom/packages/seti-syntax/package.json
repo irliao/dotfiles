@@ -1,0 +1,85 @@
+{
+  "_args": [
+    [
+      {
+        "raw": "/private/var/folders/tc/6vqd13rn76j90b1b3wbgw6wn9hvfxm/T/d-116812-67771-aix1fm/package.tgz",
+        "scope": null,
+        "escapedName": null,
+        "name": null,
+        "rawSpec": "/private/var/folders/tc/6vqd13rn76j90b1b3wbgw6wn9hvfxm/T/d-116812-67771-aix1fm/package.tgz",
+        "spec": "/private/var/folders/tc/6vqd13rn76j90b1b3wbgw6wn9hvfxm/T/d-116812-67771-aix1fm/package.tgz",
+        "type": "local"
+      },
+      "/private/var/folders/tc/6vqd13rn76j90b1b3wbgw6wn9hvfxm/T/apm-install-dir-116812-67771-1ou6cng"
+    ]
+  ],
+  "_from": "../d-116812-67771-aix1fm/package.tgz",
+  "_id": "seti-syntax@1.0.1",
+  "_inCache": true,
+  "_installable": true,
+  "_location": "/seti-syntax",
+  "_phantomChildren": {},
+  "_requested": {
+    "raw": "/private/var/folders/tc/6vqd13rn76j90b1b3wbgw6wn9hvfxm/T/d-116812-67771-aix1fm/package.tgz",
+    "scope": null,
+    "escapedName": null,
+    "name": null,
+    "rawSpec": "/private/var/folders/tc/6vqd13rn76j90b1b3wbgw6wn9hvfxm/T/d-116812-67771-aix1fm/package.tgz",
+    "spec": "/private/var/folders/tc/6vqd13rn76j90b1b3wbgw6wn9hvfxm/T/d-116812-67771-aix1fm/package.tgz",
+    "type": "local"
+  },
+  "_requiredBy": [
+    "#USER"
+  ],
+  "_resolved": "file:../d-116812-67771-aix1fm/package.tgz",
+  "_shasum": "eafb88461e75337a35d851931fe38e2d272f6afa",
+  "_shrinkwrap": null,
+  "_spec": "/private/var/folders/tc/6vqd13rn76j90b1b3wbgw6wn9hvfxm/T/d-116812-67771-aix1fm/package.tgz",
+  "_where": "/private/var/folders/tc/6vqd13rn76j90b1b3wbgw6wn9hvfxm/T/apm-install-dir-116812-67771-1ou6cng",
+  "bugs": {
+    "url": "https://github.com/jesseweed/seti-syntax/issues"
+  },
+  "configSchema": {
+    "dynamicColor": {
+      "title": "Dynamic Theme",
+      "description": "Enable this to set syntax color dynamically based on seti ui theme.",
+      "type": "boolean",
+      "default": true
+    },
+    "themeColor": {
+      "title": "Theme Color",
+      "description": "Set your default syntax color (this will be ignored if dynamic theme is enabled above).",
+      "type": "string",
+      "enum": [
+        "Blue",
+        "Green",
+        "Orange",
+        "Pink",
+        "Purple",
+        "Red",
+        "Steel",
+        "Yellow"
+      ],
+      "default": "Blue"
+    }
+  },
+  "dependencies": {},
+  "description": "Seti Syntax - A subtle dark colored theme for Atom.",
+  "devDependencies": {},
+  "engines": {
+    "atom": ">1.6"
+  },
+  "homepage": "https://github.com/jesseweed/seti-syntax#readme",
+  "license": "MIT",
+  "main": "./lib/main",
+  "name": "seti-syntax",
+  "optionalDependencies": {},
+  "readme": "# Seti Syntax\n\n\n[![Gitter](https://img.shields.io/gitter/room/nwjs/nw.js.svg?style=flat-square)](https://gitter.im/jesseweed/seti-syntax) [![apm](https://img.shields.io/apm/dm/vim-mode.svg?style=flat-square)](https://atom.io/themes/seti-syntax) [![apm](https://img.shields.io/apm/v/vim-mode.svg?style=flat-square)](https://atom.io/themes/seti-syntax) [![apm](https://img.shields.io/apm/l/vim-mode.svg?style=flat-square)](https://atom.io/themes/seti-syntax) [![Gratipay Team](https://img.shields.io/gratipay/team/atom-seti-ui.svg?style=flat-square)](https://gratipay.com/Atom-Seti-UI/)\n\n\nThis is the latest version of the Seti Syntax theme. It's a dark syntax theme crafted especially for [Atom](http://atom.io), with subtle colors that are meant to be easy on the eyes. It is mean to be paired with [Seti UI](https://atom.io/themes/seti-ui) (though this is hardly a requirement).\n\n\n-----\n\n##### **Please Note:** This is the Seti syntax theme for [Atom](http://atom.io) only\n\nThis is for the _syntax_ (i.e. code view) of the Atom editor. I also have [Seti UI](https://atom.io/themes/seti-ui) for theming the _interface_ in Atom.\n\nIf you're not in the market for an Atom theme, you can have a look at one of these great ports for other platforms:\n\n+ [Emacs](https://github.com/caisah/seti-theme)\n+ [iTerm](https://github.com/willmanduffy/seti-iterm)\n+ [JetBrains](https://github.com/zchee/Seti_JetBrains)\n+ [Sublime Text 3](https://packagecontrol.io/packages/Seti_UI)\n+ [Vim](https://github.com/trusktr/seti.vim)\n\n-----\n\n## What's New? 1.0 Update\nSeti has reached 1.0, and it now integrates more tightly with Seti UI. There is also a new settings interface that allows you to select a base color theme.\n\n![Screenshot](https://github.com/jesseweed/seti-syntax/raw/1.0-beta/screenshot.png)\n\n-----\n\n## Settings\n_To get here, Go to \"Atom > Preferences\" Select \"Themes\"  and click the settings icon next to \"Seti\" under Syntax Theme dropdown_\n\n![Screenshot](https://github.com/jesseweed/seti-syntax/raw/1.0-beta/screenshot-settings.png)\n\nYou can choose to have the syntax theme automatically adjust to match your selected theme in Seti UI (default), or select one of the built in themes.\n\n_Please note this is some-what of a beta feature. The default blue theme has been pretty well tested, but the other colors are still being tweaked. Keep an eye out for updates, and please file a bug if you notice anything weird._\n\n![Screenshot](https://github.com/jesseweed/seti-syntax/raw/1.0-beta/screenshot-colors.png)\n\n-----\n\n### Custom Icons\n[ ![Screenshot](https://github.com/jesseweed/seti-syntax/raw/1.0-beta/_icons/circular/circular-128x128.png) ](_icons/circular/)\n[ ![Screenshot](https://github.com/jesseweed/seti-syntax/raw/1.0-beta/_icons/rounded/rounded-128x128.png) ](_icons/rounded/)\n[ ![Screenshot](https://github.com/jesseweed/seti-syntax/raw/1.0-beta/_icons/squared/squared-128x128.png) ](_icons/squared/)\n",
+  "readmeFilename": "README.md",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jesseweed/seti-syntax.git"
+  },
+  "theme": "syntax",
+  "version": "1.0.1"
+}

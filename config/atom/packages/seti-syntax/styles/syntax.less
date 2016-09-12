@@ -1,0 +1,446 @@
+@import "colors";
+
+
+atom-text-editor[mini], :host(.mini) {
+ .scroll-view {
+    padding-left: 1px;
+  }
+}
+
+// MISC
+.text {
+  color: @code-font-color;
+}
+
+&.complete_tag {
+  color: @variable;
+}
+
+
+// COMENTS
+.comment {
+  color: @comment;
+  background: @comment-bg;
+}
+
+
+// CONSTANTS
+.constant {
+
+  // true, false, null, undefined
+  color: @constant;
+
+  // \ of ("what\'s")
+  &.character.escape {
+    color: @constant;
+  }
+
+  &.name.attribute.tag {
+    color: @constant-name-attribute-tag;
+  }
+
+  // all the numbers!
+  &.numeric {
+    color: @numeric;
+  }
+
+  // can't tell what this does :/
+  &.other.color {
+    color: @constant;
+  }
+
+  // can't tell what this does :/
+  &.other.symbol {
+    color: @constant;
+  }
+}
+
+
+// ENTITY | exports of module.exports, <div id= of <div id="#id">, . of .className
+.entity {
+
+  color: @entity;
+
+
+  &.name {
+
+    &.class, &.type.class {
+      color: @support;
+    }
+    &.function {
+      color: @entity-name-function;
+    }
+    &.section {
+      color: @entity;
+    }
+    &.tag {
+      color: @entity-name-tag;
+      text-decoration: none;
+      &.block, &.inline, &.name {
+        color: @entity-name-tag;
+      }
+      &.structure {
+        color: @tag;
+      }
+      &.block {
+        color: @tag;
+      }
+    }
+    &.type {
+      color: @entity-name-type;
+      text-decoration: none;
+      &.tag {
+        color: @class;
+      }
+    }
+  }
+
+
+  &.other {
+    &.attribute-name, {
+      color: @entity-other-attribute-name;
+      &.id {
+        color: @entity-other-id;
+      }
+    }
+    &.inherited-class {
+      color: @entity;
+    }
+  }
+}
+
+
+// INVALID TEXT
+.invalid.illegal, .invalid.deprecated {
+  background: none;
+  color: @error;
+}
+
+
+// KEYWORDS
+.keyword {
+
+  color: @keyword;
+
+  &.control {
+    color: @keyword-control;
+  }
+
+  &.operator {
+    color: @keyword-operator;
+    &.assignment {
+      color: @keyword-operator-assignment;
+    }
+    &.new {
+      color: @keyword-operator-new;
+    }
+  }
+
+  &.other {
+    &.important {
+      color: @keyword-other-important;
+    }
+    &.special-method {
+      color: @keyword;
+    }
+    &.unit {
+      color: @keyword;
+    }
+  }
+
+}
+
+
+// MARKUP
+.markup {
+  &.bold {
+    color: @markup;
+    font-weight: bold;
+  }
+
+  &.changed {
+    color: @markup;
+  }
+
+  &.deleted {
+    color: @markup;
+  }
+
+  &.heading .punctuation.definition.heading {
+    color: @markup;
+  }
+
+  &.inserted {
+    color: @markup;
+  }
+
+  &.italic {
+    color: @markup;
+    font-style: italic;
+  }
+
+  &.list {
+    color: @markup;
+  }
+
+  &.quote {
+    color: @quotes;
+  }
+
+  &.raw.inline {
+    color: @markup;
+  }
+}
+
+
+// META
+.meta {
+
+  &.link {
+    color: @meta;
+  }
+
+  &.require {
+    color: @meta;
+  }
+
+
+  &.brace {
+    &.curly { color: @brackets; }
+    &.round { color: @code-font-color;}
+  }
+
+  &.control {
+    &.flow {
+      color: @meta-control-flow;
+    }
+  }
+
+  &.comma {
+    color: @punctuation;
+  }
+
+  &.selector {
+    color: @punctuation;
+  }
+
+  &.separator {
+    background-color: @punctuation;
+    color: @punctuation;
+  }
+
+  &.tag {
+    color: @tag;
+  }
+}
+
+// NONE
+.none {
+  color: @code-font-color;
+}
+
+
+// PUNCTUATION
+.punctuation {
+  color: @punctuation;
+
+  &.terminator {
+    color: @punctuation;
+  }
+
+  &.separator {
+    color: @punctuation-separator;
+  }
+
+  &.definition {
+
+    color: @punctuation;
+
+    &.array {
+      color: @punctuation-definition-array;
+    }
+
+    &.bold {
+      color: @code-font-color;
+      font-weight: bold;
+    }
+
+    &.comment {
+      color: @comment-punc;
+    }
+
+    &.heading,
+    &.identity,
+    &.italic {
+      color: @code-font-color;
+    }
+
+    &.italic {
+      font-style: italic;
+    }
+
+    &.string {
+      color: @punctuation-definition-string;
+      &.begin, &.end {
+        color: @quotes;
+      }
+    }
+
+    &.variable {
+      color: @punctuation-definition-variable;
+    }
+
+    &.parameters {
+      color: @code-font-color;
+    }
+
+    &.tag {
+      color: @tag;
+    }
+  }
+
+  &.section.embedded {
+    color: @code-font-color;
+  }
+
+}
+
+
+
+// STRINGS
+.string {
+  color: @string;
+
+  .constant {
+    color: @constant;
+  }
+
+  &.interpolated {
+    color: @variable;
+  }
+
+  &.regexp {
+
+    // ?:input, select, textarea, button of  /^(?:input|select|textarea|button)$/i,
+    color: @regex;
+
+    .constant.character.escape,
+    .source.ruby.embedded,
+    .string.regexp.arbitrary-repitition {
+      color: @regex;
+    }
+
+    &.group {
+      color: @regex;
+    }
+
+    &.character-class {
+      color: @regex;
+    }
+
+    .source.ruby.embedded {
+      color: @regex;
+    }
+
+  }
+
+  &.quoted {
+    &.double { color: @string-quoted-double; }
+    &.single { color: @string-quoted-single; }
+  }
+
+  .variable {
+    color: @variable;
+  }
+
+  // can't tell what this does :/
+  &.other.link {
+    color: @string;
+  }
+}
+
+
+.source {
+  color: @color1;
+}
+
+// STORAGE
+.storage {
+  color: @storage;
+
+  &.modifier {
+    color: @storage;
+  }
+
+  &.type {
+    &.class {
+      color: @storage-class;
+    }
+    &.function {
+      color: @storage-function;
+    }
+    &.var {
+      color: @storage-var;
+    }
+  }
+
+}
+
+
+// SUPPORT
+.support {
+
+  color: @support;
+
+  &.class {
+    color: @support;
+  }
+
+  &.function  {
+    color: @function;
+    &.decl {
+      color: @support-function-decl;
+    }
+  }
+
+  &.constant {
+    color: @constant;
+  }
+  &.type {
+    &.property-name {
+      color: @support-type-property-name;
+    }
+  }
+}
+
+// VARIABLES
+.variable {
+  color: @variable;
+
+  &.control.import.include {
+    color: @variable-import;
+  }
+
+  &.other {
+    color: @variable-other;
+
+    &.property {
+      color: @variable-other-property;
+    }
+    &.module {
+      color: @variable-other-module;
+    }
+    &.module-alias {
+      color: @variable-other-module-alias;
+    }
+    &.object {
+      color: @variable-other-object;
+    }
+  }
+
+  &.parameter {
+    &.function {
+      color: @obj-method;
+    }
+  }
+}
