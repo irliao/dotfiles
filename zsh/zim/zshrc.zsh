@@ -74,22 +74,31 @@ if [[ ($TERM_PROGRAM == "Apple_Terminal") ]]; then # Apple Terminal
     rm "${HOME}/.iterm2_shell_integration.zsh" && echo "removed ~/.iterm2_shell_integration.zsh";
   fi
 
-  # Key bindings
-  # stty -ixon # gives access to ^Q
-  # bindkey "^Q" push-line-or-edit
-  bindkey -v # use vim keys
+  # TODO: bind keys to delete words faster, maybe bind to Option keys (requires research)
+  # Key bindings, available widgets listed on http://zsh.sourceforge.net/Doc/Release/Zsh-Line-Editor.html#Standard-Widgets
+  # NOTE: ^L binded in Tmux to clear screen
+  bindkey -v # -v for vim, -e for emacs key bindings
   bindkey "^A" beginning-of-line
   bindkey "^B" backward-word
   bindkey "^W" forward-word
   bindkey "^E" end-of-line
   bindkey "^C" kill-line
-  bindkey "^Z" history-search-backward
-  bindkey "^X" history-search-forward
   bindkey "^V" vi-cmd-mode
-  # bindkey "^R" history-incremental-search-backward
-  bindkey "^Y" accept-and-hold
-  bindkey "^N" insert-last-word
-  bindkey -s "^R" "^[Isudo ^[A" # prepend sudo
+  # bindkey "^Y" accept-and-hold # TODO: figure out what this does
+  # TODO: bind ^X to yank last output
+  bindkey "^Z" insert-last-word # insert word from last Entered command
+  bindkey -s "^R" "^[Isudo ^[A" # prepend sudo, ^R for root
+  # TODO: figure out difference between 'history-search-backward' vs 'up-line-or-search'
+  # TODO: figure out difference between 'history-search-forward' vs 'down-line-or-search'
+  # bindkey "^H" history-incremental-search-backward # TODO: figure out how to use this
+  bindkey "^O" down-line-or-search
+  bindkey "^P" up-line-or-search
+  # stty -ixon # gives access to ^Q
+  # bindkey "^Q" push-line-or-edit
+
+  # TODO: replace none with actual widget used to disable Up/Down key
+  bindkey "^[[A" none # ^[[A is Up arrow key
+  bindkey "^[[B" none # ^[[B is Down arrow key
 
   # Display Vi-mode in prompt
   function zle-line-init zle-keymap-select {
@@ -102,7 +111,7 @@ if [[ ($TERM_PROGRAM == "Apple_Terminal") ]]; then # Apple Terminal
   export KEYTIMEOUT=1 # 0.4 to 0.1 sec delay in Vim mode display change, raise value if other commands getting issues
 
   [[ -f "${HOME}/.ztmux" ]] && source "${HOME}/.ztmux"
-else # iTerm2
+elif [[ ($TERM_PROGRAM == "Apple_Terminal") ]]; then # iTerm2
   # iTerm2 shell integration with Unix shell
   if [[ ! -h "${HOME}/.iterm2_shell_integration.zsh" ]]; then # check if file is Symlink
     # Custom shell loading for iTerm
@@ -120,6 +129,10 @@ else # iTerm2
 
   # use iterm2_shell_integration.`basename $SHELL` when dealing with multiple shells
   test -e ${HOME}/.iterm2_shell_integration.zsh && source ${HOME}/.iterm2_shell_integration.zsh
+else # Other
+  if [[ -h "${HOME}/.iterm2_shell_integration.zsh" ]]; then
+    rm "${HOME}/.iterm2_shell_integration.zsh" && echo "removed ~/.iterm2_shell_integration.zsh";
+  fi
 fi
 
 # Clears the "Last login" message at startup

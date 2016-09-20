@@ -46,16 +46,6 @@ function selectBrowserByMachineName()
   return browser
 end
 
--- Alerts utility hotkeys
-function reportUtils()
-    hs.alert.closeAll()
-    hs.alert('Super + 1 to Copy Finder Path')
-    hs.alert('Super + 2 to Highlight Mouse')
-    hs.alert('Super + 3 to Eject MicroSD')
-    hs.alert('Super + 4 to Copy Safari URL')
-    hs.alert('Super + 5 to Toggle Termianl Full Screen')
-end
-
 -- Eject EVO64 MicroSD
 function ejectMicroSD()
     local volumes = hs.fs.volume.allVolumes(true) -- key = paths of disk volumes

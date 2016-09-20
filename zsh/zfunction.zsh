@@ -27,7 +27,7 @@ swd() { echo "$(pwd | sed -e "s,^$HOME,~,")" }
 # Make and go to directory
 md() { [[ -n ${1} ]] && mkdir -p ${1} && builtin cd ${1}; }
 
-e() {
+te() {
     tmux split-window -h -c "#{pane_current_path}" "vim $@"
 }
 
