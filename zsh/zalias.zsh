@@ -84,7 +84,8 @@ alias gm="git standup" # m for morning (standup usually in morning)
 alias gp="git pull"
 alias gr="git remote"
 alias gs="git status"
-alias gpu="git pull upstream master"
+alias gpum="git pull upstream master"
+alias gdum="git diff upstream master"
 alias glp="git log --oneline --abbrev-commit --all --graph --decorate --color"
 alias grs="git reflog show" # show branch activities
 
