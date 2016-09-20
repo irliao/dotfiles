@@ -3,6 +3,9 @@
     scheme: "Seti"
   core:
     audioBeep: false
+    disabledPackages: [
+      "vim-mode"
+    ]
     openEmptyEditorOnStart: false
     projectHome: "/Users/irliao/Developments"
     themes: [

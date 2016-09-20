@@ -2,10 +2,6 @@
 
 irliao's dotfiles
 
-## TODO:
-* fix shift-Tab issue (somehow fixed by sourcing ~/.zshrc)
-* fix vim-tab not auto-completing (somehow fixed by removing ~/.zcompdump && compinit)
-
 ## Installation
 
 Clone the repo
@@ -23,141 +19,81 @@ Go in the repo and update dotbot
 ```
 cd ~/.dotfiles && git submodule update --remote ./dotbot
 ```
-Run script (init.sh) to setup git submodules
+Run script to help setup git submodules
 
 ```
-./init.sh
+source script/init.sh
 ```
-Run dotbot's install script
-
-```
-./install.sh
-```
-
-## Update
-
 Update Git Submodules
 
 ```
 git submodule foreach git pull origin master
 ```
+Run dotbot's install script
 
-## Zsh Setup
+```
+source install.sh
+```
 
-Remember to provide 'mingit' as a symlinked function to Zim
+
+## Setup
+
+Zsh (remember to provide 'mingit' as a symlinked function to Zim)
 ```
 ln -s ~/.dotfiles/zsh/prompts/mingit.zsh ~/.zim/modules/prompt/functions/prompt_mingit_setup
 ```
-
-
-## OSX Setup
 
 Quick Look Plugins
 ```
 brew cask install qlcolorcode qlstephen qlmarkdown quicklook-json qlprettypatch quicklook-csv betterzipql qlimagesize webpquicklook suspicious-package
 ```
 
-
-## Homebrew Setup
-
-Paste at Terminal
+Homebrew
 ```
 /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
-```
-
-Opt out of Analytics by setting this environment variable
-```
-export HOMEBREW_NO_ANALYTICS=1
-```
-
-Prevent Analytics from being sent
-```
-git config --file="$(brew --repository)/.git/config" --replace-all homebrew.analyticsdisabled true
-```
-
-
-## Tmux Setup
-
-Install Tmux using Brew
-```
-brew install tmux
-```
-
-## Vim Setup
-
-Install xCode from App Store
-
-Install MacVim using Brew
-```
-brew install macvim
-```
-
-Symlink mvim binary to be vim in /usr/local/bin
-```
-ln -s /usr/local/bin/mvim /usr/local/bin/vim
-```
-
-Install YouCompleteMe for C and JavaScript family
-```
-cd ~/.vim/bundle/YouCompleteMe && ./install.py --clang-completer --tern-completer
-```
-
-## MacDown Setup
-
-Install MacDown using Brew Cask
-```
-brew cask install macdown
-```
-
-Symlink macdown binary to /usr/local/bin
-```
-ln -s /Applications/MacDown.app/Contents/SharedSupport/bin/macdown /usr/local/bin
-```
-
-Import MacDown themes
-```
-TODO
-```
-
-## Spacemacs Setup
-
-Install Spacemacs using Brew
-```
-brew tap d12frosted/emacs-plus
-brew install emacs-plus --with-cocoa --with-gnutls --with-librsvg --with-imagemagick --with-spacemacs-icon
-brew linkapps
-```
-
-Add Spacemacs to Emacs configuration
-```
-git clone https://github.com/syl20bnr/spacemacs ~/.emacs.d
-```
-
-## Updating
-
-Dotbot (submodule)
-```
-git submodule update --remote dotbot
+optional, prevent Homebrew analytics from being sent: git config --file="$(brew --repository)/.git/config" --replace-all homebrew.analyticsdisabled true
 ```
 
 Gem
 ```
-sudo gem update -n /usr/local/bin
+optional, update locally installed Gems: sudo gem update -n /usr/local/bin
+```
+
+Tmux
+```
+brew install tmux
+```
+
+Vim
+```
+brew install vim
+ln -s /usr/local/bin/mvim /usr/local/bin/vim
+cd ~/.vim/bundle/YouCompleteMe && ./install.py --clang-completer --tern-completer
+```
+
+Spacemacs
+```
+brew tap d12frosted/emacs-plus
+brew install emacs-plus --with-cocoa --with-gnutls --with-librsvg --with-imagemagick --with-spacemacs-icon
+brew linkapps
+optional, get default Spacemacs configs: git clone https://github.com/syl20bnr/spacemacs ~/.emacs.d
 ```
 
 
-## Frameworks
+## Frameworks and Package Managers
 * [dotbot](https://github.com/anishathalye/dotbot)
 * [zim](https://github.com/Eriner/zim)
 * [vim-plug](https://github.com/junegunn/vim-plug)
 * [tpm](https://github.com/tmux-plugins/tpm)
 
-## Packages
-* Homebrew
-* Node.js (npm, nvm)
-* Python (pip)
-* Gem
+
+## TODO:
+* hook Zim framework as submodule and maybe rename submodules/ to submodule/ or lib/
+* refactor files in script/ to be in bin/
+* decide whether to have master .gitignore at project root or individual .gitignore at various folders
+* fix shift-Tab issue in iTerm2 (somehow fixed by sourcing ~/.zshrc)
+* fix vim auto-complete in prompt sometimes not working (somehow fixed by removing ~/.zcompdump && compinit)
+
 
 ## Authors
 * [Ian Ryan Liao](https://github.com/irliao)
-

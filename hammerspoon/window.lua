@@ -1,5 +1,7 @@
 -- Window manipulation
 
+-- TODO: implement function to go FullScreen + join another FullScreen space (if exists) to create split FullScreen
+
 -- Check if window is maximized
 function isWindowMaximized(win)
   if not win or win:isFullScreen() then
@@ -115,7 +117,7 @@ function resizeTopBottomFull()
   centerMouse()
 end
 
-
+-- TODO: refactor functions below to an external file
 -- Resize currently focused window in X/Y fashion
 -- @param direction - horizontal or vertical
 -- @param amount - how much to grow/shrink (positive grows, negative shrinks)

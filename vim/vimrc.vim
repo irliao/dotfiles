@@ -264,7 +264,9 @@ if has("gui_running")
   colorscheme badwolf
   " let g:molokai_original = 1 " use original monokai background color
   " let g:rehash256 = 1 " attempts to bring the 256 color version as close as possible to the the default (dark) GUI version
-  set guifont=Source\ Code\ Pro\ for\ Powerline:h13
+  " set guifont=Source\ Code\ Pro\ for\ Powerline:h13
+  set guifont=Hack\ Regular:h13
+  " TODO: configure highlights like below, but replace cterm with gui, ex: ctermfg -> guifg
 else
   " colorscheme molokai
   " hi Normal ctermbg=none
@@ -281,7 +283,12 @@ else
 
   colorscheme seti
   " let g:hybrid_reduced_contrast = 1 " Remove this line if using the default palette.
-  hi Normal ctermbg=none
+  hi Normal ctermbg=none " ctermbg=none is needed to fix bad line background coloring
+  hi Visual ctermbg=Red ctermfg=Black cterm=none
+  hi Search ctermbg=Red ctermfg=Black cterm=none
+  " TODO: configure highlight for WildMenu
+  " TODO: configure highlight for MatchParen
+  " TODO: more customization at http://andrewradev.com/2011/08/06/making-vim-pretty-with-custom-colors/
 
   " colorscheme badwolf
   " let g:badwolf_darkgutter = 0
@@ -438,7 +445,7 @@ if &term =~ '^screen'
 endif
 " set timeoutlen=50 " WARN: DO NOT enable, enabling this will make <leader> maps unusable
 " set timeout timeoutlen=1000 ttimeoutlen=100 " TODO: verify this fixes slow O inserts
-" TIP: Use H (high), M (middle), or L (low) to jump to screen positions to shorten the distance
+" WARN: Use H (high), M (middle), or L (low) to jump to screen positions to shorten the distance
 
 " Airline tabline numbering
 let g:airline#extensions#tabline#buffer_idx_mode = 1
@@ -464,21 +471,27 @@ noremap <Right> <NOP>
 " map <Enter> o<Esc>
 " map <S-Enter> O<Esc>
 
+" TODO: map <Space> to something else
+" nnoremap <silent> <Space> :nohlsearch<Bar>:echo<CR>
+
+" ; -> :. less shift
+" nnoremap ; :
+" make :W save too
+" command! W write " TODO: figure out what this does
+
 " Visual/Select mode binding
 vmap / gc " comment out visually selected lines
+" TODO: refactor '<leader>/' to toggle instead of unhighlight search results
+nnoremap <leader>/ :nohlsearch<Bar>:echo<CR> " unhighlight search results
 nnoremap <leader>R :nohlsearch<cr>:diffupdate<cr>:syntax sync fromstart<cr><c-l> " redraw screen
 
 " move vertically by visual line
 nnoremap j gj
 nnoremap k gk
 
-" highlight last inserted text
+" highlight last inserted (or all text if none) text
+" mapped to 'gV' because 'gv' highlights last visual selection
 nnoremap gV `[v`]
-
-" ; -> :. less shift
-" nnoremap ; :
-" make :W save too
-command! W write
 
 "map kj sequence to escape
 inoremap kj <ESC>
@@ -487,32 +500,41 @@ inoremap kj <ESC>
 noremap <C-J> gj
 noremap <C-K> gk
 
+" TODO: verify this actually fixes pasting issue from yanking trailing character
 " don't copy the contents of an overwritten selection.
 vnoremap p "_dP
 
-"map space to unhighlight search term
-nnoremap <silent> <Space> :nohlsearch<Bar>:echo<CR>
-
-" navigation binding
+" 1 to beginning of line, 0 to end of line in Normal mode
 map 0 ^
 map 1 $
+
+" Ctrl-A to beginning of line, Ctrl-E to end of line
 nnoremap <C-a> ^
 nnoremap <C-e> $
+
+" faster block jumping when pressing right/left Shift key overwritten by Karabiner
 nnoremap ) }
 nnoremap ( {
 
 " utility binding, WARN: some mappings CANNOT have trailing comments
 noremap U :redo<CR> " revert last undo
-nnoremap <leader>a <C-w><C-w><CR> " go to previous pane like Tmux
-nnoremap <leader><Tab> :tabn<CR> " go to next buffer/tab like Tmux
-nnoremap <leader>j <C-d> " scroll down:delmarks! half a page
-nnoremap <leader>k <C-u> " scroll up half a page
+nnoremap <leader>% :%y+<CR> " copy all texts in buffer to system clipboard
 nnoremap <leader>` :marks<CR>
 nnoremap <leader>" :registers<CR>
 nnoremap <leader>r :so $MYVIMRC<CR>
 
+" pane/window navigation binding
+nnoremap <leader>j <C-d> " scroll down:delmarks! half a page
+nnoremap <leader>k <C-u> " scroll up half a page
+nnoremap <leader>' <C-w><C-w><CR> " go to previous pane
+nnoremap <leader>a <C-w><C-w><CR> " go to previous pane like Tmux
+nnoremap <leader>\ :tabn<CR> " go to next buffer/tab
+nnoremap <leader><Tab> :tabn<CR> " go to next buffer/tab like Tmux
+nnoremap <leader>[ :tabp<CR> " go to next buffer/tab
+nnoremap <leader>] :tabn<CR> " go to next buffer/tab
+
 " Vim-Tmux-navigator keys to go from Vim to Tmux
-" NOTE: should match the bindings defined in tmux.conf
+" WARN: should match the bindings defined in tmux.conf
 " let g:tmux_navigator_no_mappings = 1 " 2 - write all buffers before going from Vim to Tmux
 " nnoremap <silent> {Left-Mapping} :TmuxNavigateLeft<cr>
 " nnoremap <silent> {Down-Mapping} :TmuxNavigateDown<cr>
