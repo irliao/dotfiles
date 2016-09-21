@@ -77,32 +77,34 @@ if [[ ($TERM_PROGRAM == "Apple_Terminal") ]]; then # Apple Terminal
   # TODO: bind keys to delete words faster, maybe bind to Option keys (requires research)
   # Key bindings, available widgets listed on http://zsh.sourceforge.net/Doc/Release/Zsh-Line-Editor.html#Standard-Widgets
   # NOTE: ^L binded in Tmux to clear screen
-  bindkey -v # -v for vim, -e for emacs key bindings
+  bindkey -v # press <ESC> to switch to NORMAL mode,
   bindkey "^A" beginning-of-line
   bindkey "^B" backward-word
   bindkey "^W" forward-word
   bindkey "^E" end-of-line
   bindkey "^C" kill-line
-  bindkey "^V" vi-cmd-mode
-  # bindkey "^Y" accept-and-hold # TODO: figure out what this does
-  # TODO: bind ^X to yank last output
+  bindkey "^X" backward-kill-word
+  bindkey "^Y" vi-yank-whole-line # yank entire line to killer
+  bindkey "^V" vi-put-after # paste last yanked text after cursor, TODO: press <DEL> right after vi-put-after
   bindkey "^Z" insert-last-word # insert word from last Entered command
-  bindkey -s "^R" "^[Isudo ^[A" # prepend sudo, ^R for root
-  # TODO: figure out difference between 'history-search-backward' vs 'up-line-or-search'
-  # TODO: figure out difference between 'history-search-forward' vs 'down-line-or-search'
-  # bindkey "^H" history-incremental-search-backward # TODO: figure out how to use this
+  bindkey "^H" beginning-of-history
   bindkey "^O" down-line-or-search
   bindkey "^P" up-line-or-search
-  # stty -ixon # gives access to ^Q
-  # bindkey "^Q" push-line-or-edit
+  bindkey "^U" undo
+  bindkey "^R" redo
+  stty -ixon # gives access to ^Q
+  bindkey -s "^Q" "^[Isudo ^[A" # Tab key, prepend sudo
 
-  # TODO: replace none with actual widget used to disable Up/Down key
-  bindkey "^[[A" none # ^[[A is Up arrow key
-  bindkey "^[[B" none # ^[[B is Down arrow key
+  # Disable (-r) Up/Down arrow keys to practice ^O/^P
+  bindkey -r "^[[A" # Up arrow key
+  bindkey -r "^[[B" # Down arrow key
+  bindkey -r "^[[C" # Right arrow key
+  bindkey -r "^[[D" # Left arrow key
+  # ^I is Tab key
 
   # Display Vi-mode in prompt
   function zle-line-init zle-keymap-select {
-      VIM_PROMPT="%{$fg_bold[yellow]%} [% Vim]% %{$reset_color%}"
+      VIM_PROMPT="%{$fg_bold[yellow]%} [% NORMAL]% %{$reset_color%}"
       RPS1="${${KEYMAP/vicmd/$VIM_PROMPT}/(main|viins)/}$EPS1"
       zle reset-prompt
   }

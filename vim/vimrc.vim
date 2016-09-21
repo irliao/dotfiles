@@ -94,6 +94,7 @@ Plug 'tpope/vim-surround' " change surrounding (ex: parentheses, brackets, quote
 Plug 'tpope/vim-repeat' " epeating supported plugin maps with '.'
 Plug 'sjl/gundo.vim' " visualize unndo tree
 Plug 'tmux-plugins/vim-tmux' " editor helper for .tmux.conf files
+Plug 'tmux-plugins/vim-tmux-focus-events' " improve autoread by automatically reading a file from disk if it was changed
 Plug 'terryma/vim-multiple-cursors'
 
 " visual
@@ -471,9 +472,6 @@ noremap <Right> <NOP>
 " map <Enter> o<Esc>
 " map <S-Enter> O<Esc>
 
-" TODO: map <Space> to something else
-" nnoremap <silent> <Space> :nohlsearch<Bar>:echo<CR>
-
 " ; -> :. less shift
 " nnoremap ; :
 " make :W save too
@@ -485,9 +483,22 @@ vmap / gc " comment out visually selected lines
 nnoremap <leader>/ :nohlsearch<Bar>:echo<CR> " unhighlight search results
 nnoremap <leader>R :nohlsearch<cr>:diffupdate<cr>:syntax sync fromstart<cr><c-l> " redraw screen
 
-" move vertically by visual line
+" scroll buffer vertically by visual line
 nnoremap j gj
 nnoremap k gk
+
+" move blocks of text in visual mode
+vnoremap < <gv
+vnoremap > >gv
+
+" Select all text
+map <Space>a ggVG
+" Indent everything
+noremap <Space>I ggvG=
+" Indent selection in visual mode
+vnoremap <Space>i =
+" Indent the current line
+noremap <Space>i v=
 
 " highlight last inserted (or all text if none) text
 " mapped to 'gV' because 'gv' highlights last visual selection
@@ -507,6 +518,18 @@ vnoremap p "_dP
 " 1 to beginning of line, 0 to end of line in Normal mode
 map 0 ^
 map 1 $
+
+" Normal mode only:
+" Copy until the end of the line
+nnoremap Y y$
+" Change current word - kill
+nnoremap X ciw
+" Change in double quotes
+nnoremap I ci"
+" Join lines
+nnoremap <Space>J J
+" Enter the command-line mode
+nnoremap <CR> :
 
 " Ctrl-A to beginning of line, Ctrl-E to end of line
 nnoremap <C-a> ^
@@ -533,15 +556,6 @@ nnoremap <leader><Tab> :tabn<CR> " go to next buffer/tab like Tmux
 nnoremap <leader>[ :tabp<CR> " go to next buffer/tab
 nnoremap <leader>] :tabn<CR> " go to next buffer/tab
 
-" Vim-Tmux-navigator keys to go from Vim to Tmux
-" WARN: should match the bindings defined in tmux.conf
-" let g:tmux_navigator_no_mappings = 1 " 2 - write all buffers before going from Vim to Tmux
-" nnoremap <silent> {Left-Mapping} :TmuxNavigateLeft<cr>
-" nnoremap <silent> {Down-Mapping} :TmuxNavigateDown<cr>
-" nnoremap <silent> {Up-Mapping} :TmuxNavigateUp<cr>
-" nnoremap <silent> {Right-Mapping} :TmuxNavigateRight<cr>
-" nnoremap <silent> {Previous-Mapping} :TmuxNavigatePrevious<cr>
-
 " tab/buffer binding
 " nnoremap <leader><BS> :ls<CR> " TODO: broken
 nnoremap <leader>n :vnew<CR>
@@ -558,9 +572,18 @@ nnoremap <leader>p :tabedit <c-r>=expand("%:p:h")<CR>/
 nnoremap <leader>W :tabdo :q<CR> " close all open tabs
 nnoremap <leader>ta :tab ball <CR> " reopen all closed tabs/buffers
 
+" Vim-Tmux-navigator keys to go from Vim to Tmux
+" WARN: should match the bindings defined in tmux.conf
+" let g:tmux_navigator_no_mappings = 1 " 2 - write all buffers before going from Vim to Tmux
+" nnoremap <silent> {Left-Mapping} :TmuxNavigateLeft<cr>
+" nnoremap <silent> {Down-Mapping} :TmuxNavigateDown<cr>
+" nnoremap <silent> {Up-Mapping} :TmuxNavigateUp<cr>
+" nnoremap <silent> {Right-Mapping} :TmuxNavigateRight<cr>
+" nnoremap <silent> {Previous-Mapping} :TmuxNavigatePrevious<cr>
+
 " toggle plugin binding
+nnoremap <leader><Space> :NERDTreeToggle<CR> " similar to Tmux side-tree
 " WARN: make sure 't' is not binded
-nnoremap <leader>tb :NERDTreeToggle<CR>
 nnoremap <leader>ti :IndentLinesToggle<CR>
 nnoremap <leader>tl :set rnu!<CR>
 nnoremap <leader>tm :SignatureToggle<CR>
@@ -576,6 +599,7 @@ nnoremap <leader>tc :call ToggleCursorCross()<CR>
 nnoremap <leader>th :call ToggleHighlight()<CR>
 nnoremap <leader>td :call DiffWithSaved()<CR>
 
+" matching params for different languages
 autocmd FileType xml,html set mps+=<:>
 autocmd FileType c,cpp,java set mps+==:;
 
