@@ -14,7 +14,7 @@
     ~/.gitconfig: git/gitconfig
     ~/.gitignore_global: git/gitignore_global
     ~/.hammerspoon: hammerspoon
-    ~/.pqrs: pqrs
+    ~/.karabiner.d: pqrs/karabiner.d
     ~/.tmux: tmux
     ~/.tmux.conf: tmux/tmux.conf
     ~/.vim: vim

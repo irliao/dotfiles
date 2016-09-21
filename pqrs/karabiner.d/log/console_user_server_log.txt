@@ -1,0 +1,43 @@
+[2016-09-20 21:51:44.424] [console_user_server] [info] version 0.90.27
+[2016-09-20 21:51:45.740] [console_user_server] [info] grabber_client_ is connected
+[2016-09-20 21:51:45.758] [console_user_server] [info] configuration_core_ was loaded.
+[2016-09-20 21:51:46.802] [console_user_server] [info] system_preferences::values is updated.
+[2016-09-20 21:53:25.422] [console_user_server] [info] version 0.90.29
+[2016-09-20 21:53:26.888] [console_user_server] [info] grabber_client_ is connected
+[2016-09-20 21:53:26.898] [console_user_server] [info] configuration_core_ was loaded.
+[2016-09-20 21:53:27.950] [console_user_server] [info] system_preferences::values is updated.
+[2016-09-20 21:53:29.138] [console_user_server] [info] connection_manager::grabber_is_launched_callback
+[2016-09-20 21:53:29.935] [console_user_server] [warning] grabber socket is not found
+[2016-09-20 21:53:30.903] [console_user_server] [info] grabber_client_ is connected
+[2016-09-20 21:53:30.904] [console_user_server] [info] configuration_core_ was loaded.
+[2016-09-20 21:53:31.937] [console_user_server] [info] system_preferences::values is updated.
+[2016-09-20 22:13:38.672] [console_user_server] [warning] parse error in /Users/irliao/.karabiner.d/configuration/karabiner.json: parse error - unexpected end of input
+[2016-09-20 22:14:02.971] [console_user_server] [info] configuration_core_ was loaded.
+[2016-09-20 22:14:02.971] [console_user_server] [warning] unknown key_code:delete in /Users/irliao/.karabiner.d/configuration/karabiner.json
+[2016-09-20 22:15:21.850] [console_user_server] [info] configuration_core_ was loaded.
+[2016-09-20 22:20:12.059] [console_user_server] [info] the configuration directory is updated.
+[2016-09-20 22:20:29.916] [console_user_server] [info] the configuration directory is updated.
+[2016-09-20 23:07:18.946] [console_user_server] [info] version 0.90.29
+[2016-09-20 23:07:20.085] [console_user_server] [info] grabber_client_ is connected
+[2016-09-20 23:07:20.087] [console_user_server] [info] configuration_core_ was loaded.
+[2016-09-20 23:07:21.093] [console_user_server] [info] system_preferences::values is updated.
+[2016-09-20 23:09:25.036] [console_user_server] [info] version 0.90.29
+[2016-09-20 23:09:26.152] [console_user_server] [info] grabber_client_ is connected
+[2016-09-20 23:09:26.153] [console_user_server] [info] configuration_core_ was loaded.
+[2016-09-20 23:09:27.216] [console_user_server] [info] system_preferences::values is updated.
+[2016-09-20 23:10:06.799] [console_user_server] [info] version 0.90.29
+[2016-09-20 23:10:07.925] [console_user_server] [info] grabber_client_ is connected
+[2016-09-20 23:10:07.935] [console_user_server] [info] configuration_core_ was loaded.
+[2016-09-20 23:10:08.998] [console_user_server] [info] system_preferences::values is updated.
+[2016-09-20 23:18:59.800] [console_user_server] [info] version 0.90.29
+[2016-09-20 23:19:00.947] [console_user_server] [info] grabber_client_ is connected
+[2016-09-20 23:19:00.956] [console_user_server] [info] configuration_core_ was loaded.
+[2016-09-20 23:19:01.981] [console_user_server] [info] system_preferences::values is updated.
+[2016-09-20 23:19:55.328] [console_user_server] [info] version 0.90.29
+[2016-09-20 23:19:56.464] [console_user_server] [info] grabber_client_ is connected
+[2016-09-20 23:19:56.466] [console_user_server] [info] configuration_core_ was loaded.
+[2016-09-20 23:19:57.483] [console_user_server] [info] system_preferences::values is updated.
+[2016-09-20 23:33:24.772] [console_user_server] [info] version 0.90.29
+[2016-09-20 23:33:26.017] [console_user_server] [info] grabber_client_ is connected
+[2016-09-20 23:33:26.019] [console_user_server] [info] configuration_core_ was loaded.
+[2016-09-20 23:33:27.084] [console_user_server] [info] system_preferences::values is updated.
