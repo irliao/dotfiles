@@ -1,4 +1,1 @@
---extract-audio
---no-mtime
---audio-format mp3
--o ~/Music/YouTube\ Songs/%(title)s.%(ext)s
+audio.conf
