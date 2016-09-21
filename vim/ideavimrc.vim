@@ -1,7 +1,6 @@
 set gdefault
 set ignorecase
 
-
 " ============================================================================
 " Movement
 " ============================================================================
@@ -25,12 +24,12 @@ noremap H ,
 noremap L ;
 
 " Home row beginning / end of line
-noremap h ^
-noremap l $
+noremap 0 ^
+noremap 1 $
 
 " Previous / next word
-noremap k #
-noremap j *
+noremap b #
+noremap w *
 
 " ============================================================================
 " Editing
