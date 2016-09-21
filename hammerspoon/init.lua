@@ -45,6 +45,8 @@ function alertStatus()
     hs.alert(caff_str)
 end
 
+-- WARN: do NOT bind super + Space, alt + Space used in Tmux/Vim for temporary prefix/mapleader
+
 -- TODO: refactor using this as reference: https://github.com/talha131/dotfiles/blob/master/hammerspoon/launch-applications.lua#L8-L20
 -- TODO: refactor hotkey bindings to an external file
 -- Window management hotkeys
