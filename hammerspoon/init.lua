@@ -23,6 +23,15 @@ hs.window.animationDuration = 0
 hs.window.setShadows(false)
 hs.hints.style = 'vimperator' -- TODO: figure out what this does
 
+-- TODO: broken
+-- Input source change with alert
+-- function alertInputSource()
+--   hs.alert.closeAll()
+--   local input_src = hs.keycodes.currentLayout()
+--   hs.alert(input_src)
+-- end
+-- hs.keycodes.inputSourceChanged(alertInputSource)
+
 -- Global vars, persists across Hammerspoon session
 super = {"alt"}
 hyper = {"alt", "shift"}

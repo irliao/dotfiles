@@ -16,7 +16,7 @@
     <!-- Capslock -->
     <autogen>
       --KeyOverlaidModifier--
-      KeyCode::F19, 
+      KeyCode::F19,
       KeyCode::VK_MODIFIER_VM_SUPER, ModifierFlag::COMMAND_L | ModifierFlag::OPTION_L | ModifierFlag::CONTROL_L,
       KeyCode::ESCAPE
     </autogen>
@@ -31,16 +31,16 @@
     <!-- Fn -->
 <!--     <autogen>
       --KeyOverlaidModifier--
-      KeyCode::FN, 
+      KeyCode::FN,
       KeyCode::VK_MODIFIER_VM_HYPER, ModifierFlag::COMMAND_L | ModifierFlag::OPTION_L | ModifierFlag::CONTROL_L | ModifierFlag::SHIFT_L,
       KeyCode::ESCAPE
     </autogen> -->
 
     <!-- Fn -->
 <!--     <autogen>
-      __DoublePressModifier__ 
+      __DoublePressModifier__
       KeyCode::FN,
-      KeyCode::FN, 
+      KeyCode::FN,
       KeyCode::VK_STICKY_VM_SUPER
     </autogen> -->
 
