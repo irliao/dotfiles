@@ -97,14 +97,17 @@ hs.hotkey.bind(super, "E", function() openApplication("Sublime Text") end)
 hs.hotkey.bind(super, "F", function() openApplication("Finder") end)
 hs.hotkey.bind(super, 'G', hs.hints.windowHints)
 hs.hotkey.bind(super, "I", function() openApplication("IntelliJ IDEA") end)
+hs.hotkey.bind(super, "M", function() openApplication("Messages") end)
 hs.hotkey.bind(super, "N", function() openApplication("Notes") end)
+hs.hotkey.bind(super, 'Q', 'Lock System', function() hs.caffeinate.lockScreen() end)
+hs.hotkey.bind(hyper, 'Q', 'Put system to sleep',function() hs.caffeinate.systemSleep() end)
 -- hs.hotkey.bind(super, "O", function() openApplication("Microsoft Outlook") end)
 hs.hotkey.bind(super, "T", function() openApplication("iTunes") end)
 hs.hotkey.bind(super, "X", function() openApplication("Terminal") end)
 -- hs.hotkey.bind(hyper, "X", function() openApplication("iTerm") end)
 hs.hotkey.bind(super, ",", function() openApplication("System Preferences") end)
 hs.hotkey.bind(super, "=", function() openApplication("App Store") end)
-hs.hotkey.bind(super, "DELETE", function() openApplication("AppCleaner") end)
+-- hs.hotkey.bind(super, "DELETE", function() openApplication("AppCleaner") end) -- TODO: bind to toggle Notification Center instead
 
 -- bind to hotkeys; WARNING: at least one modifier key is required!
 -- Window switcher for apps in all spaces

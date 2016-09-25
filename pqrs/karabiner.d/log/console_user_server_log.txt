@@ -73,3 +73,27 @@
 [2016-09-21 18:40:14.770] [console_user_server] [info] grabber_client_ is connected
 [2016-09-21 18:40:14.771] [console_user_server] [info] configuration_core_ was loaded.
 [2016-09-21 18:40:15.788] [console_user_server] [info] system_preferences::values is updated.
+[2016-09-22 15:35:43.562] [console_user_server] [info] version 0.90.36
+[2016-09-22 15:35:45.305] [console_user_server] [info] grabber_client_ is connected
+[2016-09-22 15:35:45.310] [console_user_server] [info] configuration_core_ was loaded.
+[2016-09-22 15:35:46.393] [console_user_server] [info] system_preferences::values is updated.
+[2016-09-22 15:36:18.998] [console_user_server] [info] version 0.90.37
+[2016-09-22 15:36:20.301] [console_user_server] [info] grabber_client_ is connected
+[2016-09-22 15:36:20.319] [console_user_server] [info] configuration_core_ was loaded.
+[2016-09-22 15:36:21.339] [console_user_server] [info] system_preferences::values is updated.
+[2016-09-22 21:11:32.240] [console_user_server] [warning] grabber socket is not found
+[2016-09-22 21:11:33.302] [console_user_server] [info] grabber_client_ is connected
+[2016-09-22 21:11:33.304] [console_user_server] [info] configuration_core_ was loaded.
+[2016-09-22 21:11:34.373] [console_user_server] [info] system_preferences::values is updated.
+[2016-09-23 18:51:41.918] [console_user_server] [info] version 0.90.37
+[2016-09-23 18:51:43.792] [console_user_server] [info] grabber_client_ is connected
+[2016-09-23 18:51:43.803] [console_user_server] [info] configuration_core_ was loaded.
+[2016-09-23 18:51:44.874] [console_user_server] [info] system_preferences::values is updated.
+[2016-09-23 22:34:05.733] [console_user_server] [warning] grabber socket is not writable
+[2016-09-23 22:34:06.683] [console_user_server] [info] grabber_client_ is connected
+[2016-09-23 22:34:06.685] [console_user_server] [info] configuration_core_ was loaded.
+[2016-09-23 22:34:07.743] [console_user_server] [info] system_preferences::values is updated.
+[2016-09-24 05:35:17.151] [console_user_server] [info] version 0.90.39
+[2016-09-24 05:35:18.528] [console_user_server] [info] grabber_client_ is connected
+[2016-09-24 05:35:18.561] [console_user_server] [info] configuration_core_ was loaded.
+[2016-09-24 05:35:19.607] [console_user_server] [info] system_preferences::values is updated.

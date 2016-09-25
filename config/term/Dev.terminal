@@ -212,7 +212,7 @@
 	<key>FontWidthSpacing</key>
 	<integer>1</integer>
 	<key>ProfileCurrentVersion</key>
-	<real>2.04</real>
+	<real>2.0499999999999998</real>
 	<key>RunCommandAsShell</key>
 	<true/>
 	<key>ScrollAlternateScreen</key>
@@ -643,18 +643,22 @@
 	<array>
 		<dict>
 			<key>ProcessName</key>
+			<string>screen</string>
+		</dict>
+		<dict>
+			<key>ProcessName</key>
 			<string>tmux</string>
 		</dict>
 	</array>
 	<key>rowCount</key>
-	<integer>47</integer>
+	<integer>48</integer>
 	<key>shellExitAction</key>
 	<integer>1</integer>
 	<key>type</key>
 	<string>Window Settings</string>
 	<key>useOptionAsMetaKey</key>
-	<false/>
+	<true/>
 	<key>warnOnShellCloseAction</key>
-	<integer>0</integer>
+	<integer>1</integer>
 </dict>
 </plist>

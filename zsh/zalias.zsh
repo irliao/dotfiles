@@ -23,6 +23,7 @@ alias ll="ls -FGlAhp" # ls -lh
 alias clr='clear;echo "Currently logged in on $(tty), as $(whoami) in directory $(pwd)."'
 alias comp="diff -qr" # compare 2 input directories
 alias qfind='find . -name '
+alias tree="find . -print | sed -e 's;[^/]*/;|____;g;s;____|; |;g'" # TODO: compare with tree installed from brew
 alias ..="cd ../"
 alias ...="cd ../../"
 alias ....="cd ../../../"
@@ -149,4 +150,7 @@ alias osxCancelAllPrinterJobs="cancel -a -"
 alias osxXCodeVersion="/usr/bin/xcodebuild -version"
 alias osxChromeNoCSR="open -a Google\ Chrome --args --disable-web-security -–allow-file-access-from-files"
 alias osxAllPortStatus="netstat -anp tcp && lsof -i tcp"
-
+# alias osxBltKbBattery="ioreg -c AppleBluetoothHIDKeyboard |grep Battery"
+alias osxBltKbBatteryPercent="ioreg -c AppleBluetoothHIDKeyboard |grep BatteryPercent"
+# alias osxBltMouseBattery="ioreg -n BNBMouseDevice | grep -i Battery"
+alias osxBltMouseBatteryPercent="ioreg -n BNBMouseDevice | grep -i BatteryPercent"

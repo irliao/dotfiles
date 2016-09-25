@@ -153,4 +153,3 @@ fi
 # unset MANPATH
 # export MANPATH="$NPM_PACKAGES/share/man:$(manpath)" # include manuals from npm modules
 #
-

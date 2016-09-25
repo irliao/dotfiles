@@ -14,9 +14,12 @@ defaults write com.apple.terminal StringEncodings -array 4
 #defaults write com.apple.terminal FocusFollowsMouse -bool true
 #defaults write org.x.X11 wm_ffm -bool true
 
-# TODO: research a bit more before using 0 as default value
-# use Plain Text Mode as Default
-defaults write com.apple.TextEdit RichText -int 1
+# disable two-finger swipe to go back / forward gesture in Google Chrome
+defaults write com.google.Chrome.plist
+AppleEnableSwipeNavigateWithScrolls -bool FALSE
+
+# use plain text as default format in TextEdit
+defaults write com.apple.TextEdit RichText -int 0
 
 # install Command Line Tools without Xcode
 # xcode-select --install

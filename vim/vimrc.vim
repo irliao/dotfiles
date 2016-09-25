@@ -41,6 +41,17 @@ function! DiffWithSaved ()
   exe "setlocal bt=nofile bh=wipe nobl noswf ro ft=" . filetype
 endfunction
 
+" TODO: create key binding for this
+function! StripTrailingWhitespace()
+    if !&binary && &filetype != 'diff'
+          normal mz
+              normal Hmy
+                  %s/\s\+$//e
+                      normal 'yz<CR>
+                          normal `z
+                            endif
+                          endfunction
+
 " Delete trailing white space on save, useful for Python and CoffeeScript ;)
 function! DeleteTrailingWS()
   exe "normal mz"
@@ -194,7 +205,7 @@ set number " line numbering
 set ruler " show position in line
 set cursorline " use '_' character for cursor
 set fillchars+=stl:\ ,stlnc:\ " disable statusline fillchars
-" set laststatus=2 " always display statusline (e.g. Airline)
+set laststatus=2 " always display statusline (e.g. Airline)
 " set noshowmode " hide Vim mode indicator
 
 " set ch=0 " statusline height
