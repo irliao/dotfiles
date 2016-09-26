@@ -1,6 +1,6 @@
 # dotfiles
 
-irliao's dotfiles
+irliao's dotfiles for OSX 10.11
 
 ## Installation
 
