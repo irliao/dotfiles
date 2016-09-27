@@ -7,6 +7,7 @@ require("utility") -- no dependencies
 require("window") -- depends on util
 require("highlight") -- depends on window
 require("switcher") -- no dependencies
+require("hotkey") -- depends on all others, especially super/hyper definition
 
 -- Ensure IPC is installed for CLI access
 if not hs.ipc.cliStatus() then hs.ipc.cliInstall() end
@@ -33,8 +34,6 @@ hs.hints.style = 'vimperator' -- TODO: figure out what this does
 -- hs.keycodes.inputSourceChanged(alertInputSource)
 
 -- Global vars, persists across Hammerspoon session
-super = {"alt"}
-hyper = {"alt", "shift"}
 caffeineMenubar = hs.menubar.new() -- menubar icon
 
 -- Global-local vars, reset each time init.lua is loaded
@@ -53,88 +52,7 @@ function alertStatus()
     hs.alert(bat_str)
     hs.alert(caff_str)
 end
-
--- WARN: do NOT bind super + Space, alt + Space used in Tmux/Vim for temporary prefix/mapleader
-
--- TODO: refactor using this as reference: https://github.com/talha131/dotfiles/blob/master/hammerspoon/launch-applications.lua#L8-L20
--- TODO: refactor hotkey bindings to an external file
--- Window management hotkeys
-hs.hotkey.bind(super, 'A', focusPreviousWindow)
-hs.hotkey.bind(super, 'S', resizeLeftRightFull)
-hs.hotkey.bind(hyper, 'S', resizeTopBottomFull) -- simulate Caps + Shift + S for vertical divide
-hs.hotkey.bind(super, 'R', function() hs.reload() end)
-hs.hotkey.bind(super, 'W', hideScreen)
-hs.hotkey.bind(super, 'ESCAPE', moveToNextScreen)
--- hs.hotkey.bind(hyper, 'RETURN', centerScreen)
-hs.hotkey.bind(super, 'RETURN', toggleFullScreen)
-
--- Arrow hotkeys
-hs.hotkey.bind(super, 'LEFT', function() resizeFocusedWindow("horizontal", -25) end)
-hs.hotkey.bind(super, 'RIGHT', function() resizeFocusedWindow("horizontal", 25) end)
-hs.hotkey.bind(super, 'UP', function() resizeFocusedWindow("vertical", -25) end)
-hs.hotkey.bind(super, 'DOWN', function() resizeFocusedWindow("vertical", 25) end)
-
--- Resize window to corner, requires Karabiner overriding 2 arrow keys to be diagonal arrows
-hs.hotkey.bind(super, 'HOME', leftTopScreen) -- left top
-hs.hotkey.bind(super, 'PAGEUP', rightTopScreen) -- right top
-hs.hotkey.bind(super, 'END', leftBottomScreen) -- left bottom
-hs.hotkey.bind(super, 'PAGEDOWN', rightBottomScreen) -- right bottom
-
--- TODO: consider binding hyper + HJKL to focus screen
--- Focus window (args: all visible windows, only windows not fully covered, between 45 and -45 degrees)
-hs.hotkey.bind(super, 'H', function() hs.window.focusedWindow():focusWindowWest(nil, true, false) end)
-hs.hotkey.bind(super, 'J', function() hs.window.focusedWindow():focusWindowSouth(nil, true, false) end)
-hs.hotkey.bind(super, 'K', function() hs.window.focusedWindow():focusWindowNorth(nil, true, false) end)
-hs.hotkey.bind(super, 'L', function() hs.window.focusedWindow():focusWindowEast(nil, true, false) end)
-
--- TODO: disable some hotkeys based on username
--- Application opener hotkeys
-hs.hotkey.bind(super, "C", function() openApplication("Safari Technology Preview") end)
-hs.hotkey.bind(hyper, "C", function() openApplication("Slack") end)
--- hs.hotkey.bind(super, "G", function() openApplication("Google Chrome") end)
-hs.hotkey.bind(super, "D", function() openApplication("Dash") end)
-hs.hotkey.bind(super, "E", function() openApplication("Sublime Text") end)
-hs.hotkey.bind(super, "F", function() openApplication("Finder") end)
-hs.hotkey.bind(super, 'G', hs.hints.windowHints)
-hs.hotkey.bind(super, "I", function() openApplication("IntelliJ IDEA") end)
-hs.hotkey.bind(super, "M", function() openApplication("Messages") end)
-hs.hotkey.bind(super, "N", function() openApplication("Notes") end)
-hs.hotkey.bind(super, 'Q', 'Lock System', function() hs.caffeinate.lockScreen() end)
-hs.hotkey.bind(hyper, 'Q', 'Put system to sleep',function() hs.caffeinate.systemSleep() end)
--- hs.hotkey.bind(super, "O", function() openApplication("Microsoft Outlook") end)
-hs.hotkey.bind(super, "T", function() openApplication("iTunes") end)
-hs.hotkey.bind(super, "X", function() openApplication("Terminal") end)
--- hs.hotkey.bind(hyper, "X", function() openApplication("iTerm") end)
-hs.hotkey.bind(super, ",", function() openApplication("System Preferences") end)
-hs.hotkey.bind(super, "=", function() openApplication("App Store") end)
--- hs.hotkey.bind(super, "DELETE", function() openApplication("AppCleaner") end) -- TODO: bind to toggle Notification Center instead
-
--- bind to hotkeys; WARNING: at least one modifier key is required!
--- Window switcher for apps in all spaces
--- hs.hotkey.bind('alt','Tab', 'All Windows', function()switcher_all_apps:next()end)
--- hs.hotkey.bind('alt-shift','Tab', 'All Windows', function()switcher_all_apps:previous()end)
--- Window switcher for apps in current space only
-hs.hotkey.bind(super,'Tab', function()switcher_active_space_apps:next()end)
-hs.hotkey.bind(hyper,'Tab', function()switcher_active_space_apps:previous()end)
-
--- Alerts utility hotkeys
-function reportUtils()
-    hs.alert.closeAll()
-    hs.alert('Super + F#:')
-    hs.alert('F1 to Mouse Highlight')
-    hs.alert('F2 to Copy Finder Path')
-    hs.alert('F3 to Highlight Mouse')
-    hs.alert('F12 to Eject MicroSD')
-end
-
--- Utility call hotkeys
-hs.hotkey.bind(super, '`', alertStatus)
-hs.hotkey.bind(super, '/', reportUtils)
-hs.hotkey.bind(super, 'F1', mouseHighlight)
-hs.hotkey.bind(super, 'F2', copyCurrentFinderPath)
-hs.hotkey.bind(super, 'F3', copyCurrentSafariTechURL)
-hs.hotkey.bind(hyper, "F12", ejectMicroSD)
-hs.hotkey.bind(super, ';', function() hs.toggleConsole() end)
+hs.hotkey.bind('alt', '`', alertStatus)
 
 -- Karabiner URL hooks
 hs.urlevent.bind("safari", function(eventName, params)
