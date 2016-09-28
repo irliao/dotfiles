@@ -569,6 +569,7 @@ nnoremap <leader>] :tabn<CR> " go to next buffer/tab
 
 " tab/buffer binding
 " nnoremap <leader><BS> :ls<CR> " TODO: broken
+nnoremap <leader>b :buffers<CR>
 nnoremap <leader>n :vnew<CR>
 nnoremap <leader>s :vsplit<Space>
 nnoremap <leader>w :hide<CR> " close current pane like Tmux

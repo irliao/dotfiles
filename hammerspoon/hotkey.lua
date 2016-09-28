@@ -1,49 +1,26 @@
 -- Launch applications
 
-super = {'alt'}
+super = {'ctrl', 'alt', 'cmd'}
+hyper = {'ctrl', 'alt', 'cmd', 'shift'}
 
--- WARN: debug only, prints all typed values
--- tap = hs.eventtap.new({hs.eventtap.event.types.keyDown}, function(event)
---   print(hs.inspect(event:getRawEventData()))
--- end)
--- tap:start()
-
--- tap = hs.eventtap.new({hs.eventtap.event.types.flagsChanged}, function(event)
---   local win = (hs.window.focusedWindow() and hs.window.focusedWindow() or hs.window.frontmostWindow())
---   if not win or not win:application:name() == "Terminal" then
---     return
---   end
-
---   if (event:getFlags() == nil and event:getKeyCode() == nil) then
---     hs.alert'alt lifted with no keycode'
---   end
--- end)
--- tap:start()
-
--- k = hs.hotkey.modal.new('cmd-shift', 'd')
--- function k:entered() hs.alert'Entered mode' end
--- function k:exited() hs.alert'Exited mode' end
--- k:bind('', 'escape', function() k:exit() end)
--- k:bind('', 'J', 'Pressed J',function() print'let the record show that J was pressed' end)
-
--- modalKey = hs.hotkey.modal.new({}, "f19")
--- modalKey:bind('', 'escape', function() modalKey:exit() end)
-
--- appShortCuts = {
---     C = 'Safari Technology Preview',
---     X = 'Terminal'
--- }
--- for key, app in pairs(appShortCuts) do
---     modalKey:bind('', key, function() openApplication(app) end, function() modalKey:exit() end)
--- end
+-- Alert date, time, battery info, and caffeine status using Notification Center
+function alertStatus()
+    hs.alert.closeAll()
+    local bat_num = hs.battery.percentage() -- local var for immediate battery status
+    local time_str = os.date("%A %b %d, %Y - %I:%M%p") -- os.date("%a, %m/%d/%y - %H:%m")
+    local bat_str = "Battery: " .. (bat_num and (bat_num .. "%") or "Nil")
+    local caff_str = "Caffeine: " .. (caffeineStatus and caffeineStatus or "Nil")
+    hs.alert(time_str)
+    hs.alert(bat_str)
+    hs.alert(caff_str)
+end
+hs.hotkey.bind(super, '`', alertStatus)
 
 -- Both Modifer + Key to activate hotkey
--- WARN: do NOT bind super + Space, alt + Space used in Tmux/Vim for temporary prefix/mapleader
--- TODO: refactor using this as reference: https://github.com/talha131/dotfiles/blob/master/hammerspoon/launch-applications.lua#L8-L20
 -- TODO: refactor hotkey bindings to an external file
 hs.hotkey.bind(super, 'A', focusPreviousWindow)
 hs.hotkey.bind(super, 'S', resizeLeftRightFull)
--- hs.hotkey.bind(hyper, 'S', resizeTopBottomFull) -- simulate Caps + Shift j+ S for vertical divide
+hs.hotkey.bind(hyper, 'S', resizeTopBottomFull) -- simulate Caps + Shift j+ S for vertical divide
 hs.hotkey.bind(super, 'R', function() hs.reload() end)
 hs.hotkey.bind(super, 'W', hideScreen)
 hs.hotkey.bind(super, 'ESCAPE', moveToNextScreen)
@@ -51,29 +28,29 @@ hs.hotkey.bind(super, 'ESCAPE', moveToNextScreen)
 hs.hotkey.bind(super, 'RETURN', toggleFullScreen)
 
 -- -- Arrow hotkeys
--- hs.hotkey.bind(super, 'LEFT', function() resizeFocusedWindow("horizontal", -25) end)
--- hs.hotkey.bind(super, 'RIGHT', function() resizeFocusedWindow("horizontal", 25) end)
--- hs.hotkey.bind(super, 'UP', function() resizeFocusedWindow("vertical", -25) end)
--- hs.hotkey.bind(super, 'DOWN', function() resizeFocusedWindow("vertical", 25) end)
+hs.hotkey.bind(super, 'LEFT', function() resizeFocusedWindow("horizontal", -25) end)
+hs.hotkey.bind(super, 'RIGHT', function() resizeFocusedWindow("horizontal", 25) end)
+hs.hotkey.bind(super, 'UP', function() resizeFocusedWindow("vertical", -25) end)
+hs.hotkey.bind(super, 'DOWN', function() resizeFocusedWindow("vertical", 25) end)
 
 -- -- Resize window to corner, requires Karabiner overriding 2 arrow keys to be diagonal arrows
--- hs.hotkey.bind(super, 'HOME', leftTopScreen) -- left top
--- hs.hotkey.bind(super, 'PAGEUP', rightTopScreen) -- right top
--- hs.hotkey.bind(super, 'END', leftBottomScreen) -- left bottom
--- hs.hotkey.bind(super, 'PAGEDOWN', rightBottomScreen) -- right bottom
+hs.hotkey.bind(super, 'HOME', leftTopScreen) -- left top
+hs.hotkey.bind(super, 'PAGEUP', rightTopScreen) -- right top
+hs.hotkey.bind(super, 'END', leftBottomScreen) -- left bottom
+hs.hotkey.bind(super, 'PAGEDOWN', rightBottomScreen) -- right bottom
 
 -- -- TODO: consider binding hyper + HJKL to focus screen
 -- -- Focus window (args: all visible windows, only windows not fully covered, between 45 and -45 degrees)
--- hs.hotkey.bind(super, 'H', function() hs.window.focusedWindow():focusWindowWest(nil, true, false) end)
--- hs.hotkey.bind(super, 'J', function() hs.window.focusedWindow():focusWindowSouth(nil, true, false) end)
--- hs.hotkey.bind(super, 'K', function() hs.window.focusedWindow():focusWindowNorth(nil, true, false) end)
--- hs.hotkey.bind(super, 'L', function() hs.window.focusedWindow():focusWindowEast(nil, true, false) end)
+hs.hotkey.bind(super, 'H', function() hs.window.focusedWindow():focusWindowWest(nil, true, false) end)
+hs.hotkey.bind(super, 'J', function() hs.window.focusedWindow():focusWindowSouth(nil, true, false) end)
+hs.hotkey.bind(super, 'K', function() hs.window.focusedWindow():focusWindowNorth(nil, true, false) end)
+hs.hotkey.bind(super, 'L', function() hs.window.focusedWindow():focusWindowEast(nil, true, false) end)
 
 -- -- TODO: disable some hotkeys based on username
 -- -- Application opener hotkeys
 hs.hotkey.bind(super, "C", function() openApplication("Safari Technology Preview") end)
 -- hs.hotkey.bind(hyper, "C", function() openApplication("Slack") end)
--- hs.hotkey.bind(super, "G", function() openApplication("Google Chrome") end)
+hs.hotkey.bind(super, "G", function() openApplication("Google Chrome") end)
 hs.hotkey.bind(super, "D", function() openApplication("Dash") end)
 hs.hotkey.bind(super, "E", function() openApplication("Sublime Text") end)
 hs.hotkey.bind(super, "F", function() openApplication("Finder") end)
@@ -89,7 +66,14 @@ hs.hotkey.bind(super, "X", function() openApplication("Terminal") end)
 -- hs.hotkey.bind(hyper, "X", function() openApplication("iTerm") end)
 hs.hotkey.bind(super, ",", function() openApplication("System Preferences") end)
 hs.hotkey.bind(super, "=", function() openApplication("App Store") end)
--- hs.hotkey.bind(super, "DELETE", function() openApplication("AppCleaner") end) -- TODO: bind to toggle Notification Center instead
+hs.hotkey.bind(super, "DELETE", function() openApplication("AppCleaner") end) -- TODO: bind to toggle Notification Center instead
+
+-- TODO: implement temporary hotkey for single key Tmux prefix
+-- hs.hotkey.bind(super, "SPACE", function()
+--   local win = (hs.window.focusedWindow() and hs.window.focusedWindow() or hs.window.frontmostWindow())
+--   if not win or win:application().then
+--     return
+--   end
 
 -- -- bind to hotkeys; WARNING: at least one modifier key is required!
 -- -- Window switcher for apps in all spaces
@@ -114,5 +98,29 @@ hs.hotkey.bind(super, '/', reportUtils)
 hs.hotkey.bind(super, 'F1', mouseHighlight)
 hs.hotkey.bind(super, 'F2', copyCurrentFinderPath)
 hs.hotkey.bind(super, 'F3', copyCurrentSafariTechURL)
-hs.hotkey.bind(hyper, "F12", ejectMicroSD)
+-- hs.hotkey.bind(hyper, "F12", ejectMicroSD)
 hs.hotkey.bind(super, ';', function() hs.toggleConsole() end)
+
+-- Control mode (similar to Tmux prefix key)
+-- modalKey = hs.hotkey.modal.new({}, "f19")
+-- modalKey:bind('', 'escape', function() modalKey:exit() end)
+-- appShortCuts = {
+--     C = 'Safari Technology Preview',
+--     X = 'Terminal'
+-- }
+-- for key, app in pairs(appShortCuts) do
+--     modalKey:bind('', key, function() openApplication(app) end, function() modalKey:exit() end)
+-- end
+
+-- WARN: debug only, prints all typed values
+-- -- tap = hs.eventtap.new({hs.eventtap.event.types.keyDown}, function(event)
+-- --   print(hs.inspect(event:getRawEventData()))
+-- -- end)
+-- -- tap:start()
+
+-- -- k = hs.hotkey.modal.new('cmd-shift', 'd')
+-- -- function k:entered() hs.alert'Entered mode' end
+-- -- function k:exited() hs.alert'Exited mode' end
+-- -- k:bind('', 'escape', function() k:exit() end)
+-- -- k:bind('', 'J', 'Pressed J',function() print'let the record show that J was pressed' end)
+

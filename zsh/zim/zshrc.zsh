@@ -76,7 +76,7 @@ if [[ ($TERM_PROGRAM == "Apple_Terminal") ]]; then # Apple Terminal
 
   # TODO: bind keys to delete words faster, maybe bind to Option keys (requires research)
   # Key bindings, available widgets listed on http://zsh.sourceforge.net/Doc/Release/Zsh-Line-Editor.html#Standard-Widgets
-  # NOTE: ^L binded in Tmux to clear screen
+  # WARN: do not bind to ^L or ^V
   bindkey -v # press <ESC> to switch to NORMAL mode,
   bindkey "^A" beginning-of-line
   bindkey "^B" backward-word
@@ -85,7 +85,7 @@ if [[ ($TERM_PROGRAM == "Apple_Terminal") ]]; then # Apple Terminal
   bindkey "^C" kill-line
   bindkey "^X" backward-kill-word
   bindkey "^Y" vi-yank-whole-line # yank entire line to killer
-  bindkey "^V" vi-put-after # paste last yanked text after cursor, TODO: press <DEL> right after vi-put-after
+  # bindkey "^V" vi-put-after # paste last yanked text after cursor, TODO: press <DEL> right after vi-put-after
   bindkey "^Z" insert-last-word # insert word from last Entered command
   bindkey "^H" beginning-of-history
   bindkey "^O" down-line-or-search
@@ -104,7 +104,7 @@ if [[ ($TERM_PROGRAM == "Apple_Terminal") ]]; then # Apple Terminal
 
   # Display Vi-mode in prompt
   function zle-line-init zle-keymap-select {
-      VIM_PROMPT="%{$fg_bold[yellow]%} [% NORMAL]% %{$reset_color%}"
+      VIM_PROMPT="%{$fg_bold[yellow]%} [% Vi]% %{$reset_color%}"
       RPS1="${${KEYMAP/vicmd/$VIM_PROMPT}/(main|viins)/}$EPS1"
       zle reset-prompt
   }

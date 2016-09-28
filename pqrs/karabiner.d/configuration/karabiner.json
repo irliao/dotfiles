@@ -4,8 +4,8 @@
             "name": "Default profile",
             "selected": true,
             "simple_modifications": {
-                "caps_lock": "left_alt",
-                "right_alt": "comma"
+                "caps_lock": "hyper",
+                "right_option": "comma"
             }
         }
     ]

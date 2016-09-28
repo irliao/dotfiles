@@ -135,3 +135,17 @@
 [2016-09-26 22:49:29.639] [console_user_server] [warning] unknown key_code:alt in /Users/irliao/.karabiner.d/configuration/karabiner.json
 [2016-09-26 22:49:30.637] [console_user_server] [info] system_preferences::values is updated.
 [2016-09-26 22:54:38.659] [console_user_server] [info] configuration_core_ was loaded.
+[2016-09-27 19:22:35.758] [console_user_server] [info] version 0.90.44
+[2016-09-27 19:22:36.943] [console_user_server] [info] grabber_client_ is connected
+[2016-09-27 19:22:36.963] [console_user_server] [info] configuration_core_ was loaded.
+[2016-09-27 19:22:37.955] [console_user_server] [info] system_preferences::values is updated.
+[2016-09-27 19:24:13.876] [console_user_server] [info] version 0.90.44
+[2016-09-27 19:24:15.024] [console_user_server] [info] grabber_client_ is connected
+[2016-09-27 19:24:15.027] [console_user_server] [info] configuration_core_ was loaded.
+[2016-09-27 19:24:16.057] [console_user_server] [info] system_preferences::values is updated.
+[2016-09-27 19:26:14.540] [console_user_server] [info] configuration_core_ was loaded.
+[2016-09-27 19:51:19.624] [console_user_server] [info] configuration_core_ was loaded.
+[2016-09-27 20:28:39.179] [console_user_server] [info] configuration_core_ was loaded.
+[2016-09-28 00:42:52.231] [console_user_server] [info] configuration_core_ was loaded.
+[2016-09-28 00:42:52.231] [console_user_server] [warning] unknown key_code:alt_right in /Users/irliao/Developments/dotfiles/pqrs/karabiner.d/configuration/karabiner.json
+[2016-09-28 00:44:45.285] [console_user_server] [info] configuration_core_ was loaded.

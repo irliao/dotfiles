@@ -54,6 +54,7 @@ alias tl="teamocil"
 alias tle="teamocil --edit"
 alias tll="teamocil --list"
 alias tlc="source ~/.tmux/tmux_colors.sh"
+alias tclear="run_in_all_naked_panes clear" # requires script in ~/.bin
 
 # CLIs
 alias bu="brew update && brew upgrade && brew prune && brew cleanup && brew doctor"
@@ -74,6 +75,7 @@ alias nya="nyancat"
 alias net="netstat"
 alias mirrorsite='wget -m -k -K -E -e robots=off' # mirror a website
 alias peek='tee >(cat 1>&2)' # mirror stdout to stderr, useful for seeing data going through a pipe
+alias subl="reattach-to-user-namespace /usr/local/bin/subl" # make commands with arguments work such as "subl /tmp"
 
 # Git
 alias ga="git add"

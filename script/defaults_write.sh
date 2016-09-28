@@ -3,6 +3,15 @@
 # Ask for the administrator password upfront
 sudo -v
 
+# WARN: sets Capslock to Ctrl... not verified to work yet...
+# defaults -currentHost write -g com.apple.keyboard.modifiermapping.alt_handler_id-50 -array "<dict><key>HIDKeyboardModifierMappingDst</key><integer>2</integer><key>HIDKeyboardModifierMappingSrc</key><integer>0</integer></dict>"
+
+# Make CMD-V paste without formatting
+defaults write NSGlobalDomain NSUserKeyEquivalents -dict "Paste and Match Style" -string "@v"
+
+# Make CMD-F in Finder to start "Find by filename"
+defaults write com.apple.finder NSUserKeyEquivalents -dict "Find by Name..." -string "@f"
+
 # Keep-alive: update existing `sudo` time stamp until `.osx` has finished
 while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
 
@@ -71,6 +80,15 @@ defaults write com.apple.finder DisableAllAnimations -bool true
 defaults write com.apple.dock launchanim -bool false
 
 defaults write com.apple.dock expose-animation-duration -float 0.1
+
+# Autohide Dock
+defaults write com.apple.dock autohide -bool true
+
+# Remove Dock hide/show delay
+defaults write com.apple.dock autohide-delay -float 0
+
+# # Shorten Dock hide/show animation
+defaults write com.apple.dock autohide-time-modifier -float 0.2
 
 # disable send/reply animation in Mail
 defaults write com.apple.mail DisableReplyAnimations -bool true

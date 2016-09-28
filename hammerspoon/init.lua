@@ -41,18 +41,6 @@ isConfigLoaded = true
 caffeineStatus = nil
 -- browser = selectBrowserByMachineName() -- TODO: figure out how to make function static for readibility, ex: ClassName.functionName
 
--- Alert date, time, battery info, and caffeine status using Notification Center
-function alertStatus()
-    hs.alert.closeAll()
-    local bat_num = hs.battery.percentage() -- local var for immediate battery status
-    local time_str = os.date("%A %b %d, %Y - %I:%M%p") -- os.date("%a, %m/%d/%y - %H:%m")
-    local bat_str = "Battery: " .. (bat_num and (bat_num .. "%") or "Nil")
-    local caff_str = "Caffeine: " .. (caffeineStatus and caffeineStatus or "Nil")
-    hs.alert(time_str)
-    hs.alert(bat_str)
-    hs.alert(caff_str)
-end
-hs.hotkey.bind('alt', '`', alertStatus)
 
 -- Karabiner URL hooks
 hs.urlevent.bind("safari", function(eventName, params)
