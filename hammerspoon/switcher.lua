@@ -1,5 +1,30 @@
 -- Window Switcher
 
+-- Only windows from focused app
+wf_focused_apps = hs.window.filter.new(function(win)
+  local fw = hs.window.focusedWindow()
+  return (
+    win:isStandard() and
+    win:application() == fw:application()
+    -- win:screen() == fw:screen() -- only windows on focused screen
+  )
+end)
+
+uiPrefsFocusedApp = {
+  fontName = 'Hack',
+  textSize = 13,
+  highlightColor= {1,0.9,0,0.8},
+  backgroundColor = {0.1,0.1,0.1,1},
+  onlyActiveApplication = true,
+  showTitles = true,
+  showThumbNails = false, -- screen as icon
+  thumbnailSize = 150,
+  showSelectedThumbnail = false, -- screen as popup background
+  selectedThumbnail = 200,
+  showSelectedTitle = true
+}
+switcher_focused_apps = hs.window.switcher.new(wf_focused_apps, uiPrefsFocusedApp) -- include minimized/hidden windows, current Space only
+
 -- All windows, activate with Option + Tab
 wf_all_apps = hs.window.filter.new() -- only visible windows, all Spaces
 uiPrefsAll = {
