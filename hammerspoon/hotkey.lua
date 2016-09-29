@@ -80,7 +80,7 @@ hs.hotkey.bind(super, "DELETE", function() openApplication("AppCleaner") end) --
 -- -- hs.hotkey.bind('alt','Tab', 'All Windows', function()switcher_all_apps:next()end)
 -- -- hs.hotkey.bind('alt-shift','Tab', 'All Windows', function()switcher_all_apps:previous()end)
 -- -- Window switcher for apps in current space only
-hs.hotkey.bind(super,'Tab', function()switcher_active_space_apps:next()end)
+hs.hotkey.bind(super,'Tab', function()switcher_focused_apps:next()end)
 -- hs.hotkey.bind(hyper,'Tab', function()switcher_active_space_apps:previous()end)
 
 -- -- Alerts utility hotkeys
