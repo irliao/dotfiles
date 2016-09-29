@@ -20,10 +20,10 @@ alias al="ls -lar"
 alias sl="ls -r" # ls reverse
 alias lr="l -r" # l reverse
 alias ll="ls -FGlAhp" # ls -lh
+alias lt="find . -print | sed -e 's;[^/]*/;|____;g;s;____|; |;g'" # TODO: compare with tree installed from brew
 alias clr='clear;echo "Currently logged in on $(tty), as $(whoami) in directory $(pwd)."'
 alias comp="diff -qr" # compare 2 input directories
 alias qfind='find . -name '
-alias tree="find . -print | sed -e 's;[^/]*/;|____;g;s;____|; |;g'" # TODO: compare with tree installed from brew
 alias ..="cd ../"
 alias ...="cd ../../"
 alias ....="cd ../../../"
@@ -55,6 +55,7 @@ alias tle="teamocil --edit"
 alias tll="teamocil --list"
 alias tlc="source ~/.tmux/tmux_colors.sh"
 alias tclear="run_in_all_naked_panes clear" # requires script in ~/.bin
+# tmux list-keys -t vi-copy
 
 # CLIs
 alias bu="brew update && brew upgrade && brew prune && brew cleanup && brew doctor"

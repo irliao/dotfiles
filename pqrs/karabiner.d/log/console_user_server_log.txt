@@ -149,3 +149,7 @@
 [2016-09-28 00:42:52.231] [console_user_server] [info] configuration_core_ was loaded.
 [2016-09-28 00:42:52.231] [console_user_server] [warning] unknown key_code:alt_right in /Users/irliao/Developments/dotfiles/pqrs/karabiner.d/configuration/karabiner.json
 [2016-09-28 00:44:45.285] [console_user_server] [info] configuration_core_ was loaded.
+[2016-09-28 01:05:12.838] [console_user_server] [info] version 0.90.44
+[2016-09-28 01:05:16.465] [console_user_server] [info] grabber_client_ is connected
+[2016-09-28 01:05:16.484] [console_user_server] [info] configuration_core_ was loaded.
+[2016-09-28 01:05:17.541] [console_user_server] [info] system_preferences::values is updated.
