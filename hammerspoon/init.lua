@@ -86,6 +86,8 @@ appWatcher:start()
 hs.pathwatcher.new(os.getenv("HOME") .. "/.hammerspoon/init.lua", reloadConfig):start()
 hs.alert.show('Config Loaded')
 
+collectgarbage("setstepmul", 1000)
+collectgarbage("setpause", 1)
 -- Unused configs
 
 -- -- Window filter, WARN: subscribe MUST be in init.lua
