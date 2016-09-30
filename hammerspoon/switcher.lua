@@ -9,7 +9,6 @@ wf_focused_apps = hs.window.filter.new(function(win)
     -- win:screen() == fw:screen() -- only windows on focused screen
   )
 end)
-
 uiPrefsFocusedApp = {
   fontName = 'Hack',
   textSize = 13,
