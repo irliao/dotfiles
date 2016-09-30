@@ -21,4 +21,4 @@ function mouseHighlight()
     -- Set a timer to delete the circle after 3 seconds
     mouseCircleTimer = hs.timer.doAfter(3, function() mouseCircle:delete() end)
 end
-hs.hotkey.bind({"cmd","alt","shift"}, "D", mouseHighlight)
+-- hs.hotkey.bind({"cmd","alt","shift"}, "D", mouseHighlight)

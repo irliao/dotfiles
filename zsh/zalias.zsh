@@ -105,7 +105,7 @@ alias bs="cd ~/BitTorrent\ Sync"
 alias vm="cd ~/Virtual\ Machines"
 
 # History
-alias hs="history"
+alias his="history"
 alias history15="history | awk '{a[$2]++}END{for(i in a){print a[i] " " i}}' | sort -rn | head -15"
 alias historyTop='history | sort -rn | head'
 alias historyClear='history -c'

@@ -153,6 +153,30 @@ function centerMouse()
   hs.mouse.setRelativePosition(mousePoint, screen)
 end
 
+-- TODO: override right-Alt to press ',' in Vim
+-- Override Alt-key to press Ctrl-S for Tmux prefix in Terminal
+altKeyEvent = hs.eventtap.new({hs.eventtap.event.types.flagsChanged}, function(o)
+  local keyCode = o:getKeyCode()
+  local modifiers = o:getFlags()
+
+  -- check if correct key code
+  if keyCode ~= 58 then return end
+  if not (modifiers['alt'] and not modifiers['shift'] and not modifiers['cmd'] and not modifiers['ctrl']) then return end
+
+  -- TODO: implement this to have higher accuracy
+  -- check if no other modifiers where pressed
+  -- spacesModifiers = {"fn", "cmd", "ctrl", "shift"}
+  -- local otherModifiers = hs.fnutils.every(modifiers, function(_, modifier)
+  --   return hs.fnutils.contains(spacesModifiers, modifier)
+  -- end)
+  -- if otherModifiers then return end
+
+  hs.eventtap.keyStroke({"ctrl"}, "s")
+
+  -- stop propagation
+  return true
+end)
+
 -- App watcher for Activate and Launch events
 function applicationWatcher(appName, eventType, appObject)
     -- Activated Apps
@@ -160,6 +184,13 @@ function applicationWatcher(appName, eventType, appObject)
         if (appName == "Finder") then
             appObject:selectMenuItem({"Window", "Bring All to Front"})
             -- centerScreen()
+        end
+        if (osVer and osVer.major == 10 and osVer.minor == 12) then
+          if (appName == "Terminal") then
+            altKeyEvent:start()
+          else
+            altKeyEvent:stop()
+          end
         end
     end
 
