@@ -1,16 +1,5 @@
 -- Hammerspoon Config
 
--- NOTE: import order matters!
--- Preload defaults APIs/configs from Hammerspoon
-require("hs.application") -- fixes error from hs.window.orderedWindows() in layoutVertical()
-require("utility") -- no dependencies
-require("window") -- depends on util
-require("highlight") -- depends on window
-require("switcher") -- no dependencies
-
--- Ensure IPC is installed for CLI access
-if not hs.ipc.cliStatus() then hs.ipc.cliInstall() end
-
 -- Hammerspoon configs
 hs.autoLaunch(true)
 hs.automaticallyCheckForUpdates(true)
@@ -21,6 +10,20 @@ hs.consoleOnTop(true)
 hs.crash.crashLogToNSLog = true -- show crash logs as OSX notification
 hs.window.animationDuration = 0
 hs.window.setShadows(false)
+hs.window.filter.ignoreAlways['Spotlight']=true -- prevent wfilter warnings from windowHighlight
+hs.window.filter.ignoreAlways['Hammerspoon']=true
+hs.window.filter.ignoreAlways['Hammerspoon Console']=true -- TODO: figure out how to remove errors from Hammerspoon console logs
+
+-- NOTE: import order matters!
+-- Preload defaults APIs/configs from Hammerspoon
+require("hs.application") -- fixes error from hs.window.orderedWindows() in layoutVertical()
+require("utility") -- no dependencies
+require("window") -- depends on util
+require("highlight") -- depends on window
+require("switcher") -- no dependencies
+
+-- Ensure IPC is installed for CLI access
+if not hs.ipc.cliStatus() then hs.ipc.cliInstall() end
 
 -- Global vars, persists across Hammerspoon session
 super = {"cmd", "alt", "ctrl"}
@@ -85,6 +88,7 @@ hs.hotkey.bind(super, "E", function() openApplication("Sublime Text") end)
 hs.hotkey.bind(super, "F", function() openApplication("Finder") end)
 hs.hotkey.bind(super, "I", function() openApplication("IntelliJ IDEA") end)
 hs.hotkey.bind(hyper, "I", function() openApplication("WebStorm") end)
+hs.hotkey.bind(super, "M", function() openApplication("Messages") end)
 hs.hotkey.bind(super, "N", function() openApplication("Notes") end)
 hs.hotkey.bind(super, "O", function() openApplication("Microsoft Outlook") end)
 hs.hotkey.bind(super, "T", function() openApplication("iTunes") end)

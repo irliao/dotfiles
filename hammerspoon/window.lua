@@ -202,11 +202,11 @@ function moveToNextScreen()
     end
     local prevScreen = win:screen():previous()
     local nextScreen = win:screen():next()
-    if prevScreen ~= nil then
-        win:moveToScreen(prevScreen)
-        centerMouse()
-    elseif nextScreen ~= nil then
+    if nextScreen ~= nil then
         win:moveToScreen(nextScreen)
+        centerMouse()
+    elseif prevScreen ~= nil then
+        win:moveToScreen(prevScreen)
         centerMouse()
     else
         sendNotif('Screen', 'No Screen to Move to')

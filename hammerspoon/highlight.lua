@@ -1,5 +1,8 @@
 -- Window focus highlight
 
+-- TODO: integrate this
+-- nofs_wf=hs.window.filter.new():setOverrideFilter{fullscreen=false}
+
 -- TODO: handle multiple screens
 function toggleWindowHighlight()
   local win = (hs.window.focusedWindow() and hs.window.focusedWindow() or hs.window.frontmostWindow())
@@ -10,9 +13,7 @@ function toggleWindowHighlight()
   end
 end
 
-hs.window.filter.ignoreAlways['Spotlight']=true -- prevent wfilter warnings from windowHighlight
 wf_highlight = hs.window.filter.new()
--- hs.window.filter.ignoreAlways['Hammerspoon']=true -- TODO: figure out how to remove errors from Hammerspoon console logs
 hs.window.highlight.ui.overlay=true
 hs.window.highlight.ui.overlayColor = {0,0,0,0.25} -- gray
 hs.window.highlight.ui.frameWidth = 5
