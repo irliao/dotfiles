@@ -1,18 +1,10 @@
 -- Hammerspoon Config
 
--- NOTE: import order matters!
--- Preload defaults APIs/configs from Hammerspoon
-require("hs.application") -- fixes error from hs.window.orderedWindows() in layoutVertical()
-require("utility") -- no dependencies
-require("window") -- depends on util
-require("highlight") -- depends on window
-require("switcher") -- no dependencies
-require("hotkey") -- depends on all others, especially super/hyper definition
-
 -- Ensure IPC is installed for CLI access
-if not hs.ipc.cliStatus() then hs.ipc.cliInstall() end
+-- require("hs.ipc")
 
 -- Hammerspoon configs
+hs.ipc.cliInstall()
 hs.autoLaunch(true)
 hs.automaticallyCheckForUpdates(true)
 hs.dockIcon(false)
@@ -22,7 +14,24 @@ hs.consoleOnTop(true)
 hs.crash.crashLogToNSLog = true -- show crash logs as OSX notification
 hs.window.animationDuration = 0
 hs.window.setShadows(false)
-hs.hints.style = 'vimperator' -- TODO: figure out what this does
+hs.hotkey.alertDuration = 0 -- hotkey alerts are disabled
+hs.hints.style = 'vimperator' -- window hint starts with the first character of the parent application's title
+hs.hints.fontName = 'Hack'
+hs.window.filter.ignoreAlways['Spotlight']=true -- prevent wfilter warnings from windowHighlight
+hs.window.filter.ignoreAlways['Siri']=true -- prevent wfilter warnings from windowHighlight
+-- hs.window.filter.ignoreAlways['Hammerspoon']=true -- TODO: figure out how to remove errors from Hammerspoon console logs
+-- hs.window.filter.ignoreAlways['Hammerspoon Console']=true
+-- hs.window.filter.ignoreAlways[hs.console.hswindow():application():title()]=true
+
+-- NOTE: import order matters!
+-- Preload defaults APIs/configs from Hammerspoon
+-- require("hs.application") -- fixes error from hs.window.orderedWindows() in layoutVertical()
+require("utility") -- no dependencies
+require("window") -- depends on util
+require("highlight") -- depends on window
+require("switcher") -- no dependencies
+require("modifier") -- no dependencies, defines Super/Hyper key
+require("hotkey") -- depends on all others, especially super/hyper definition
 
 -- TODO: broken
 -- Input source change with alert
@@ -40,15 +49,6 @@ caffeineMenubar = hs.menubar.new() -- menubar icon
 isConfigLoaded = true
 caffeineStatus = nil
 -- browser = selectBrowserByMachineName() -- TODO: figure out how to make function static for readibility, ex: ClassName.functionName
-
-
--- Karabiner URL hooks
-hs.urlevent.bind("safari", function(eventName, params)
-    if params["someParam"] then
-        -- hs.alert.show(params["someParam"]) -- for debugging
-        openSafariTechExtensionBuilder()
-    end
-end)
 
 -- Toggle binded to caffeine icon on menu bar
 function caffeineToggle()

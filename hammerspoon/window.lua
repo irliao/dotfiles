@@ -153,6 +153,7 @@ function centerMouse()
   hs.mouse.setRelativePosition(mousePoint, screen)
 end
 
+-- TODO: override right-Alt to press ',' in Vim
 -- Override Alt-key to press Ctrl-S for Tmux prefix in Terminal
 altKeyEvent = hs.eventtap.new({hs.eventtap.event.types.flagsChanged}, function(o)
   local keyCode = o:getKeyCode()
@@ -230,11 +231,11 @@ function moveToNextScreen()
     end
     local prevScreen = win:screen():previous()
     local nextScreen = win:screen():next()
-    if prevScreen ~= nil then
-        win:moveToScreen(prevScreen)
-        centerMouse()
-    elseif nextScreen ~= nil then
+    if nextScreen ~= nil then
         win:moveToScreen(nextScreen)
+        centerMouse()
+    elseif prevScreen ~= nil then
+        win:moveToScreen(prevScreen)
         centerMouse()
     else
         sendNotif('Screen', 'No Screen to Move to')

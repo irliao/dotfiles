@@ -498,6 +498,10 @@ nnoremap <leader>R :nohlsearch<cr>:diffupdate<cr>:syntax sync fromstart<cr><c-l>
 nnoremap j gj
 nnoremap k gk
 
+" move current line in normal mode TODO: make sure this does not conflict
+nnoremap > >>
+nnoremap < <<
+
 " move blocks of text in visual mode
 vnoremap < <gv
 vnoremap > >gv
@@ -518,9 +522,10 @@ nnoremap gV `[v`]
 "map kj sequence to escape
 inoremap kj <ESC>
 
+" TODO: figure out what this does
 " move screenline instead of bufferline
-noremap <C-J> gj
-noremap <C-K> gk
+" noremap <C-J> gj
+" noremap <C-K> gk
 
 " TODO: verify this actually fixes pasting issue from yanking trailing character
 " don't copy the contents of an overwritten selection.
@@ -547,8 +552,10 @@ nnoremap <C-a> ^
 nnoremap <C-e> $
 
 " faster block jumping when pressing right/left Shift key overwritten by Karabiner
-nnoremap ) }
-nnoremap ( {
+" nnoremap ) }
+" nnoremap ( {
+"nnoremap J }
+" nnoremap K {
 
 " utility binding, WARN: some mappings CANNOT have trailing comments
 noremap U :redo<CR> " revert last undo
