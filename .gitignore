@@ -5,6 +5,7 @@ config/hub
 config/workshopper
 node_modules/
 tmux/plugins/
+tmux/sidebar/
 vim/bundle/
 lbin/
 *.DS_Store

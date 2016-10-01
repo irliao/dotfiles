@@ -77,7 +77,6 @@ if [[ ($TERM_PROGRAM == "Apple_Terminal") ]]; then # Apple Terminal
   # TODO: bind keys to delete words faster, maybe bind to Option keys (requires research)
   # Key bindings, available widgets listed on http://zsh.sourceforge.net/Doc/Release/Zsh-Line-Editor.html#Standard-Widgets
   # WARN: do not bind to ^L or ^V
-  bindkey -v # press <ESC> to switch to NORMAL mode,
   bindkey "^A" beginning-of-line
   bindkey "^B" backward-word
   bindkey "^W" forward-word
@@ -85,13 +84,13 @@ if [[ ($TERM_PROGRAM == "Apple_Terminal") ]]; then # Apple Terminal
   bindkey "^C" kill-line
   bindkey "^X" backward-kill-word
   bindkey "^Y" vi-yank-whole-line # yank entire line to killer
-  # bindkey "^V" vi-put-after # paste last yanked text after cursor, TODO: press <DEL> right after vi-put-after
   bindkey "^Z" insert-last-word # insert word from last Entered command
   bindkey "^H" beginning-of-history
   bindkey "^O" down-line-or-search
   bindkey "^P" up-line-or-search
   bindkey "^U" undo
-  bindkey "^R" redo
+  bindkey '^R' history-incremental-search-backward
+  # bindkey "^R" redo
   stty -ixon # gives access to ^Q
   bindkey -s "^Q" "^[Isudo ^[A" # Tab key, prepend sudo
 
@@ -102,15 +101,16 @@ if [[ ($TERM_PROGRAM == "Apple_Terminal") ]]; then # Apple Terminal
   bindkey -r "^[[D" # Left arrow key
   # ^I is Tab key
 
+  # bindkey -v # press <ESC> to switch to NORMAL mode,
   # Display Vi-mode in prompt
-  function zle-line-init zle-keymap-select {
-      VIM_PROMPT="%{$fg_bold[yellow]%} [% Vi]% %{$reset_color%}"
-      RPS1="${${KEYMAP/vicmd/$VIM_PROMPT}/(main|viins)/}$EPS1"
-      zle reset-prompt
-  }
-  zle -N zle-line-init
-  zle -N zle-keymap-select
-  export KEYTIMEOUT=1 # 0.4 to 0.1 sec delay in Vim mode display change, raise value if other commands getting issues
+  # function zle-line-init zle-keymap-select {
+  #     VIM_PROMPT="%{$fg_bold[yellow]%}Vi%{$reset_color%}"
+  #     RPS1="${${KEYMAP/vicmd/$VIM_PROMPT}/(main|viins)/}$EPS1"
+  #     zle reset-prompt
+  # }
+  # zle -N zle-line-init
+  # zle -N zle-keymap-select
+  # export KEYTIMEOUT=1 # 0.4 to 0.1 sec delay in Vim mode display change, raise value if other commands getting issues
 
   [[ -f "${HOME}/.ztmux" ]] && source "${HOME}/.ztmux"
 elif [[ ($TERM_PROGRAM == "Apple_Terminal") ]]; then # iTerm2

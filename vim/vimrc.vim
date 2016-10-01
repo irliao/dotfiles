@@ -545,7 +545,7 @@ nnoremap I ci"
 " Join lines
 nnoremap <Space>J J
 " Enter the command-line mode
-nnoremap <CR> :
+nnoremap <leader>; :
 
 " Ctrl-A to beginning of line, Ctrl-E to end of line
 nnoremap <C-a> ^
