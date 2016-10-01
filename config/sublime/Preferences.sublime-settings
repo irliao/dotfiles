@@ -2,11 +2,7 @@
 	"color_scheme": "Packages/Theme - Afterglow/Afterglow.tmTheme",
 	"font_face": "Hack",
 	"font_size": 12,
-	"ignored_packages":
-	[
-		"Vintage",
-		"Vintageous"
-	],
+	"ignored_packages": [],
 	"tab_size": 2,
 	"theme": "Spacegray Eighties.sublime-theme"
 }

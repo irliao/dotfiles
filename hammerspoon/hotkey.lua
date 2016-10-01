@@ -17,7 +17,6 @@ end
 hs.hotkey.bind(super, '`', alertStatus)
 
 -- Both Modifer + Key to activate hotkey
--- TODO: refactor hotkey bindings to an external file
 hs.hotkey.bind(super, 'A', focusPreviousWindow)
 hs.hotkey.bind(super, 'S', resizeLeftRightFull)
 hs.hotkey.bind(hyper, 'S', resizeTopBottomFull) -- simulate Caps + Shift j+ S for vertical divide

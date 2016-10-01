@@ -1,6 +1,8 @@
 # source in ~/.bashrc
 # https://forums.gentoo.org/viewtopic-t-836006-start-0.html
 
+# Wrapper that prevents Tmux from creating useless sesssions
+
 tmux_nb=`tmux ls | wc -l`
 if [[ "$tmux_nb" == "0" ]]; then
     #echo "Launching tmux..."

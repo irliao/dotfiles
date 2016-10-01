@@ -1,10 +1,6 @@
 -- Hammerspoon Config
 
--- Ensure IPC is installed for CLI access
--- require("hs.ipc")
-
--- Hammerspoon configs
-hs.ipc.cliInstall()
+hs.ipc.cliInstall() -- install Hammerspoon cli
 hs.autoLaunch(true)
 hs.automaticallyCheckForUpdates(true)
 hs.dockIcon(false)
@@ -17,20 +13,24 @@ hs.window.setShadows(false)
 hs.hotkey.alertDuration = 0 -- hotkey alerts are disabled
 hs.hints.style = 'vimperator' -- window hint starts with the first character of the parent application's title
 hs.hints.fontName = 'Hack'
-hs.window.filter.ignoreAlways['Spotlight']=true -- prevent wfilter warnings from windowHighlight
-hs.window.filter.ignoreAlways['Siri']=true -- prevent wfilter warnings from windowHighlight
--- hs.window.filter.ignoreAlways['Hammerspoon']=true -- TODO: figure out how to remove errors from Hammerspoon console logs
--- hs.window.filter.ignoreAlways['Hammerspoon Console']=true
--- hs.window.filter.ignoreAlways[hs.console.hswindow():application():title()]=true
+hs.window.filter.setLogLevel = 'error'
+hs.window.filter.ignoreAlways['Safari Technology Preview Networking'] = true
+hs.window.filter.ignoreAlways['Safari Technology Preview Database Storage'] = true
+hs.window.filter.ignoreAlways['Siri'] = true -- prevent wfilter warnings from windowHighlight
+hs.window.filter.ignoreAlways['Spotlight'] = true -- prevent wfilter warnings from windowHighlight
 
--- NOTE: import order matters!
--- Preload defaults APIs/configs from Hammerspoon
--- require("hs.application") -- fixes error from hs.window.orderedWindows() in layoutVertical()
+-- WARN: import order matters!
 require("utility") -- no dependencies
 require("window") -- depends on util
 require("highlight") -- depends on window
 require("switcher") -- no dependencies
-require("modifier") -- no dependencies, defines Super/Hyper key
+
+osVer = hs.host.operatingSystemVersion()
+if osVer and osVer.major == 10 and osVer.minor == 12 then
+  require("superkey") -- no dependencies, defines Super/Hyper key
+  require("termkey")
+end
+
 require("hotkey") -- depends on all others, especially super/hyper definition
 
 -- TODO: broken
@@ -42,15 +42,10 @@ require("hotkey") -- depends on all others, especially super/hyper definition
 -- end
 -- hs.keycodes.inputSourceChanged(alertInputSource)
 
--- Global vars, persists across Hammerspoon session
-caffeineMenubar = hs.menubar.new() -- menubar icon
-
--- Global-local vars, reset each time init.lua is loaded
-isConfigLoaded = true
-caffeineStatus = nil
--- browser = selectBrowserByMachineName() -- TODO: figure out how to make function static for readibility, ex: ClassName.functionName
-
 -- Toggle binded to caffeine icon on menu bar
+caffeineStatus = nil
+local caffeineMenubar = hs.menubar.new() -- menubar icon
+local isConfigLoaded = true
 function caffeineToggle()
     hs.alert.closeAll()
     hs.caffeinate.toggle("system")

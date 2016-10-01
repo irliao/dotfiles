@@ -1,0 +1,140 @@
+{
+    "layouts": [
+        "tall",
+        "fullscreen"
+    ],
+    "Valid modifiers are": [
+        "option",
+        "shift",
+        "control",
+        "command"
+    ],
+    "mod1": [
+        "command",
+        "option",
+        "control"
+    ],
+    "mod2": [
+        "command",
+        "option",
+        "control",
+        "shift"
+    ],
+    "screens": 3,
+    "cycle-layout": {
+        "mod": "mod1",
+        "key": "space"
+    },
+    "cycle-layout-backward": {
+        "mod": "mod2",
+        "key": "space"
+    },
+    "select-tall-layout": {
+        "mod": "mod1",
+        "key": "s"
+    },
+    "select-wide-layout": {
+        "mod": "mod2",
+        "key": "s"
+    },
+    "select-fullscreen-layout": {
+        "mod": "mod1",
+        "key": "f"
+    },
+    "select-column-layout": {
+        "mod": "mod3",
+        "key": "f"
+    },
+    "focus-screen-1": {
+        "mod": "mod1",
+        "key": "1"
+    },
+    "focus-screen-2": {
+        "mod": "mod1",
+        "key": "2"
+    },
+    "focus-screen-3": {
+        "mod": "mod1",
+        "key": "3"
+    },
+    "throw-screen-1": {
+        "mod": "mod2",
+        "key": "1"
+    },
+    "throw-screen-2": {
+        "mod": "mod2",
+        "key": "2"
+    },
+    "throw-screen-3": {
+        "mod": "mod2",
+        "key": "3"
+    },
+    "shrink-main": {
+        "mod": "mod1",
+        "key": "h"
+    },
+    "expand-main": {
+        "mod": "mod1",
+        "key": "l"
+    },
+    "focus-ccw": {
+        "mod": "mod1",
+        "key": "a"
+    },
+    "focus-cw": {
+        "mod": "mod2",
+        "key": "a"
+    },
+    "swap-screen-ccw": {
+        "mod": "mod1",
+        "key": "d"
+    },
+    "swap-screen-cw": {
+        "mod": "mod2",
+        "key": "d"
+    },
+    "swap-ccw": {
+        "mod": "mod1",
+        "key": "["
+    },
+    "swap-cw": {
+        "mod": "mod1",
+        "key": "]"
+    },
+    "swap-main": {
+        "mod": "mod1",
+        "key": "."
+    },
+    "toggle-float": {
+        "mod": "mod2",
+        "key": "f"
+    },
+    "toggle-tiling": {
+        "mod": "mod2",
+        "key": "t"
+    },
+    "display-current-layout": {
+        "mod": "mod1",
+        "key": "/"
+    },
+    "reevaluate-windows": {
+        "mod": "mod1",
+        "key": "r"
+    },
+    "toggle-focus-follows-mouse": {
+        "mod": "mod2",
+        "key": "m"
+    },
+    "floating": [],
+    "float-small-windows": false,
+    "mouse-follows-focus": true,
+    "focus-follows-mouse": true,
+    "enables-layout-hud": true,
+    "enables-layout-hud-on-space-change": true,
+    "window-margin-size": 0,
+    "window-margins": false,
+    "ignore-menu-bar": true,
+    "use-canary-build": false,
+    "new-windows-to-main": false,
+    "send-crash-reports": false
+}

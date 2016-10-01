@@ -154,16 +154,16 @@
 
 	<item>
 		<name>Shortcuts in Terminal</name>
-		<appendix>* Command_L to send Tmux Prefix (Control + S)</appendix>
-		<appendix>* Command_R to send Vim MapLeader (,)</appendix>
+		<appendix>* Option_L to send Tmux Prefix (Control + S)</appendix>
+		<appendix>* Option_R to send Vim MapLeader (,)</appendix>
 		<identifier>private.shortcuts.tmux</identifier>
     <block>
       <only>TERMINAL</only>
       <!-- Tmux Prefix -->
       <autogen>
         --KeyOverlaidModifier--
-        KeyCode::COMMAND_L,
-        KeyCode::COMMAND_L,
+        KeyCode::OPTION_L,
+        KeyCode::OPTION_L,
         KeyCode::S, ModifierFlag::CONTROL_L | ModifierFlag::NONE
       </autogen>
     </block>
@@ -172,8 +172,8 @@
       <!-- Vim MapLeader -->
       <autogen>
         --KeyOverlaidModifier--
-        KeyCode::COMMAND_R,
-        KeyCode::COMMAND_R,
+        KeyCode::OPTION_R,
+        KeyCode::OPTION_R,
         KeyCode::COMMA, ModifierFlag::NONE
       </autogen>
     </block>
