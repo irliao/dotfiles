@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+
+CURRENT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+
+print_ip() {
+  local has_ip="$(ifconfig en0 | grep 'inet ' | awk '{printf $2}')"
+  if [ "$has_ip" ]; then # non-empty
+    ifconfig en0 | grep 'inet ' | awk '{printf $2}' | xargs echo
+  else
+    echo '0.0.0.0'
+  fi
+}
+
+main() {
+  print_ip
+}
+main

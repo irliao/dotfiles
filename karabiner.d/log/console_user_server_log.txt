@@ -196,3 +196,7 @@
 [2016-09-29 23:20:13.769] [console_user_server] [info] configuration_core_ was loaded.
 [2016-09-29 23:20:14.800] [console_user_server] [info] system_preferences::values is updated.
 [2016-09-29 23:36:26.186] [console_user_server] [info] configuration_core_ was loaded.
+[2016-09-30 23:46:13.681] [console_user_server] [info] version 0.90.45
+[2016-09-30 23:46:15.432] [console_user_server] [info] grabber_client_ is connected
+[2016-09-30 23:46:15.455] [console_user_server] [info] configuration_core_ was loaded.
+[2016-09-30 23:46:16.451] [console_user_server] [info] system_preferences::values is updated.
