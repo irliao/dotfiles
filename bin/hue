@@ -49,52 +49,52 @@ fi
 
 # light on function
 light_on () {
-        # determine brightness
-        if [ -z $bri ]; then
-                bri=100
-        fi
-        bright=$(($bri*254/100))
+  # determine brightness
+  if [ -z $bri ]; then
+          bri=100
+  fi
+  bright=$(($bri*254/100))
 
-        for light in $lights; do
-                ltype=`curl -X GET -s "http://$bridge/api/$hash/lights/$light" |sed -e 's/.*\"modelid/modelid/' -e 's/\,.*//' -e 's/type\": \"//' -e 's/\"//'`
-                if [ `echo $ltype |grep -c LWB00[46]` = 1 ]; then
-                        type="white"
-                        on=`curl -X GET -s "http://$bridge/api/$hash/lights/$light" |cut -d, -f1 |cut -d\{ -f3 |cut -d: -f2`
-                        if [ $on = "true" ]; then
-                                curl -X PUT -d '{"bri":'$bright'}' http://$bridge/api/$hash/lights/$light/state > /dev/null 2>&1
-                        elif [ $on = "false" ]; then
-                                curl -X PUT -d '{"on":true,"bri":'$bright'}' http://$bridge/api/$hash/lights/$light/state > /dev/null 2>&1
-                        fi
-                elif [ `echo $ltype |grep -c LCT00[12]` = 1 ]; then
-                        type="hue"
-                        on=`curl -X GET -s "http://$bridge/api/$hash/lights/$light" |cut -d, -f1 |cut -d\{ -f3 |cut -d: -f2`
-                        if [ $on = "true" ]; then
-                                curl -X PUT -d '{"ct":369,"bri":'$bright'}' http://$bridge/api/$hash/lights/$light/state > /dev/null 2>&1
-                        elif [ $on = "false" ]; then
-                                curl -X PUT -d '{"on":true,"ct":369,"bri":'$bright'}' http://$bridge/api/$hash/lights/$light/state > /dev/null 2>&1
-                        fi
-                elif [ `echo $ltype |grep -c LST001` = 1 ]; then
-                        type="lightstrip"
-                        on=`curl -X GET -s "http://$bridge/api/$hash/lights/$light" |cut -d, -f1 |cut -d\{ -f3 |cut -d: -f2`
-                        if [ $on = "true" ]; then
-                                curl -X PUT -d '{"ct":369,"bri":'$bright'}' http://$bridge/api/$hash/lights/$light/state > /dev/null 2>&1
-                        elif [ $on = "false" ]; then
-                                curl -X PUT -d '{"on":true,"ct":369,"bri":'$bright'}' http://$bridge/api/$hash/lights/$light/state > /dev/null 2>&1
-                        fi
-                fi
-        done
+  for light in $lights; do
+          ltype=`curl -X GET -s "http://$bridge/api/$hash/lights/$light" |sed -e 's/.*\"modelid/modelid/' -e 's/\,.*//' -e 's/type\": \"//' -e 's/\"//'`
+          if [ `echo $ltype |grep -c LWB00[46]` = 1 ]; then
+                  type="white"
+                  on=`curl -X GET -s "http://$bridge/api/$hash/lights/$light" |cut -d, -f1 |cut -d\{ -f3 |cut -d: -f2`
+                  if [ $on = "true" ]; then
+                          curl -X PUT -d '{"bri":'$bright'}' http://$bridge/api/$hash/lights/$light/state > /dev/null 2>&1
+                  elif [ $on = "false" ]; then
+                          curl -X PUT -d '{"on":true,"bri":'$bright'}' http://$bridge/api/$hash/lights/$light/state > /dev/null 2>&1
+                  fi
+          elif [ `echo $ltype |grep -c LCT00[12]` = 1 ]; then
+                  type="hue"
+                  on=`curl -X GET -s "http://$bridge/api/$hash/lights/$light" |cut -d, -f1 |cut -d\{ -f3 |cut -d: -f2`
+                  if [ $on = "true" ]; then
+                          curl -X PUT -d '{"ct":369,"bri":'$bright'}' http://$bridge/api/$hash/lights/$light/state > /dev/null 2>&1
+                  elif [ $on = "false" ]; then
+                          curl -X PUT -d '{"on":true,"ct":369,"bri":'$bright'}' http://$bridge/api/$hash/lights/$light/state > /dev/null 2>&1
+                  fi
+          elif [ `echo $ltype |grep -c LST001` = 1 ]; then
+                  type="lightstrip"
+                  on=`curl -X GET -s "http://$bridge/api/$hash/lights/$light" |cut -d, -f1 |cut -d\{ -f3 |cut -d: -f2`
+                  if [ $on = "true" ]; then
+                          curl -X PUT -d '{"ct":369,"bri":'$bright'}' http://$bridge/api/$hash/lights/$light/state > /dev/null 2>&1
+                  elif [ $on = "false" ]; then
+                          curl -X PUT -d '{"on":true,"ct":369,"bri":'$bright'}' http://$bridge/api/$hash/lights/$light/state > /dev/null 2>&1
+                  fi
+          fi
+  done
 }
 
 
 # light off function
 light_off () {
-        for light in $lights; do
-                on=`curl -X GET -s "http://$bridge/api/$hash/lights/$light" |cut -d, -f1 |cut -d\{ -f3 |cut -d: -f2`
-                while [ $on = "true" ]; do
-                        curl -X PUT -d '{"on":false}' http://$bridge/api/$hash/lights/$light/state > /dev/null 2>&1
-                        on=`curl -X GET -s "http://$bridge/api/$hash/lights/$light" |cut -d, -f1 |cut -d\{ -f3 |cut -d: -f2`
-                done
-        done
+  for light in $lights; do
+          on=`curl -X GET -s "http://$bridge/api/$hash/lights/$light" |cut -d, -f1 |cut -d\{ -f3 |cut -d: -f2`
+          while [ $on = "true" ]; do
+                  curl -X PUT -d '{"on":false}' http://$bridge/api/$hash/lights/$light/state > /dev/null 2>&1
+                  on=`curl -X GET -s "http://$bridge/api/$hash/lights/$light" |cut -d, -f1 |cut -d\{ -f3 |cut -d: -f2`
+          done
+  done
 }
 
 
