@@ -108,6 +108,7 @@ if [[ ($TERM_PROGRAM == "Apple_Terminal") ]]; then # Apple Terminal
       # RPS1="${${KEYMAP/vicmd/$VIM_PROMPT}/(main|viins)/}$EPS1"
 
       # read more on: http://unix.stackexchange.com/questions/547/make-my-zsh-prompt-show-mode-in-vi-mode
+      # also read up: http://martin.krischik.com/index.php/Z-Shell/VimMode
       # RPS1="${${KEYMAP/vicmd/-- NORMAL --}/(main|viins)/-- INSERT --}"
       RPS1="${${KEYMAP/vicmd/Vi}/(main|viins)/}"
       zle reset-prompt
