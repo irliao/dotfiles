@@ -1,0 +1,15 @@
+{
+    "profiles": [
+        {
+            "name": "Default profile",
+            "selected": true,
+            "simple_modifications": {
+                "caps_lock": "f18",
+                "right_option": "comma"
+            },
+            "standalone_modifiers": {
+                "f18": "escape"
+            }
+        }
+    ]
+}
