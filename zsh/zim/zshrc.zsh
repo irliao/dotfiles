@@ -77,6 +77,7 @@ if [[ ($TERM_PROGRAM == "Apple_Terminal") ]]; then # Apple Terminal
   # TODO: bind keys to delete words faster, maybe bind to Option keys (requires research)
   # Key bindings, available widgets listed on http://zsh.sourceforge.net/Doc/Release/Zsh-Line-Editor.html#Standard-Widgets
   # WARN: do not bind to ^L or ^V
+  bindkey -v
   bindkey "^A" beginning-of-line
   bindkey "^B" backward-word
   bindkey "^W" forward-word
@@ -103,14 +104,14 @@ if [[ ($TERM_PROGRAM == "Apple_Terminal") ]]; then # Apple Terminal
 
   # bindkey -v # press <ESC> to switch to NORMAL mode,
   # Display Vi-mode in prompt
-  # function zle-line-init zle-keymap-select {
-  #     VIM_PROMPT="%{$fg_bold[yellow]%}Vi%{$reset_color%}"
-  #     RPS1="${${KEYMAP/vicmd/$VIM_PROMPT}/(main|viins)/}$EPS1"
-  #     zle reset-prompt
-  # }
-  # zle -N zle-line-init
-  # zle -N zle-keymap-select
-  # export KEYTIMEOUT=1 # 0.4 to 0.1 sec delay in Vim mode display change, raise value if other commands getting issues
+  function zle-line-init zle-keymap-select {
+      VIM_PROMPT="%{$fg_bold[yellow]%}Vi%{$reset_color%}"
+      RPS1="${${KEYMAP/vicmd/$VIM_PROMPT}/(main|viins)/}$EPS1"
+      zle reset-prompt
+  }
+  zle -N zle-line-init
+  zle -N zle-keymap-select
+  export KEYTIMEOUT=1 # 0.4 to 0.1 sec delay in Vim mode display change, raise value if other commands getting issues
 
   [[ -f "${HOME}/.ztmux" ]] && source "${HOME}/.ztmux"
 elif [[ ($TERM_PROGRAM == "Apple_Terminal") ]]; then # iTerm2
