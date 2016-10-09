@@ -5,6 +5,7 @@ config/hub
 config/ranger/
 config/workshopper
 node_modules/
+karabiner.d/log/
 tmux/plugins/
 tmux/sidebar/
 vim/bundle/
