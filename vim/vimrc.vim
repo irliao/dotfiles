@@ -1,12 +1,11 @@
 " Vim Configs
 set nocompatible " vi improved, required
 
-" Automatic installation for Vim-Plug
-if empty(glob('~/.vim/autoload/plug.vim'))
-  silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
-    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-  autocmd VimEnter * PlugInstall | source $MYVIMRC
-endif
+" WARN: Order matters
+source ~/.vim/function.vim
+source ~/.vim/plugin.vim
+source ~/.vim/setting.vim
+source ~/.vim/scheme.vim
 
 " Cursor at position of last saved line when opening file
 autocmd BufReadPost *
@@ -14,306 +13,11 @@ autocmd BufReadPost *
     \   exe "normal! g`\"" |
     \ endif
 
-" Toggle highlight from search
-function! ToggleHighlight ()
-  set hlsearch! hlsearch?
-endfunction
-
-" Toggle cross highlight at cursor
-function! ToggleCursorCross ()
-  if &cursorline && &cursorcolumn
-    set nocursorline
-    set nocursorcolumn
-  else
-    set cursorline
-    highlight CursorLine ctermbg=Red
-    set cursorcolumn
-    highlight CursorColumn ctermbg=Red
-  endif
-endfunction
-
-" Diff current file against saved version
-function! DiffWithSaved ()
-  let filetype=&ft
-  diffthis
-  vnew | r # | normal! 1Gdd
-  diffthis
-  exe "setlocal bt=nofile bh=wipe nobl noswf ro ft=" . filetype
-endfunction
-
-" TODO: create key binding for this
-function! StripTrailingWhitespace()
-    if !&binary && &filetype != 'diff'
-          normal mz
-              normal Hmy
-                  %s/\s\+$//e
-                      normal 'yz<CR>
-                          normal `z
-                            endif
-                          endfunction
-
-" Delete trailing white space on save, useful for Python and CoffeeScript ;)
-function! DeleteTrailingWS()
-  exe "normal mz"
-  %s/\s\+$//ge
-  exe "normal `z"
-endfunc
-" WARN: uncomment out lines below to auto call function above for specified file type
-" autocmd BufWrite *.py :call DeleteTrailingWS()
-" autocmd BufWrite *.coffee :call DeleteTrailingWS()
-
-function! ShowListChar()
-" TODO: make this toggleable
-" set list " show trailing spaces and tabs as chars
-" set listchars=tab:▸\ ,eol:¬
-endfunc
-
-" Command-T build
-function! BuildCommandT(info)
-  " build C extension required
-  !cd ~/.vim/bundle/command-t/ruby/command-t
-  !ruby extconf.rb
-  !make
-endfunction
-
-" YouCompleteMe build
-" @param name - name of the plugin
-" @param status - 'installed', 'updated', or 'unchanged'
-" @param force - set on PlugInstall! or PlugUpdate!
-function! BuildYCM(info)
-    if a:info.status == 'installed' || a:info.force
-        !./install.py --clang-completer --tern-completer
-    endif
-endfunction
-
-" Vim-Plug
-call plug#begin('~/.vim/bundle')
-
-" utility
-Plug 'conradIrwin/vim-bracketed-paste' "  enables transparent pasting into vim. (i.e. no more :set paste!)
-Plug 'scrooloose/syntastic' " syntax checker
-Plug 'tpope/vim-commentary' " comment/uncomment selected lines with: gc
-Plug 'mbbill/undotree' " show history of undos in side panel
-Plug 'majutsushi/tagbar' " displays tags in a window, ordered by scope
-Plug 'christoomey/vim-tmux-navigator' " Vim/Tmux unified navigation key TODO: remove
-Plug 'ctrlpvim/ctrlp.vim' " Fuzzy file, buffer, mru, tag, etc finder
-Plug 'rking/ag.vim' " use AG in Vim faster
-Plug 'junegunn/vim-easy-align' " alignment tool
-Plug 'ervandew/supertab' " tab completion going down list
-Plug 'haya14busa/incsearch.vim' " incrementally highlights all pattern
-Plug 'tpope/vim-surround' " change surrounding (ex: parentheses, brackets, quotes, etc)
-Plug 'tpope/vim-repeat' " epeating supported plugin maps with '.'
-Plug 'sjl/gundo.vim' " visualize unndo tree
-Plug 'tmux-plugins/vim-tmux' " editor helper for .tmux.conf files
-Plug 'tmux-plugins/vim-tmux-focus-events' " improve autoread by automatically reading a file from disk if it was changed
-Plug 'terryma/vim-multiple-cursors'
-
-" visual
-Plug 'mhinz/vim-startify' " fancy start screen
-Plug 'vim-airline/vim-airline' " Lean & mean status/tabline for vim that's light as air
-Plug 'vim-airline/vim-airline-themes' " themes for Airline
-Plug 'tpope/vim-fugitive' " Git wrapper, install vim-git if Vim version < 7.2
-Plug 'airblade/vim-gitgutter' " show Git diff in gutter
-Plug 'kshenoy/vim-signature' " mark navigator
-Plug 'ervandew/screen'
-
-" language specific
-Plug 'pangloss/vim-javascript', { 'for': 'javascript' }
-Plug 'maksimr/vim-jsbeautify', { 'for': 'javascript' } " formats JavaScript
-Plug 'mxw/vim-jsx', { 'for': 'javascript' }
-Plug 'editorconfig/editorconfig-vim' " uses ~/.editorconfig for vim-jsbeautify
-Plug 'plasticboy/vim-markdown', { 'for': 'mkd' }
-Plug 'elzr/vim-json', { 'for': 'json' } " highlight key:value for JSON
-Plug 'groenewege/vim-less', { 'for': 'less' }
-Plug 'ryym/vim-riot'
-
-" color scheme
-Plug 'tomasr/molokai'
-Plug 'w0ng/vim-hybrid'
-Plug 'morhetz/gruvbox'
-Plug 'hukl/smyck-color-scheme'
-Plug 'chriskempson/base16-vim'
-Plug 'sjl/badwolf'
-Plug 'Lokaltog/vim-distinguished'
-Plug 'sickill/vim-monokai'
-" Plug 'crusoexia/vim-monokai' " refined vim-monokai
-Plug 'trusktr/seti.vim'
-
-" autocompletion
-Plug 'ervandew/supertab'
-Plug 'Valloric/YouCompleteMe', { 'do': function('BuildYCM'), 'for': ['cpp', 'js'] }
-autocmd! User YouCompleteMe if !has('vim_starting') | call youcompleteme#Enable() | endif
-
-" unused plugins
-Plug 'scrooloose/nerdtree' " , { 'on': 'NERDTreeToggle' }
-" Plug 'easymotion/vim-easymotion' " faster motions with jump to target
-
-call plug#end()
 " WARN: remove any [filetype off, filetype plugin indent on, syntax on], already included by vim-plug
-
-" Encoding and end of line.
-" Default file encoding for new files.
-setglobal fenc=utf-8
-" Detect file encoding when opening a file and try to choose from the following
-" encoding list (to check what file encoding was selected run ":set fenc").
-set fencs=ucs-bom,utf-8
-" Internal encoding used by Vim buffers, help and commands.
-set enc=utf-8
-" Terminal encoding used for input and terminal display.
-" set tenc=utf-8
-
-" Vim custom settings
-set encoding=utf-8
-set modeline " ???!!! something about setting vars specific to files
-" set backspace=indent,eol,start " custom configure backspace
-set backspace=eol,start,indent " backspacing over line breaks and start of insert
-set linespace=1
-set fileformats=unix,dos,mac " open files from mac/dos
-set exrc " load .exrc (rc for vi) if present
-set tags+=.tags
-set shortmess=atI
-set complete-=i
-set complete-=t
-set completeopt-=preview
-set autochdir " automatically set current directory to directory of last opened file
-set clipboard=unnamed " yanks to OSX clipboard instead TODO: requires Brew installed Vim
-" set paste " WARN: no used due to vim-bracketed-paste fixing paste
-" set nohidden " disable unsaved buffers
-set hidden " hide buffers
-set nostartofline " don't move the cursor to the start of line
-set ttyfast " makes some actions smoother (?)
-set shortmess=I " no startup messages
-
-" auto-completion settings
-set wildmenu " visual autocomplete for Vim command menu
-set wildignore+=*.o,*.obj,*.pyc,*.aux,*.bbl,*.blg,.git,.svn,.hg
-" set wildmode=list:longest,full " autocompletion menu layout
-
-" text wrap
-" let w:m2=matchadd('ErrorMsg', '\%>80v.\+', -1) " highlight text past 80 chars " TODO: make a toggle function
-set nojoinspaces " suppress inserting two spaces between sentences
-set nowrap " display long lines as is
-" set textwidth=0 " disable auto newline during Insert mode
-" set whichwrap+=<,>,h,l " scrolling past end of line begins at start of next line
-" set linebreak " wrap lines at convenient points
-set textwidth=0 " original setting: set textwidth=110
-let &wrapmargin= &textwidth
-set formatoptions=croql
-
-" visual
-set number " line numbering
-set ruler " show position in line
-set cursorline " use '_' character for cursor
-set fillchars+=stl:\ ,stlnc:\ " disable statusline fillchars
-set laststatus=2 " always display statusline (e.g. Airline)
-" set noshowmode " hide Vim mode indicator
-
-" set ch=0 " statusline height
-" set statusline=%-30.50(%n\ %f\ %m%h%r%w%)%l/%L\ (%p%%),\ %c\ %<%=%(\(%{bufnr(\"#\")}\ %{bufname(\"#\")})%)
-" set showtabline=2 " always display the tabline, even if there is only one tab
-set showcmd " show last command in the bottom right
-set splitbelow " new window opens below current one
-set splitright " new window opens to the right of current one
-set ambiwidth=single
-
-" disable visual alert for errors
-set noerrorbells " disable error bell
-set novisualbell " disable visual bell
-set t_vb= " disable visual flash
-
-" search
-set showmatch " highlight matching code such as {},(),[]
-set mat=2 " show matching brackets for 2 tenths of a second to blink
-set incsearch " search while typing before Return
-set hlsearch " highlight search results
-set ignorecase " ignoring cases for search
-set smartcase  " searches with case if any upper-case chars used
-set magic " for regular expression
-match ErrorMsg '^\(<\|=\|>\)\{7\}\([^=].\+\)\?$' " highlight VCS conflict markers
-
-" identation
-set autoindent
-set smartindent
-set smarttab
-set shiftwidth=2
-set softtabstop=2 " number of spaces in tab when editing
-set tabstop=2
-set expandtab " tabs are spaces
-
-" lines visible when scrolling past window
-set scrolloff=5 " lines from top and bottom
-set sidescrolloff=5 " lines on the left
-set sidescroll=3 " lines from when scrolled off the window
-
-" optimizations (when editing small files)
-set nocursorcolumn
-set norelativenumber
-set foldmethod=manual " set foldmethod=marker
-set synmaxcol=200
-set lazyredraw " no redraw while executing macros custom Airline
-let loaded_matchparen=1 " avoid loading matchparen
-" set nocursorline " no '_' character for cursor
-
-" swap files
-set noswapfile " no more *.swp files during Vim edit
-set nobackup
-set nowb
-" set noundofile " TODO: maybe re-enable swap file, backup, and undo file
-" Ensure the temp dirs exist
-" call system("mkdir -p ~/.vim/tmp/swap")
-" call system("mkdir -p ~/.vim/tmp/backup")
-" call system("mkdir -p ~/.vim/tmp/undo")
-" Change where we store swap/undo files
-" set dir=~/.vim/tmp/swap/
-" set backupdir=~/.vim/tmp/backup/
-" set undodir=~/.vim/tmp/undo/
-
-
-set background=dark
-" Color theme settings
-if has("gui_running")
-  " Molokai Theme
-  colorscheme badwolf
-  " let g:molokai_original = 1 " use original monokai background color
-  " let g:rehash256 = 1 " attempts to bring the 256 color version as close as possible to the the default (dark) GUI version
-  " set guifont=Source\ Code\ Pro\ for\ Powerline:h13
-  set guifont=Hack\ Regular:h13
-  " TODO: configure highlights like below, but replace cterm with gui, ex: ctermfg -> guifg
-else
-  " colorscheme molokai
-  " hi Normal ctermbg=none
-  " hi NonText ctermbg=none
-  " hi LineNr ctermbg=none
-  " let g:molokai_original = 1 " use original monokai background color
-  " let g:rehash256 = 1 " attempts to bring the 256 color version as close as possible to the the default (dark) GUI version
-
-  " colorscheme monokai
-  " hi Normal ctermbg=none
-  " hi NonText ctermbg=none
-  " hi LineNr ctermbg=none
-  " set t_Co=256 " iTerm2 256 color mode for Airline highlight
-
-  colorscheme seti
-  " let g:hybrid_reduced_contrast = 1 " Remove this line if using the default palette.
-  hi Normal ctermbg=none " ctermbg=none is needed to fix bad line background coloring
-  hi Visual ctermbg=Red ctermfg=Black cterm=none
-  hi Search ctermbg=Red ctermfg=Black cterm=none
-  " TODO: configure highlight for WildMenu
-  " TODO: configure highlight for MatchParen
-  " TODO: more customization at http://andrewradev.com/2011/08/06/making-vim-pretty-with-custom-colors/
-
-  " colorscheme badwolf
-  " let g:badwolf_darkgutter = 0
-  " let g:badwolf_tabline = 1
-endif
 
 " SuperTab settings
 let g:SuperTabDefaultCompletionType = "<c-n>" " <tab> completion going -down- list
 
-" Incsearch settings
-map /  <Plug>(incsearch-forward)
-map ?  <Plug>(incsearch-backward)
-map g/ <Plug>(incsearch-stay)
 
 " Syntastic settings
 set statusline+=%#warningmsg#
@@ -458,6 +162,11 @@ endif
 " set timeoutlen=50 " WARN: DO NOT enable, enabling this will make <leader> maps unusable
 " set timeout timeoutlen=1000 ttimeoutlen=100 " TODO: verify this fixes slow O inserts
 " WARN: Use H (high), M (middle), or L (low) to jump to screen positions to shorten the distance
+
+" Incsearch settings
+map /  <Plug>(incsearch-forward)
+map ?  <Plug>(incsearch-backward)
+map g/ <Plug>(incsearch-stay)
 
 " Airline tabline numbering
 let g:airline#extensions#tabline#buffer_idx_mode = 1

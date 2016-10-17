@@ -19,5 +19,3 @@ vim +PlugInstall +qall
 cd ~/.vim/bundle/YouCompleteMe && ./install.py --clang-completer --tern-completer
 
 echo "Finished setting up Vim"
-
-# EOF
