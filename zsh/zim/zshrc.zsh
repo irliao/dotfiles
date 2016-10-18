@@ -77,7 +77,7 @@ if [[ ($TERM_PROGRAM == "Apple_Terminal") ]]; then # Apple Terminal
   # TODO: bind keys to delete words faster, maybe bind to Option keys (requires research)
   # Key bindings, available widgets listed on http://zsh.sourceforge.net/Doc/Release/Zsh-Line-Editor.html#Standard-Widgets
   # WARN: do not bind to ^L or ^V
-  bindkey -v # press <ESC> to switch to NORMAL mode,
+  bindkey -v # press <ESC> to enter NORMAL mode, press i to enter INSERT mode
   bindkey "^A" beginning-of-line
   bindkey "^B" backward-word
   bindkey "^W" forward-word
@@ -110,7 +110,7 @@ if [[ ($TERM_PROGRAM == "Apple_Terminal") ]]; then # Apple Terminal
       # read more on: http://unix.stackexchange.com/questions/547/make-my-zsh-prompt-show-mode-in-vi-mode
       # also read up: http://martin.krischik.com/index.php/Z-Shell/VimMode
       # RPS1="${${KEYMAP/vicmd/-- NORMAL --}/(main|viins)/-- INSERT --}"
-      RPS1="${${KEYMAP/vicmd/-- NORMAL --}/(main|viins)/}"
+      RPS1="${${KEYMAP/vicmd/-- NORMAL --}/(main|viins)/}$EPS1"
       zle reset-prompt
   }
   zle -N zle-line-init
