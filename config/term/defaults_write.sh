@@ -3,11 +3,17 @@
 # Ask for the administrator password upfront
 sudo -v
 
+# TODO: removing existing 'NSUserKeyEquivalents' and research on the exact effect of this defaults
+# Make CMD-V paste and match format when applicable
+# defaults write NSGlobalDomain NSUserKeyEquivalents -dict "Paste and Match Style" -string "@v"
+
 # WARN: sets Capslock to Ctrl... not verified to work yet...
 # defaults -currentHost write -g com.apple.keyboard.modifiermapping.alt_handler_id-50 -array "<dict><key>HIDKeyboardModifierMappingDst</key><integer>2</integer><key>HIDKeyboardModifierMappingSrc</key><integer>0</integer></dict>"
 
-# Make CMD-V paste without formatting
-defaults write NSGlobalDomain NSUserKeyEquivalents -dict "Paste and Match Style" -string "@v"
+# WARN: uncomment below to set Launcher grid to 9-col, 4-row
+# defaults write com.apple.dock springboard-columns -int 9
+# defaults write com.apple.dock springboard-rows -int 4
+# defaults write com.apple.dock ResetLaunchPad -bool TRUE;killall Dock
 
 # Make CMD-F in Finder to start "Find by filename"
 defaults write com.apple.finder NSUserKeyEquivalents -dict "Find by Name..." -string "@f"
@@ -164,11 +170,6 @@ defaults write com.apple.Dock showhidden -boolean yes
 
 # disable Photo from opening automatically when device connects
 defaults -currentHost write com.apple.ImageCapture disableHotPlug -bool true
-
-# default 7-col, 5-row
-defaults write com.apple.dock springboard-columns -int 9
-defaults write com.apple.dock springboard-rows -int 4
-defaults write com.apple.dock ResetLaunchPad -bool TRUE;killall Dock
 
 # prevent OS X Help Window from Staying on Top
 defaults write com.apple.helpviewer DevMode -bool FALSE
