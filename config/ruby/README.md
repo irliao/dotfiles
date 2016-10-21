@@ -16,3 +16,6 @@ gem update --system
 ```bash
 gem update -n /usr/local/bin
 ```
+
+## Tasks
+* add .gemfile

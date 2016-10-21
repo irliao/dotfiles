@@ -65,9 +65,6 @@ alias tmux='TERM=xterm-256color \tmux'
 alias tmk="tmux kill-server"
 alias tmu="tmux source-file ~/.tmux.conf"
 alias getTmuxLayout='tmux list-windows -F "#{window_active} #{window_layout}" | grep "^1" | cut -d " " -f 2'
-alias tl="teamocil"
-alias tle="teamocil --edit"
-alias tll="teamocil --list"
 alias tlc="source ~/.tmux/tmux_colors.sh"
 alias tclear="run_in_all_naked_panes clear" # requires script in ~/.bin
 # tmux list-keys -t vi-copy
@@ -78,7 +75,6 @@ alias fk='$(thefuck $(fc -ln -1))' # WARN: this alias must use single quotes to 
 alias ch="cheat"
 alias py="python"
 alias kd="ksdiff"
-alias md="macdown"
 alias ns="npm start"
 alias yd="youtube-dl" # download YouTube video
 alias seb="open -g 'hammerspoon://safari?someParam=openExtensionBuilder'" # open Safari Extension Builder using Hammerspoon
@@ -101,6 +97,7 @@ alias gm="git standup" # m for morning (standup usually in morning)
 alias gp="git pull"
 alias gr="git remote"
 alias gs="git status"
+alias gmd="grip README.md" # preview Markdown in browser using grip
 alias gpum="git pull upstream master"
 alias gdum="git diff upstream/master"
 alias glp="git log --oneline --abbrev-commit --all --graph --decorate --color"

@@ -1,3 +1,5 @@
+-- Terminal.app keyboard customization
+
 local wf = hs.window.filter
 wf.default:setAppFilter('My IDE',{allowTitles=1}) -- ignore no-title windows (e.g. transient autocomplete suggestions) in My IDE
 

@@ -1,4 +1,6 @@
+-- TODO: remove this file once Karabiner-Elements officially supports Super/Hyper keys
 -- References:
+-- https://github.com/lodestone/hyper-hacks/blob/master/hammerspoon/init.lua
 -- https://gist.github.com/prenagha/1c28f71cb4d52b3133a4bff1b3849c3e
 -- https://gist.github.com/ttscoff/cce98a711b5476166792d5e6f1ac5907
 -- https://github.com/lodestone/hyper-hacks/blob/master/hammerspoon/init.lua

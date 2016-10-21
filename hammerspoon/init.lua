@@ -1,6 +1,9 @@
 -- Hammerspoon Config
 
-hs.ipc.cliInstall() -- install Hammerspoon cli
+-- Hammerspoon CLI
+require("hs.ipc") -- provides server portion of cli
+hs.ipc.cliInstall() -- installs cli named 'hs' in /Applications/Hammerspoon.app/Contents/Resources/extensions/hs/ipc/bin/
+
 hs.autoLaunch(true)
 hs.automaticallyCheckForUpdates(true)
 hs.dockIcon(false)
@@ -26,13 +29,14 @@ require("window") -- depends on util
 require("highlight") -- depends on window
 require("switcher") -- no dependencies
 
+-- TODO: remove if check after deprecating osx10.11
 osVer = hs.host.operatingSystemVersion()
 if osVer and osVer.major == 10 and osVer.minor == 12 then
-  require("superkey") -- no dependencies, defines Super/Hyper key
-  require("termkey")
+  require("superkey") -- no dependencies, defines Super/Hyper key for hotkey module
+  require("termkey") -- no dependencies
 end
 
-require("hotkey") -- depends on all others, especially super/hyper definition
+require("hotkey") -- depends on imported modules above
 
 -- TODO: broken
 -- Input source change with alert
