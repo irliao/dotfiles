@@ -1,6 +1,9 @@
 #
-# mingit theme
+# Mingit Theme
+# @author: iliao
 #
+
+# NOTE: synlink ~/.zim/modules/prompt/functions/prompt_mingit_setup -> /Users/irliao/.dotfiles/zsh/prompts/mingit.zsh
 
 gst_get_prefix() {
   print "%(?:%F{6} :%F{6} %s)%f"
@@ -20,6 +23,7 @@ gst_get_pwd() {
 prompt_mingit_precmd() {
   PROMPT="$(gst_get_prefix)%F{8}$(gst_get_pwd)%f$(parse_git_dirty)$(git_prompt_info)$(gst_get_suffix)"
 
+  # TODO: determine if this is useful to keep or not
   # save cwd and show it on the segment (powerline)
   # PROMPT="$PROMPT"'$([ -n "$TMUX" ] && tmux setenv TMUXPWD_$(tmux display -p "#D" | tr -d %) "$PWD")'
 }

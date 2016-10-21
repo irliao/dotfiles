@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+# prints the current IP, used in Tmux left status-line
+
 CURRENT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
 print_ip() {

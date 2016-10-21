@@ -15,12 +15,13 @@ DEFAULT_USER="irliao" # replaces user@hostname with specified username
 typeset -U fpath
 typeset -U path
 path=(
- /usr/local/{bin,sbin}
+  /usr/local/{bin,sbin}
   $path
 )
 typeset -U PATH # remove duplicate entries in Path
-PATH="/usr/local/bin:${HOME}/.bin:/usr/local/sbin:/usr/bin:/bin:/usr/sbin:/sbin"
+PATH="/usr/local/bin:$HOME/.bin:/usr/local/sbin:/usr/bin:/bin:/usr/sbin:/sbin"
 
+# TODO: figure out how LESS works
 # export LESS_TERMCAP_mb=$'\E[01;31m'
 # export LESS_TERMCAP_md=$'\E[01;31m'
 # export LESS_TERMCAP_me=$'\E[0m'
@@ -28,10 +29,11 @@ PATH="/usr/local/bin:${HOME}/.bin:/usr/local/sbin:/usr/bin:/bin:/usr/sbin:/sbin"
 # export LESS_TERMCAP_so=$'\E[01;44;33m'
 # export LESS_TERMCAP_ue=$'\E[0m'
 # export LESS_TERMCAP_us=$'\E[01;32m'
-export VISUAL='vim'
-export EDITOR='vim'
 # export LESS="-R"
 # export PAGER='less'
+
+export VISUAL='vim'
+export EDITOR='vim'
 export DEVPATH="${HOME}/Developments"
 export HISTCONTROL=erasedups  # Ignore duplicate entries in history
 export HISTIGNORE="&:ls:ll:la:l.:pwd:exit:clear:clr:[bf]g"
@@ -53,17 +55,17 @@ eval "$(thefuck --alias fk)"
 # Completion with more than 1 possibilities will insert first available option into prompt automatically
 setopt MENU_COMPLETE
 
-# Local profile... exports local (or private) variables
-[[ -f "${HOME}/.local_profile" ]] && source "${HOME}/.local_profile"
-
-# Bash profile
-[[ -f "${HOME}/.bash_profile" ]] && source "${HOME}/.bash_profile"
-
 # Custom functions
 [[ -f "${HOME}/.zfunction" ]] && source "${HOME}/.zfunction"
 
 # Custom aliases, should source after custom functions incase aliasing functions
 [[ -f "${HOME}/.zalias" ]] && source "${HOME}/.zalias"
+
+# Local profile... exports local (or private) variables
+[[ -f "${HOME}/.local_profile" ]] && source "${HOME}/.local_profile"
+
+# Bash profile
+[[ -f "${HOME}/.bash_profile" ]] && source "${HOME}/.bash_profile"
 
 # Use 256 color terminal
 export TERM="xterm-256color"

@@ -18,6 +18,7 @@ hs.window.filter.ignoreAlways['Safari Technology Preview Networking'] = true
 hs.window.filter.ignoreAlways['Safari Technology Preview Database Storage'] = true
 hs.window.filter.ignoreAlways['Siri'] = true -- prevent wfilter warnings from windowHighlight
 hs.window.filter.ignoreAlways['Spotlight'] = true -- prevent wfilter warnings from windowHighlight
+hs.window.filter.ignoreAlways['Autoupdate'] = true
 
 -- WARN: import order matters!
 require("utility") -- no dependencies

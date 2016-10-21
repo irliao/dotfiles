@@ -9,6 +9,22 @@ alias vs="vim -O" # split files horizontally
 alias vt="vim -p" # open files as separate tabs
 alias m="mvim"
 
+# Directories
+alias bin="cd $HOME/.bin"
+alias dot="cd $HOME/.dotfiles"
+alias dow="cd $HOME/Downloads"
+alias doc="cd $HOME/Documents"
+alias mus="cd $HOME/Music"
+alias pic="cd $HOME/Pictures"
+alias app="cd $HOME/Applications"
+alias dev="cd $DEVPATH" # $DEVPATH defined in ~/.zshrc
+alias saf="cd $DEVPATH/safari-extensions"
+alias web="cd $DEVPATH/irliao.github.io"
+alias rea="cd $DEVPATH/react-tutorials"
+alias ghc="cd $DEVPATH/clones"
+alias bs="cd ~/BitTorrent\ Sync"
+alias vm="cd ~/Virtual\ Machines"
+
 # Unix
 alias s="source"
 alias c='clear'
@@ -66,8 +82,6 @@ alias kd="ksdiff"
 alias md="macdown"
 alias ns="npm start"
 alias yd="youtube-dl" # download YouTube video
-alias hue="setPhilipsHueTheme"
-alias huehome="setPhilipsHueTheme home"
 alias seb="open -g 'hammerspoon://safari?someParam=openExtensionBuilder'" # open Safari Extension Builder using Hammerspoon
 alias kbr="/Applications/Karabiner.app/Contents/Library/bin/karabiner reloadxml"
 alias sel="/Applications/Seil.app/Contents/Library/bin/seil"
@@ -93,27 +107,13 @@ alias gdum="git diff upstream/master"
 alias glp="git log --oneline --abbrev-commit --all --graph --decorate --color"
 alias grs="git reflog show" # show branch activities
 
-# Directories
-alias dot="cd ${HOME}/.dotfiles"
-alias dow="cd ${HOME}/Downloads"
-alias doc="cd ${HOME}/Documents"
-alias mus="cd ${HOME}/Music"
-alias pic="cd ${HOME}/Pictures"
-alias app="cd ${HOME}/Applications"
-alias dev="cd ${DEVPATH}"
-alias saf="cd ${DEVPATH}/safari-extensions"
-alias web="cd ${DEVPATH}/irliao.github.io"
-alias rea="cd ${DEVPATH}/react-tutorials"
-alias ghc="cd ${DEVPATH}/clones"
-alias bs="cd ~/BitTorrent\ Sync"
-alias vm="cd ~/Virtual\ Machines"
-
 # History
 alias his="history"
 alias history15="history | awk '{a[$2]++}END{for(i in a){print a[i] " " i}}' | sort -rn | head -15"
 alias historyTop='history | sort -rn | head'
 alias historyClear='history -c'
 
+# TODO: cleanup aliases below
 # OSX
 alias osxClipboardNoFormat="pbpaste | textutil -convert txt -stdin -stdout -encoding 30 | pbcopy"
 alias osxOpeniCloud="cd $HOME/Library/Mobile Documents/com~apple~CloudDocs/"

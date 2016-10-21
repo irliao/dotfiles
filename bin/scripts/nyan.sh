@@ -1,13 +1,7 @@
 #!/bin/bash
-# Git Nyan Graph
 
-# Hello there! I have no idea what I'm doing
-# -however, I do think it'd be nice to see
-# nyan cat following a pretty git log graph thing.
-
-# Feel free to modify this to best suite your
-# favorite customized log graph
-# git log --graph --color --pretty=oneline
+# Git Nyan Graph: https://github.com/steckel/Git-Nyan-Graph
+# Custom Git log: git log --graph --color --pretty=oneline
 
 e='\033'
 RESET="$e[0m"

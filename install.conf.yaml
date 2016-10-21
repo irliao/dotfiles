@@ -10,7 +10,7 @@
     ~/.bin: bin
     ~/.cheat: config/cheat
     ~/.config: config
-    ~/.editorconfig: vim/editorconfig
+    ~/.editorconfig: vim/editorconfig.conf
     ~/.gitconfig: git/gitconfig
     ~/.gitignore_global: git/gitignore_global
     ~/.hammerspoon: hammerspoon

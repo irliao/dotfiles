@@ -1,3 +1,4 @@
+# Tmux integration with Zsh
 # Original: https://github.com/sorin-ionescu/prezto/blob/master/modules/tmux/init.zsh
 
 # return if tmux not installed

@@ -1,5 +1,12 @@
 # Vim
 
+## Installation
+```bash
+brew install vim
+ln -s /usr/local/bin/mvim /usr/local/bin/vim
+cd ~/.vim/bundle/YouCompleteMe && ./install.py --clang-completer --tern-completer
+```
+
 ## Files
 - vimrc_bak.vim : working version of vimrc
 - vimrc_broken.vim : broken, but extremely configured version of vimrc
