@@ -53,6 +53,7 @@ source install.sh
 * add Wiki page
 * add Contribution.md
 * decide if should add Zim (clone or fork) as a submodule
+* consider moving Dotbot into a submodule dir to organize all submodules
 * choose between using master .gitignore at project root or individual .gitignore at various folders
 * write own script (maybe Makefile or Rake) to setup .files and remove dotbot from submodule
 * fix shift-Tab issue in iTerm2 (somehow fixed by sourcing ~/.zshrc)

@@ -6,14 +6,13 @@
 
 - link:
     ~/.dotfiles: ''
-    ~/.atom: config/atom
     ~/.bin: bin
-    ~/.cheat: config/cheat
     ~/.config: config
+    ~/.cheat: config/cheat
+    ~/.grip: config/grip
     ~/.editorconfig: vim/editorconfig.conf
     ~/.gitconfig: git/gitconfig
     ~/.gitignore_global: git/gitignore_global
-    ~/.grip: config/grip
     ~/.hammerspoon: hammerspoon
     ~/.ideavimrc: vim/ideavimrc.vim
     ~/.karabiner.d: karabiner.d

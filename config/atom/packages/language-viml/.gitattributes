@@ -1,2 +1,0 @@
-# Exclude fixtures from language analysis
-tests/* linguist-vendored
