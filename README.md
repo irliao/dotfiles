@@ -1,6 +1,6 @@
 # irliao's dotfiles
 
-![screenshot]((http://i.imgur.com/BXXPRU3.png)
+![screenshot](http://i.imgur.com/BXXPRU3.png)
 
 ## Installation
 
