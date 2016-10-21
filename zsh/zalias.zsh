@@ -26,11 +26,10 @@ alias bs="cd ~/BitTorrent\ Sync"
 alias vm="cd ~/Virtual\ Machines"
 
 # Unix
+alias g="grep"
 alias s="source"
 alias c='clear'
 alias d='dirs -v'
-alias pbc='pbcopy'
-alias pbp='pbpaste'
 alias la="ls -la"
 alias al="ls -lar"
 alias sl="ls -r" # ls reverse
@@ -106,6 +105,7 @@ alias gpum="git pull upstream master"
 alias gdum="git diff upstream/master"
 alias glp="git log --oneline --abbrev-commit --all --graph --decorate --color"
 alias grs="git reflog show" # show branch activities
+alias gCleanDS="find . -name .DS_Store -print0 | xargs -0 git rm -f --ignore-unmatch" # remove existing .DS_Store files from repository
 
 # History
 alias his="history"

@@ -39,8 +39,8 @@ source install.sh
 * [tpm](https://github.com/tmux-plugins/tpm) - Tmux plugin manager
 
 ### Applications
-* [Hammerspoon]() - system automation
-* [Karabiner-Elements]() - keyboard customization
+* [Hammerspoon](https://github.com/Hammerspoon/hammerspoon) - system automation
+* [Karabiner-Elements](https://github.com/tekezo/Karabiner-Elements) - keyboard customization (for osx10.12)
 
 ## Tasks
 
