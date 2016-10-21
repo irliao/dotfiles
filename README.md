@@ -1,5 +1,7 @@
 # irliao's dotfiles
 
+![screenshot]((http://i.imgur.com/BXXPRU3.png)
+
 ## Installation
 
 Clone the repo to some directory, ex: ~/Developments/
