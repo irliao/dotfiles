@@ -1,6 +1,7 @@
+-- TODO: refactor this file to be personal customization
 
 -- A global variable for the Hyper Mode
-k = hs.hotkey.modal.new({}, "F17")
+k = hs.hotkey.modal.new({}, "F19")
 
 -- HYPER+L: Open news.google.com in the default browser
 lfun = function()
