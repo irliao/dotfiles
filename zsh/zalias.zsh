@@ -70,6 +70,7 @@ alias tclear="run_in_all_naked_panes clear" # requires script in ~/.bin
 # tmux list-keys -t vi-copy
 
 # CLIs
+alias st="syncthing"
 alias bu="brew update && brew upgrade && brew prune && brew cleanup && brew doctor"
 alias fk='$(thefuck $(fc -ln -1))' # WARN: this alias must use single quotes to work properly
 alias ch="cheat"
