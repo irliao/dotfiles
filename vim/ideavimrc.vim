@@ -1,5 +1,6 @@
 set gdefault
 set ignorecase
+set relativenumber
 
 set clipboard=unnamed " yanks to OSX clipboard instead TODO: requires Brew installed Vim
 

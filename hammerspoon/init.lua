@@ -11,6 +11,7 @@ hs.menuIcon(false)
 hs.dockIcon(false)
 hs.consoleOnTop(true)
 hs.crash.crashLogToNSLog = true -- show crash logs as OSX notification
+hs.hotkey.alertDuration = 0 -- hotkey alerts are disabled
 hs.window.animationDuration = 0
 hs.window.setShadows(false)
 hs.hints.style = 'vimperator' -- window hint starts with the first character of the parent application's title

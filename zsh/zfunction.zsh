@@ -448,10 +448,12 @@ nyan() {
 # TODO: integrate this function into ~/.bin/hue
 # Set PhilipsHue light theme using cURL to send HTTP Put
 # args: $1 - theme name
-setPhilipsHueTheme() {
+sethue() {
 	if [[ $# < 1 ]] then
-		echo "error: setPhilipsHueTheme requires at least 1 arg"
-		return 1;
+		echo "error: setPhilipsHueTheme requires at least 1 arg, running command with default params\n"
+    theme="home"
+  else
+    theme=$1
 	fi
 
  	# WARN: IP/User could change frequently
@@ -463,11 +465,11 @@ setPhilipsHueTheme() {
 	hue_url_light2="$hue_ip/api/$hue_user/lights/2/state";
 	hue_url_light3="$hue_ip/api/$hue_user/lights/3/state";
 
-	if [[ $1 == "off" ]] then
+	if [[ $theme == "off" ]] then
 		hue_body_light1='{"on": false,"bri": 254, "hue": 15125, "sat": 133}';
 		hue_body_light2='{"on": false,"bri": 163, "hue": 22632, "sat": 254}';
 		hue_body_light3='{"on": false,"bri": 163, "hue": 26632, "sat": 254}';
-	elif [[ $1 == "home" ]] then
+	elif [[ $theme == "home" ]] then
         if [[ $2 == "low" ]] then
             hue_body_light1='{"on": true,"bri": 3, "hue": 15125, "sat": 133}';
 		        hue_body_light2='{"on": true,"bri": 2, "hue": 26632, "sat": 254}';
@@ -477,24 +479,24 @@ setPhilipsHueTheme() {
 		    hue_body_light2='{"on": true,"bri": 163, "hue": 26632, "sat": 254}';
 		    hue_body_light3='{"on": true,"bri": 163, "hue": 26632, "sat": 254}';
         fi
-	elif [[ $1 == "relax" ]] then
+	elif [[ $theme == "relax" ]] then
 		hue_body_light1='{"on": true,"bri": 144, "hue": 13088, "sat": 213}';
 		hue_body_light2='{"on": true,"bri": 144, "hue": 13088, "sat": 213}';
 		hue_body_light3='{"on": true,"bri": 144, "hue": 13088, "sat": 213}';
-	elif [[ $1 == "sexy" ]] then
+	elif [[ $theme == "sexy" ]] then
 		hue_body_light1='{"on": true,"bri": 225, "hue": 45706, "sat": 252}';
 		hue_body_light2='{"on": true,"bri": 183, "hue": 704, "sat": 250}';
 		hue_body_light3='{"on": true,"bri": 183, "hue": 704, "sat": 250}';
-	elif [[ $1 == "study" ]] then
+	elif [[ $theme == "study" ]] then
 		hue_body_light1='{"on": true,"bri": 219, "hue": 33848, "sat": 44}';
 		hue_body_light2='{"on": true,"bri": 219, "hue": 33848, "sat": 44}';
 		hue_body_light3='{"on": true,"bri": 219, "hue": 33848, "sat": 44}';
-	elif [[ $1 == "candy" ]] then
+	elif [[ $theme == "candy" ]] then
 		hue_body_light1='{"on": true,"bri": 254, "hue": 16198, "sat": 59}';
 		hue_body_light2='{"on": true,"bri": 238, "hue": 25653, "sat": 254}';
 		hue_body_light3='{"on": true,"bri": 254, "hue": 14738, "sat": 153}';
 	else
-		echo "error: setPhilipsHueTheme did not recognize theme: $1"
+		echo "error: hueset did not recognize theme: $1"
 		return 1;
 	fi
 
