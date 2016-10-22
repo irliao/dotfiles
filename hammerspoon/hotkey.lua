@@ -18,7 +18,7 @@ end
 -- Returns string name of browser to use based on machine name
 function chooseBrowserByMachineName()
   local machineName = hs.host.localizedName()
-  if machineName == "irliao-mba" or machineName == "irliao-mbp" then -- personal
+  if machineName == "irl-mba" or machineName == "irl-mbp" then -- personal
     browser = "Safari Technology Preview"
   elseif machineName == "SDGL130e9919d" then -- work
     browser = "Google Chrome"

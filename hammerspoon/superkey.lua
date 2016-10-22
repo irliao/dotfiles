@@ -5,9 +5,11 @@
 -- https://gist.github.com/ttscoff/cce98a711b5476166792d5e6f1ac5907
 -- https://github.com/lodestone/hyper-hacks/blob/master/hammerspoon/init.lua
 
+hs.hotkey.alertDuration = 0 -- hotkey alerts are disabled
+
 -- Variable to represent Super key
 -- F17 is just a key value that is never used
-superModal = hs.hotkey.modal.new({}, "F17")
+superModal = hs.hotkey.modal.new({}, "F17", nil)
 
 -- Keys allowed to be binded with Super
 keys = { '1', '2', 'a', 's', '/', 'w', 'h', 'j', 'k', 'l',
@@ -39,7 +41,7 @@ releasedF18 = function()
 end
 
 -- Bind Capslock to Super
-f18 = hs.hotkey.bind({}, 'F18', pressedF18, releasedF18)
+f18 = hs.hotkey.bind({}, 'F18', pressedF18, releasedF18) -- WARN: do not use nil as 3rd param, omit it instead to disable hotkey alert
 
 function reloadConfig()
   hs.reload()

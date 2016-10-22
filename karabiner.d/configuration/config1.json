@@ -3,6 +3,10 @@
     {
       "name" : "Default profile",
       "selected" : true,
+      "simple_modifications" : {
+        "caps_lock" : "f18",
+        "right_option" : "comma"
+      },
       "fn_function_keys" : {
         "f12" : "volume_up",
         "f9" : "vk_consumer_next",
@@ -16,10 +20,6 @@
         "f3" : "vk_mission_control",
         "f8" : "vk_consumer_play",
         "f4" : "vk_launchpad"
-      },
-      "simple_modifications" : {
-        "caps_lock" : "f18",
-        "right_option" : "comma"
       }
     }
   ]
