@@ -13,6 +13,11 @@ source ~/.vim/map.vim
 " SuperTab settings
 let g:SuperTabDefaultCompletionType = "<c-n>" " <Tab> completion going -down- list
 
+" ChooseWin settings
+" invoke with '-'
+nmap <leader>g  <Plug>(choosewin)
+let g:choosewin_overlay_enable = 1 " if you want to use overlay feature
+
 " Startify settings
 " WARN: avoid mapping to Startify reserved keys q,e,i,b,s,v,t,<cr>
 autocmd User Startified setlocal cursorline

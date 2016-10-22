@@ -28,6 +28,8 @@ Plug 'sjl/gundo.vim' " visualize unndo tree
 Plug 'tmux-plugins/vim-tmux' " editor helper for .tmux.conf files
 Plug 'tmux-plugins/vim-tmux-focus-events' " improve autoread by automatically reading a file from disk if it was changed
 Plug 'terryma/vim-multiple-cursors'
+Plug 'sjl/vitality.vim' " better focus event from Vim in both Tmux and iTerm2
+Plug 't9md/vim-choosewin'
 
 " visual
 Plug 'mhinz/vim-startify' " fancy start screen

@@ -10,6 +10,8 @@ fi
 # skip_global_compinit=1 # faster Zsh startup
 DEFAULT_USER="irliao" # replaces user@hostname with specified username
 # LANG=en_US.utf8
+export LC_ALL=en_US.UTF-8
+export LANG=en_US.UTF-8
 
 # Environment variables
 typeset -U fpath
