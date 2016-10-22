@@ -153,15 +153,24 @@ function centerMouse()
   hs.mouse.setRelativePosition(mousePoint, screen)
 end
 
--- TODO: override right-Alt to press ',' in Vim
--- Override Alt-key to press Ctrl-S for Tmux prefix in Terminal
-altKeyEvent = hs.eventtap.new({hs.eventtap.event.types.flagsChanged}, function(o)
+-- TODO: also override right-Alt to press ',' in Vim
+
+-- TODO: fix bug where Option_L does not return early, meaning 2 checks did not catch it...
+-- TODO: refactor function to be more modular between overriding cmd vs alt
+-- Override Command_L press to Ctrl-S for Tmux prefix in Terminal.app
+cmdKeyEvent = hs.eventtap.new({hs.eventtap.event.types.flagsChanged}, function(o)
   local keyCode = o:getKeyCode()
   local modifiers = o:getFlags()
 
-  -- check if correct key code
-  if keyCode ~= 58 then return end
-  if not (modifiers['alt'] and not modifiers['shift'] and not modifiers['cmd'] and not modifiers['ctrl']) then return end
+  -- exit if key pressed is not Command_L
+  if keyCode ~= 55 then -- keycode: 58 = Option_L, 55 = Command_L
+    return
+  end
+
+  -- exit if cmd is not the only modifier pressed
+  if not (not modifiers['alt'] and not modifiers['shift'] and modifiers['cmd'] and not modifiers['ctrl']) then
+    return
+  end
 
   -- TODO: implement this to have higher accuracy
   -- check if no other modifiers where pressed
@@ -186,13 +195,18 @@ function applicationWatcher(appName, eventType, appObject)
             -- centerScreen()
         end
 
-        -- if (osVer and osVer.major == 10 and osVer.minor == 12) then
-        --   if (appName == "Terminal") then
-        --     altKeyEvent:start()
-        --   else
-        --     altKeyEvent:stop()
-        --   end
-        -- end
+        -- TODO: remove once Karabiner-Elements support this feature
+        if (osVer and osVer.major == 10 and osVer.minor == 12) then
+          if (appName == "Terminal") then
+            cmdKeyEvent:start()
+          else
+            cmdKeyEvent:stop()
+          end
+        else
+          if cmdKeyEvent ~= nil then
+            cmdKeyEvent:stop()
+          end
+        end
     end
 
     -- Launched Apps
