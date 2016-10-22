@@ -153,34 +153,24 @@ function centerMouse()
   hs.mouse.setRelativePosition(mousePoint, screen)
 end
 
--- TODO: also override right-Alt to press ',' in Vim
-
--- TODO: fix bug where Option_L does not return early, meaning 2 checks did not catch it...
--- TODO: refactor function to be more modular between overriding cmd vs alt
--- Override Command_L press to Ctrl-S for Tmux prefix in Terminal.app
+-- Override Command_L press to Ctrl-S for Tmux prefix and Command_R to ',' for Vim prefix in Terminal.app
 cmdKeyEvent = hs.eventtap.new({hs.eventtap.event.types.flagsChanged}, function(o)
   local keyCode = o:getKeyCode()
   local modifiers = o:getFlags()
 
-  -- exit if key pressed is not Command_L
-  if keyCode ~= 55 then -- keycode: 58 = Option_L, 55 = Command_L
-    return
+  -- first checks if Command is the only modifier pressed, then checks if Command_L or Command_R is pressed without any other key
+  -- keycodes: 58 = Option_L, 54 = COMMAND_R, 55 = Command_L
+  if not modifiers['alt'] and not modifiers['shift'] and modifiers['cmd'] and not modifiers['ctrl'] then
+    if keyCode == 55 then
+      hs.eventtap.keyStroke({"ctrl"}, "s")
+      return
+    elseif keyCode == 54 then
+      hs.eventtap.keyStroke({}, ",")
+      return
+    else
+      -- should pass through here and proceed with pressed keys and modifiers
+    end
   end
-
-  -- exit if cmd is not the only modifier pressed
-  if not (not modifiers['alt'] and not modifiers['shift'] and modifiers['cmd'] and not modifiers['ctrl']) then
-    return
-  end
-
-  -- TODO: implement this to have higher accuracy
-  -- check if no other modifiers where pressed
-  -- spacesModifiers = {"fn", "cmd", "ctrl", "shift"}
-  -- local otherModifiers = hs.fnutils.every(modifiers, function(_, modifier)
-  --   return hs.fnutils.contains(spacesModifiers, modifier)
-  -- end)
-  -- if otherModifiers then return end
-
-  hs.eventtap.keyStroke({"ctrl"}, "s")
 
   -- stop propagation
   return true
@@ -196,13 +186,14 @@ function applicationWatcher(appName, eventType, appObject)
         end
 
         -- TODO: remove once Karabiner-Elements support this feature
-        if (osVer and osVer.major == 10 and osVer.minor == 12) then
+        if (osVer and osVer.major == 10 and osVer.minor == 12) then -- osx10.12+
           if (appName == "Terminal") then
             cmdKeyEvent:start()
           else
             cmdKeyEvent:stop()
           end
-        else
+        else -- osx10.11-
+          -- stop any lingering cmdKeyEvent just in case
           if cmdKeyEvent ~= nil then
             cmdKeyEvent:stop()
           end
