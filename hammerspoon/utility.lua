@@ -33,19 +33,6 @@ function isFocusedWindowFullOrMax()
   return win:isFullScreen()
 end
 
--- Select browser based on machine name
-function selectBrowserByMachineName()
-  local machineName = hs.host.localizedName()
-  if machineName == "irliao-mba" or machineName == "irliao-mbp" then -- dev
-    browser = "Safari Technology Preview"
-  elseif machineName == "SDGL130e9919d" then -- work
-    browser = "Google Chrome"
-  else -- default
-    browser = "Safari"
-  end
-  return browser
-end
-
 -- Eject EVO64 MicroSD
 function ejectMicroSD()
     local volumes = hs.fs.volume.allVolumes(true) -- key = paths of disk volumes
