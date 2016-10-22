@@ -154,27 +154,40 @@
 
 	<item>
 		<name>Shortcuts in Terminal</name>
-		<appendix>* Option_L to send Tmux Prefix (Control + S)</appendix>
-		<appendix>* Option_R to send Vim MapLeader (,)</appendix>
+		<appendix>* Command_L to send Tmux Prefix (Control + S)</appendix>
+		<appendix>* Command_R to send Vim MapLeader (,)</appendix>
 		<identifier>private.shortcuts.tmux</identifier>
     <block>
       <only>TERMINAL</only>
       <!-- Tmux Prefix -->
       <autogen>
         --KeyOverlaidModifier--
-        KeyCode::OPTION_L,
-        KeyCode::OPTION_L,
+        KeyCode::COMMAND_L,
+        KeyCode::COMMAND_L,
         KeyCode::S, ModifierFlag::CONTROL_L | ModifierFlag::NONE
       </autogen>
     </block>
+
     <block>
       <only>TERMINAL, MACVIM</only>
       <!-- Vim MapLeader -->
       <autogen>
         --KeyOverlaidModifier--
-        KeyCode::OPTION_R,
-        KeyCode::OPTION_R,
+        KeyCode::COMMAND_R,
+        KeyCode::COMMAND_R,
         KeyCode::COMMA, ModifierFlag::NONE
+      </autogen>
+    </block>
+
+    <block>
+      <device_only>DeviceVendor::WASD_KEYBOARD, DeviceProduct::MY_WASD_KEYBOARD</device_only>
+      <!-- Right Command key actually produces Option_R on WASD keyboard -->
+      <!-- this allows both WASD and Apple keyboard to use Right Cmd as Vim Mapleader -->
+      <autogen>
+        --KeyToKey--
+        KeyCode::OPTION_R,
+        KeyCode::OPTION_R,
+        KeyCode::COMMA
       </autogen>
     </block>
 	</item>

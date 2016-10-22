@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<root>
+  <devicevendordef>
+    <vendorname>WASD_KEYBOARD</vendorname>
+    <vendorid>0x04d9</vendorid>
+  </devicevendordef>
+
+  <deviceproductdef>
+    <productname>MY_WASD_KEYBOARD</productname>
+    <productid>0x0141</productid>
+  </deviceproductdef>
+</root>
