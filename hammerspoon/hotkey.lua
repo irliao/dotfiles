@@ -4,7 +4,7 @@
 -- TODO: move some functions below to external require
 -- TODO: lower case all keycode strings used (ex. change F17 to f17)
 
-super = onSierra and hs.hotkey.modal.new({}, "F17", nil) or hs.hotkey
+super = onSierra and hs.hotkey.modal.new({}, "F17") or hs.hotkey
 
 -- Alert date, time, battery info, and caffeine status using Notification Center
 alertSystemStatus = function()
@@ -65,8 +65,13 @@ exitSuperModal = function()
   -- uncomment line below to require Super be released after each binding call
   -- ex: Super + A, release A, while holding Super, pressing B now will not execute Super + B
   --     this forces Super to be released after releasing A first, then press Super + B will register correctly
+  -- super.triggered = true
   -- super:exit()
 end
+
+-- TODO: design and write the following:
+-- Wrapper for super:bind() pressedFn() so releasing Capslock last won't try to press an extra ESCAPE key
+-- runHotkeyAndReleaseCapslock = function()
 
 -- Window management hotkeys
 -- TODO: bind hyper + HJKL to focus screen
@@ -74,14 +79,14 @@ end
 -- -- Focus window (args: all visible windows, only windows not fully covered, between 45 and -45 degrees)
 super:bind({}, 'H', nil, function() hs.window.focusedWindow():focusWindowWest(nil, true, false) end, exitSuperModal)
 super:bind({}, 'L', nil, function() hs.window.focusedWindow():focusWindowEast(nil, true, false) end, exitSuperModal)
-super:bind({}, 'A', nil, focusPreviousWindow, exitSuperModal)
-super:bind({}, 'S', nil, resizeLeftRightFull, exitSuperModal)
-super:bind({'shift'}, 'S', nil, resizeTopBottomFull, exitSuperModal) -- simulate Caps + Shift j+ S for vertical divide
-super:bind({}, 'W', nil, hideScreen, exitSuperModal)
-super:bind({}, 'ESCAPE', nil, moveToNextScreen, exitSuperModal)
-super:bind({}, 'RETURN', nil, toggleFullScreen, exitSuperModal)
-super:bind({}, '1', nil, alertSystemStatus, exitSuperModal)
-super:bind({}, '2', nil, reportUtilsHotsupereys, exitSuperModal)
+super:bind({}, 'A', nil, function() focusPreviousWindow() super.triggered = true end, exitSuperModal)
+super:bind({}, 'S', nil, function() resizeLeftRightFull() super.triggered = true end, exitSuperModal)
+super:bind({'shift'}, 'S', nil, function() resizeTopBottomFull() super.triggered = true end, exitSuperModal) -- simulate Caps + Shift j+ S for vertical divide
+super:bind({}, 'W', nil, function() hideScreen() super.triggered = true end, exitSuperModal)
+super:bind({}, 'ESCAPE', nil, function() moveToNextScreen() super.triggered = true end, exitSuperModal)
+super:bind({}, 'RETURN', nil, function() toggleFullScreen() super.triggered = true end, exitSuperModal)
+super:bind({}, '1', nil, function() alertSystemStatus() super.triggered = true end, exitSuperModal)
+super:bind({}, '2', nil, function() reportUtilsHotsupereys() super.triggered = true end, exitSuperModal)
 super:bind({}, ';', nil, function() hs.toggleConsole() end, exitSuperModal)
 
 -- Application opener hotsupereys
@@ -89,22 +94,22 @@ super:bind({}, "C", nil, function() openApplication(chooseBrowserByMachineName()
 super:bind({}, "E", nil, function() openApplication("Sublime Text") end, exitSuperModal)
 super:bind({}, "F", nil, function() openApplication("Finder") end, exitSuperModal)
 super:bind({}, 'G', nil, function() hs.hints.windowHints(hs.window.focusedWindow():application():allWindows()) end, exitSuperModal) -- display hints only for focused application
-super:bind({'shift'}, 'G', nil, hs.hints.windowHints, exitSuperModal) -- display hints for all active applications
-super:bind({}, "I", nil, function() openApplication("IntelliJ IDEA") end, exitSuperModal)
-super:bind({}, "K", nil, function() openApplication("Slack") end, exitSuperModal)
-super:bind({}, "M", nil, function() openApplication("Messages") end, exitSuperModal)
-super:bind({}, "N", nil, function() openApplication("Notes") end, exitSuperModal)
-super:bind({}, "O", nil, function() openApplication(chooseMailByMachineName()) end, exitSuperModal)
-super:bind({}, "R", nil, reloadConfig, exitSuperModal)
-super:bind({}, "T", nil, function() openApplication("Spotify") end, exitSuperModal)
-super:bind({}, "T", nil, function() openApplication("Spotify") end, exitSuperModal)
-super:bind({}, "X", nil, function() openApplication("Terminal") end, exitSuperModal)
-super:bind({'shift'}, "X", nil, function() openApplication("iTerm") end, exitSuperModal)
-super:bind({}, ",", nil, function() openApplication("System Preferences") end, exitSuperModal)
-super:bind({}, "=", nil, function() openApplication("App Store") end, exitSuperModal)
-super:bind({}, 'Tab', nil, function()switcher_focused_apps:next()end, exitSuperModal)
-super:bind({'shift'}, 'Tab', nil, function()switcher_active_space_apps:previous()end, exitSuperModal)
-super:bind({}, "DELETE", nil, function() openApplication("AppCleaner") end, exitSuperModal)
+super:bind({'shift'}, 'G', nil, function() hs.hints.windowHints() super.triggered = true end, exitSuperModal) -- display hints for all active applications
+super:bind({}, "I", nil, function() openApplication("IntelliJ IDEA") super.triggered = true end, exitSuperModal)
+super:bind({}, "K", nil, function() openApplication("Slack") super.triggered = true end, exitSuperModal)
+super:bind({}, "M", nil, function() openApplication("Messages") super.triggered = true end, exitSuperModal)
+super:bind({}, "N", nil, function() openApplication("Notes") super.triggered = true end, exitSuperModal)
+super:bind({}, "O", nil, function() openApplication(chooseMailByMachineName()) super.triggered = true end, exitSuperModal)
+super:bind({}, "R", nil, function() reloadConfig() super.triggered = true end, exitSuperModal)
+super:bind({}, "T", nil, function() openApplication("Spotify") super.triggered = true end, exitSuperModal)
+super:bind({}, "T", nil, function() openApplication("Spotify") super.triggered = true end, exitSuperModal)
+super:bind({}, "X", nil, function() openApplication("Terminal") super.triggered = true end, exitSuperModal)
+super:bind({'shift'}, "X", nil, function() openApplication("iTerm") super.triggered = true end, exitSuperModal)
+super:bind({}, ",", nil, function() openApplication("System Preferences") super.triggered = true end, exitSuperModal)
+super:bind({}, "=", nil, function() openApplication("App Store") super.triggered = true end, exitSuperModal)
+super:bind({}, 'Tab', nil, function() switcher_focused_apps:next() super.triggered = true end, exitSuperModal)
+super:bind({'shift'}, 'Tab', nil, function() switcher_active_space_apps:previous() super.triggered = true end, exitSuperModal)
+super:bind({}, "DELETE", nil, function() openApplication("AppCleaner") super.triggered = true end, exitSuperModal)
 
 -- Super keyDown when F18 (Capslock) is pressed
 pressedF18 = function()
