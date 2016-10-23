@@ -28,6 +28,17 @@ function chooseBrowserByMachineName()
   return browser
 end
 
+-- Returns string name of mail application to use based on machine name
+function chooseMailByMachineName()
+  local machineName = hs.host.localizedName()
+  if machineName == "SDGL130e9919d" then -- work
+    mail = "Microsoft Outlook"
+  else -- default
+    mail = "Mail" -- default Apple Mac Mail.app
+  end
+  return mail
+end
+
 -- TODO: enhance this
 -- -- Alerts utility hotkeys
 function reportUtilsHotkeys()
@@ -58,20 +69,21 @@ hs.hotkey.bind(hyper, 'S', nil, resizeTopBottomFull) -- simulate Caps + Shift j+
 hs.hotkey.bind(super, 'W', nil, hideScreen)
 hs.hotkey.bind(super, 'ESCAPE', nil, moveToNextScreen)
 hs.hotkey.bind(super, 'RETURN', nil, toggleFullScreen)
-hs.hotkey.bind(super, '`', nil, alertSystemStatus)
-hs.hotkey.bind(super, '/', nil, reportUtilsHotkeys)
+hs.hotkey.bind(super, '1', nil, alertSystemStatus)
+hs.hotkey.bind(super, '2', nil, reportUtilsHotkeys)
 hs.hotkey.bind(super, ';', nil, function() hs.toggleConsole() end)
 
 -- Application opener hotkeys
 hs.hotkey.bind(super, "C", nil, function() openApplication(chooseBrowserByMachineName()) end)
 hs.hotkey.bind(super, "E", nil, function() openApplication("Sublime Text") end)
 hs.hotkey.bind(super, "F", nil, function() openApplication("Finder") end)
-hs.hotkey.bind(super, 'G', nil, hs.hints.windowHints)
-hs.hotkey.bind(hyper, 'G', nil, function() hs.hints.windowHints(hs.window.focusedWindow():application():allWindows()) end) -- hint for windows of focused app
+hs.hotkey.bind(super, 'G', nil, function() hs.hints.windowHints(hs.window.focusedWindow():application():allWindows()) end) -- display hints only for focused application
+hs.hotkey.bind(hyper, 'G', nil, hs.hints.windowHints) -- display hints for all active applications
 hs.hotkey.bind(super, "I", nil, function() openApplication("IntelliJ IDEA") end)
 hs.hotkey.bind(super, "K", nil, function() openApplication("Slack") end)
 hs.hotkey.bind(super, "M", nil, function() openApplication("Messages") end)
 hs.hotkey.bind(super, "N", nil, function() openApplication("Notes") end)
+hs.hotkey.bind(super, "O", nil, function() openApplication(chooseMailByMachineName()) end)
 hs.hotkey.bind(super, "R", nil, reloadConfig)
 hs.hotkey.bind(super, "T", nil, function() openApplication("Spotify") end)
 hs.hotkey.bind(super, "T", nil, function() openApplication("Spotify") end)

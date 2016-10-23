@@ -4,8 +4,7 @@
       "name" : "Default profile",
       "selected" : true,
       "simple_modifications" : {
-        "caps_lock" : "f18",
-        "right_option" : "comma"
+        "caps_lock" : "f18"
       },
       "fn_function_keys" : {
         "f12" : "volume_up",

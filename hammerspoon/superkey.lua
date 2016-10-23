@@ -20,7 +20,7 @@ keys = { '1', '2', 'a', 's', '/', 'w', 'h', 'j', 'k', 'l',
 -- WARN: using this approach in order to preserve original hotkey.lua file
 for i,key in ipairs(keys) do
   superModal:bind({}, key, nil, function() hs.eventtap.keyStroke({'cmd','alt','ctrl'}, key)
-    superModal.triggered = true
+    -- superModal.triggered = true
   end)
 end
 
@@ -34,6 +34,8 @@ end
 -- send ESCAPE if no other keys are pressed.
 releasedF18 = function()
   superModal:exit()
+
+  -- send ESC if no other keys are pressed
   if not superModal.triggered then
     hs.eventtap.keyStroke({}, 'ESCAPE')
   end
