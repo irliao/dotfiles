@@ -4,7 +4,8 @@
 -- TODO: move some functions below to external require
 -- TODO: lower case all keycode strings used (ex. change F17 to f17)
 
-super = onSierra and hs.hotkey.modal.new({}, "F17") or hs.hotkey
+super = hs.hotkey.modal.new({}, "F17")
+-- super = onSierra and hs.hotkey.modal.new({}, "F17") or hs.hotkey -- TODO: hs.hotkey can't call :bind(...)
 
 -- Alert date, time, battery info, and caffeine status using Notification Center
 alertSystemStatus = function()

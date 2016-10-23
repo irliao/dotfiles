@@ -29,6 +29,7 @@ chooseBrowserByMachineName = function()
   else -- default
     browser = "Safari"
   end
+  hs.alert(browser)
   return browser
 end
 
@@ -57,7 +58,7 @@ end
 -- Reloads Hammerspoon config
 reloadConfig = function()
   hs.reload()
-  super.triggered = true -- default value
+  -- super.triggered = true -- default value
   hs.alert.show("Config loaded")
 end
 

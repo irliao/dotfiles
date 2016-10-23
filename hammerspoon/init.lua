@@ -40,7 +40,7 @@ if onSierra then
     require("termkey")
     require("hotkey") -- depends on imported modules above
 else
-    require("osx10.11/hotkey")
+    require("hotkey_old")
 end
 
 -- TODO: broken
