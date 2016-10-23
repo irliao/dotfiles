@@ -23,20 +23,25 @@ hs.window.filter.ignoreAlways['Siri'] = true -- prevent wfilter warnings from wi
 hs.window.filter.ignoreAlways['Spotlight'] = true -- prevent wfilter warnings from windowHighlight
 hs.window.filter.ignoreAlways['Autoupdate'] = true
 
+-- Returns boolean indicating if current system is on OSX 10.12 or not
+onSierra = function()
+  local osVer = hs.host.operatingSystemVersion()
+  return (osVer and osVer.major == 10 and osVer.minor == 12)
+end
+
 -- WARN: import order matters!
 require("utility") -- no dependencies
 require("window") -- depends on util
 require("highlight") -- depends on window
 require("switcher") -- no dependencies
 
--- TODO: remove if check after deprecating osx10.11
-osVer = hs.host.operatingSystemVersion()
-if osVer and osVer.major == 10 and osVer.minor == 12 then
-  require("superkey") -- no dependencies, defines Super/Hyper key for hotkey module
-  require("termkey") -- no dependencies
+-- osx10.12 dependencies
+if onSierra then
+    require("termkey")
+    require("hotkey") -- depends on imported modules above
+else
+    require("osx10.11/hotkey")
 end
-
-require("hotkey") -- depends on imported modules above
 
 -- TODO: broken
 -- Input source change with alert
@@ -80,16 +85,3 @@ appWatcher:start()
 -- Reload config
 hs.pathwatcher.new(os.getenv("HOME") .. "/.hammerspoon/init.lua", reloadConfig):start()
 hs.alert.show('Config Loaded')
-
--- Unused configs
-
--- -- Window filter, WARN: subscribe MUST be in init.lua
--- wf=hs.window.filter.new() -- empty filter
--- wf:subscribe(hs.window.filter.windowFullscreened, function() hs.window.highlight.stop() end)
--- wf:subscribe(hs.window.filter.windowFocused, function ()
---     if isFocusedWindowFullOrMax() then
---         hs.window.highlight.stop()
---     else
---         hs.window.highlight.start()
---     end
--- end)

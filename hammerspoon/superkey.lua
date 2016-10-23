@@ -1,28 +1,33 @@
--- TODO: remove this file once Karabiner-Elements officially supports Super/Hyper keys
 -- References:
 -- https://github.com/lodestone/hyper-hacks/blob/master/hammerspoon/init.lua
 -- https://gist.github.com/prenagha/1c28f71cb4d52b3133a4bff1b3849c3e
 -- https://gist.github.com/ttscoff/cce98a711b5476166792d5e6f1ac5907
 -- https://github.com/lodestone/hyper-hacks/blob/master/hammerspoon/init.lua
 
--- Variable to represent Super key
--- F17 is just a key value that is never used
-superModal = hs.hotkey.modal.new({}, "F17", nil)
+-- TODO: consider refactoring superkey and hotkey to be like: https://github.com/hiro28/useful-capslock/blob/master/hammerspoon/init.lua
+-- Variable to represent Super key, F17 is just a key value that is never used
+-- superModal = hs.hotkey.modal.new({}, "F17")
 
 -- TODO: refactor and add every single key allowed on keyboard
 -- Keys allowed to be binded with Super
-keys = { '1', '2', 'a', 's', '/', 'w', 'h', 'j', 'k', 'l',
-         'c', 'g', 'e', 'f', 'g', 'i', 'm', 'n', 'o', 'q',
-         't', 'x', ',', '=', '`', 'tab', 'space', 'delete', 'escape', 'return'
-}
+-- keys = { '1', '2', 'a', 's', '/', 'w', 'h', 'j', 'k', 'l',
+--          'c', 'g', 'e', 'f', 'g', 'i', 'm', 'n', 'o', 'q',
+--          't', 'x', ',', '=', '`', 'tab', 'space', 'delete', 'escape', 'return'
+-- }
 
 -- Map each Capslock + key to emit Cmd+Alt+Ctrl + key
 -- WARN: using this approach in order to preserve original hotkey.lua file
-for i,key in ipairs(keys) do
-  superModal:bind({}, key, nil, function() hs.eventtap.keyStroke({'cmd','alt','ctrl'}, key)
-    -- superModal.triggered = true
-  end)
-end
+-- for i,key in ipairs(keys) do
+--   superModal:bind({}, key, nil,
+--     function()
+--       hs.eventtap.keyStroke({'cmd','alt','ctrl'}, key)
+--       superModal.triggered = true
+--     end,
+--     -- TODO: verify if this is required
+--     function()
+--       superModal:exit()
+--     end)
+-- end
 
 -- Super keyDown when F18 (Capslock) is pressed
 pressedF18 = function()
@@ -31,11 +36,10 @@ pressedF18 = function()
 end
 
 -- Super keyUp when F18 (Capslock) is released,
--- send ESCAPE if no other keys are pressed.
 releasedF18 = function()
   superModal:exit()
 
-  -- send ESC if no other keys are pressed
+  -- send Esc if no other keys are pressed
   if not superModal.triggered then
     hs.eventtap.keyStroke({}, 'ESCAPE')
   end

@@ -1,10 +1,11 @@
--- Hotkeys for Macs running osx10.12
+-- Hotkeys for Mac running osx10.11 or older
 
 -- TODO: remove super modal once Karabiner-Elements officially supports Super/Hyper keys
 -- TODO: move some functions below to external require
 -- TODO: lower case all keycode strings used (ex. change F17 to f17)
 
-super = onSierra and hs.hotkey.modal.new({}, "F17", nil) or hs.hotkey
+super = {'ctrl', 'alt', 'cmd'}
+hyper = {'ctrl', 'alt', 'cmd', 'shift'}
 
 -- Alert date, time, battery info, and caffeine status using Notification Center
 alertSystemStatus = function()
@@ -60,70 +61,43 @@ reloadConfig = function()
   hs.alert.show("Config loaded")
 end
 
--- Releases the F18 modifier
-exitSuperModal = function()
-  -- uncomment line below to require Super be released after each binding call
-  -- ex: Super + A, release A, while holding Super, pressing B now will not execute Super + B
-  --     this forces Super to be released after releasing A first, then press Super + B will register correctly
-  -- super:exit()
-end
-
 -- Window management hotkeys
 -- TODO: bind hyper + HJKL to focus screen
 -- TODO: bind hyper + DELETE to toggle Notification Center
 -- -- Focus window (args: all visible windows, only windows not fully covered, between 45 and -45 degrees)
-super:bind({}, 'H', nil, function() hs.window.focusedWindow():focusWindowWest(nil, true, false) end, exitSuperModal)
-super:bind({}, 'L', nil, function() hs.window.focusedWindow():focusWindowEast(nil, true, false) end, exitSuperModal)
-super:bind({}, 'A', nil, focusPreviousWindow, exitSuperModal)
-super:bind({}, 'S', nil, resizeLeftRightFull, exitSuperModal)
-super:bind({'shift'}, 'S', nil, resizeTopBottomFull, exitSuperModal) -- simulate Caps + Shift j+ S for vertical divide
-super:bind({}, 'W', nil, hideScreen, exitSuperModal)
-super:bind({}, 'ESCAPE', nil, moveToNextScreen, exitSuperModal)
-super:bind({}, 'RETURN', nil, toggleFullScreen, exitSuperModal)
-super:bind({}, '1', nil, alertSystemStatus, exitSuperModal)
-super:bind({}, '2', nil, reportUtilsHotsupereys, exitSuperModal)
-super:bind({}, ';', nil, function() hs.toggleConsole() end, exitSuperModal)
+hs.hotkey.bind(super, 'H', function() hs.window.focusedWindow():focusWindowWest(nil, true, false) end)
+hs.hotkey.bind(super, 'L', function() hs.window.focusedWindow():focusWindowEast(nil, true, false) end)
+hs.hotkey.bind(super, 'A', focusPreviousWindow)
+hs.hotkey.bind(super, 'S', resizeLeftRightFull)
+hs.hotkey.bind(hyper, 'S', resizeTopBottomFull) -- simulate Caps + Shift j+ S for vertical divide
+hs.hotkey.bind(super, 'W', hideScreen)
+hs.hotkey.bind(super, 'ESCAPE', moveToNextScreen)
+hs.hotkey.bind(super, 'RETURN', toggleFullScreen)
+hs.hotkey.bind(super, '1', alertSystemStatus)
+hs.hotkey.bind(super, '2', reportUtilsHotsupereys)
+hs.hotkey.bind(super, ';', function() hs.toggleConsole() end)
 
 -- Application opener hotsupereys
-super:bind({}, "C", nil, function() openApplication(chooseBrowserByMachineName()) end, exitSuperModal)
-super:bind({}, "E", nil, function() openApplication("Sublime Text") end, exitSuperModal)
-super:bind({}, "F", nil, function() openApplication("Finder") end, exitSuperModal)
-super:bind({}, 'G', nil, function() hs.hints.windowHints(hs.window.focusedWindow():application():allWindows()) end, exitSuperModal) -- display hints only for focused application
-super:bind({'shift'}, 'G', nil, hs.hints.windowHints, exitSuperModal) -- display hints for all active applications
-super:bind({}, "I", nil, function() openApplication("IntelliJ IDEA") end, exitSuperModal)
-super:bind({}, "K", nil, function() openApplication("Slack") end, exitSuperModal)
-super:bind({}, "M", nil, function() openApplication("Messages") end, exitSuperModal)
-super:bind({}, "N", nil, function() openApplication("Notes") end, exitSuperModal)
-super:bind({}, "O", nil, function() openApplication(chooseMailByMachineName()) end, exitSuperModal)
-super:bind({}, "R", nil, reloadConfig, exitSuperModal)
-super:bind({}, "T", nil, function() openApplication("Spotify") end, exitSuperModal)
-super:bind({}, "T", nil, function() openApplication("Spotify") end, exitSuperModal)
-super:bind({}, "X", nil, function() openApplication("Terminal") end, exitSuperModal)
-super:bind({'shift'}, "X", nil, function() openApplication("iTerm") end, exitSuperModal)
-super:bind({}, ",", nil, function() openApplication("System Preferences") end, exitSuperModal)
-super:bind({}, "=", nil, function() openApplication("App Store") end, exitSuperModal)
-super:bind({}, 'Tab', nil, function()switcher_focused_apps:next()end, exitSuperModal)
-super:bind({'shift'}, 'Tab', nil, function()switcher_active_space_apps:previous()end, exitSuperModal)
-super:bind({}, "DELETE", nil, function() openApplication("AppCleaner") end, exitSuperModal)
-
--- Super keyDown when F18 (Capslock) is pressed
-pressedF18 = function()
-  super.triggered = false
-  super:enter()
-end
-
--- Super keyUp when F18 (Capslock) is released,
-releasedF18 = function()
-  super:exit()
-
-  -- send Esc if no other keys are pressed
-  if not super.triggered then
-    hs.eventtap.keyStroke({}, 'ESCAPE')
-  end
-end
-
--- Bind Capslock to Super
-f18 = hs.hotkey.bind({}, 'F18', pressedF18, releasedF18) -- WARN: do not use nil as 3rd param, omit it instead to disable hotkey alert
+hs.hotkey.bind(super, "C", function() openApplication(chooseBrowserByMachineName()) end)
+hs.hotkey.bind(super, "E", function() openApplication("Sublime Text") end)
+hs.hotkey.bind(super, "F", function() openApplication("Finder") end)
+hs.hotkey.bind(super, 'G', function() hs.hints.windowHints(hs.window.focusedWindow():application():allWindows()) end) -- display hints only for focused application
+hs.hotkey.bind(hyper, 'G', hs.hints.windowHints) -- display hints for all active applications
+hs.hotkey.bind(super, "I", function() openApplication("IntelliJ IDEA") end)
+hs.hotkey.bind(super, "K", function() openApplication("Slack") end)
+hs.hotkey.bind(super, "M", function() openApplication("Messages") end)
+hs.hotkey.bind(super, "N", function() openApplication("Notes") end)
+hs.hotkey.bind(super, "O", function() openApplication(chooseMailByMachineName()) end)
+hs.hotkey.bind(super, "R", reloadConfig)
+hs.hotkey.bind(super, "T", function() openApplication("Spotify") end)
+hs.hotkey.bind(super, "T", function() openApplication("Spotify") end)
+hs.hotkey.bind(super, "X", function() openApplication("Terminal") end)
+hs.hotkey.bind(hyper, "X", function() openApplication("iTerm") end)
+hs.hotkey.bind(super, ",", function() openApplication("System Preferences") end)
+hs.hotkey.bind(super, "=", function() openApplication("App Store") end)
+hs.hotkey.bind(super, 'Tab', function()switcher_focused_apps:next()end)
+hs.hotkey.bind(hyper, 'Tab', function()switcher_active_space_apps:previous() end)
+hs.hotkey.bind(super, "DELETE", function() openApplication("AppCleaner") end)
 
 -- Resize windows with arrow hotkeys
 -- super:bind(super, 'LEFT', function() resizeFocusedWindow("horizontal", -25) end, exitSuperModal)

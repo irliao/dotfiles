@@ -153,29 +153,6 @@ function centerMouse()
   hs.mouse.setRelativePosition(mousePoint, screen)
 end
 
--- Override Command_L press to Ctrl-S for Tmux prefix and Command_R to ',' for Vim prefix in Terminal.app
-cmdKeyEvent = hs.eventtap.new({hs.eventtap.event.types.flagsChanged}, function(o)
-  local keyCode = o:getKeyCode()
-  local modifiers = o:getFlags()
-
-  -- first checks if Command is the only modifier pressed, then checks if Command_L or Command_R is pressed without any other key
-  -- keycodes: 58 = Option_L, 61 = Option_R, 54 = COMMAND_R, 55 = Command_L
-  if not modifiers['alt'] and not modifiers['shift'] and modifiers['cmd'] and not modifiers['ctrl'] then
-    if keyCode == 55 then -- left Command key
-      hs.eventtap.keyStroke({"ctrl"}, "s")
-      return
-    elseif keyCode == 54 then -- right Command key
-      hs.eventtap.keyStroke({}, ",")
-      return
-    else
-      -- should pass through here and proceed with pressed keys and modifiers
-    end
-  end
-
-  -- stop propagation
-  return true
-end)
-
 -- App watcher for Activate and Launch events
 function applicationWatcher(appName, eventType, appObject)
     -- Activated Apps
@@ -183,20 +160,6 @@ function applicationWatcher(appName, eventType, appObject)
         if (appName == "Finder") then
             appObject:selectMenuItem({"Window", "Bring All to Front"})
             -- centerScreen()
-        end
-
-        -- TODO: remove once Karabiner-Elements support this feature
-        if (osVer and osVer.major == 10 and osVer.minor == 12) then -- > osx10.12
-          if (appName == "Terminal") then
-            cmdKeyEvent:start()
-          else
-            cmdKeyEvent:stop()
-          end
-        else -- < osx10.11, cmdKeyEvent feature implemented in Karabiner instead
-          -- stop any lingering cmdKeyEvent just in case
-          if cmdKeyEvent ~= nil then
-            cmdKeyEvent:stop()
-          end
         end
     end
 
