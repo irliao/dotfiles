@@ -1,9 +1,9 @@
 -- Hammerspoon Config
 
 -- Hammerspoon CLI
-require("hs.ipc") -- provides server portion of cli
-hs.ipc.cliInstall() -- installs cli named 'hs' in /Applications/Hammerspoon.app/Contents/Resources/extensions/hs/ipc/bin/
+-- require("hs.ipc") -- provides server portion of cli
 
+hs.ipc.cliInstall() -- installs cli named 'hs' in /Applications/Hammerspoon.app/Contents/Resources/extensions/hs/ipc/bin/
 hs.autoLaunch(true)
 hs.automaticallyCheckForUpdates(true)
 hs.dockIcon(false)
@@ -11,23 +11,23 @@ hs.menuIcon(false)
 hs.dockIcon(false)
 hs.consoleOnTop(true)
 hs.crash.crashLogToNSLog = true -- show crash logs as OSX notification
-hs.hotkey.alertDuration = 0 -- hotkey alerts are disabled
 hs.window.animationDuration = 0
 hs.window.setShadows(false)
+hs.hotkey.alertDuration = 0 -- hotkey alerts are disabled
 hs.hints.style = 'vimperator' -- window hint starts with the first character of the parent application's title
 hs.hints.fontName = 'Hack'
 hs.window.filter.setLogLevel = 'error'
 hs.window.filter.ignoreAlways['Safari Technology Preview Networking'] = true
 hs.window.filter.ignoreAlways['Safari Technology Preview Database Storage'] = true
-hs.window.filter.ignoreAlways['Siri'] = true -- prevent wfilter warnings from windowHighlight
-hs.window.filter.ignoreAlways['Spotlight'] = true -- prevent wfilter warnings from windowHighlight
-hs.window.filter.ignoreAlways['Autoupdate'] = true
+-- hs.window.filter.ignoreAlways['Siri'] = true -- prevent wfilter warnings from windowHighlight
+-- hs.window.filter.ignoreAlways['Spotlight'] = true -- prevent wfilter warnings from windowHighlight
+-- hs.window.filter.ignoreAlways['Autoupdate'] = true
 
 -- Returns boolean indicating if current system is on OSX 10.12 or not
-onSierra = function()
-  local osVer = hs.host.operatingSystemVersion()
-  return (osVer and osVer.major == 10 and osVer.minor == 12)
-end
+-- onSierra = function()
+--   local osVer = hs.host.operatingSystemVersion()
+--   return (osVer and osVer.major == 10 and osVer.minor == 12)
+-- end
 
 -- WARN: import order matters!
 require("utility") -- no dependencies
@@ -36,11 +36,15 @@ require("highlight") -- depends on window
 require("switcher") -- no dependencies
 
 -- osx10.12 dependencies
-if onSierra then
+onSierra = nil -- global var to indicate whether this machine is  running osx10.12
+osVer = hs.host.operatingSystemVersion()
+if osVer and osVer.major == 10 and osVer.minor == 12 then
+    onSierra = true
     require("termkey")
     require("hotkey") -- depends on imported modules above
 else
-    require("hotkey_old")
+    onSierra = false
+    require("pqrskey")
 end
 
 -- TODO: broken
@@ -53,9 +57,9 @@ end
 -- hs.keycodes.inputSourceChanged(alertInputSource)
 
 -- Toggle binded to caffeine icon on menu bar
+caffeineMenubar = hs.menubar.new() -- menubar icon
 caffeineStatus = nil
-local caffeineMenubar = hs.menubar.new() -- menubar icon
-local isConfigLoaded = true
+isConfigLoaded = true
 function caffeineToggle()
     hs.alert.closeAll()
     hs.caffeinate.toggle("system")

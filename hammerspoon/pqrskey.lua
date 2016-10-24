@@ -8,7 +8,7 @@ super = {'ctrl', 'alt', 'cmd'}
 hyper = {'ctrl', 'alt', 'cmd', 'shift'}
 
 -- Alert date, time, battery info, and caffeine status using Notification Center
-alertSystemStatus = function()
+function alertStatus()
     hs.alert.closeAll()
     local bat_num = hs.battery.percentage() -- local var for immediate battery status
     local time_str = os.date("%A %b %d, %Y - %H:%M") -- os.date("%a, %m/%d/%y - %H:%m")
@@ -20,7 +20,7 @@ alertSystemStatus = function()
 end
 
 -- Returns string name of browser to use based on machine name
-chooseBrowserByMachineName = function()
+function chooseBrowserByMachineName()
   local machineName = hs.host.localizedName()
   if machineName == "irl-mba" or machineName == "irl-mbp" then -- personal
     browser = "Safari Technology Preview"
@@ -34,7 +34,7 @@ chooseBrowserByMachineName = function()
 end
 
 -- Returns string name of mail application to use based on machine name
-chooseMailByMachineName = function()
+function chooseMailByMachineName()
   local machineName = hs.host.localizedName()
   if machineName == "SDGL130e9919d" then -- work
     mail = "Microsoft Outlook"
@@ -46,20 +46,13 @@ end
 
 -- TODO: enhance this
 -- -- Alerts utility hotkeys
-reportUtilsHotkeys = function()
+function reportUtils()
     hs.alert.closeAll()
     hs.alert('Super + F#:')
     hs.alert('F1 to Mouse Highlight')
     hs.alert('F2 to Copy Finder Path')
     hs.alert('F3 to Highlight Mouse')
     hs.alert('F12 to Eject MicroSD')
-end
-
--- Reloads Hammerspoon config
-reloadConfig = function()
-  hs.reload()
-  -- super.triggered = true -- default value
-  hs.alert.show("Config loaded")
 end
 
 -- Window management hotkeys
@@ -74,31 +67,32 @@ hs.hotkey.bind(hyper, 'S', resizeTopBottomFull) -- simulate Caps + Shift j+ S fo
 hs.hotkey.bind(super, 'W', hideScreen)
 hs.hotkey.bind(super, 'ESCAPE', moveToNextScreen)
 hs.hotkey.bind(super, 'RETURN', toggleFullScreen)
-hs.hotkey.bind(super, '1', alertSystemStatus)
-hs.hotkey.bind(super, '2', reportUtilsHotsupereys)
+-- hs.hotkey.bind(super, '1', alertStatus)
+-- hs.hotkey.bind(super, '2', reportUtils)
 hs.hotkey.bind(super, ';', function() hs.toggleConsole() end)
 
 -- Application opener hotsupereys
-hs.hotkey.bind(super, "C", function() openApplication(chooseBrowserByMachineName()) end)
-hs.hotkey.bind(super, "E", function() openApplication("Sublime Text") end)
+hs.hotkey.bind(super, 'C', function() openApplication("Google Chrome") end)
+hs.hotkey.bind(super, 'E', function() openApplication("Sublime Text") end)
 hs.hotkey.bind(super, "F", function() openApplication("Finder") end)
-hs.hotkey.bind(super, 'G', function() hs.hints.windowHints(hs.window.focusedWindow():application():allWindows()) end) -- display hints only for focused application
+hs.hotkey.bind(super, 'G', function()
+  hs.hints.windowHints(hs.window.focusedWindow():application():allWindows())
+end) -- display hints only for focused application
 hs.hotkey.bind(hyper, 'G', hs.hints.windowHints) -- display hints for all active applications
 hs.hotkey.bind(super, "I", function() openApplication("IntelliJ IDEA") end)
 hs.hotkey.bind(super, "K", function() openApplication("Slack") end)
 hs.hotkey.bind(super, "M", function() openApplication("Messages") end)
 hs.hotkey.bind(super, "N", function() openApplication("Notes") end)
-hs.hotkey.bind(super, "O", function() openApplication(chooseMailByMachineName()) end)
-hs.hotkey.bind(super, "R", reloadConfig)
+hs.hotkey.bind(super, "R", function() hs.reload() end) -- TODO: refactor to be a function like alertStatus()
 hs.hotkey.bind(super, "T", function() openApplication("Spotify") end)
 hs.hotkey.bind(super, "T", function() openApplication("Spotify") end)
 hs.hotkey.bind(super, "X", function() openApplication("Terminal") end)
 hs.hotkey.bind(hyper, "X", function() openApplication("iTerm") end)
 hs.hotkey.bind(super, ",", function() openApplication("System Preferences") end)
 hs.hotkey.bind(super, "=", function() openApplication("App Store") end)
+hs.hotkey.bind(super, "DELETE", function() openApplication("AppCleaner") end)
 hs.hotkey.bind(super, 'Tab', function()switcher_focused_apps:next()end)
 hs.hotkey.bind(hyper, 'Tab', function()switcher_active_space_apps:previous() end)
-hs.hotkey.bind(super, "DELETE", function() openApplication("AppCleaner") end)
 
 -- Resize windows with arrow hotkeys
 -- super:bind(super, 'LEFT', function() resizeFocusedWindow("horizontal", -25) end, exitSuperModal)

@@ -1,6 +1,37 @@
 <?xml version="1.0"?>
 <root>
 	<item>
+		<name>Shortcuts in Terminal</name>
+		<appendix>* Command_L to send Tmux Prefix (Control + S)</appendix>
+		<appendix>* Command_R to send Vim MapLeader (,)</appendix>
+		<identifier>private.shortcuts.tmux</identifier>
+    <only> TERMINAL </only>
+    <!-- Tmux Prefix -->
+    <autogen>
+      __KeyOverlaidModifier__
+      KeyCode::COMMAND_L,
+      KeyCode::COMMAND_L,
+      KeyCode::S, ModifierFlag::CONTROL_L | ModifierFlag::NONE
+    </autogen>
+
+   <!-- Vim MapLeader -->
+    <autogen>
+      __KeyOverlaidModifier__
+      KeyCode::COMMAND_R,
+      KeyCode::COMMAND_R,
+      KeyCode::COMMA, ModifierFlag::NONE
+    </autogen>
+
+    <autogen>
+      __KeyOverlaidModifier__
+      KeyCode::OPTION_R,
+      KeyCode::OPTION_R,
+      KeyCode::COMMA, ModifierFlag::NONE
+    </autogen>
+
+	</item>
+
+	<item>
 	  <name>Two cursors to diagonal</name>
 	  <appendix>* Simultaneous arrow keys presses to Home/End/PageUp/PageDown</appendix>
 	  <appendix>* Hammerspoon uses Home/End/PageUp/PageDown as NW, NE, SW, SE</appendix>
@@ -58,7 +89,6 @@
 		<appendix>* Option_R + I to show web inspector</appendix>
 		<appendix>* Option_R + L to toggle bookmarks side bar</appendix>
 		<appendix>* Option_R + R to add page to read list</appendix>
-		<appendix>* Option_R + [ to show prev tab</appendix>
 		<appendix>* Option_R + ] to show next tab</appendix>
 		<appendix>* Option_R + SPACE to go to search bar</appendix>
     <appendix>* Commmand_R + : to show web console</appendix>
@@ -150,46 +180,6 @@
 		    </autogen>
 		</block>
 
-	</item>
-
-	<item>
-		<name>Shortcuts in Terminal</name>
-		<appendix>* Command_L to send Tmux Prefix (Control + S)</appendix>
-		<appendix>* Command_R to send Vim MapLeader (,)</appendix>
-		<identifier>private.shortcuts.tmux</identifier>
-    <block>
-      <only>TERMINAL</only>
-      <!-- Tmux Prefix -->
-      <autogen>
-        --KeyOverlaidModifier--
-        KeyCode::COMMAND_L,
-        KeyCode::COMMAND_L,
-        KeyCode::S, ModifierFlag::CONTROL_L | ModifierFlag::NONE
-      </autogen>
-    </block>
-
-    <block>
-      <only>TERMINAL, MACVIM</only>
-      <!-- Vim MapLeader -->
-      <autogen>
-        --KeyOverlaidModifier--
-        KeyCode::COMMAND_R,
-        KeyCode::COMMAND_R,
-        KeyCode::COMMA, ModifierFlag::NONE
-      </autogen>
-    </block>
-
-    <block>
-      <device_only>DeviceVendor::WASD_KEYBOARD, DeviceProduct::MY_WASD_KEYBOARD</device_only>
-      <!-- Right Command key actually produces Option_R on WASD keyboard -->
-      <!-- this allows both WASD and Apple keyboard to use Right Cmd as Vim Mapleader -->
-      <autogen>
-        --KeyToKey--
-        KeyCode::OPTION_R,
-        KeyCode::OPTION_R,
-        KeyCode::COMMA
-      </autogen>
-    </block>
 	</item>
 
 	<item>

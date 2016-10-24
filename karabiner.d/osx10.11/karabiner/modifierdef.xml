@@ -1,16 +1,15 @@
 <?xml version="1.0"?>
 <root>
   <modifierdef>VM_SUPER</modifierdef>
-  <modifierdef>VM_HYPER</modifierdef>
 
   <item>
     <name>Capslock / Command_R to Super</name>
     <appendix>* Capslock + Key to VM_SUPER</appendix>
     <appendix>* Capslock + Key to Command + Option + Control</appendix>
     <appendix>* Capslock to Escape</appendix>
-    <appendix></appendix>
-    <appendix>* Fn + Key to VM_HYPER</appendix>
-    <appendix>* Fn to Escape</appendix>
+    <!-- <appendix></appendix> -->
+    <!-- <appendix>* Fn + Key to VM_HYPER</appendix> -->
+    <!-- <appendix>* Fn to Escape</appendix> -->
     <identifier>private.modifierdef</identifier>
 
     <!-- Capslock -->
@@ -21,12 +20,13 @@
       KeyCode::ESCAPE
     </autogen>
 
+    <!-- TODO: add condition to override Fn with code below only if NO external usb keyboards are attached -->
     <!-- Fn -->
-    <autogen>
-      __KeyToKey__
-      KeyCode::FN,
-      KeyCode::COMMAND_L, ModifierFlag::OPTION_L | ModifierFlag::CONTROL_L | ModifierFlag::SHIFT_L
-    </autogen>
+    <!-- <autogen> -->
+    <!--   __KeyToKey__ -->
+    <!--   KeyCode::FN, -->
+    <!--   KeyCode::COMMAND_L, ModifierFlag::OPTION_L | ModifierFlag::CONTROL_L | ModifierFlag::SHIFT_L -->
+    <!-- </autogen> -->
 
     <!-- Fn -->
 <!--     <autogen>
