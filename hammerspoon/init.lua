@@ -35,7 +35,7 @@ if osVer and osVer.major == 10 and osVer.minor == 12 then
     require("termkey")
     require("hotkey") -- depends on imported modules above
 else
-    require("hotkey-10.11")
+    require("hotkey-old")
 end
 
 -- TODO: broken
