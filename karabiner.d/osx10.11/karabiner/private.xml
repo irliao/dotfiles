@@ -1,42 +1,10 @@
 <?xml version="1.0"?>
 <root>
-  <devicevendordef>
-    <vendorname>WASD_KEYBOARD</vendorname>
-    <vendorid>0x04d9</vendorid>
-  </devicevendordef>
-
-  <deviceproductdef>
-    <productname>MY_WASD_KEYBOARD</productname>
-    <productid>0x0141</productid>
-  </deviceproductdef>
-
-  <devicelocationdef>
-    <locationname>MY_WASD_KEYBOARD_PRIMARY</locationname>
-    <locationid>0x14400000</localtionid>
-  </devicelocationdef>
-
-  <!-- <item> -->
-  <!--   <name>Shorts in Terminal via external WASD keyboard</name> -->
-  <!--   <appendix>* Map Option_R to Command_R press+release</appendix> -->
-  <!--   <appendix>* Pressing Option_R on WASD keyboard outputs single key ',' (Vim mapleader> in Terminal.app</appendix> -->
-  <!--   <identifier>private.deviceproductdef</identifier> -->
-  <!--     <device_only> -->
-  <!--       DeviceVendor::WASD_KEYBOARD, -->
-  <!--       DeviceProduct::MY_WASD_KEYBOARD, -->
-  <!--       DeviceLocation::MY_WASD_KEYBOARD_PRIMARY, -->
-  <!--     </device_only> -->
-  <!--     <1!-- Right Command key actually produces Option_R on WASD keyboard --1> -->
-  <!--     <1!-- this allows both WASD and Apple keyboard to use Right Cmd as Vim Mapleader --1> -->
-  <!--       __KeyToKey__ -->
-  <!--       KeyCode::OPTION_R, -->
-  <!--       KeyCode::COMMA -->
-  <!--     </autogen> -->
-  <!-- </item> -->
-
+  <!-- <include path="{{ ENV_HOME }}/.dotfiles/karabiner.d/osx10.11/karabiner/devicedef.xml"/> -->
 	<include path="{{ ENV_HOME }}/.dotfiles/karabiner.d/osx10.11/karabiner/modifierdef.xml"/>
 	<include path="{{ ENV_HOME }}/.dotfiles/karabiner.d/osx10.11/karabiner/appurl.xml"/>
 	<include path="{{ ENV_HOME }}/.dotfiles/karabiner.d/osx10.11/karabiner/appdef.xml"/>
   <include path="{{ ENV_HOME }}/.dotfiles/karabiner.d/osx10.11/karabiner/core.xml"/>
-
+  <!-- <include path="{{ ENV_HOME }}/.dotfiles/karabiner.d/osx10.11/karabiner/extra.xml"/> -->
   <!-- <include path="{{ ENV_HOME }}/.dotfiles/karabiner.d/osx10.11/karabiner/external_mouse.xml"/> -->
 </root>

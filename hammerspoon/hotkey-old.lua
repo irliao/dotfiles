@@ -72,7 +72,7 @@ hs.hotkey.bind(super, 'RETURN', toggleFullScreen)
 hs.hotkey.bind(super, ';', function() hs.toggleConsole() end)
 
 -- Application opener hotsupereys
-hs.hotkey.bind(super, 'C', function() openApplication("Google Chrome") end)
+hs.hotkey.bind(super, 'C', function() openApplication("Safari Technology Preview") end)
 hs.hotkey.bind(super, 'E', function() openApplication("Sublime Text") end)
 hs.hotkey.bind(super, "F", function() openApplication("Finder") end)
 hs.hotkey.bind(super, 'G', function()

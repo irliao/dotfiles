@@ -93,9 +93,7 @@ if [[ ($TERM_PROGRAM == "Apple_Terminal") ]]; then # Apple Terminal
   bindkey "^H" beginning-of-history
   bindkey "^O" down-line-or-search
   bindkey "^P" up-line-or-search
-  bindkey "^U" undo
   bindkey '^R' history-incremental-search-backward
-  # bindkey "^R" redo
   stty -ixon # gives access to ^Q
   bindkey -s "^Q" "^[Isudo ^[A" # Tab key, prepend sudo
 

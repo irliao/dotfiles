@@ -91,7 +91,7 @@ super:bind({}, '2', nil, function() reportUtilsHotsupereys() super.triggered = t
 super:bind({}, ';', nil, function() hs.toggleConsole() end, exitSuperModal)
 
 -- Application opener hotsupereys
-super:bind({}, "C", nil, function() openApplication(chooseBrowserByMachineName()) end, exitSuperModal)
+super:bind({}, "C", nil, function() openApplication("Safari Technology Preview") end, exitSuperModal)
 super:bind({}, "E", nil, function() openApplication("Sublime Text") end, exitSuperModal)
 super:bind({}, "F", nil, function() openApplication("Finder") end, exitSuperModal)
 super:bind({}, 'G', nil, function() hs.hints.windowHints(hs.window.focusedWindow():application():allWindows()) end, exitSuperModal) -- display hints only for focused application
