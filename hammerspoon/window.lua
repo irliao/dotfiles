@@ -153,6 +153,7 @@ function centerMouse()
   hs.mouse.setRelativePosition(mousePoint, screen)
 end
 
+-- TODO: rename function
 -- App watcher for Activate and Launch events
 function applicationWatcher(appName, eventType, appObject)
     -- Activated Apps

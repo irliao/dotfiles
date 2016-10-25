@@ -19,15 +19,9 @@ hs.hints.fontName = 'Hack'
 hs.window.filter.setLogLevel = 'error'
 hs.window.filter.ignoreAlways['Safari Technology Preview Networking'] = true
 hs.window.filter.ignoreAlways['Safari Technology Preview Database Storage'] = true
--- hs.window.filter.ignoreAlways['Siri'] = true -- prevent wfilter warnings from windowHighlight
--- hs.window.filter.ignoreAlways['Spotlight'] = true -- prevent wfilter warnings from windowHighlight
--- hs.window.filter.ignoreAlways['Autoupdate'] = true
-
--- Returns boolean indicating if current system is on OSX 10.12 or not
--- onSierra = function()
---   local osVer = hs.host.operatingSystemVersion()
---   return (osVer and osVer.major == 10 and osVer.minor == 12)
--- end
+hs.window.filter.ignoreAlways['Siri'] = true -- prevent wfilter warnings from windowHighlight
+hs.window.filter.ignoreAlways['Spotlight'] = true -- prevent wfilter warnings from windowHighlight
+hs.window.filter.ignoreAlways['Autoupdate'] = true
 
 -- WARN: import order matters!
 require("utility") -- no dependencies
@@ -36,15 +30,12 @@ require("highlight") -- depends on window
 require("switcher") -- no dependencies
 
 -- osx10.12 dependencies
-onSierra = nil -- global var to indicate whether this machine is  running osx10.12
 osVer = hs.host.operatingSystemVersion()
 if osVer and osVer.major == 10 and osVer.minor == 12 then
-    onSierra = true
     require("termkey")
     require("hotkey") -- depends on imported modules above
 else
-    onSierra = false
-    require("pqrskey")
+    require("hotkey-10.11")
 end
 
 -- TODO: broken

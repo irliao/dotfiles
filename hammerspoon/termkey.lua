@@ -1,11 +1,11 @@
--- Terminal.app keyboard customization
+local module = {}
+module.showPopUp = false
 
--- NOTE: 1 wf can only subscribe to 1 function per eventType
+-- local wf = hs.window.filter.default:setAppFilter('My IDE',{allowTitles=1}) -- ignore no-title windows (e.g. transient autocomplete suggestions) in My IDE
+local wf=hs.window.filter
+module.wf = wf.new{'Terminal'} -- all visible terminal windows
 
-wf = hs.window.filter
-wf.default:setAppFilter('My IDE',{allowTitles=1}) -- ignore no-title windows (e.g. transient autocomplete suggestions) in My IDE
-wf_terminal = wf.new{'Terminal'} -- all visible terminal windows
-
+-- integrate this to handle WASD right Command key
 usingWASD = function()
   local attachedUsbs = hs.usb.attachedDevices()
   for i,usb in ipairs(attachedUsbs) do
@@ -18,37 +18,83 @@ usingWASD = function()
   return false
 end
 
--- Override Command_L press to Ctrl-S for Tmux prefix and Command_R to ',' for Vim prefix in Terminal.app
--- Overrid Option_R to press Ctrl-S for Tmux prefix in Terminal
-cmdKeyEvent = hs.eventtap.new({hs.eventtap.event.types.flagsChanged}, function(o)
-  local keyCode = o:getKeyCode()
-  local modifiers = o:getFlags()
+module.eventwatcher1 = hs.eventtap.new({hs.eventtap.event.types.flagsChanged}, function(e)
 
-  -- first checks if Command is the only modifier pressed, then checks if Command_L or Command_R is pressed without any other key
-  -- keycodes: 58 = Option_L, 61 = Option_R, 54 = COMMAND_R, 55 = Command_L
-  if not modifiers['alt'] and not modifiers['shift'] and modifiers['cmd'] and not modifiers['ctrl'] then
-    if keyCode == 55 then -- left Command key
-      hs.eventtap.keyStroke({"ctrl"}, "s")
-      return
-    elseif keyCode == 54 then -- right Command key
-      hs.eventtap.keyStroke({}, ",")
-      return
+    local flags = e:getFlags()
+
+    if flags.cmd
+       and not (flags.alt or flags.shift or flags.ctrl or flags.fn)
+    then
+        module.cmdWasPressed = true
+        module.cmdShouldBeIgnored = false
+        return false;
     end
-  end
 
-  -- check if Option_R (WASD keyboard does not have Command_R, so mapping Option_R instead)
-  -- keycodes: 58 = Option_L, 61 = Option_R, 54 = COMMAND_R, 55 = Command_L
-  if modifiers['alt'] and not modifiers['shift'] and not modifiers['cmd'] and not modifiers['ctrl'] then
-    if keyCode == 61 and usingWASD() == true then -- WASD keyboard is connected
-      hs.eventtap.keyStroke({}, ",")
-      return
+    if flags.cmd
+       and (flags.alt or flags.shift or flags.ctrl or flags.fn)
+       and module.cmdWasPressed
+    then
+        module.cmdShouldBeIgnored = true
+        return false;
     end
-  end
 
-  -- stop propagation, perform original key stroke
-  return true
+    if not flags.cmd
+    then
+        if module.cmdWasPressed
+       and not module.cmdShouldBeIgnored
+        then
+            local keyCode = e:getKeyCode()
+
+            if keyCode == 0x37 then
+              hs.eventtap.keyStroke({"ctrl"}, "s")
+
+        elseif keyCode == 0x36 then
+          hs.eventtap.keyStroke({}, ",")
+
+        end
+    end
+
+    module.cmdWasPressed = false
+    module.cmdShouldBeIgnored = false
+    end
+
+    return false;
 end)
 
-wf_terminal:subscribe(wf.windowFocused, function() cmdKeyEvent:start() end)
-wf_terminal:subscribe(wf.windowUnfocused, function() cmdKeyEvent:start() end)
 
+module.eventwatcher2 = hs.eventtap.new({"all", hs.eventtap.event.types.flagsChanged}, function(e)
+    local flags = e:getFlags()
+
+    if flags.cmd and module.cmdWasPressed then
+    module.cmdShouldBeIgnored = true
+    end
+
+    return false;
+end)
+
+startWatch = function()
+  module.eventwatcher1:start()
+  module.eventwatcher2:start()
+  -- hs.alert.show('termkey event watch started')
+end
+
+stopWatch = function()
+  module.eventwatcher1:stop()
+  module.eventwatcher2:stop()
+  -- hs.alert.show('termkey event watch stopped')
+end
+
+module.enable = function()
+  module.wf:subscribe(wf.windowFocused, startWatch)
+  module.wf:subscribe(wf.windowUnfocused, stopWatch)
+end
+
+module.disable = function()
+  module.wf:unsubscribe(wf.windowFocused)
+  module.wf:unsubscribe(wf.windowUnfocused)
+end
+
+module.wf:subscribe(wf.windowFocused, startWatch)
+module.wf:subscribe(wf.windowUnfocused, stopWatch)
+
+return module
