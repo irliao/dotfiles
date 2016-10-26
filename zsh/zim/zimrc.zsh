@@ -76,3 +76,9 @@ zhighlighters=(main brackets cursor)
 # Load any helper scripts as defined here
 # zpacman_helper=(aur)
 
+# External Modules
+if [[ ! -d ~/.zsh/zsh-autosuggestions ]]; then
+    git clone git://github.com/zsh-users/zsh-autosuggestions ~/.zsh/zsh-autosuggestions
+fi
+source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
+

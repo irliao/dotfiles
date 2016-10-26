@@ -144,6 +144,29 @@ else # Other
   fi
 fi
 
+# Rename tabs automatically
+# rename tab - version 1
+case $TERM in
+    xterm*)
+        precmd () {print -Pn "\e]0;${PWD/#${HOME}/~}\a"}
+        ;;
+esac
+
+# rename tab - version 2
+# case $TERM in
+#   xterm*|*rxvt*)
+#     temu="urxvt"
+#     preexec () {
+#       if [[ $(echo -e $1 | tr -d '\040\011\012\015') = "reset" ]]; then
+#         1="$temu"
+#       else
+#         1="$1 - $temu"
+#       fi
+#       print -Pn "\e]0;$1\a"
+#     }
+#   ;;
+# esac
+
 # Clears the "Last login" message at startup
 # clear;
 
