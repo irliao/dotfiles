@@ -1,3 +1,5 @@
+-- Terminal modifier customization
+
 local module = {}
 module.showPopUp = false
 

@@ -13,6 +13,7 @@
     ~/.editorconfig: vim/editorconfig.conf
     ~/.gitconfig: git/gitconfig
     ~/.gitignore_global: git/gitignore_global
+    ~/.go: go
     ~/.hammerspoon: hammerspoon
     ~/.ideavimrc: vim/ideavimrc.vim
     ~/.karabiner.d: karabiner.d

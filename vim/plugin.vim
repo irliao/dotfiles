@@ -30,6 +30,7 @@ Plug 'tmux-plugins/vim-tmux-focus-events' " improve autoread by automatically re
 Plug 'terryma/vim-multiple-cursors'
 Plug 'sjl/vitality.vim' " better focus event from Vim in both Tmux and iTerm2
 Plug 't9md/vim-choosewin'
+Plug 'mileszs/ack.vim'
 
 " visual
 Plug 'mhinz/vim-startify' " fancy start screen
@@ -49,6 +50,7 @@ Plug 'plasticboy/vim-markdown', { 'for': 'mkd' }
 Plug 'elzr/vim-json', { 'for': 'json' } " highlight key:value for JSON
 Plug 'groenewege/vim-less', { 'for': 'less' }
 Plug 'ryym/vim-riot'
+Plug 'keith/tmux.vim'
 
 " color scheme
 Plug 'tomasr/molokai'

@@ -1,3 +1,5 @@
+# origin: https://github.com/mdsn/zsh-tmux
+
 #
 # Aliases
 #

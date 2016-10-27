@@ -24,19 +24,14 @@ hs.window.filter.ignoreAlways['Spotlight'] = true -- prevent wfilter warnings fr
 hs.window.filter.ignoreAlways['Autoupdate'] = true
 
 -- WARN: import order matters!
-require("utility") -- no dependencies
+require("utility")
 require("window") -- depends on util
 require("highlight") -- depends on window
-require("switcher") -- no dependencies
+require("switcher")
+require("clipboard")
 
 -- osx10.12 dependencies
-osVer = hs.host.operatingSystemVersion()
-if osVer and osVer.major == 10 and osVer.minor == 12 then
-    require("termkey")
-    require("hotkey") -- depends on imported modules above
-else
-    require("hotkey-old")
-end
+if hs.host.operatingSystemVersion().minor == 12 then require("hotkey") else require("hotkey-old") end
 
 -- TODO: broken
 -- Input source change with alert

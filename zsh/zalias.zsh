@@ -29,6 +29,7 @@ alias vm="cd ~/Virtual\ Machines"
 alias g="grep"
 alias s="source"
 alias c='clear'
+alias h="history"
 alias d='dirs -v'
 alias la="ls -la"
 alias al="ls -lar"
@@ -70,6 +71,7 @@ alias tclear="run_in_all_naked_panes clear" # requires script in ~/.bin
 # tmux list-keys -t vi-copy
 
 # CLIs
+# alias grep="brew install the_silver_searcher"
 alias st="syncthing"
 alias bu="brew update && brew upgrade && brew prune && brew cleanup && brew doctor"
 alias fk='$(thefuck $(fc -ln -1))' # WARN: this alias must use single quotes to work properly
@@ -78,15 +80,15 @@ alias py="python"
 alias kd="ksdiff"
 alias ns="npm start"
 alias yd="youtube-dl" # download YouTube video
-alias seb="open -g 'hammerspoon://safari?someParam=openExtensionBuilder'" # open Safari Extension Builder using Hammerspoon
-alias kbr="/Applications/Karabiner.app/Contents/Library/bin/karabiner reloadxml"
-alias sel="/Applications/Seil.app/Contents/Library/bin/seil"
 alias cat="ccat" # cat with syntax highlighting
 alias nya="nyancat"
 alias net="netstat"
 alias mirrorsite='wget -m -k -K -E -e robots=off' # mirror a website
 alias peek='tee >(cat 1>&2)' # mirror stdout to stderr, useful for seeing data going through a pipe
 alias subl="reattach-to-user-namespace /usr/local/bin/subl" # make commands with arguments work such as "subl /tmp"
+
+# Hammerspoon
+alias seb="open -g 'hammerspoon://safari?someParam=openExtensionBuilder'" # open Safari Extension Builder using Hammerspoon
 
 # Git
 alias ga="git add"
@@ -98,6 +100,7 @@ alias gm="git standup" # m for morning (standup usually in morning)
 alias gp="git pull"
 alias gr="git remote"
 alias gs="git status"
+alias gcl="github_changelog_generator" # generage CHANGELOG.md
 alias gmd="grip README.md" # preview Markdown in browser using grip, TODO: figure out how to also open browser in same command (issue: any command after grip will run only after grip quits from error or manual exit)
 alias gpum="git pull upstream master"
 alias gdum="git diff upstream/master"
@@ -106,7 +109,6 @@ alias grs="git reflog show" # show branch activities
 alias gCleanDS="find . -name .DS_Store -print0 | xargs -0 git rm -f --ignore-unmatch" # remove existing .DS_Store files from repository
 
 # History
-alias his="history"
 alias history15="history | awk '{a[$2]++}END{for(i in a){print a[i] " " i}}' | sort -rn | head -15"
 alias historyTop='history | sort -rn | head'
 alias historyClear='history -c'

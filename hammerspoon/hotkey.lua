@@ -4,8 +4,10 @@
 -- TODO: move some functions below to external require
 -- TODO: lower case all keycode strings used (ex. change F17 to f17)
 
+require("termkey") -- override Command_R/L in Terminal
+-- require("alttabkey") -- TODO: fix broken module
+
 super = hs.hotkey.modal.new({}, "F17")
--- super = onSierra and hs.hotkey.modal.new({}, "F17") or hs.hotkey -- TODO: hs.hotkey can't call :bind(...)
 
 -- Alert date, time, battery info, and caffeine status using Notification Center
 alertSystemStatus = function()
@@ -70,9 +72,39 @@ exitSuperModal = function()
   -- super:exit()
 end
 
--- TODO: design and write the following:
--- Wrapper for super:bind() pressedFn() so releasing Capslock last won't try to press an extra ESCAPE key
--- runHotkeyAndReleaseCapslock = function()
+-- Vim Arrows
+hs.hotkey.bind({"ctrl"}, "h", function()
+    hs.eventtap.keyStroke({}, "left")
+end)
+hs.hotkey.bind({"ctrl"}, "j", function()
+    hs.eventtap.keyStroke({}, "down")
+end)
+hs.hotkey.bind({"ctrl"}, "k", function()
+    hs.eventtap.keyStroke({}, "up")
+end)
+hs.hotkey.bind({"ctrl"}, "l", function()
+    hs.eventtap.keyStroke({}, "right")
+end)
+
+-- Safari shortcuts
+hs.hotkey.bind({"shift"}, ';', function()
+    local app = hs.application.frontmostApplication()
+    local element = hs.uielement.focusedElement():role()
+    if (app:name() == "Safari" or app:name() == "Safari Technology Preview") and not string.find(element, "Text") then
+        hs.eventtap.keyStroke({"cmd"}, "l")
+    else
+        hs.eventtap.keyStrokes(':')
+    end
+end)
+hs.hotkey.bind({}, '/', function()
+    local app = hs.application.frontmostApplication()
+    local element = hs.uielement.focusedElement():role()
+    if (app:name() == "Safari" or app:name() == "Safari Technology Preview") and not string.find(element, "Text") then
+        hs.eventtap.keyStroke({"cmd"}, "f")
+    else
+        hs.eventtap.keyStrokes('/')
+    end
+end)
 
 -- Window management hotkeys
 -- TODO: bind hyper + HJKL to focus screen
@@ -82,8 +114,9 @@ super:bind({}, 'H', nil, function() hs.window.focusedWindow():focusWindowWest(ni
 super:bind({}, 'L', nil, function() hs.window.focusedWindow():focusWindowEast(nil, true, false) end, exitSuperModal)
 super:bind({}, 'A', nil, function() focusPreviousWindow() super.triggered = true end, exitSuperModal)
 super:bind({}, 'S', nil, function() resizeLeftRightFull() super.triggered = true end, exitSuperModal)
-super:bind({'shift'}, 'S', nil, function() resizeTopBottomFull() super.triggered = true end, exitSuperModal) -- simulate Caps + Shift j+ S for vertical divide
-super:bind({}, 'W', nil, function() hideScreen() super.triggered = true end, exitSuperModal)
+super:bind({'shift'}, 'S', nil, function() hs.window.setFrameCorrectness=true resizeLeftRightFull() hs.window.setFrameCorrectness=false super.triggered = true end, exitSuperModal)
+super:bind({}, 'Z', nil, function() centerScreen() super.triggered = true end, exitSuperModal)
+-- super:bind({}, 'W', nil, function() hideScreen() super.triggered = true end, exitSuperModal)
 super:bind({}, 'ESCAPE', nil, function() moveToNextScreen() super.triggered = true end, exitSuperModal)
 super:bind({}, 'RETURN', nil, function() toggleFullScreen() super.triggered = true end, exitSuperModal)
 super:bind({}, '1', nil, function() alertSystemStatus() super.triggered = true end, exitSuperModal)
@@ -91,7 +124,7 @@ super:bind({}, '2', nil, function() reportUtilsHotsupereys() super.triggered = t
 super:bind({}, ';', nil, function() hs.toggleConsole() end, exitSuperModal)
 
 -- Application opener hotsupereys
-super:bind({}, "C", nil, function() openApplication("Safari Technology Preview") end, exitSuperModal)
+super:bind({}, "C", nil, function() openApplication(chooseBrowserByMachineName()) end, exitSuperModal)
 super:bind({}, "E", nil, function() openApplication("Sublime Text") end, exitSuperModal)
 super:bind({}, "F", nil, function() openApplication("Finder") end, exitSuperModal)
 super:bind({}, 'G', nil, function() hs.hints.windowHints(hs.window.focusedWindow():application():allWindows()) end, exitSuperModal) -- display hints only for focused application
@@ -130,18 +163,6 @@ end
 
 -- Bind Capslock to Super
 f18 = hs.hotkey.bind({}, 'F18', pressedF18, releasedF18) -- WARN: do not use nil as 3rd param, omit it instead to disable hotkey alert
-
--- Resize windows with arrow hotkeys
--- super:bind(super, 'LEFT', function() resizeFocusedWindow("horizontal", -25) end, exitSuperModal)
--- super:bind(super, 'RIGHT', function() resizeFocusedWindow("horizontal", 25) end, exitSuperModal)
--- super:bind(super, 'UP', function() resizeFocusedWindow("vertical", -25) end, exitSuperModal)
--- super:bind(super, 'DOWN', function() resizeFocusedWindow("vertical", 25) end, exitSuperModal)
-
--- Resize window to corner, requires Karabiner overriding 2 arrow keys to be diagonal arrows
--- super:bind(super, 'HOME', leftTopScreen) -- left top
--- super:bind(super, 'PAGEUP', rightTopScreen) -- right top
--- super:bind(super, 'END', leftBottomScreen) -- left bottom
--- super:bind(super, 'PAGEDOWN', rightBottomScreen) -- right bottom
 
 -- Control mode (similar to Tmux prefix key)
 -- modalKey = k.modal.new({}, "f19")

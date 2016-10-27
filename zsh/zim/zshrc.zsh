@@ -21,7 +21,7 @@ path=(
   $path
 )
 typeset -U PATH # remove duplicate entries in Path
-PATH="/usr/local/bin:$HOME/.bin:/usr/local/sbin:/usr/bin:/bin:/usr/sbin:/sbin"
+export PATH="/usr/local/bin:$HOME/.bin:/usr/local/sbin:/usr/bin:/bin:/usr/sbin:/sbin"
 
 # TODO: figure out how LESS works
 # export LESS_TERMCAP_mb=$'\E[01;31m'
@@ -36,7 +36,7 @@ PATH="/usr/local/bin:$HOME/.bin:/usr/local/sbin:/usr/bin:/bin:/usr/sbin:/sbin"
 
 export VISUAL='vim'
 export EDITOR='vim'
-export DEVPATH="${HOME}/Developments"
+export DEVPATH="$HOME/Developments"
 export HISTCONTROL=erasedups  # Ignore duplicate entries in history
 export HISTIGNORE="&:ls:ll:la:l.:pwd:exit:clear:clr:[bf]g"
 
@@ -44,6 +44,10 @@ export HISTIGNORE="&:ls:ll:la:l.:pwd:exit:clear:clr:[bf]g"
 fpath=("/usr/local/bin/" $fpath)
 export HOMEBREW_CASK_OPTS="--appdir=/Applications --caskroom=/opt/homebrew-cask/Caskroom" # install path
 export HOMEBREW_NO_ANALYTICS=1 # opt-out of analytics
+
+# Go
+export GOPATH="$DEVPATH/go"
+export PATH="$PATH:$GOPATH/bin"
 
 # Node
 # export NVM_DIR="$HOME/.nvm"
@@ -69,6 +73,12 @@ setopt MENU_COMPLETE
 # Bash profile
 [[ -f "${HOME}/.bash_profile" ]] && source "${HOME}/.bash_profile"
 
+# Autosuggestion
+# if [[ ! -d ~/.zsh/zsh-autosuggestions ]]; then
+#     git clone git://github.com/zsh-users/zsh-autosuggestions ~/.zsh/zsh-autosuggestions
+# fi
+# source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
+
 # Use 256 color terminal
 export TERM="xterm-256color"
 
@@ -77,6 +87,9 @@ if [[ ($TERM_PROGRAM == "Apple_Terminal") ]]; then # Apple Terminal
   if [[ -h "${HOME}/.iterm2_shell_integration.zsh" ]]; then
     rm "${HOME}/.iterm2_shell_integration.zsh" && echo "removed ~/.iterm2_shell_integration.zsh";
   fi
+
+  # Disables ^S (freeze terminal output) and ^Q (resume terminal output)
+  unsetopt flowcontrol
 
   # TODO: bind keys to delete words faster, maybe bind to Option keys (requires research)
   # Key bindings, available widgets listed on http://zsh.sourceforge.net/Doc/Release/Zsh-Line-Editor.html#Standard-Widgets
@@ -98,10 +111,10 @@ if [[ ($TERM_PROGRAM == "Apple_Terminal") ]]; then # Apple Terminal
   bindkey -s "^Q" "^[Isudo ^[A" # Tab key, prepend sudo
 
   # Disable (-r) Up/Down arrow keys to practice ^O/^P
-  bindkey -r "^[[A" # Up arrow key
-  bindkey -r "^[[B" # Down arrow key
-  bindkey -r "^[[C" # Right arrow key
-  bindkey -r "^[[D" # Left arrow key
+  # bindkey -r "^[[A" # Up arrow key
+  # bindkey -r "^[[B" # Down arrow key
+  # bindkey -r "^[[C" # Right arrow key
+  # bindkey -r "^[[D" # Left arrow key
   # ^I is Tab key
 
   # Display Vi-mode in prompt

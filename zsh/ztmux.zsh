@@ -26,7 +26,7 @@ if [[ -z "$TMUX" && -z "$EMACS" && -z "$VIM" ]]; then
     set-option -t "$tmux_session" destroy-unattached off &> /dev/null
   fi
 
-  exec tmux $_tmux_iterm_integration attach-session
+  exec tmux $_tmux_iterm_integration attach -d
   # exec tmux attach-session -d
 fi
 

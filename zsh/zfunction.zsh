@@ -33,6 +33,17 @@ te() {
   tmux split-window -h -c "#{pane_current_path}" "vim $@"
 }
 
+# NOTE: 3 functions below require 'selecta' from brew
+devs() {
+    cd $(find $DEVPATH -maxdepth 1 -type d | selecta)
+}
+pids() {
+    ps axww -o pid,user,%cpu,%mem,start,time,command | selecta | sed 's/^ *//' | cut -f1 -d' '
+}
+files() {
+  ccat $(ls | selecta)
+}
+
 ssht(){
   ssh $* -t "tmux attach || tmux || $SHELL"
 }
@@ -448,9 +459,9 @@ nyan() {
 # TODO: integrate this function into ~/.bin/hue
 # Set PhilipsHue light theme using cURL to send HTTP Put
 # args: $1 - theme name
-sethue() {
+hue() {
 	if [[ $# < 1 ]] then
-		echo "error: setPhilipsHueTheme requires at least 1 arg, running command with default params\n"
+		# echo "error: setPhilipsHueTheme requires at least 1 arg, running command with default params\n"
     theme="home"
   else
     theme=$1
