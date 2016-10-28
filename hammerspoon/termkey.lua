@@ -86,16 +86,6 @@ stopWatch = function()
   -- hs.alert.show('termkey event watch stopped')
 end
 
-module.enable = function()
-  module.wf:subscribe(wf.windowFocused, startWatch)
-  module.wf:subscribe(wf.windowUnfocused, stopWatch)
-end
-
-module.disable = function()
-  module.wf:unsubscribe(wf.windowFocused)
-  module.wf:unsubscribe(wf.windowUnfocused)
-end
-
 module.wf:subscribe(wf.windowFocused, startWatch)
 module.wf:subscribe(wf.windowUnfocused, stopWatch)
 

@@ -17,6 +17,9 @@ endif
 " set timeout timeoutlen=1000 ttimeoutlen=100 " TODO: verify this fixes slow O inserts
 " WARN: Use H (high), M (middle), or L (low) to jump to screen positions to shorten the distance
 
+" make :W save too
+command! W write
+
 " disable arrow keys in Navigation mode
 noremap <Up> <NOP>
 noremap <Down> <NOP>
@@ -40,7 +43,8 @@ map g/ <Plug>(incsearch-stay)
 " Visual/Select mode binding
 vmap / gc " comment out visually selected lines
 " TODO: refactor '<leader>h' to toggle instead of unhighlight search results
-nnoremap <leader>h :nohlsearch<Bar>:echo<CR> " unhighlight search results
+" nnoremap <leader>h :nohlsearch<Bar>:echo<CR> " unhighlight search results
+nnoremap <silent> <Space> :nohlsearch<Bar>:echo<CR>
 nnoremap <leader>R :nohlsearch<cr>:diffupdate<cr>:syntax sync fromstart<cr><c-l> " redraw screen
 
 " scroll buffer vertically by visual line
@@ -54,9 +58,6 @@ nnoremap < <<
 " move blocks of text in visual mode
 vnoremap < <gv
 vnoremap > >gv
-
-" Select all text
-map <Space>a ggVG
 
 " highlight last inserted (or all text if none) text
 " mapped to 'gV' because 'gv' highlights last visual selection
@@ -160,6 +161,4 @@ nnoremap <leader>b :call SelectaBuffer()<cr>
 
 " ; -> :. less shift
 " nnoremap ; :
-" make :W save too
-" command! W write " TODO: figure out what this does
 

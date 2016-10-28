@@ -20,8 +20,8 @@ hs.window.filter.setLogLevel = 'error'
 hs.window.filter.ignoreAlways['Safari Technology Preview Networking'] = true
 hs.window.filter.ignoreAlways['Safari Technology Preview Database Storage'] = true
 hs.window.filter.ignoreAlways['Siri'] = true -- prevent wfilter warnings from windowHighlight
-hs.window.filter.ignoreAlways['Spotlight'] = true -- prevent wfilter warnings from windowHighlight
-hs.window.filter.ignoreAlways['Autoupdate'] = true
+hs.window.filter.ignoreAlways['Spotlight'] = false -- prevent wfilter warnings from windowHighlight
+-- hs.window.filter.ignoreAlways['Autoupdate'] = true
 
 -- WARN: import order matters!
 require("utility")
@@ -29,6 +29,7 @@ require("window") -- depends on util
 require("highlight") -- depends on window
 require("switcher")
 require("clipboard")
+require("winfilter")
 
 -- osx10.12 dependencies
 if hs.host.operatingSystemVersion().minor == 12 then require("hotkey") else require("hotkey-old") end

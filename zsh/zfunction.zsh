@@ -13,10 +13,11 @@
 # }
 
 # Change directory and list files
-cd() { builtin cd "$@" && ls && printf ""; }
+# cd() { builtin cd "$@" && ls && printf ""; }
 
 # Change to previous directory and list files
-bd() { cd - && printf ""; }
+# bd() { cd - && printf ""; }
+bd() { cd - }
 
 # Change to git root directory
 rd() { cd $(git rev-parse --show-cdup); }
@@ -27,9 +28,8 @@ swd() { echo "$(pwd | sed -e "s,^$HOME,~,")" }
 # Make and go to directory
 md() { [[ -n ${1} ]] && mkdir -p ${1} && builtin cd ${1}; }
 
-# TODO: rename function
-# Opens file with default editor in new Tmux pane
-te() {
+# Open file with default Editor in a new Tmux pane
+emux() {
   tmux split-window -h -c "#{pane_current_path}" "vim $@"
 }
 
@@ -165,10 +165,10 @@ fd() {
 }
 
 # Copy/Paste buffer
-yy() { echo "$*" | pbcopy }
-P() { pbpaste | textutil -convert txt -stdin -stdout -encoding 30 | pbpaste } # paste plain text
-p() { echo `pbpaste` } # paste with formats, must use ` instead of ' to execute pbpaste
-ywd() { echo $PWD | pbcopy } # Yank current directory path
+# yy() { echo "$*" | pbcopy }
+# P() { pbpaste | textutil -convert txt -stdin -stdout -encoding 30 | pbpaste } # paste plain text
+# p() { echo `pbpaste` } # paste with formats, must use ` instead of ' to execute pbpaste
+# ywd() { echo $PWD | pbcopy } # Yank current directory path
 
 port() {
   # netstat -anp tcp | grep $1; # default port scan

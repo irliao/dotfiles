@@ -8,6 +8,10 @@ if [[ -s ${ZDOTDIR:-${HOME}}/.zim/init.zsh ]]; then
 fi
 
 # skip_global_compinit=1 # faster Zsh startup
+autoload -Uz promptinit
+promptinit
+prompt mingit
+
 DEFAULT_USER="irliao" # replaces user@hostname with specified username
 # LANG=en_US.utf8
 export LC_ALL=en_US.UTF-8
@@ -60,6 +64,12 @@ eval "$(thefuck --alias fk)"
 
 # Completion with more than 1 possibilities will insert first available option into prompt automatically
 setopt MENU_COMPLETE
+
+# List files upon change directory
+function chpwd() {
+  emulate -L zsh
+  ls
+}
 
 # Custom functions
 [[ -f "${HOME}/.zfunction" ]] && source "${HOME}/.zfunction"
