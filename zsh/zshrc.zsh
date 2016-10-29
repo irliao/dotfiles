@@ -7,13 +7,17 @@ if [[ -s ${ZDOTDIR:-${HOME}}/.zim/init.zsh ]]; then
   source ${ZDOTDIR:-${HOME}}/.zim/init.zsh
 fi
 
-# skip_global_compinit=1 # faster Zsh startup
+# Symlink custom prompt if not there
+if [[ ! -h ~/.zim/modules/prompt/functions/prompt_mingit_setup ]]; then
+  ln -s ~/.zprompt ~/.zim/modules/prompt/functions/prompt_mingit_setup
+fi
+
+skip_global_compinit=1 # faster Zsh startup
 autoload -Uz promptinit
 promptinit
 prompt mingit
 
 DEFAULT_USER="irliao" # replaces user@hostname with specified username
-# LANG=en_US.utf8
 export LC_ALL=en_US.UTF-8
 export LANG=en_US.UTF-8
 
@@ -62,13 +66,18 @@ export PATH="$PATH:$GOPATH/bin"
 eval "$(thefuck --alias)"
 eval "$(thefuck --alias fk)"
 
-# Completion with more than 1 possibilities will insert first available option into prompt automatically
-setopt MENU_COMPLETE
+setopt MENU_COMPLETE # completion with > 1 choices will auto insert first choice
+unsetopt flowcontrol # disables ^S (freeze) and ^Q (resume) terminal output
 
 # List files upon change directory
 function chpwd() {
   emulate -L zsh
   ls
+}
+
+# Redraw prompt when Terminal size changes, fixes Tmux window size
+TRAPWINCH() {
+  zle &&  zle -R
 }
 
 # Custom functions
@@ -77,17 +86,8 @@ function chpwd() {
 # Custom aliases, should source after custom functions incase aliasing functions
 [[ -f "${HOME}/.zalias" ]] && source "${HOME}/.zalias"
 
-# Local profile... exports local (or private) variables
-[[ -f "${HOME}/.local_profile" ]] && source "${HOME}/.local_profile"
-
 # Bash profile
 [[ -f "${HOME}/.bash_profile" ]] && source "${HOME}/.bash_profile"
-
-# Autosuggestion
-# if [[ ! -d ~/.zsh/zsh-autosuggestions ]]; then
-#     git clone git://github.com/zsh-users/zsh-autosuggestions ~/.zsh/zsh-autosuggestions
-# fi
-# source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
 
 # Use 256 color terminal
 export TERM="xterm-256color"
@@ -98,12 +98,8 @@ if [[ ($TERM_PROGRAM == "Apple_Terminal") ]]; then # Apple Terminal
     rm "${HOME}/.iterm2_shell_integration.zsh" && echo "removed ~/.iterm2_shell_integration.zsh";
   fi
 
-  # Disables ^S (freeze terminal output) and ^Q (resume terminal output)
-  unsetopt flowcontrol
-
-  # TODO: bind keys to delete words faster, maybe bind to Option keys (requires research)
-  # Key bindings, available widgets listed on http://zsh.sourceforge.net/Doc/Release/Zsh-Line-Editor.html#Standard-Widgets
-  # WARN: do not bind to ^L or ^V
+  # Key bindings
+  stty -ixon # gives access to ^Q
   bindkey -v # press <ESC> to enter NORMAL mode, press i to enter INSERT mode
   bindkey "^A" beginning-of-line
   bindkey "^B" backward-word
@@ -112,43 +108,27 @@ if [[ ($TERM_PROGRAM == "Apple_Terminal") ]]; then # Apple Terminal
   bindkey "^C" kill-line
   bindkey "^X" backward-kill-word
   bindkey "^Y" vi-yank-whole-line # yank entire line to killer
-  bindkey "^Z" insert-last-word # insert word from last Entered command
   bindkey "^H" beginning-of-history
   bindkey "^O" down-line-or-search
   bindkey "^P" up-line-or-search
-  bindkey '^R' history-incremental-search-backward
-  stty -ixon # gives access to ^Q
-  bindkey -s "^Q" "^[Isudo ^[A" # Tab key, prepend sudo
-
-  # Disable (-r) Up/Down arrow keys to practice ^O/^P
-  # bindkey -r "^[[A" # Up arrow key
-  # bindkey -r "^[[B" # Down arrow key
-  # bindkey -r "^[[C" # Right arrow key
-  # bindkey -r "^[[D" # Left arrow key
-  # ^I is Tab key
+  bindkey -s '\es' '^Asudo ^E' # \e is Alt-key, Alt+S to prepend sudo to command then go to eol
+  bindkey '\e.' insert-last-word
 
   # Display Vi-mode in prompt
   function zle-line-init zle-keymap-select {
-      # VIM_PROMPT="%{$fg_bold[red]%}Vi%{$reset_color%}"
-      # RPS1="${${KEYMAP/vicmd/$VIM_PROMPT}/(main|viins)/}$EPS1"
-
-      # read more on: http://unix.stackexchange.com/questions/547/make-my-zsh-prompt-show-mode-in-vi-mode
-      # also read up: http://martin.krischik.com/index.php/Z-Shell/VimMode
-      # RPS1="${${KEYMAP/vicmd/-- NORMAL --}/(main|viins)/-- INSERT --}"
-      RPS1="${${KEYMAP/vicmd/-- NORMAL --}/(main|viins)/}$EPS1"
+      VIM_PROMPT="%{$fg_bold[yellow]%}NORMAL%{$reset_color%}"
+      RPS1="${${KEYMAP/vicmd/$VIM_PROMPT}/(main|viins)/}$EPS1"
       zle reset-prompt
   }
   zle -N zle-line-init
   zle -N zle-keymap-select
   export KEYTIMEOUT=1 # 0.4 to 0.1 sec delay in Vim mode display change, raise value if other commands getting issues
 
-  [[ -f "${HOME}/.ztmux" ]] && source "${HOME}/.ztmux"
-elif [[ ($TERM_PROGRAM == "Apple_Terminal") ]]; then # iTerm2
+  [[ -f "${HOME}/.zmux" ]] && source "${HOME}/.zmux"
+  # [[ -f ~/.dotfiles/zsh/tmux.plugin.zsh ]] && source ~/.dotfiles/zsh/tmux.plugin.zsh
+elif [[ ($TERM_PROGRAM == "iTerm") ]]; then # iTerm2
   # iTerm2 shell integration with Unix shell
-  if [[ ! -h "${HOME}/.iterm2_shell_integration.zsh" ]]; then # check if file is Symlink
-    # Custom shell loading for iTerm
-    ln -s ${HOME}/.dotfiles/config/term/iterm2_shell_integration.zsh ${HOME}/.iterm2_shell_integration.zsh;
-  fi
+  [[ ! -h "${HOME}/.iterm2_shell_integration.zsh" ]] && ln -s ${HOME}/.dotfiles/config/term/iterm2_shell_integration.zsh ${HOME}/.iterm2_shell_integration.zsh;
 
   # Rename title displayed from tabs in iTerm
   title () {
@@ -162,9 +142,7 @@ elif [[ ($TERM_PROGRAM == "Apple_Terminal") ]]; then # iTerm2
   # use iterm2_shell_integration.`basename $SHELL` when dealing with multiple shells
   test -e ${HOME}/.iterm2_shell_integration.zsh && source ${HOME}/.iterm2_shell_integration.zsh
 else # Other
-  if [[ -h "${HOME}/.iterm2_shell_integration.zsh" ]]; then
-    rm "${HOME}/.iterm2_shell_integration.zsh" && echo "removed ~/.iterm2_shell_integration.zsh";
-  fi
+  [[ -h "${HOME}/.iterm2_shell_integration.zsh" ]] && rm "${HOME}/.iterm2_shell_integration.zsh" && echo "removed ~/.iterm2_shell_integration.zsh";
 fi
 
 # Rename tabs automatically
@@ -190,19 +168,10 @@ esac
 #   ;;
 # esac
 
-# Clears the "Last login" message at startup
-# clear;
-
 # Unused settings
-#
-
-# Autocompletion
-# fpath=(~/.dotfiles/zsh/completions $fpath)
-# autoload -U compinit && compinit
 
 # PATH configured to work with NPM global installs (without sudo)
 # NPM_PACKAGES="${HOME}/.node_modules_global"
 # NPM_PACKAGES_BIN="${HOME}/.node_modules_global/bin" # include in PATH if setting prefix with .npmrc
 # unset MANPATH
 # export MANPATH="$NPM_PACKAGES/share/man:$(manpath)" # include manuals from npm modules
-#

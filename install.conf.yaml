@@ -23,11 +23,11 @@
     ~/.vimrc: vim/vimrc.vim
     ~/.zalias: zsh/zalias.zsh
     ~/.zfunction: zsh/zfunction.zsh
-    ~/.zimrc: zsh/zim/zimrc.zsh
-    ~/.zlogin: zsh/zim/zlogin.zsh
+    ~/.zimrc: zsh/zimrc.zsh
+    ~/.zlogin: zsh/zlogin.zsh
     ~/.zprompt: zsh/prompts/mingit.zsh
-    ~/.zshrc: zsh/zim/zshrc.zsh
-    ~/.ztmux: zsh/ztmux.zsh
+    ~/.zshrc: zsh/zshrc.zsh
+    ~/.zmux: zsh/zmux.zsh
 
 - shell:
   - [git submodule update --init --recursive, Installing submodules]
