@@ -9,7 +9,7 @@ fi
 
 # Symlink custom prompt if not there
 if [[ ! -h ~/.zim/modules/prompt/functions/prompt_mingit_setup ]]; then
-  ln -s ~/.zprompt ~/.zim/modules/prompt/functions/prompt_mingit_setup
+  ln -s "$HOME/.zprompt" "$HOME/.zim/modules/prompt/functions/prompt_mingit_setup"
 fi
 
 skip_global_compinit=1 # faster Zsh startup
@@ -52,6 +52,7 @@ export HISTIGNORE="&:ls:ll:la:l.:pwd:exit:clear:clr:[bf]g"
 fpath=("/usr/local/bin/" $fpath)
 export HOMEBREW_CASK_OPTS="--appdir=/Applications --caskroom=/opt/homebrew-cask/Caskroom" # install path
 export HOMEBREW_NO_ANALYTICS=1 # opt-out of analytics
+# export TRAVIS=1 # bypass missing xCode 8 error on osx10.12
 
 # Go
 export GOPATH="$DEVPATH/go"
@@ -111,6 +112,7 @@ if [[ ($TERM_PROGRAM == "Apple_Terminal") ]]; then # Apple Terminal
   bindkey "^H" beginning-of-history
   bindkey "^O" down-line-or-search
   bindkey "^P" up-line-or-search
+  bindkey "^R" history-incremental-search-backward
   bindkey -s '\es' '^Asudo ^E' # \e is Alt-key, Alt+S to prepend sudo to command then go to eol
   bindkey '\e.' insert-last-word
 
@@ -147,11 +149,11 @@ fi
 
 # Rename tabs automatically
 # rename tab - version 1
-case $TERM in
-    xterm*)
-        precmd () {print -Pn "\e]0;${PWD/#${HOME}/~}\a"}
-        ;;
-esac
+# case $TERM in
+#     xterm*)
+#         precmd () {print -Pn "\e]0;${PWD/#${HOME}/~}\a"}
+#         ;;
+# esac
 
 # rename tab - version 2
 # case $TERM in

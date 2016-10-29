@@ -11,28 +11,11 @@ Clone the repo to some directory, ex: ~/Developments/
 ```
 git clone https://github.com/irliao/dotfiles ~/Developments/dotfiles
 ```
-Symlink the repo to home directory
+Run install script
 
 ```
-ln -s ~/Developments/dotfiles ~/.dotfiles
+source ./install.sh
 ```
-Go in the dotfiles repo and update submodule: dotbot
-
-```
-cd ~/.dotfiles && git submodule update --remote ./dotbot
-```
-Update all submodules
-
-```
-git submodule foreach git pull origin master
-```
-Run dotbot's install script
-
-```
-source install.sh
-```
-
-## Dependencies
 
 ### Managers
 
@@ -49,6 +32,7 @@ source install.sh
 
 ## Tasks
 
+* finish and test ./install.sh
 * include screencast (maybe asciinema?)
 * add Wiki page
 * add Contribution.md
