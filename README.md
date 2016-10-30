@@ -11,7 +11,7 @@ Clone the repo, ex:
 ```
 git clone https://github.com/irliao/dotfiles $HOME/Developments/dotfiles
 ```
-Run install script inside the repo
+Run install script inside the repo **Warning:** This script is still in progress... do NOT run until this warning message goes away.
 
 ```
 cd $HOME/Developments/dotfiles && source ./install.sh
@@ -19,11 +19,9 @@ cd $HOME/Developments/dotfiles && source ./install.sh
 
 ### Managers
 
-* [dotbot](https://github.com/anishathalye/dotbot) - .files manager
 * [zim](https://github.com/Eriner/zim) - Zsh customization and plugin manager
 * [vim-plug](https://github.com/junegunn/vim-plug) - Vim plugin manager
 * [tpm](https://github.com/tmux-plugins/tpm) - Tmux plugin manager
-* [grip](https://github.com/joeyespo/grip) - preview GitHub Markdown files
 
 ### Tools
 
@@ -31,7 +29,6 @@ cd $HOME/Developments/dotfiles && source ./install.sh
 
 ## Tasks
 
-* move karabiner.d/ to be under config/
 * finish and test ./install.sh
 * include screencast (maybe asciinema?)
 * add Wiki page
