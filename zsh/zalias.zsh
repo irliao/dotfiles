@@ -22,8 +22,6 @@ alias saf="cd $DEVPATH/safari-extensions"
 alias web="cd $DEVPATH/irliao.github.io"
 alias rea="cd $DEVPATH/react-tutorials"
 alias ghc="cd $DEVPATH/clones"
-alias bs="cd ~/BitTorrent\ Sync"
-alias vm="cd ~/Virtual\ Machines"
 
 # Unix
 alias g="grep"
@@ -72,6 +70,7 @@ alias tclear="run_in_all_naked_panes clear" # requires script in ~/.bin
 
 # CLIs
 # alias grep="brew install the_silver_searcher"
+alias ds='du -khs' # display size of directory (not listing children files) in kb
 alias st="syncthing"
 alias bu="brew update && brew upgrade && brew prune && brew cleanup && brew doctor"
 alias fk='$(thefuck $(fc -ln -1))' # WARN: this alias must use single quotes to work properly
