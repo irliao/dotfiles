@@ -95,9 +95,7 @@ export TERM="xterm-256color"
 
 # Term specific customizations
 if [[ ($TERM_PROGRAM == "Apple_Terminal") ]]; then # Apple Terminal
-  if [[ -h "${HOME}/.iterm2_shell_integration.zsh" ]]; then
-    rm "${HOME}/.iterm2_shell_integration.zsh" && echo "removed ~/.iterm2_shell_integration.zsh";
-  fi
+  if [[ -h "${HOME}/.iterm2_shell_integration.zsh" ]]; then rm "${HOME}/.iterm2_shell_integration.zsh" && echo "removed ~/.iterm2_shell_integration.zsh"; fi
 
   # Key bindings
   stty -ixon # gives access to ^Q
@@ -127,10 +125,9 @@ if [[ ($TERM_PROGRAM == "Apple_Terminal") ]]; then # Apple Terminal
   export KEYTIMEOUT=1 # 0.4 to 0.1 sec delay in Vim mode display change, raise value if other commands getting issues
 
   [[ -f "${HOME}/.zmux" ]] && source "${HOME}/.zmux"
-  # [[ -f ~/.dotfiles/zsh/tmux.plugin.zsh ]] && source ~/.dotfiles/zsh/tmux.plugin.zsh
 elif [[ ($TERM_PROGRAM == "iTerm") ]]; then # iTerm2
   # iTerm2 shell integration with Unix shell
-  [[ ! -h "${HOME}/.iterm2_shell_integration.zsh" ]] && ln -s ${HOME}/.dotfiles/config/term/iterm2_shell_integration.zsh ${HOME}/.iterm2_shell_integration.zsh;
+  [[ ! -h "${HOME}/.iterm2_shell_integration.zsh" ]] && ln -s ${HOME}/.dotfiles/config/term/iterm2/iterm2_shell_integration.zsh ${HOME}/.iterm2_shell_integration.zsh;
 
   # Rename title displayed from tabs in iTerm
   title () {

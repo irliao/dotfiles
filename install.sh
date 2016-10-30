@@ -56,7 +56,8 @@ function install() {
   # TODO: symlink Vim, Tmux,
 
   echo 'finished install, starting zim' &&
-    source ${ZDOTDIR:-${HOME}}/.zlogin
+    source ${ZDOTDIR:-${HOME}}/.zlogin &&
+    open "$dotdir/config/term/Main.terminal"
 
   return 1
 }
