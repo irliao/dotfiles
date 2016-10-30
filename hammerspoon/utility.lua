@@ -1,4 +1,46 @@
--- Utilities
+-- Utilities (mostly binded to some hotkey)
+
+-- Returns string name of browser to use based on machine name
+chooseBrowserByMachineName = function()
+  local machineName = hs.host.localizedName()
+  if machineName == "irl-mba" or machineName == "irl-mbp" then -- personal
+    browser = "Safari Technology Preview"
+  elseif machineName == "SDGL130e9919d" then -- work
+    browser = "Google Chrome"
+  else -- default
+    browser = "Safari"
+  end
+  return browser
+end
+
+-- Returns string name of mail application to use based on machine name
+chooseMailByMachineName = function()
+  local machineName = hs.host.localizedName()
+  if machineName == "SDGL130e9919d" then -- work
+    mail = "Microsoft Outlook"
+  else -- default
+    mail = "Mail" -- default Apple Mac Mail.app
+  end
+  return mail
+end
+
+-- Reloads Hammerspoon config
+reloadConfig = function()
+  hs.reload()
+  hs.alert.show("Config loaded")
+end
+
+-- Alert date, time, battery info, and caffeine status using Notification Center
+alertSystemStatus = function()
+    hs.alert.closeAll()
+    local bat_num = hs.battery.percentage() -- local var for immediate battery status
+    local time_str = os.date("%A %b %d, %Y - %H:%M") -- os.date("%a, %m/%d/%y - %H:%m")
+    local bat_str = "Battery: " .. (bat_num and (bat_num .. "%") or "Nil")
+    local caff_str = "Caffeine: " .. (caffeineStatus and caffeineStatus or "Nil")
+    hs.alert(time_str)
+    hs.alert(bat_str)
+    hs.alert(caff_str)
+end
 
 -- Mouse highlight
 function mouseHighlight()
@@ -54,17 +96,7 @@ function sendNotif(title_str, message_str)
     hs.notify.new(notif_msg):send()
 end
 
--- Report date, time, battery info, and caffeine status using Notification Center
-function reportStatus()
-    hs.alert.closeAll()
-    local bat_num = hs.battery.percentage() -- local var for immediate battery status
-    local date_str = os.date("%a, %m/%d/%y - %H:%m")
-    local bat_str = "Battery % Left: " .. (bat_num and string.format("%d%%", bat_num) or "Charging")
-    local caff_str = "Caffeine: " .. (caffeineStatus and caffeineStatus or "Nil")
-    local notif_str = bat_str .. caff_str
-    sendNotif(date_str, notif_str)
-end
-
+-- TODO: move Term functions below to another file, refactor window.lua to import it
 -- Open Terminal and Enter Full Screen
 function openTerminalFullScreen()
     script = [[
@@ -125,64 +157,6 @@ function toggleiTermFullScreen()
     hs.applescript(script)
 end
 
--- Open Safari Extension Builder
-function openSafariExtensionBuilder()
-    script = [[
-    activate application "Safari"
-    tell application "System Events"
-        tell process "Safari"
-            click menu item "Show Extension Builder" of menu 1 of menu bar item "Develop" of menu bar 1
-        end tell
-    end tell
-    ]]
-    hs.applescript(script)
-end
-
--- Open Safari Technology Preview's Extension Builder
-function openSafariTechExtensionBuilder()
-    script = [[
-    activate application "Safari Technology Preview"
-    tell application "System Events"
-        tell process "Safari Technology Preview"
-            click menu item "Show Extension Builder" of menu 1 of menu bar item "Develop" of menu bar 1
-        end tell
-    end tell
-    ]]
-    hs.applescript(script)
-end
-
--- Types the current URL of Safari
-function copyCurrentSafariURL()
-    script = [[
-    tell application "Safari"
-        set currentURL to URL of document 1
-    end tell
-    return currentURL
-    ]]
-    ok, result = hs.applescript(script)
-    if (ok) then
-        -- hs.eventtap.keyStrokes(result) -- type the result
-        hs.pasteboard.setContents(result)
-        sendNotif('Clipboard', 'Copied current URL of Safari')
-    end
-end
-
--- Types the current URL of Safari Technology Preview
-function copyCurrentSafariTechURL()
-    script = [[
-    tell application "Safari Technology Preview"
-        set currentURL to URL of document 1
-    end tell
-    return currentURL
-    ]]
-    ok, result = hs.applescript(script)
-    if (ok) then
-        -- hs.eventtap.keyStrokes(result) -- type the result
-        hs.pasteboard.setContents(result)
-        sendNotif('Clipboard', 'Copied current URL of Safari Tech')
-    end
-end
-
 -- Types the current PATH of Finder
 function copyCurrentFinderPath()
     script = [[
@@ -200,9 +174,22 @@ function copyCurrentFinderPath()
     end
 end
 
--- Reload Hammerspoon config
-function reloadConfig(files)
-    doReload = false
+-- Checks if a device is currently connected
+function isDeviceConnected(productID, productName, vendorID)
+  local attachedUsbs = hs.usb.attachedDevices()
+  for i,usb in ipairs(attachedUsbs) do
+    if usb and usb['productID'] == productID and usb['productName'] == productName and usb['vendorID'] == vendorID then
+      return true
+    end
+  end
+
+  -- no such device found connected
+  return false
+end
+
+-- Reload Hammerspoon config if any files passed in is lua file and has saved changes
+function reloadConfigWithAnyChange(files)
+    local doReload = false
     for _,file in pairs(files) do
         if file:sub(-4) == ".lua" then
             doReload = true

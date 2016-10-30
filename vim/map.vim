@@ -51,6 +51,11 @@ nnoremap <leader>R :nohlsearch<cr>:diffupdate<cr>:syntax sync fromstart<cr><c-l>
 nnoremap j gj
 nnoremap k gk
 
+" TODO: map to some other key not j or k
+" physically move 6 lines instead of 1 line
+" nnoremap j 6j
+" nnoremap k 6k
+
 " move current line in normal mode
 nnoremap > >>
 nnoremap < <<
@@ -68,6 +73,7 @@ nnoremap gV `[v`]
 vnoremap p "_dP
 
 " 1 to beginning of line, 0 to end of line in Normal mode
+" ^ and $ can be used in regex for start and end of the line, ex: :%s/^/# substitudes start of all lines with # character
 map 0 ^
 map 1 $
 

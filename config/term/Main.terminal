@@ -227,7 +227,7 @@
 	AAAZAAAAAAAAAAAAAAAAAAAA2Q==
 	</data>
 	<key>SetLanguageEnvironmentVariables</key>
-	<false/>
+	<true/>
 	<key>ShouldLimitScrollback</key>
 	<integer>0</integer>
 	<key>ShouldRestoreContent</key>
@@ -638,22 +638,22 @@
 		<string>[6;7~</string>
 	</dict>
 	<key>name</key>
-	<string>Dev</string>
+	<string>Main</string>
 	<key>noWarnProcesses</key>
 	<array>
 		<dict>
 			<key>ProcessName</key>
-			<string>screen</string>
+			<string>tmux</string>
 		</dict>
 		<dict>
 			<key>ProcessName</key>
-			<string>tmux</string>
+			<string>screen</string>
 		</dict>
 	</array>
 	<key>rowCount</key>
 	<integer>48</integer>
 	<key>shellExitAction</key>
-	<integer>1</integer>
+	<integer>0</integer>
 	<key>type</key>
 	<string>Window Settings</string>
 	<key>useOptionAsMetaKey</key>

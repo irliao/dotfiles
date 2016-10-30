@@ -23,16 +23,16 @@ hs.window.filter.ignoreAlways['Siri'] = true -- prevent wfilter warnings from wi
 hs.window.filter.ignoreAlways['Spotlight'] = false -- prevent wfilter warnings from windowHighlight
 -- hs.window.filter.ignoreAlways['Autoupdate'] = true
 
--- WARN: import order matters!
+-- TODO: currently order matters, should remove such dependency order
 require("utility")
 require("window") -- depends on util
 require("highlight") -- depends on window
 require("switcher")
 require("clipboard")
-require("winfilter")
-
--- osx10.12 dependencies
-if hs.host.operatingSystemVersion().minor == 12 then require("hotkey") else require("hotkey-old") end
+require("window-filter")
+-- if hs.host.operatingSystemVersion().minor == 12 then require("sierra-key") else require("el-capitan-key") end
+-- require("terminal-key") -- override Command_R/L in Terminal
+require("hhkb-key")
 
 -- TODO: broken
 -- Input source change with alert
@@ -69,6 +69,7 @@ caffeineMenubar:setClickCallback(caffeineToggle)
 caffeineToggle() -- default Caffeine to be ON
 isConfigLoaded = false -- controls when Caffeine can alert
 
+-- TODO: move applicationWatcher() out of window.lua
 -- Application watcher
 appWatcher = hs.application.watcher.new(applicationWatcher)
 appWatcher:start()

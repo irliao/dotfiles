@@ -6,15 +6,15 @@
 
 **Warning:** This repository primarily supports macOS Sierra (osx10.12) but should be compatible with earlier versions. Please feel free to report any issue or request for features [here](https://github.com/irliao/dotfiles/issues).
 
-Clone the repo to some directory, ex: ~/Developments/
+Clone the repo, ex:
 
 ```
-git clone https://github.com/irliao/dotfiles ~/Developments/dotfiles
+git clone https://github.com/irliao/dotfiles $HOME/Developments/dotfiles
 ```
-Run install script
+Run install script inside the repo
 
 ```
-source ./install.sh
+cd $HOME/Developments/dotfiles && source ./install.sh
 ```
 
 ### Managers
@@ -25,22 +25,19 @@ source ./install.sh
 * [tpm](https://github.com/tmux-plugins/tpm) - Tmux plugin manager
 * [grip](https://github.com/joeyespo/grip) - preview GitHub Markdown files
 
-### Applications
+### Tools
 
 * [Hammerspoon](https://github.com/Hammerspoon/hammerspoon) - system automation
-* [Karabiner-Elements](https://github.com/tekezo/Karabiner-Elements) - keyboard customization
 
 ## Tasks
 
+* move karabiner.d/ to be under config/
 * finish and test ./install.sh
 * include screencast (maybe asciinema?)
 * add Wiki page
 * add Contribution.md
-* decide if should add Zim (clone or fork) as a submodule
-* consider moving Dotbot into a submodule dir to organize all submodules
 * choose between using master .gitignore at project root or individual .gitignore at various folders
-* write own script (maybe Makefile or Rake) to setup .files and remove dotbot from submodule
-* fix shift-Tab issue in iTerm2 (somehow fixed by sourcing ~/.zshrc)
+* investigate shift-Tab issue in iTerm2 (somehow fixed by sourcing ~/.zshrc)
 * consider adding badge for build status (https://github.com/badges/shields/blob/master/INSTALL.md)
 
 ## License

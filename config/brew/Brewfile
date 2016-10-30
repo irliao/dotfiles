@@ -6,6 +6,7 @@ brew 'gdbm'
 brew 'openssl'
 brew 'pkg-config'
 brew 'readline'
+brew 'icu4c'
 brew 'sqlite'
 brew 'xz'
 brew 'python3'
@@ -13,8 +14,15 @@ brew 'asciinema'
 brew 'autoconf'
 brew 'bdw-gc'
 brew 'boost'
+brew 'libpng'
+brew 'freetype'
+brew 'fontconfig'
 brew 'gettext'
+brew 'libffi'
 brew 'pcre'
+brew 'glib'
+brew 'pixman'
+brew 'cairo'
 brew 'git'
 brew 'go'
 brew 'ccat'
@@ -26,15 +34,17 @@ brew 'libogg'
 brew 'libvorbis'
 brew 'x264'
 brew 'xvid'
+brew 'libsodium'
+brew 'zeromq'
 brew 'ffmpeg'
 brew 'flac'
 brew 'libao'
+brew 'libtool'
 brew 'libcue'
 brew 'mad'
 brew 'mp4v2'
 brew 'cmus'
 brew 'gmp'
-brew 'libffi'
 brew 'python'
 brew 'llvm'
 brew 'doxygen'
@@ -43,27 +53,31 @@ brew 'libyaml'
 brew 'crystal-lang'
 brew 'cscope'
 brew 'ctags'
+brew 'czmq'
 brew 'node'
 brew 'diff-so-fancy'
 brew 'fpp'
 brew 'git-standup'
-brew 'glib'
+brew 'gobject-introspection'
 brew 'grip'
+brew 'harfbuzz'
 brew 'lua'
 brew 'highlight'
 brew 'httpstat'
 brew 'hub'
-brew 'libpng'
+brew 'jpeg'
 brew 'libssh2'
+brew 'libtiff'
 brew 'luajit'
 brew 'macvim', args: ['with-lua', 'with-luajit', 'with-override-system-vim', 'with-python3']
-brew 's-lang'
-brew 'midnight-commander'
+brew 'mas'
 brew 'noti'
+brew 'pango'
 brew 'perl'
 brew 'ranger'
 brew 'reattach-to-user-namespace'
 brew 'ruby'
+brew 's-lang'
 brew 'screenfetch'
 brew 'selecta'
 brew 'shellcheck'
@@ -92,3 +106,39 @@ cask 'quicklook-json'
 cask 'sonarr'
 cask 'suspicious-package'
 cask 'webpquicklook'
+mas 'WeChat (2.0.4)', id: 836500024
+mas 'Server (5.2)', id: 883878097
+mas 'Transmit (4.4.11)', id: 403388562
+mas 'Disk Diag (1.4)', id: 672206759
+mas 'JSON Query (2.2)', id: 953006734
+mas 'Timing (1.7.5)', id: 431511738
+mas 'Patterns (1.1.2)', id: 429449079
+mas 'Xcode (8.1)', id: 497799835
+mas 'Pixave (2.1.4)', id: 924891282
+mas 'Key Codes (2.1)', id: 414568915
+mas 'amplifyforspotify (1.0)', id: 1025490895
+mas 'StoreView (1.0.1)', id: 961027437
+mas 'Browser Sweeper (1.5.0)', id: 1068833647
+mas 'Jump Desktop (6.0.3)', id: 524141863
+mas 'AppManager (2.0.4)', id: 1085438162
+mas 'MiniPlayer (2.0)', id: 931202332
+mas 'JSON Helper (1.07)', id: 453114608
+mas 'Rested (2.7)', id: 421879749
+mas 'Unarchiver (1.2)', id: 1104175604
+mas 'JSON Editor (1.9)', id: 567740330
+mas 'FileBot (4.7.2)', id: 905384638
+mas 'Pages (6.0.5)', id: 409201541
+mas 'Disk Doctor (3.6)', id: 455970963
+mas 'Slack (2.3.1)', id: 803453959
+mas 'NZBin (1.1.12)', id: 979608899
+mas 'Cookie (5.1.3)', id: 1048338802
+mas 'Human Resource Machine (1.0.9534)', id: 1005728312
+mas 'Evernote (6.10)', id: 406056744
+mas 'DaisyDisk (4.2)', id: 411643860
+mas 'Asset Catalog Creator (2.2.1)', id: 809625456
+mas 'MiniPlay (1.4.1)', id: 936243210
+mas 'TuneSpan (1.3.1)', id: 528459889
+mas 'Numbers (4.0.5)', id: 409203825
+mas 'Quiver (3.0.3)', id: 866773894
+mas 'LINE (4.10.0)', id: 539883307
+mas 'Keynote (7.0.5)', id: 409183694

@@ -1,7 +1,33 @@
-#!/bin/sh
+#!/usr/bin/env bash
 
 # Ask for the administrator password upfront
 sudo -v
+
+# Disable menu bar transparency
+defaults write NSGlobalDomain AppleEnableMenuBarTransparency -bool false
+
+# Enable the 2D Dock
+defaults write com.apple.dock no-glass -bool true
+
+# Disable Resume system-wide
+defaults write NSGlobalDomain NSQuitAlwaysKeepsWindows -bool false
+
+# Automatically open a new Finder window when a volume is mounted
+defaults write com.apple.frameworks.diskimages auto-open-ro-root -bool true
+defaults write com.apple.frameworks.diskimages auto-open-rw-root -bool true
+defaults write com.apple.finder OpenWindowForNewRemovableDisk -bool true
+
+# Allow text selection in Quick Look
+defaults write com.apple.finder QLEnableTextSelection -bool true
+
+# Show remaining battery time; hide percentage
+defaults write com.apple.menuextra.battery ShowTime -string "NO"
+defaults write com.apple.menuextra.battery ShowPercent -string "NO"
+
+# Disable text manipulations found in System Preferences -> Keyboard -> Text
+defaults write com.tapbots.TweetbotMac TextAutomaticQuoteSubstitution -bool NO
+defaults write com.tapbots.TweetbotMac TextAutoCorrect -bool NO
+defaults write com.tapbots.TweetbotMac TextAutomaticTextReplacement -bool NO
 
 # TODO: removing existing 'NSUserKeyEquivalents' and research on the exact effect of this defaults
 # Make CMD-V paste and match format when applicable
@@ -48,6 +74,15 @@ defaults write com.apple.CrashReporter UseUNC 1
 # enable debug mode in Safari
 defaults write com.apple.Safari IncludeInternalDebugMenu 1
 
+# Make Safari’s search banners default to Contains instead of Starts With
+defaults write com.apple.Safari FindOnPageMatchesWordStartsOnly -bool false
+
+# Remove useless icons from Safari’s bookmarks bar
+defaults write com.apple.Safari ProxiesInBookmarksBar "()"
+
+# Disable Safari’s thumbnail cache for History and Top Sites
+ defaults write com.apple.Safari DebugSnapshotsUpdatePolicy -int 2
+
 # disable Desktop icons
 defaults write com.apple.finder CreateDesktop -bool false
 
@@ -76,8 +111,11 @@ defaults write com.apple.Terminal AppleShowScrollbars -string WhenScrolling
 defaults write -g QLPanelAnimationDuration -float 0
 
 # enable Save Panel by default
-defaults write NSGlobalDomain NSNavPanelExpandedStateForSaveMode -bool true && \
+defaults write NSGlobalDomain NSNavPanelExpandedStateForSaveMode -bool true
 defaults write NSGlobalDomain NSNavPanelExpandedStateForSaveMode2 -bool true
+
+# Expand print panel by default
+defaults write NSGlobalDomain PMPrintingExpandedStateForPrint -bool true
 
 # disable Window animation and Get Info animation in Finder
 defaults write com.apple.finder DisableAllAnimations -bool true
@@ -91,16 +129,16 @@ defaults write com.apple.dock expose-animation-duration -float 0.1
 defaults write com.apple.dock autohide -bool true
 
 # Remove Dock hide/show delay
-defaults write com.apple.dock autohide-delay -float 0
+defaults write com.apple.dock autohide-delay -float 10000
 
-# # Shorten Dock hide/show animation
-defaults write com.apple.dock autohide-time-modifier -float 0.2
+# Remove Dock hide/show animation
+defaults write com.apple.dock autohide-time-modifier -float 0
 
 # disable send/reply animation in Mail
 defaults write com.apple.mail DisableReplyAnimations -bool true
 defaults write com.apple.mail DisableSendAnimations -bool true
 
-# disable copying full name with email in Mail
+# Copy email addresses as `foo@example.com` instead of `Foo Bar <foo@example.com>` in Mail.app
 defaults write com.apple.mail AddressesIncludeNameOnPasteboard -bool false
 
 # show Attachments as Icons

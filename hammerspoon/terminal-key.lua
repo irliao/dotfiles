@@ -7,19 +7,6 @@ module.showPopUp = false
 local wf=hs.window.filter
 module.wf = wf.new{'Terminal'} -- all visible terminal windows
 
--- integrate this to handle WASD right Command key
-usingWASD = function()
-  local attachedUsbs = hs.usb.attachedDevices()
-  for i,usb in ipairs(attachedUsbs) do
-    if usb and usb['productID'] == 321 and usb['productName'] == 'USB Keyboard' and usb['vendorID'] == 1241 then
-      return true
-    end
-  end
-
-  -- no WASD keyboard found connected
-  return false
-end
-
 module.eventwatcher1 = hs.eventtap.new({hs.eventtap.event.types.flagsChanged}, function(e)
 
     local flags = e:getFlags()

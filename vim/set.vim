@@ -50,12 +50,19 @@ let &wrapmargin= &textwidth
 set formatoptions=croql
 
 " visual
+set modelines=0
 set number " line numbering
 set ruler " show position in line
 set cursorline " use '_' character for cursor
 set fillchars+=stl:\ ,stlnc:\ " disable statusline fillchars
+set noshowmode " hide Vim mode indicator
+set noshowmode " hide Vim mode indicator
 " set laststatus=2 " always display statusline (e.g. Airline), default displays Airline only if there is a split
-" set noshowmode " hide Vim mode indicator
+" set colorcolumn=+1 " highlight max textwidth column (current is 80)
+
+" show line break characters
+" set list
+" set listchars=tab:▸\ ,eol:¬,extends:❯,precedes:❮
 
 " set ch=0 " statusline height
 " set statusline=%-30.50(%n\ %f\ %m%h%r%w%)%l/%L\ (%p%%),\ %c\ %<%=%(\(%{bufnr(\"#\")}\ %{bufname(\"#\")})%)
