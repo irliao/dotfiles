@@ -63,6 +63,8 @@ Plug 'Lokaltog/vim-distinguished'
 Plug 'sickill/vim-monokai'
 " Plug 'crusoexia/vim-monokai' " refined vim-monokai
 Plug 'trusktr/seti.vim'
+Plug 'yorickpeterse/autumn.vim'
+Plug 'YorickPeterse/happy_hacking.vim'
 
 " autocompletion
 Plug 'ervandew/supertab'

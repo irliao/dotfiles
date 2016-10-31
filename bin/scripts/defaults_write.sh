@@ -3,6 +3,9 @@
 # Ask for the administrator password upfront
 sudo -v
 
+# Build Locate database for locate cli
+sudo launchctl load -w /System/Library/LaunchDaemons/com.apple.locate.plist
+
 # Disable menu bar transparency
 defaults write NSGlobalDomain AppleEnableMenuBarTransparency -bool false
 

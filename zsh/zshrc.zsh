@@ -31,22 +31,21 @@ path=(
 typeset -U PATH # remove duplicate entries in Path
 export PATH="/usr/local/bin:$HOME/.bin:/usr/local/sbin:/usr/bin:/bin:/usr/sbin:/sbin"
 
-# TODO: figure out how LESS works
-# export LESS_TERMCAP_mb=$'\E[01;31m'
-# export LESS_TERMCAP_md=$'\E[01;31m'
-# export LESS_TERMCAP_me=$'\E[0m'
-# export LESS_TERMCAP_se=$'\E[0m'
-# export LESS_TERMCAP_so=$'\E[01;44;33m'
-# export LESS_TERMCAP_ue=$'\E[0m'
-# export LESS_TERMCAP_us=$'\E[01;32m'
-# export LESS="-R"
-# export PAGER='less'
-
-export VISUAL='vim'
 export EDITOR='vim'
+export PAGER="less"
+export LESS="-R" # -R for ANSI color codes only
 export DEVPATH="$HOME/Developments"
 export HISTCONTROL=erasedups  # Ignore duplicate entries in history
 export HISTIGNORE="&:ls:ll:la:l.:pwd:exit:clear:clr:[bf]g"
+
+# Colors in Manual page
+export LESS_TERMCAP_mb=$'\E[01;31m'
+export LESS_TERMCAP_md=$'\E[01;31m'
+export LESS_TERMCAP_me=$'\E[0m'
+export LESS_TERMCAP_se=$'\E[0m'
+export LESS_TERMCAP_so=$'\E[01;44;33m'
+export LESS_TERMCAP_ue=$'\E[0m'
+export LESS_TERMCAP_us=$'\E[01;32m'
 
 # Brew
 fpath=("/usr/local/bin/" $fpath)

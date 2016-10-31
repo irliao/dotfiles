@@ -33,6 +33,16 @@ emux() {
   tmux split-window -h -c "#{pane_current_path}" "vim $@"
 }
 
+# Change directory to current Finder folder
+cdf() {
+  target=`osascript -e 'tell application "Finder" to if (count of Finder windows) > 0 then get POSIX path of (target of front Finder window as text)'`
+  if [ "$target" != "" ]; then
+      cd "$target"; pwd
+  else
+      echo 'No Finder window found' >&2
+  fi
+}
+
 # NOTE: 3 functions below require 'selecta' from brew
 devs() {
     cd $(find $DEVPATH -maxdepth 1 -type d | selecta)
@@ -564,3 +574,19 @@ alias wifiHistory="defaults read /Library/Preferences/SystemConfiguration/com.ap
 # alias osx-lidwake='sudo pmset lidwake 0'
 # alias osx-set-morning='pmset repeat wakeorpoweron MTWRF 07:45:00'
 # alias osx-cancel-morning='pmset repeat cancel'
+
+# Unused
+
+# Provide colors to manual pages... variables exported in ~/.zshrc
+# man() {
+#   env \
+#   LESS_TERMCAP_mb=$(printf "\e[1;31m") \
+#   LESS_TERMCAP_md=$(printf "\e[1;31m") \
+#   LESS_TERMCAP_me=$(printf "\e[0m") \
+#   LESS_TERMCAP_se=$(printf "\e[0m") \
+#   LESS_TERMCAP_so=$(printf "\e[1;44;33m") \
+#   LESS_TERMCAP_ue=$(printf "\e[0m") \
+#   LESS_TERMCAP_us=$(printf "\e[1;32m") \
+#   man "$@"
+# }
+

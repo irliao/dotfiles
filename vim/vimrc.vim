@@ -6,7 +6,7 @@ set nocompatible " vi improved, required
 source ~/.vim/function.vim
 source ~/.vim/plugin.vim
 source ~/.vim/set.vim
-source ~/.vim/scheme.vim
+source ~/.vim/theme.vim
 source ~/.vim/autocmd.vim
 source ~/.vim/map.vim
 

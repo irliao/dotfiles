@@ -29,11 +29,11 @@ cd $HOME/Developments/dotfiles && source ./install.sh
 
 ## Tasks
 
+* merge all .gitignore in subdirs into the one under repo root
 * finish and test ./install.sh
 * include screencast (maybe asciinema?)
 * add Wiki page
 * add Contribution.md
-* choose between using master .gitignore at project root or individual .gitignore at various folders
 * investigate shift-Tab issue in iTerm2 (somehow fixed by sourcing ~/.zshrc)
 * consider adding badge for build status (https://github.com/badges/shields/blob/master/INSTALL.md)
 

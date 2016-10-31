@@ -34,6 +34,7 @@ alias al="ls -lar"
 alias sl="ls -r" # ls reverse
 alias lr="l -r" # l reverse
 alias ll="ls -FGlAhp" # ls -lh
+alias l="ls"
 alias lt="find . -print | sed -e 's;[^/]*/;|____;g;s;____|; |;g'" # TODO: compare with tree installed from brew
 alias clr='clear;echo "Currently logged in on $(tty), as $(whoami) in directory $(pwd)."'
 alias comp="diff -qr" # compare 2 input directories
@@ -71,6 +72,7 @@ alias tclear="run_in_all_naked_panes clear" # requires script in ~/.bin
 # CLIs
 # alias grep="brew install the_silver_searcher"
 alias ds='du -khs' # display size of directory (not listing children files) in kb
+alias dl="diskutil list"
 alias st="syncthing"
 alias bu="brew update && brew upgrade && brew prune && brew cleanup && brew doctor"
 alias fk='$(thefuck $(fc -ln -1))' # WARN: this alias must use single quotes to work properly
@@ -85,6 +87,9 @@ alias net="netstat"
 alias mirrorsite='wget -m -k -K -E -e robots=off' # mirror a website
 alias peek='tee >(cat 1>&2)' # mirror stdout to stderr, useful for seeing data going through a pipe
 alias subl="reattach-to-user-namespace /usr/local/bin/subl" # make commands with arguments work such as "subl /tmp"
+alias fuck='$(thefuck $(fc -ln -1))'
+alias loc='locate -i' # -i to make the search case insensitive
+alias ql='qlmanage -p' # -p to preview with QuickLook
 
 # Hammerspoon
 alias seb="open -g 'hammerspoon://safari?someParam=openExtensionBuilder'" # open Safari Extension Builder using Hammerspoon
@@ -114,6 +119,9 @@ alias historyClear='history -c'
 
 # TODO: cleanup aliases below
 # OSX
+alias osxUnmountDisk="hdiutil detach"
+alias osxMountDisk="hdiutil attach"
+alias osxEjectAllVolumes="osascript -e 'tell application "Finder" to eject (every disk whose ejectable is true)'"
 alias osxClipboardNoFormat="pbpaste | textutil -convert txt -stdin -stdout -encoding 30 | pbcopy"
 alias osxOpeniCloud="cd $HOME/Library/Mobile Documents/com~apple~CloudDocs/"
 alias osxResetSpotlight="sudo mdutil -E /" # / can be replaced by any path to volume
