@@ -23,7 +23,8 @@ hs.hotkey.bind(mash, 'RETURN', function() toggleFullScreen() end)
 hs.hotkey.bind(mash, ';', function() hs.toggleConsole() end)
 
 -- Application opener hotsupereys
-hs.hotkey.bind(mash, "C", function() openApplication(chooseBrowserByMachineName()) end)
+-- hs.hotkey.bind(mash, "C", function() openApplication(chooseBrowserByMachineName()) end)
+hs.hotkey.bind(mash, "C", function() openApplication("Safari Technology Preview") end)
 hs.hotkey.bind(mash, "E", function() openApplication("Sublime Text") end)
 hs.hotkey.bind(mash, "F", function() openApplication("Finder") end)
 hs.hotkey.bind(mash, "I", function() openApplication("IntelliJ IDEA") end)

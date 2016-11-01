@@ -54,8 +54,8 @@ export HOMEBREW_NO_ANALYTICS=1 # opt-out of analytics
 # export TRAVIS=1 # bypass missing xCode 8 error on osx10.12
 
 # Go
-export GOPATH="$DEVPATH/go"
-export PATH="$PATH:$GOPATH/bin"
+# export GOPATH="$DEVPATH/go"
+# export PATH="$PATH:$GOPATH/bin"
 
 # Node
 # export NVM_DIR="$HOME/.nvm"
