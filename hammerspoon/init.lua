@@ -30,9 +30,7 @@ require("highlight") -- depends on window
 require("switcher")
 require("clipboard")
 require("window-filter")
--- if hs.host.operatingSystemVersion().minor == 12 then require("sierra-key") else require("el-capitan-key") end
--- require("terminal-key") -- override Command_R/L in Terminal
-require("hhkb-key")
+require("hotkey")
 
 -- TODO: broken
 -- Input source change with alert
