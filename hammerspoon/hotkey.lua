@@ -26,9 +26,12 @@ hs.hotkey.bind(mash, ';', function() hs.toggleConsole() end)
 -- hs.hotkey.bind(mash, "C", function() openApplication(chooseBrowserByMachineName()) end)
 -- hs.hotkey.bind(mash, "C", function() openApplication("Safari Technology Preview") end)
 hs.hotkey.bind(mash, "C", function() openApplication("Safari") end)
+-- hs.hotkey.bind(mash, "G", function() openApplication("Google Chrome") end)
+hs.hotkey.bind(mash, 'G', function() hs.hints.windowHints() end)
 hs.hotkey.bind(mash, "E", function() openApplication("Sublime Text") end)
 hs.hotkey.bind(mash, "F", function() openApplication("Finder") end)
 hs.hotkey.bind(mash, "I", function() openApplication("IntelliJ IDEA") end)
+hs.hotkey.bind(mash, "K", function() openApplication("Slack") end)
 hs.hotkey.bind(mash, "M", function() openApplication("Messages") end)
 hs.hotkey.bind(mash, "N", function() openApplication("Notes") end)
 hs.hotkey.bind(mash, "R", function() reloadConfig() end)
@@ -37,5 +40,5 @@ hs.hotkey.bind(mash, "X", function() openApplication("Terminal") end)
 hs.hotkey.bind(mash, ",", function() openApplication("System Preferences") end)
 
 -- Jump to Applications with Vimperator
-hs.hotkey.bind(mash, 'G', function() hs.hints.windowHints(hs.window.focusedWindow():application():allWindows()) end) -- display hints only for windows from focused application
-hs.hotkey.bind(mash, 'SPACE', function() hs.hints.windowHints() end) -- display hints for all windows from active applications
+-- hs.hotkey.bind(mash, 'G', function() hs.hints.windowHints(hs.window.focusedWindow():application():allWindows()) end) -- display hints only for windows from focused application
+-- hs.hotkey.bind(mash, 'SPACE', function() hs.hints.windowHints() end) -- display hints for all windows from active applications
