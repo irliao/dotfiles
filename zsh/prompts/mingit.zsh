@@ -13,7 +13,7 @@ gst_get_prefix() {
 
 # green - last command success, red - last command failed
 gst_get_suffix() {
-  print "%(?:%F{2}$ :%F{1}$ %s)"
+  print "%(?:%F{2}$ :%F{1}$ %s)%f"
 }
 
 gst_get_pwd() {
@@ -24,9 +24,6 @@ gst_get_pwd() {
 }
 
 prompt_mingit_precmd() {
-  # TODO: figure out how to fix color properly with %s at end of prompt
-  # PROMPT="$(gst_get_prefix)%F{8}$(gst_get_pwd)%f$(parse_git_dirty)$(git_prompt_info)$(gst_get_suffix)%s"
-
   PROMPT="$(gst_get_prefix)%F{8}$(gst_get_pwd)%f$(parse_git_dirty)$(git_prompt_info)$(gst_get_suffix)"
 
   # TODO: determine if this is useful to keep or not
