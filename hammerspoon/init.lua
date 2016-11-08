@@ -17,16 +17,16 @@ hs.hotkey.alertDuration = 0 -- hotkey alerts are disabled
 hs.hints.style = 'vimperator' -- window hint starts with the first character of the parent application's title
 hs.hints.fontName = 'Hack'
 hs.window.filter.setLogLevel = 'error'
-hs.window.filter.ignoreAlways['Safari Technology Preview Networking'] = true
-hs.window.filter.ignoreAlways['Safari Technology Preview Database Storage'] = true
+-- hs.window.filter.ignoreAlways['Safari Technology Preview Networking'] = true
+-- hs.window.filter.ignoreAlways['Safari Technology Preview Database Storage'] = true
 hs.window.filter.ignoreAlways['Siri'] = true -- prevent wfilter warnings from windowHighlight
 hs.window.filter.ignoreAlways['Spotlight'] = false -- prevent wfilter warnings from windowHighlight
--- hs.window.filter.ignoreAlways['Autoupdate'] = true
+hs.window.filter.ignoreAlways['Autoupdate'] = true
 
 -- TODO: currently order matters, should remove such dependency order
 require("utility")
 require("window") -- depends on util
-require("highlight") -- depends on window
+-- require("highlight") -- depends on window
 require("switcher")
 require("clipboard")
 require("window-filter")
