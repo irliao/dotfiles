@@ -1,9 +1,10 @@
 -- Hotkeys for Macs running osx10.12 and using HHKB keyboard layout (Capslock replaced with Control)
 
--- mash = {"ctrl", "shift"}
--- mash = {"alt", "shift"}
+require("utility")
+require("window")
+
 mash = {"ctrl", "cmd"}
-mash_shift = {"ctrl", "cmd", "shift"}
+mashShift = {"ctrl", "cmd", "shift"}
 
 -- Vim Arrows
 hs.hotkey.bind({"ctrl"}, "h", function() hs.eventtap.keyStroke({}, "left") end)
@@ -22,10 +23,9 @@ hs.hotkey.bind(mash, 'Tab', function() switcher_focused_apps:next() end)
 hs.hotkey.bind(mash, 'ESCAPE', function() moveToNextScreen() end)
 hs.hotkey.bind(mash, 'RETURN', function() toggleFullScreen() end)
 hs.hotkey.bind(mash, ';', function() hs.toggleConsole() end)
+hs.hotkey.bind(mash, 'DELETE', 'Lock system', function() hs.caffeinate.lockScreen() end)
 
 -- Application opener hotsupereys
--- hs.hotkey.bind(mash, "C", function() openApplication(chooseBrowserByMachineName()) end)
--- hs.hotkey.bind(mash, "C", function() openApplication("Safari Technology Preview") end)
 hs.hotkey.bind(mash, "C", function() openApplication("Safari") end)
 hs.hotkey.bind(mash, 'G', function() hs.hints.windowHints() end)
 hs.hotkey.bind(mash, "E", function() openApplication("Sublime Text") end)
@@ -36,7 +36,7 @@ hs.hotkey.bind(mash, "M", function() openApplication("Messages") end)
 hs.hotkey.bind(mash, "N", function() openApplication("Notes") end)
 hs.hotkey.bind(mash, "R", function() reloadConfig() end)
 hs.hotkey.bind(mash, "T", function() openApplication("Spotify") end)
-hs.hotkey.bind(mash_shift, "X", function() openApplication("Terminal") end)
+hs.hotkey.bind(mashShift, "X", function() openApplication("Terminal") end)
 hs.hotkey.bind(mash, "X", function() openApplication("iTerm") end)
 hs.hotkey.bind(mash, ",", function() openApplication("System Preferences") end)
 

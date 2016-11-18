@@ -1,13 +1,26 @@
+*.swp
+*.DS_Store
+.DS_Store
+
 config/base16-shell
 config/configstore/
 config/filezilla/
 config/hub
 config/ranger/
 config/workshopper
+
 node_modules/
 karabiner.d/log/
+lbin/
+
 tmux/plugins/
 tmux/sidebar/
-lbin/
-*.DS_Store
-.DS_Store
+tmux/resurrect/
+
+vim/.netrwhist
+vim/bundle/
+# .*.s[a-w][a-z] # TODO: research this syntax
+
+# Files that might appear on external disk
+.Spotlight-V100
+.Trashes

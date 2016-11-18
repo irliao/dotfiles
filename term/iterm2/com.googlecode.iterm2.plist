@@ -750,13 +750,6 @@
 			<key>Text</key>
 			<string>208D22C7-4CF7-4076-8941-79CC635BE84B</string>
 		</dict>
-		<key>0x77-0x40000</key>
-		<dict>
-			<key>Action</key>
-			<integer>25</integer>
-			<key>Text</key>
-			<string>Close</string>
-		</dict>
 		<key>0x9-0x40000</key>
 		<dict>
 			<key>Action</key>
@@ -915,8 +908,10 @@
 	<string>269 429 606 456 0 0 1440 900 </string>
 	<key>NSWindow Frame SUUpdateAlert</key>
 	<string>410 382 620 392 0 0 1440 900 </string>
+	<key>NSWindow Frame SessionsPreferences</key>
+	<string>269 144 599 388 0 0 1440 900 </string>
 	<key>NSWindow Frame SharedPreferences</key>
-	<string>269 403 796 473 0 0 1440 900 </string>
+	<string>269 380 796 473 0 0 1440 900 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
 	<string>155 18 650 502 0 0 1440 900 </string>
 	<key>NSWindow Frame iTerm Window 1</key>

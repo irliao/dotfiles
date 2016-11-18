@@ -1,5 +1,14 @@
 -- Utilities (mostly binded to some hotkey)
 
+-- TODO: broken
+-- Input source change with alert
+-- function alertInputSource()
+--   hs.alert.closeAll()
+--   local input_src = hs.keycodes.currentLayout()
+--   hs.alert(input_src)
+-- end
+-- hs.keycodes.inputSourceChanged(alertInputSource)
+
 -- Returns string name of browser to use based on machine name
 chooseBrowserByMachineName = function()
   local machineName = hs.host.localizedName()
@@ -36,10 +45,8 @@ alertSystemStatus = function()
     local bat_num = hs.battery.percentage() -- local var for immediate battery status
     local time_str = os.date("%A %b %d, %Y - %H:%M") -- os.date("%a, %m/%d/%y - %H:%m")
     local bat_str = "Battery: " .. (bat_num and (bat_num .. "%") or "Nil")
-    local caff_str = "Caffeine: " .. (caffeineStatus and caffeineStatus or "Nil")
     hs.alert(time_str)
     hs.alert(bat_str)
-    hs.alert(caff_str)
 end
 
 -- Mouse highlight

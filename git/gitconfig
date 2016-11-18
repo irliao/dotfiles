@@ -21,8 +21,32 @@
         excludesfile = /Users/irliao/.gitignore_global
         fileMode = false # ignore file mode difference
         autocrlf = input # better cross-platform line ending handling
+	      pager = diff-so-fancy | less --tabs=4 -RFX
+
+[color]
+    ui = always
+
+[color "branch"]
+    current = green
+    local = magenta
+    remote = yellow
+
+[color "diff"]
+    meta = yellow bold
+    frag = magenta
+    old = red
+    new = green
+    whitespace = white reverse
+    commit = blue reverse
+
+[color "status"]
+    added = green
+    changed = red
+    untracked = cyan reverse
+    branch = magenta
+
 [web]
-        browser = safari
+    browser = safari
+
 [pager]
-        diff = diff-so-fancy | less --tabs=1,5 -RFX
-        show = diff-so-fancy | less --tabs=1,5 -RFX
+    diff = diff-so-fancy | less --tabs=4 -RFX --pattern '^(Date|added|deleted|modified): '

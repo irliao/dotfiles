@@ -2,6 +2,8 @@
 
 -- TODO: implement function to go FullScreen + join another FullScreen space (if exists) to create split FullScreen
 
+require("utility")
+
 -- Check if window is maximized
 function isWindowMaximized(win)
   if not win or win:isFullScreen() then
@@ -151,31 +153,6 @@ function centerMouse()
   }
 
   hs.mouse.setRelativePosition(mousePoint, screen)
-end
-
--- TODO: rename function
--- App watcher for Activate and Launch events
-function applicationWatcher(appName, eventType, appObject)
-    -- Activated Apps
-    if (eventType == hs.application.watcher.activated) then
-        if (appName == "Finder") then
-            appObject:selectMenuItem({"Window", "Bring All to Front"})
-            -- centerScreen()
-        end
-    end
-
-    -- Launched Apps
-    if (eventType == hs.application.watcher.launched) then
-        if (appName == "Finder") then
-            -- centerScreen()
-        elseif (appName == "Terminal") then
-            openTerminalFullScreen()
-        elseif (appName == "iTerm2") then
-            openiTermFullScreen()
-        else
-            maxScreen()
-        end
-    end
 end
 
 -- Toggle Full Screen

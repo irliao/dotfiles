@@ -1,5 +1,7 @@
 -- Window focus highlight
 
+require("window")
+
 -- TODO: integrate this
 -- nofs_wf=hs.window.filter.new():setOverrideFilter{fullscreen=false}
 

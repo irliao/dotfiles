@@ -6,17 +6,18 @@
 # https://github.com/zanshin/dotfiles/blob/master/make.sh
 # https://github.com/atomantic/dotfiles/blob/master/install.sh
 
-# directory of this script
+# TODO: investigate why vim highlights certain '(' and ')' in this file
+
+# set directory of this script
 dotdir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
 function install() {
-  # install homebrew if not found
+  # install brew if not found
   if ! brew_loc="$(type -p "brew")" || [ -z "brew_loc" ]; then
     /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)" && \
       echo 'installed brew'
   fi
 
-  # TODO: remove existing taps and packages
   # install brew packages
   brew tap homebrew/bundle &&
     cd "$dotdir/config/brew" &&
@@ -38,7 +39,7 @@ function install() {
       echo 'fetched zim'
   fi
 
-  # overwrites zsh symlinks/files
+  # symlink zsh files
   zshdir="$dotdir/zsh"
   ln -svf "$zshdir/zalias.zsh" "$HOME/.zalias" &&
     ln -svf "$zshdir/zfunction.zsh" "$HOME/.zfunction" &&
@@ -50,18 +51,41 @@ function install() {
     ln -svf "$HOME/.zprompt" "$zimdir/modules/prompt/functions/prompt_mingit_setup" &&
     echo 'symlinked zsh files'
 
+  # symlink directories
+  ln -svf "$dotdir/bin" "$HOME/.bin" &&
+    echo 'symlinked bin directory'
+  ln -svf "$dotdir/config" "$HOME/.config" &&
+    echo 'symlinked config directory'
+  ln -svf "$dotdir/config/cheat" "$HOME/.cheat" &&
+    echo 'symlinked cheat directory'
+  ln -svf "$dotdir/config/grip" "$HOME/.grip" &&
+    echo 'symlinked grip directory'
 
-  ln -svf "$dotdir/bin" "$HOME/.bin"
+  # symlink git files
+  ln -svf "$dotdir/git/gitconfig" "$HOME/.gitconfig" &&
+    ln -svf "$dotdir/git/gitignore_global" "$HOME/.gitignore_global" &&
+    echo 'symlinked git files'
 
-  # TODO: symlink Vim, Tmux,
+  # symlink vim files
+  ln -svf "$dotdir/vim" "$HOME/.vim" &&
+    ln -svf "$dotdir/vim/vimrc.vim" "$HOME/.vimrc" &&
+    ln -svf "$dotdir/vim/editorconfig.conf" "$HOME/.editorconfig" &&
+    ln -svf "$dotdir/vim/ideavimrc.vim" "$HOME/.ideavimrc" &&
+    echo 'symlinked vim files'
+
+  # symlink tmux files
+  ln -svf "$dotdir/tmux" "$HOME/.tmux" &&
+    ln -svf "$dotdir/tmux/tmux.conf" "$HOME/.tmux.conf" &&
+    echo 'symlinked tmux files'
 
   echo 'finished install, starting zim' &&
     source ${ZDOTDIR:-${HOME}}/.zlogin &&
-    open "$dotdir/config/term/Main.terminal"
+    echo 'restart iTerm2 or Terminal application'
 
   return 1
 }
 
+# TODO: warn user that this script will create and/or overwrite existing symlinks
 if [ "$1" == "--force" -o "$1" == "-f" ]; then
   # install;
   echo "Force install currently disabled, please rerun script without --force/-f"

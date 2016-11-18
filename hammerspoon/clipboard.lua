@@ -1,12 +1,11 @@
+-- Clipboard history in menu bar
+
 --[[
-This is my attempt to implement a jumpcut replacement in Lua/Hammerspoon.
-It monitors the clipboard/pasteboard for changes, and stores the strings you copy to the transfer area.
-You can access this history on the menu (Unicode scissors icon).
 Clicking on any item will add it to your transfer area.
 If you open the menu while pressing option/alt, you will enter the Direct Paste Mode. This means that the selected item will be
 "typed" instead of copied to the active clipboard.
 The clipboard persists across launches.
--> Ng irc suggestion: hs.settings.set("jumpCutReplacementHistory", clipboard_history)
+-> Ng irc suggestion: hs.settings.set("clipboardMenuBarReplacementHistory", clipboard_history)
 ]]--
 
 -- Feel free to change those settings
@@ -17,24 +16,31 @@ local honor_clearcontent = false --asmagill request. If any application clears t
 local pasteOnSelect = false -- Auto-type on click
 
 -- Don't change anything bellow this line
-local jumpcut = hs.menubar.new()
-jumpcut:setTooltip("Jumpcut replacement")
+local clipboardMenuBar = hs.menubar.new()
+clipboardMenuBar:setTooltip("clipboardMenuBar replacement")
 local pasteboard = require("hs.pasteboard") -- http://www.hammerspoon.org/docs/hs.pasteboard.html
 local settings = require("hs.settings") -- http://www.hammerspoon.org/docs/hs.settings.html
 local last_change = pasteboard.changeCount() -- displays how many times the pasteboard owner has changed // Indicates a new copy has been made
 
 --Array to store the clipboard history
-local clipboard_history = settings.get("so.victor.hs.jumpcut") or {} --If no history is saved on the system, create an empty history
+local clipboard_history = settings.get("so.victor.hs.clipboardMenuBar") or {} --If no history is saved on the system, create an empty history
 
--- Append a history counter to the menu
-function setTitle()
-  jumpcut:setTitle("✂") -- Unicode magic
+-- Append clipboard size to the menu
+function setMenuBarText()
   -- display number of items in this clipboard if more than 0
-  -- if (#clipboard_history == 0) then
-  --   jumpcut:setTitle("✂") -- Unicode magic
-  --   else
-  --     jumpcut:setTitle("✂ ("..#clipboard_history..")") -- updates the menu counter
-  -- end
+  if (#clipboard_history == 0) then
+    clipboardMenuBar:setMenuBarIcon("✂") -- Unicode magic
+    else
+      clipboardMenuBar:setMenuBarIcon("✂ ("..#clipboard_history..")") -- updates the menu counter
+  end
+end
+
+function setMenuBarIcon()
+  if (#clipboard_history == 0) then
+    clipboardMenuBar:setIcon("assets/clipboard_empty.png")
+    else
+    clipboardMenuBar:setIcon("assets/clipboard_filled.png")
+  end
 end
 
 function putOnPaste(string,key)
@@ -56,17 +62,17 @@ end
 function clearAll()
   pasteboard.clearContents()
   clipboard_history = {}
-  settings.set("so.victor.hs.jumpcut",clipboard_history)
+  settings.set("so.victor.hs.clipboardMenuBar",clipboard_history)
   now = pasteboard.changeCount()
-  setTitle()
+  setMenuBarIcon()
 end
 
 -- Clears the last added to the history
 function clearLastItem()
   table.remove(clipboard_history,#clipboard_history)
-  settings.set("so.victor.hs.jumpcut",clipboard_history)
+  settings.set("so.victor.hs.clipboardMenuBar",clipboard_history)
   now = pasteboard.changeCount()
-  setTitle()
+  setMenuBarIcon()
 end
 
 function pasteboardToClipboard(item)
@@ -75,13 +81,13 @@ function pasteboardToClipboard(item)
     table.remove(clipboard_history,1)
   end
   table.insert(clipboard_history, item)
-  settings.set("so.victor.hs.jumpcut",clipboard_history) -- updates the saved history
-  setTitle() -- updates the menu counter
+  settings.set("so.victor.hs.clipboardMenuBar",clipboard_history) -- updates the saved history
+  setMenuBarIcon() -- updates the menu counter
 end
 
 -- Dynamic menu by cmsj https://github.com/Hammerspoon/hammerspoon/issues/61#issuecomment-64826257
 populateMenu = function(key)
-  setTitle() -- Update the counter every time the menu is refreshed
+  setMenuBarIcon() -- Update the counter every time the menu is refreshed
   menuData = {}
   if (#clipboard_history == 0) then
     table.insert(menuData, {title="None", disabled = true}) -- If the history is empty, display "None"
@@ -122,5 +128,5 @@ end
 timer = hs.timer.new(frequency, storeCopy)
 timer:start()
 
-setTitle() --Avoid wrong title if the user already has something on his saved history
-jumpcut:setMenu(populateMenu)
+setMenuBarIcon() --Avoid wrong title if the user already has something on his saved history
+clipboardMenuBar:setMenu(populateMenu)

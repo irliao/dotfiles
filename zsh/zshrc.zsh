@@ -92,32 +92,36 @@ TRAPWINCH() {
 # Use 256 color terminal
 export TERM="xterm-256color"
 
+# Key bindings
+bindkey "^A" beginning-of-line
+bindkey "^B" backward-word
+bindkey "^C" kill-line
+bindkey "^E" end-of-line
+bindkey "^O" down-line-or-search
+bindkey "^P" up-line-or-search
+bindkey "^W" forward-word
+# bindkey -s '\es' '^Asudo ^E' # \e is Alt-key, Alt+S to prepend sudo to command then go to eol
+# bindkey '\e.' insert-last-word # TODO: figure out how to press: \e.
+
+
 # Terminal customizations
 if [[ ($TERM_PROGRAM == "Apple_Terminal") ]]; then # Apple Terminal
   if [[ -h "${HOME}/.iterm2_shell_integration.zsh" ]]; then rm "${HOME}/.iterm2_shell_integration.zsh" && echo "removed ~/.iterm2_shell_integration.zsh"; fi
 
   # Key bindings
   stty -ixon # gives access to ^Q
-  bindkey -v # press <ESC> to enter NORMAL mode, press i to enter INSERT mode
-  bindkey "^A" beginning-of-line
-  bindkey "^B" backward-word
-  bindkey "^W" forward-word
-  bindkey "^E" end-of-line
-  bindkey "^C" kill-line
   bindkey "^X" backward-kill-word
   bindkey "^Y" vi-yank-whole-line # yank entire line to killer
   bindkey "^H" beginning-of-history
-  bindkey "^O" down-line-or-search
-  bindkey "^P" up-line-or-search
   bindkey "^R" history-incremental-search-backward
-  bindkey -s '\es' '^Asudo ^E' # \e is Alt-key, Alt+S to prepend sudo to command then go to eol
-  bindkey '\e.' insert-last-word
 
-  # Display Vi-mode in prompt
+  # Vim mode
+  bindkey -v # press <ESC> to enter NORMAL mode, press i to enter INSERT mode, NOTE: disables Shift-Tab in iTerm2
   function zle-line-init zle-keymap-select {
-      VIM_PROMPT="%{$fg_bold[yellow]%}NORMAL%{$reset_color%}"
-      RPS1="${${KEYMAP/vicmd/$VIM_PROMPT}/(main|viins)/}$EPS1"
-      zle reset-prompt
+    # Display Vim mode in prompt
+    VIM_PROMPT="%{$fg_bold[yellow]%}NORMAL%{$reset_color%}"
+    RPS1="${${KEYMAP/vicmd/$VIM_PROMPT}/(main|viins)/}$EPS1"
+    zle reset-prompt
   }
   zle -N zle-line-init
   zle -N zle-keymap-select
@@ -125,7 +129,7 @@ if [[ ($TERM_PROGRAM == "Apple_Terminal") ]]; then # Apple Terminal
 
   [[ -f "${HOME}/.zmux" ]] && source "${HOME}/.zmux"
 # iTerm2 customizations
-elif [[ ($TERM_PROGRAM == "iTerm") ]]; then
+elif [[ ($TERM_PROGRAM == "iTerm.app") ]]; then
   # iTerm2 shell integration with Unix shell
   [[ ! -h "${HOME}/.iterm2_shell_integration.zsh" ]] && ln -s ${HOME}/.dotfiles/config/term/iterm2/iterm2_shell_integration.zsh ${HOME}/.iterm2_shell_integration.zsh;
 
@@ -140,6 +144,7 @@ elif [[ ($TERM_PROGRAM == "iTerm") ]]; then
 
   # use iterm2_shell_integration.`basename $SHELL` when dealing with multiple shells
   test -e ${HOME}/.iterm2_shell_integration.zsh && source ${HOME}/.iterm2_shell_integration.zsh
+  clear;
 else # Other
   [[ -h "${HOME}/.iterm2_shell_integration.zsh" ]] && rm "${HOME}/.iterm2_shell_integration.zsh" && echo "removed ~/.iterm2_shell_integration.zsh";
 fi

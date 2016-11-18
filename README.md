@@ -1,6 +1,14 @@
 # irliao's dotfiles
 
+iTerm2
+
+![screenshot](http://i.imgur.com/qwfYoqP.png)
+
+Terminal
+
 ![screenshot](http://i.imgur.com/BXXPRU3.png)
+
+Total size: **47M**
 
 ## Installation
 
@@ -11,7 +19,7 @@ Clone the repo, ex:
 ```
 git clone https://github.com/irliao/dotfiles $HOME/Developments/dotfiles
 ```
-Run install script inside the repo **Warning:** This script is still in progress... do NOT run until this warning message goes away.
+Run install script inside the repo **Warning:** Script has not been fully tested yet... please read and understand the script PRIOR to executing it.
 
 ```
 cd $HOME/Developments/dotfiles && source ./install.sh
@@ -29,17 +37,12 @@ cd $HOME/Developments/dotfiles && source ./install.sh
 
 ## Tasks
 
-* merge all .gitignore in subdirs into the one under repo root
-* finish and test ./install.sh
-* include screencast (maybe asciinema?)
-* add Wiki page
-* add Contribution.md
-* investigate shift-Tab issue in iTerm2 (somehow fixed by sourcing ~/.zshrc)
+* fully test and verify ./install.sh
 * consider adding badge for build status (https://github.com/badges/shields/blob/master/INSTALL.md)
 
 ## License
 Copyright (c) 2012-2016 Ian Ryan Liao. Released under the [MIT License][license].
 
-[license]: LICENSE.txt
+[license]: LICENSE
 [readme]: README.md
 [wiki]: https://github.com/irliao/dotfiles/wiki
