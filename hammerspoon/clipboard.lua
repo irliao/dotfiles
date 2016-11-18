@@ -124,9 +124,22 @@ function storeCopy()
   end
 end
 
+-- TODO: bind Alt+LeftClick or Alt+Return to past directly instead of copy
+-- TODO: fix issue where Ctrl+HJKL won't work when the menu is showing due to popupMenu() being a blocking call to Hammerspoon
+-- TODO: consider showing menu at center of the screen or directly under menu bar icon
+function showClipboardMenuBarAtMouse()
+  if clipboardMenuBar == nil then
+    return
+  end
+
+  clipboardMenuBar:popupMenu(hs.mouse.getAbsolutePosition())
+end
+
 --Checks for changes on the pasteboard. Is it possible to replace with eventtap?
 timer = hs.timer.new(frequency, storeCopy)
 timer:start()
 
 setMenuBarIcon() --Avoid wrong title if the user already has something on his saved history
 clipboardMenuBar:setMenu(populateMenu)
+
+hs.hotkey.bind({"ctrl", "cmd"}, "P",function() clipboardMenuBar:popupMenu() end)
