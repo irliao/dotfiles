@@ -3,6 +3,7 @@
 -- mash = {"ctrl", "shift"}
 -- mash = {"alt", "shift"}
 mash = {"ctrl", "cmd"}
+mash_shift = {"ctrl", "cmd", "shift"}
 
 -- Vim Arrows
 hs.hotkey.bind({"ctrl"}, "h", function() hs.eventtap.keyStroke({}, "left") end)
@@ -26,7 +27,6 @@ hs.hotkey.bind(mash, ';', function() hs.toggleConsole() end)
 -- hs.hotkey.bind(mash, "C", function() openApplication(chooseBrowserByMachineName()) end)
 -- hs.hotkey.bind(mash, "C", function() openApplication("Safari Technology Preview") end)
 hs.hotkey.bind(mash, "C", function() openApplication("Safari") end)
--- hs.hotkey.bind(mash, "G", function() openApplication("Google Chrome") end)
 hs.hotkey.bind(mash, 'G', function() hs.hints.windowHints() end)
 hs.hotkey.bind(mash, "E", function() openApplication("Sublime Text") end)
 hs.hotkey.bind(mash, "F", function() openApplication("Finder") end)
@@ -36,7 +36,8 @@ hs.hotkey.bind(mash, "M", function() openApplication("Messages") end)
 hs.hotkey.bind(mash, "N", function() openApplication("Notes") end)
 hs.hotkey.bind(mash, "R", function() reloadConfig() end)
 hs.hotkey.bind(mash, "T", function() openApplication("Spotify") end)
-hs.hotkey.bind(mash, "X", function() openApplication("Terminal") end)
+hs.hotkey.bind(mash_shift, "X", function() openApplication("Terminal") end)
+hs.hotkey.bind(mash, "X", function() openApplication("iTerm") end)
 hs.hotkey.bind(mash, ",", function() openApplication("System Preferences") end)
 
 -- Jump to Applications with Vimperator
