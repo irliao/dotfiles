@@ -1783,7 +1783,7 @@
 		</dict>
 	</dict>
 	<key>PrefsCustomFolder</key>
-	<string>/Users/irliao/Developments/dotfiles/config/term/iTerm2</string>
+	<string>/Users/irliao/Developments/dotfiles/config/term/iterm2</string>
 	<key>PromptOnQuit</key>
 	<false/>
 	<key>QuitWhenAllWindowsClosed</key>
