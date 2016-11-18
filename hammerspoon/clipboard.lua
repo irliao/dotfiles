@@ -126,6 +126,7 @@ end
 
 -- TODO: bind Alt+LeftClick or Alt+Return to past directly instead of copy
 -- TODO: fix issue where Ctrl+HJKL won't work when the menu is showing due to popupMenu() being a blocking call to Hammerspoon
+-- TODO: implement separate clipboard that reads from file or directly from Notes.app
 -- TODO: consider showing menu at center of the screen or directly under menu bar icon
 function showClipboardMenuBarAtMouse()
   if clipboardMenuBar == nil then
