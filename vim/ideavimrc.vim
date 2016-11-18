@@ -8,6 +8,9 @@ set clipboard=unnamed " yanks to OSX clipboard instead TODO: requires Brew insta
 nnoremap j gj
 nnoremap k gk
 
+" map Redo
+noremap U :redo<CR>
+
 " Scroll screen with the cursor
 noremap <C-j> gj<C-e>
 noremap <C-k> gk<C-y>

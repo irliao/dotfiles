@@ -16,7 +16,7 @@ hs.hotkey.bind(mash, 'L', function() hs.window.focusedWindow():focusWindowEast(n
 hs.hotkey.bind(mash, 'A', function() focusPreviousWindow() end)
 hs.hotkey.bind(mash, 'S', function() resizeLeftRightFull() end)
 hs.hotkey.bind(mash, 'D', function() centerScreen() end)
-hs.hotkey.bind(mash, 'Z', function() alertSystemStatus() end)
+hs.hotkey.bind(mash, '`', function() alertSystemStatus() end)
 hs.hotkey.bind(mash, 'Tab', function() switcher_focused_apps:next() end)
 hs.hotkey.bind(mash, 'ESCAPE', function() moveToNextScreen() end)
 hs.hotkey.bind(mash, 'RETURN', function() toggleFullScreen() end)
