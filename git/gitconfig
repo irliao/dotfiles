@@ -1,22 +1,70 @@
 [user]
-	name = Ian Liao
+	name = Ian Ryan Liao
 	email = ianryanliao@gmail.com
+
+[commit]
+  template = ~/.gitmessage
+
 [push]
         default = simple
+
 [credential]
         helper = osxkeychain
+
 [merge]
         conflictstyle = diff3
+        tool = vimdiff
+
 [alias]
-        unstage = reset HEAD --
-        log = log --pretty=format:\"%h - %C(green)%an%C(white), %ar : %C(yellow)%s\"
-        remote = remote -v
-        branch = branch -vv
-        status = status -sb
+	author = config user.name
+  ls = ls-files
+  root = !git rev-parse --show-toplevel
+  url = remote show origin
+  rebase-interactive = !sh -c 'git rebase -i origin/${1-master}' - # interactive rebase
+  stage-interactive = add --all -p
+  amend = commit --amend
+  undo = checkout --
+	unstage = reset HEAD -- # unadd
+  uncommit = reset --soft HEAD^
+  unstash = stash pop --index
+  remote = remote -v
+  branch = branch -vv
+  status = status -sb
+  update = !sh -c 'git fetch origin && git rebase -p origin/${1-master}' -
+  log-pretty = log --pretty=format:\"%h - %C(green)%an%C(white), %ar : %C(yellow)%s\"
+  log-pretty-line = log --pretty=oneline
+	log-prev = log -1 HEAD
+  log-prev-status = !git show --name-status
+	log-prev-files = !git prev --pretty=format:""
+  log-prev-modifications = !git prev-files | awk 'match($1, /M/) {print $2}'
+	log-prev-adds = !git prev-files | awk 'match($1, /A/) {print $2}'
+	log-prev-deletes = !git prev-files | awk 'match($1, /D/) {print $2}'
+  log-branch = reflog show
+  log-diff = log -p
+  log-diff-2 = log -p -2
+  log-stat = log --stat
+  log-graph = log --oneline --abbrev-commit --all --graph --decorate --color
+  log-week-1 = !git diff --stat `git log --since='1 week' --format=%H | tail -1`
+  branch-master = !sh -c 'git checkout -b $1 ${2-master} && git config branch.$1.localmerge ${2-master}' -
+  rebranch = !sh -c 'git branch $0 && git reset --hard HEAD^ && git checkout $0' # move last commit to new branch
+  count-non-merge-commits = !git log --pretty=format:"%Cblue%aN%Creset" --no-merges | sort | uniq -c | sort -rn
+	count-merge-commits = !git log --pretty=format:"%Cred%aN%Creset" --merges | sort | uniq -c | sort -rn
+  diff-files-master = !git diff origin/master... --name-status
+  diff-staged = !git diff --cached # diff staged (cached) against prev commit
+  unfuck = !git fsck && git remote prune origin && git gc
+  delete-ds-store = !find . -name .DS_Store -print0 | xargs -0 git rm -f --ignore-unmatch
+  delete-merged-branches = "!f() { git branch --no-color --merged | grep -v '\\*' | grep -v master | grep -v develop | xargs -n 1 git branch -d -D; }; f"
+  null-sha = hash-object -t tree /dev/null
+
+  log-all-branches-non-merge = !git log --pretty=oneline --abbrev-commit --all --no-merges
+  log-today-by-me = !git log-all-branches-non-merge --since='12am' --committer=\"`git config user.name`\"
+  log-today-by-me-no-color = !git --no-pager log-today-by-me --no-color
+
 [filter "lfs"]
         clean = git-lfs clean %f
         smudge = git-lfs smudge %f
         required = true
+
 [core]
         excludesfile = /Users/irliao/.gitignore_global
         fileMode = false # ignore file mode difference
@@ -24,29 +72,44 @@
 	      pager = diff-so-fancy | less --tabs=4 -RFX
 
 [color]
-    ui = always
+  branch = auto
+  diff = auto
+  interactive = auto
+  pager = true
+  status = auto
+  ui = true
+
+; [color "branch"]
+;   current = green reverse
+;   local = green
+;   remote = yellow
 
 [color "branch"]
-    current = green
-    local = magenta
-    remote = yellow
+  current = cyan reverse
+  local = cyan
+  remote = green
 
 [color "diff"]
     meta = yellow bold
-    frag = magenta
-    old = red
-    new = green
-    whitespace = white reverse
+    frag = magenta bold
+    new = green bold
+    old = red bold
+    whitespace = red reverse
     commit = blue reverse
 
 [color "status"]
     added = green
     changed = red
-    untracked = cyan reverse
-    branch = magenta
+    untracked = blue
 
 [web]
     browser = safari
 
 [pager]
-    diff = diff-so-fancy | less --tabs=4 -RFX --pattern '^(Date|added|deleted|modified): '
+    # diff = diff-so-fancy | less --tabs=4 -RFX --pattern '^(Date|added|deleted|modified): '
+	diff = diff-so-fancy | less --tabs=4 -RFX
+	show = diff-so-fancy | less --tabs=4 -RFX
+
+[diff-so-fancy]
+	stripLeadingSymbols = false
+	markEmptyLines = false

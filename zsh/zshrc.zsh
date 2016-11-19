@@ -103,6 +103,39 @@ bindkey "^W" forward-word
 # bindkey -s '\es' '^Asudo ^E' # \e is Alt-key, Alt+S to prepend sudo to command then go to eol
 # bindkey '\e.' insert-last-word # TODO: figure out how to press: \e.
 
+# Vicmd status in prompt
+bindkey -v # press <ESC> to enter NORMAL mode, press i to enter INSERT mode, NOTE: disables Shift-Tab in iTerm2
+function zle-line-init zle-keymap-select {
+  # Display Vim mode in prompt
+  VIM_PROMPT="%{$fg_bold[yellow]%}NORMAL%{$reset_color%}"
+  RPS1="${${KEYMAP/vicmd/$VIM_PROMPT}/(main|viins)/}$EPS1"
+  zle reset-prompt
+}
+zle -N zle-line-init
+zle -N zle-keymap-select
+export KEYTIMEOUT=1 # 0.4 to 0.1 sec delay in Vim mode display change, raise value if other commands getting issues
+
+# Extra Vim bindings
+bindkey -a 'gg' beginning-of-buffer-or-history
+bindkey -a 'g~' vi-oper-swap-case
+bindkey -a G end-of-buffer-or-history
+bindkey '^?' backward-delete-char
+bindkey '^H' backward-delete-char
+bindkey '^G' what-cursor-position
+
+# TODO: figure out what this does
+# autoload -U select-bracketed select-quoted
+# zle -N select-bracketed
+# zle -N select-quoted
+#   for km in viopp visual; do
+#   bindkey -M $km -- '-' vi-up-line-or-history
+#   for c in {a,i}"${(s..):-\'\"\`\|,./:;-=+@}"; do
+#     bindkey -M $km $c select-quoted
+#   done
+#   for c in {a,i}${(s..):-'()[]{}<>bB'}; do
+#     bindkey -M $km $c select-bracketed
+#   done
+# done
 
 # Terminal customizations
 if [[ ($TERM_PROGRAM == "Apple_Terminal") ]]; then # Apple Terminal
@@ -115,25 +148,16 @@ if [[ ($TERM_PROGRAM == "Apple_Terminal") ]]; then # Apple Terminal
   bindkey "^H" beginning-of-history
   bindkey "^R" history-incremental-search-backward
 
-  # Vim mode
-  bindkey -v # press <ESC> to enter NORMAL mode, press i to enter INSERT mode, NOTE: disables Shift-Tab in iTerm2
-  function zle-line-init zle-keymap-select {
-    # Display Vim mode in prompt
-    VIM_PROMPT="%{$fg_bold[yellow]%}NORMAL%{$reset_color%}"
-    RPS1="${${KEYMAP/vicmd/$VIM_PROMPT}/(main|viins)/}$EPS1"
-    zle reset-prompt
-  }
-  zle -N zle-line-init
-  zle -N zle-keymap-select
-  export KEYTIMEOUT=1 # 0.4 to 0.1 sec delay in Vim mode display change, raise value if other commands getting issues
-
   [[ -f "${HOME}/.zmux" ]] && source "${HOME}/.zmux"
 # iTerm2 customizations
 elif [[ ($TERM_PROGRAM == "iTerm.app") ]]; then
   # iTerm2 shell integration with Unix shell
   [[ ! -h "${HOME}/.iterm2_shell_integration.zsh" ]] && ln -s ${HOME}/.dotfiles/config/term/iterm2/iterm2_shell_integration.zsh ${HOME}/.iterm2_shell_integration.zsh;
 
-  # Rename title displayed from tabs in iTerm
+  # reenable Shift-Tab in vicmd for iTerm2
+  bindkey "\e[Z" reverse-menu-complete
+
+  # Rename title displayed from tabs in iTerm TODO: broken
   title () {
     if [[ $# == 0 ]] then
       echo -ne "\e]1;$PWD\a"

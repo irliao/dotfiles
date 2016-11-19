@@ -715,19 +715,19 @@
 			<key>Text</key>
 			<string></string>
 		</dict>
+		<key>0x53-0x60000</key>
+		<dict>
+			<key>Action</key>
+			<integer>28</integer>
+			<key>Text</key>
+			<string>208D22C7-4CF7-4076-8941-79CC635BE84B</string>
+		</dict>
 		<key>0x60-0x40000</key>
 		<dict>
 			<key>Action</key>
 			<integer>25</integer>
 			<key>Text</key>
 			<string>Show Tabs in Fullscreen</string>
-		</dict>
-		<key>0x64-0x40000</key>
-		<dict>
-			<key>Action</key>
-			<integer>28</integer>
-			<key>Text</key>
-			<string>208D22C7-4CF7-4076-8941-79CC635BE84B</string>
 		</dict>
 		<key>0x71-0x40000</key>
 		<dict>

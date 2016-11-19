@@ -24,7 +24,6 @@ alias rea="cd $DEVPATH/react-tutorials"
 alias ghc="cd $DEVPATH/clones"
 
 # Unix
-alias g="grep"
 alias s="source"
 alias c='clear'
 alias h="history"
@@ -46,28 +45,6 @@ alias ..2="cd ../../"
 alias ..3="cd ../../../"
 alias ..4="cd ../../../../"
 alias ..5="cd ../../../../../"
-
-# Debug
-alias isLoginShell="if [[ -o login ]]; then; print yes; else; print no; fi"
-alias fixvim="rm ~/.zcompdump* && compinit"
-alias printTmuxPaneSize='tmux list-panes -F "#{pane_width}x#{pane_height}"' # desired window size: x=204, y=64
-alias printTmuxCopyModeKeys='tmux list-keys -t vi-copy'
-alias printTmuxOptions='tmux show-options -g'
-alias enableAutoTmux="ln -s ~/.dotfiles/zsh/zim/ztmux.zsh ~/.ztmux"
-alias disableAutoTmux="rm ~/.ztmux && killall tmux"
-alias printTmuxColors="source ~/.bin/tmux_colors.sh"
-alias printTTYs="ps -a"
-
-# Tmux
-alias tmx='TERM=xterm-256color tmx'
-alias tmux='TERM=xterm-256color \tmux'
-# alias tmk="tmux ls | grep : | cut -d. -f1 | awk '{print substr($1, 0, length($1)-1)}' | xargs kill"
-alias tmk="tmux kill-server"
-alias tmu="tmux source-file ~/.tmux.conf"
-alias getTmuxLayout='tmux list-windows -F "#{window_active} #{window_layout}" | grep "^1" | cut -d " " -f 2'
-alias tlc="source ~/.tmux/tmux_colors.sh"
-alias tclear="run_in_all_naked_panes clear" # requires script in ~/.bin
-# tmux list-keys -t vi-copy
 
 # CLIs
 # alias grep="brew install the_silver_searcher"
@@ -91,31 +68,25 @@ alias fuck='$(thefuck $(fc -ln -1))'
 alias loc='locate -i' # -i to make the search case insensitive
 alias ql='qlmanage -p' # -p to preview with QuickLook
 
-# Hammerspoon
-alias seb="open -g 'hammerspoon://safari?someParam=openExtensionBuilder'" # open Safari Extension Builder using Hammerspoon
-
 # Git
 alias ga="git add"
 alias gb="git branch"
 alias gd="git diff"
 alias gc="git commit"
 alias gl="git log"
-alias gm="git standup" # m for morning (standup usually in morning)
 alias gp="git pull"
 alias gr="git remote"
 alias gs="git status"
-alias gcl="github_changelog_generator" # generage CHANGELOG.md
-alias gmd="grip README.md" # preview Markdown in browser using grip, TODO: figure out how to also open browser in same command (issue: any command after grip will run only after grip quits from error or manual exit)
+alias gm="git standup" # m for morning (standup usually in morning)
 alias gpum="git pull upstream master"
 alias gdum="git diff upstream/master"
-alias glp="git log --oneline --abbrev-commit --all --graph --decorate --color"
-alias grs="git reflog show" # show branch activities
-alias gCleanDS="find . -name .DS_Store -print0 | xargs -0 git rm -f --ignore-unmatch" # remove existing .DS_Store files from repository
+alias gmd="grip README.md" # preview Markdown in browser using grip, TODO: figure out how to also open browser in same command (issue: any command after grip will run only after grip quits from error or manual exit)
+alias gcl="github_changelog_generator" # generage CHANGELOG.md
 
 # History
-alias history15="history | awk '{a[$2]++}END{for(i in a){print a[i] " " i}}' | sort -rn | head -15"
-alias historyTop='history | sort -rn | head'
-alias historyClear='history -c'
+alias h15="history | awk '{a[$2]++}END{for(i in a){print a[i] " " i}}' | sort -rn | head -15"
+alias htop='history | sort -rn | head'
+alias hclear='history -c'
 
 # TODO: cleanup aliases below
 # OSX
@@ -164,3 +135,25 @@ alias osxAllPortStatus="netstat -anp tcp && lsof -i tcp"
 alias osxBltKbBatteryPercent="ioreg -c AppleBluetoothHIDKeyboard |grep BatteryPercent"
 # alias osxBltMouseBattery="ioreg -n BNBMouseDevice | grep -i Battery"
 alias osxBltMouseBatteryPercent="ioreg -n BNBMouseDevice | grep -i BatteryPercent"
+
+# Tmux
+# alias tmx='TERM=xterm-256color tmx'
+# alias tmux='TERM=xterm-256color \tmux'
+# alias tmk="tmux ls | grep : | cut -d. -f1 | awk '{print substr($1, 0, length($1)-1)}' | xargs kill"
+# alias tmk="tmux kill-server"
+# alias tmu="tmux source-file ~/.tmux.conf"
+# alias getTmuxLayout='tmux list-windows -F "#{window_active} #{window_layout}" | grep "^1" | cut -d " " -f 2'
+# alias tlc="source ~/.tmux/tmux_colors.sh"
+# alias tclear="run_in_all_naked_panes clear" # requires script in ~/.bin
+# NOTE: show tmux binded keys with: tmux list-keys -t vi-copy
+
+# Debug
+# alias isLoginShell="if [[ -o login ]]; then; print yes; else; print no; fi"
+# alias fixvim="rm ~/.zcompdump* && compinit"
+# alias printTmuxPaneSize='tmux list-panes -F "#{pane_width}x#{pane_height}"' # desired window size: x=204, y=64
+# alias printTmuxCopyModeKeys='tmux list-keys -t vi-copy'
+# alias printTmuxOptions='tmux show-options -g'
+# alias enableAutoTmux="ln -s ~/.dotfiles/zsh/zim/ztmux.zsh ~/.ztmux"
+# alias disableAutoTmux="rm ~/.ztmux && killall tmux"
+# alias printTmuxColors="source ~/.bin/tmux_colors.sh"
+# alias printTTYs="ps -a"
