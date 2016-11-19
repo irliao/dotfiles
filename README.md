@@ -35,10 +35,10 @@ cd $HOME/Developments/dotfiles && source ./install.sh
 
 * [Hammerspoon](https://github.com/Hammerspoon/hammerspoon) - system automation
 
-## Tasks
+## Todos
 
-* fully test and verify ./install.sh
-* consider adding badge for build status (https://github.com/badges/shields/blob/master/INSTALL.md)
+* [ ] fully test and verify ./install.sh
+* [ ] consider adding badge for build status (https://github.com/badges/shields/blob/master/INSTALL.md)
 
 ## License
 Copyright (c) 2012-2016 Ian Ryan Liao. Released under the [MIT License][license].

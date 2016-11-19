@@ -6,6 +6,12 @@ sudo -v
 # Build Locate database for locate cli
 sudo launchctl load -w /System/Library/LaunchDaemons/com.apple.locate.plist
 
+# Add a blank space to Dock
+defaults write com.apple.dock persistent-apps -array-add '{tile-data={}; tile-type=spacer-tile;}'
+
+# Power button change from entering Stand-by mode to show dialog box
+defaults write com.apple.loginwindow PowerButtonSleepsSystem -bool no
+
 # Disable menu bar transparency
 defaults write NSGlobalDomain AppleEnableMenuBarTransparency -bool false
 
