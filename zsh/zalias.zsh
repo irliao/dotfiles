@@ -136,6 +136,7 @@ alias osxBltKbBatteryPercent="ioreg -c AppleBluetoothHIDKeyboard |grep BatteryPe
 # alias osxBltMouseBattery="ioreg -n BNBMouseDevice | grep -i Battery"
 alias osxBltMouseBatteryPercent="ioreg -n BNBMouseDevice | grep -i BatteryPercent"
 
+# TODO: set Tmux aliases if using Terminal
 # Tmux
 # alias tmx='TERM=xterm-256color tmx'
 # alias tmux='TERM=xterm-256color \tmux'
