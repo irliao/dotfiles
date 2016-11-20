@@ -12,10 +12,12 @@
         helper = osxkeychain
 
 [merge]
-        conflictstyle = diff3
         tool = vimdiff
+        conflictstyle = diff3 # set editor to display BASE(BA), LOCAL(LO), and REMOTE(RE) changes
+        prompt = false # no prompt before launching mergetool
 
 [alias]
+# NOTE: '--' tells git that all the next args should be interpreted as file names, not branch names or anything else
 	author = config user.name
   ls = ls-files
   root = !git rev-parse --show-toplevel
@@ -23,7 +25,7 @@
   rebase-interactive = !sh -c 'git rebase -i origin/${1-master}' - # interactive rebase
   stage-interactive = add --all -p
   amend = commit --amend
-  undo = checkout --
+  undo = checkout -- # reset file back to previous commit TODO: replace undo with a less confusing alias name
 	unstage = reset HEAD -- # unadd
   uncommit = reset --soft HEAD^
   unstash = stash pop --index
