@@ -1,44 +1,41 @@
--- Clipboard history in menu bar
+-- Clipboard in menu bar with history persistent across launches
+
+-- TODO: map JK to up/down when menubar shows
+-- TODO: auto select first item
+-- TODO: show menubar at location of current typing cursor
+-- TODO: refactor to check clipbpard changes based on Command + C and YY keypress
+-- TODO: implement separate clipboard that reads from file or directly from Notes.app, look into hs.json
+-- TODO: efficiently remove duplicates from clipboard
 
 --[[
 Clicking on any item will add it to your transfer area.
 If you open the menu while pressing option/alt, you will enter the Direct Paste Mode. This means that the selected item will be
 "typed" instead of copied to the active clipboard.
-The clipboard persists across launches.
 -> Ng irc suggestion: hs.settings.set("clipboardMenuBarReplacementHistory", clipboard_history)
 ]]--
 
 -- Feel free to change those settings
 local frequency = 0.8 -- Speed in seconds to check for clipboard changes. If you check too frequently, you will loose performance, if you check sparsely you will loose copies
-local hist_size = 20 -- How many items to keep on history
-local label_length = 40 -- How wide (in characters) the dropdown menu should be. Copies larger than this will have their label truncated and end with "…" (unicode for elipsis ...)
+local hist_size = 50 -- How many items to keep on history
+local label_length = 50 -- How wide (in characters) the dropdown menu should be. Copies larger than this will have their label truncated and end with "…" (unicode for elipsis ...)
 local honor_clearcontent = false --asmagill request. If any application clears the pasteboard, we also remove it from the history https://groups.google.com/d/msg/hammerspoon/skEeypZHOmM/Tg8QnEj_N68J
-local pasteOnSelect = false -- Auto-type on click
+local pasteOnSelect = true -- Auto-type on click
 
 -- Don't change anything bellow this line
+local settingsKey = "HSClipboardHistory" -- key to access clipboard_history stored in hs.settings
 local clipboardMenuBar = hs.menubar.new()
-clipboardMenuBar:setTooltip("clipboardMenuBar replacement")
+clipboardMenuBar:setTooltip("clipboard")
 local pasteboard = require("hs.pasteboard") -- http://www.hammerspoon.org/docs/hs.pasteboard.html
 local settings = require("hs.settings") -- http://www.hammerspoon.org/docs/hs.settings.html
 local last_change = pasteboard.changeCount() -- displays how many times the pasteboard owner has changed // Indicates a new copy has been made
 
 --Array to store the clipboard history
-local clipboard_history = settings.get("so.victor.hs.clipboardMenuBar") or {} --If no history is saved on the system, create an empty history
-
--- Append clipboard size to the menu
-function setMenuBarText()
-  -- display number of items in this clipboard if more than 0
-  if (#clipboard_history == 0) then
-    clipboardMenuBar:setMenuBarIcon("✂") -- Unicode magic
-    else
-      clipboardMenuBar:setMenuBarIcon("✂ ("..#clipboard_history..")") -- updates the menu counter
-  end
-end
+local clipboard_history = settings.get(settingsKey) or {} --If no history is saved on the system, create an empty history
 
 function setMenuBarIcon()
   if (#clipboard_history == 0) then
     clipboardMenuBar:setIcon("assets/clipboard_empty.png")
-    else
+  else
     clipboardMenuBar:setIcon("assets/clipboard_filled.png")
   end
 end
@@ -62,7 +59,7 @@ end
 function clearAll()
   pasteboard.clearContents()
   clipboard_history = {}
-  settings.set("so.victor.hs.clipboardMenuBar",clipboard_history)
+  settings.set(settingsKey,clipboard_history)
   now = pasteboard.changeCount()
   setMenuBarIcon()
 end
@@ -70,18 +67,25 @@ end
 -- Clears the last added to the history
 function clearLastItem()
   table.remove(clipboard_history,#clipboard_history)
-  settings.set("so.victor.hs.clipboardMenuBar",clipboard_history)
+  settings.set(settingsKey,clipboard_history)
   now = pasteboard.changeCount()
   setMenuBarIcon()
 end
 
+-- Copies currently copied item to clipboard history
 function pasteboardToClipboard(item)
+  -- Prevent adding consecutive duplicate items
+  if #clipboard_history > 0 and clipboard_history[#clipboard_history] == item then
+    return
+  end
+
   -- Loop to enforce limit on qty of elements in history. Removes the oldest items
   while (#clipboard_history >= hist_size) do
     table.remove(clipboard_history,1)
   end
+
   table.insert(clipboard_history, item)
-  settings.set("so.victor.hs.clipboardMenuBar",clipboard_history) -- updates the saved history
+  settings.set(settingsKey,clipboard_history) -- updates the saved history
   setMenuBarIcon() -- updates the menu counter
 end
 
@@ -103,9 +107,11 @@ populateMenu = function(key)
   -- footer
   table.insert(menuData, {title="-"})
   table.insert(menuData, {title="Clear All", fn = function() clearAll() end })
-  if (key.alt == true or pasteOnSelect) then
-    table.insert(menuData, {title="Direct Paste Mode ✍", disabled=true})
-  end
+
+  -- TODO: figure out why this is needed
+  -- if (key.alt == true or pasteOnSelect) then
+  --   table.insert(menuData, {title="Direct Paste Mode ✍", disabled=true})
+  -- end
   return menuData
 end
 
@@ -124,10 +130,6 @@ function storeCopy()
   end
 end
 
--- TODO: bind Alt+LeftClick or Alt+Return to past directly instead of copy
--- TODO: fix issue where Ctrl+HJKL won't work when the menu is showing due to popupMenu() being a blocking call to Hammerspoon
--- TODO: implement separate clipboard that reads from file or directly from Notes.app
--- TODO: consider showing menu at center of the screen or directly under menu bar icon
 function showClipboardMenuBarAtMouse()
   if clipboardMenuBar == nil then
     return
@@ -143,4 +145,5 @@ timer:start()
 setMenuBarIcon() --Avoid wrong title if the user already has something on his saved history
 clipboardMenuBar:setMenu(populateMenu)
 
+-- TODO: move this to hotkey.lua
 hs.hotkey.bind({"ctrl", "cmd"}, "P",function() clipboardMenuBar:popupMenu() end)

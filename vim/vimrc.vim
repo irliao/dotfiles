@@ -93,7 +93,8 @@ nnoremap <leader>sp :lprevious<CR> " go to previous error from Syntastic check, 
 " set autoread
 
 " Airline settings... mainly used to enable tab switch with map keys
-let g:airline_theme='term' " use 'badwolf' for high contrast
+" let g:airline_theme='term' " use 'badwolf' for high contrast
+let g:airline_theme = "hybrid"
 let g:airline#extensions#tabline#show_buffers = 0 " hide buffers (prevents closed buffer showing in tab list)
 let g:airline#extensions#tabline#enabled = 1 " displays all buffers (WARN: even if closed) if only one tab, required for tabline numbering to work
 let g:airline#extensions#tabline#left_sep = ''

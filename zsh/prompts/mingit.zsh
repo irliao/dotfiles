@@ -23,11 +23,20 @@ gst_get_pwd() {
   print ${prompt_short_dir}
 }
 
+prompt_iterm_preexec() {
+  echo -ne "\e]1; $(history $HISTCMD | cut -b7- ) \a" # set title to last command
+}
+
 prompt_mingit_precmd() {
   PROMPT="$(gst_get_prefix)%F{8}$(gst_get_pwd)%f$(parse_git_dirty)$(git_prompt_info)$(gst_get_suffix)"
 
   # TODO: determine if this is useful to keep or not
   PROMPT="$PROMPT"'$([ -n "$TMUX" ] && tmux setenv TMUXPWD_$(tmux display -p "#D" | tr -d %) "$PWD")'
+
+  if [[ "$TERM_PROGRAM" == "iTerm.app" ]];then
+    # echo -ne "\e]1; ${PWD##*/} \a" # set title to short pwd
+    echo -ne "\e]1; $(gst_get_pwd) \a" # set title to git short pwd
+  fi
 }
 
 prompt_mingit_setup() {
@@ -37,7 +46,6 @@ prompt_mingit_setup() {
   ZSH_THEME_GIT_PROMPT_CLEAN=" %F{6}"
 
   autoload -Uz add-zsh-hook
-
   add-zsh-hook precmd prompt_mingit_precmd
   prompt_opts=(cr subst percent)
 }

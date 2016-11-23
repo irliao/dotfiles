@@ -1,5 +1,7 @@
 -- Reload config
 
+-- TODO: ignore archive/*.lua
+
 function reloadConfig(files)
     doReload = false
     for _, file in pairs(files) do

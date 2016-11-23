@@ -93,6 +93,7 @@ TRAPWINCH() {
 export TERM="xterm-256color"
 
 # Key bindings
+bindkey -v # ESC to NORMAL mode, i to INSERT mode, NOTE: will unset any bindkey before this
 bindkey "^A" beginning-of-line
 bindkey "^B" backward-word
 bindkey "^C" kill-line
@@ -104,7 +105,6 @@ bindkey "^W" forward-word
 # bindkey '\e.' insert-last-word # TODO: figure out how to press: \e.
 
 # Vicmd status in prompt
-bindkey -v # press <ESC> to enter NORMAL mode, press i to enter INSERT mode, NOTE: disables Shift-Tab in iTerm2
 function zle-line-init zle-keymap-select {
   # Display Vim mode in prompt
   VIM_PROMPT="%{$fg_bold[yellow]%}NORMAL%{$reset_color%}"
@@ -157,8 +157,8 @@ elif [[ ($TERM_PROGRAM == "iTerm.app") ]]; then
   # reenable Shift-Tab in vicmd for iTerm2
   bindkey "\e[Z" reverse-menu-complete
 
-  # Rename title displayed from tabs in iTerm TODO: broken
-  title () {
+  # TODO: broken due to set title in precmd hook
+  tt () {
     if [[ $# == 0 ]] then
       echo -ne "\e]1;$PWD\a"
     else

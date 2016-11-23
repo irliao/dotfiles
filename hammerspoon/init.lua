@@ -15,9 +15,9 @@ hs.hotkey.alertDuration = 0 -- hotkey alerts are disabled
 hs.hints.style = 'vimperator' -- window hint starts with the first character of the parent application's title
 hs.hints.fontName = 'Hack'
 hs.window.filter.setLogLevel = 'error'
-hs.window.filter.ignoreAlways['Siri'] = true -- prevent wfilter warnings from windowHighlight
-hs.window.filter.ignoreAlways['Spotlight'] = false -- prevent wfilter warnings from windowHighlight
-hs.window.filter.ignoreAlways['Autoupdate'] = true
+hs.window.filter.ignoreAlways['Autoupdate'] = true -- prevent wfiltre warning
+hs.window.filter.ignoreAlways['Siri'] = true -- prevent wfilter warning
+hs.window.filter.ignoreAlways['Spotlight'] = false -- NOTE: needed for window-filter to auto center Spotlight
 
 -- Global logger to send debug logs to Hammerspoon console
 logger = hs.logger.new('Debug', 'info') -- usage: logger.i('message')

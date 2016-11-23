@@ -65,6 +65,7 @@ Plug 'sickill/vim-monokai'
 Plug 'trusktr/seti.vim'
 Plug 'yorickpeterse/autumn.vim'
 Plug 'YorickPeterse/happy_hacking.vim'
+Plug 'kristijanhusak/vim-hybrid-material'
 
 " autocompletion
 Plug 'ervandew/supertab'

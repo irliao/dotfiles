@@ -1,5 +1,7 @@
 -- Window Switcher
 
+-- TODO: look into hs.tabs.tabWindows(app)
+
 -- Only windows from focused app
 wf_focused_apps = hs.window.filter.new(function(win)
   local fw = hs.window.focusedWindow()
