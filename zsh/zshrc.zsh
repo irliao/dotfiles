@@ -152,7 +152,7 @@ if [[ ($TERM_PROGRAM == "Apple_Terminal") ]]; then # Apple Terminal
 # iTerm2 customizations
 elif [[ ($TERM_PROGRAM == "iTerm.app") ]]; then
   # iTerm2 shell integration with Unix shell
-  [[ ! -h "${HOME}/.iterm2_shell_integration.zsh" ]] && ln -s ${HOME}/.dotfiles/config/term/iterm2/iterm2_shell_integration.zsh ${HOME}/.iterm2_shell_integration.zsh;
+  # [[ ! -h "${HOME}/.iterm2_shell_integration.zsh" ]] && ln -s ${HOME}/.dotfiles/term/iterm2/iterm2_shell_integration.zsh ${HOME}/.iterm2_shell_integration.zsh;
 
   # reenable Shift-Tab in vicmd for iTerm2
   bindkey "\e[Z" reverse-menu-complete
@@ -167,7 +167,7 @@ elif [[ ($TERM_PROGRAM == "iTerm.app") ]]; then
   }
 
   # use iterm2_shell_integration.`basename $SHELL` when dealing with multiple shells
-  test -e ${HOME}/.iterm2_shell_integration.zsh && source ${HOME}/.iterm2_shell_integration.zsh
+  # test -e ${HOME}/.iterm2_shell_integration.zsh && source ${HOME}/.iterm2_shell_integration.zsh
   clear;
 else # Other
   [[ -h "${HOME}/.iterm2_shell_integration.zsh" ]] && rm "${HOME}/.iterm2_shell_integration.zsh" && echo "removed ~/.iterm2_shell_integration.zsh";
