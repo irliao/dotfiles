@@ -8,14 +8,13 @@ config/filezilla/
 config/hub
 config/ranger/
 config/workshopper
+config/tmux/plugins/
+config/tmux/sidebar/
+config/tmux/resurrect/
 
+.idea/
 node_modules/
-karabiner.d/log/
 lbin/
-
-tmux/plugins/
-tmux/sidebar/
-tmux/resurrect/
 
 vim/.netrwhist
 vim/bundle/

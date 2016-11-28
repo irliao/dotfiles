@@ -74,9 +74,9 @@ function install() {
     echo 'symlinked vim files'
 
   # symlink tmux files
-  ln -svf "$dotdir/tmux" "$HOME/.tmux" &&
-    ln -svf "$dotdir/tmux/tmux.conf" "$HOME/.tmux.conf" &&
-    echo 'symlinked tmux files'
+  # ln -svf "$dotdir/tmux" "$HOME/.tmux" &&
+  #   ln -svf "$dotdir/tmux/tmux.conf" "$HOME/.tmux.conf" &&
+  #   echo 'symlinked tmux files'
 
   echo 'finished install, starting zim' &&
     source ${ZDOTDIR:-${HOME}}/.zlogin &&

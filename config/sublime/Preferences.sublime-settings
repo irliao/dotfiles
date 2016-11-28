@@ -1,10 +1,31 @@
 {
-	"color_scheme": "Packages/Theme - Afterglow/Afterglow.tmTheme",
+	"always_show_minimap_viewport": true,
+	"bold_folder_labels": true,
+	"color_scheme": "Packages/Material Theme/schemes/Material-Theme-Darker.tmTheme",
 	"font_face": "Hack",
 	"font_size": 13,
 	"ignored_packages":
 	[
 	],
+	"indent_guide_options":
+	[
+		"draw_normal",
+		"draw_active"
+	],
+	"line_padding_bottom": 3,
+	"line_padding_top": 3,
+	"overlay_scroll_bars": "enabled",
 	"tab_size": 2,
-	"theme": "Spacegray Eighties.sublime-theme"
+	"theme": "Material-Theme-Darker.sublime-theme",
+  "material_theme_tree_headings": true, // Show sidebar headings
+"material_theme_appbar_lime": true,
+"material_theme_appbar_orange": true,
+"material_theme_appbar_purple": true,
+"material_theme_appbar_red": true,
+"material_theme_appbar_yellow": true,
+"material_theme_appbar_indigo": true,
+"material_theme_appbar_pink": true,
+"material_theme_appbar_blue": true,
+"material_theme_appbar_cyan": true,
+"material_theme_appbar_charcoal": true
 }

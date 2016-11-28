@@ -863,7 +863,7 @@
 	<key>LoadPrefsFromCustomFolder</key>
 	<true/>
 	<key>NSNavLastRootDirectory</key>
-	<string>~/Developments/dotfiles</string>
+	<string>~/Developments/dotfiles/config/term/iterm2</string>
 	<key>NSNavPanelExpandedSizeForOpenMode</key>
 	<string>{712, 459}</string>
 	<key>NSNavPanelExpandedSizeForSaveMode</key>
@@ -911,9 +911,9 @@
 	<key>NSWindow Frame SessionsPreferences</key>
 	<string>269 144 599 388 0 0 1440 900 </string>
 	<key>NSWindow Frame SharedPreferences</key>
-	<string>4 427 796 473 0 0 1440 900 </string>
+	<string>-288 1507 796 473 -295 900 1920 1080 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
-	<string>4 0 650 502 0 0 1440 900 </string>
+	<string>155 18 650 502 0 0 1440 900 </string>
 	<key>NSWindow Frame iTerm Window 1</key>
 	<string>0 4 1438 896 0 0 1440 900 </string>
 	<key>New Bookmarks</key>
@@ -1768,7 +1768,7 @@
 		</dict>
 	</dict>
 	<key>PrefsCustomFolder</key>
-	<string>/Users/irliao/Developments/dotfiles/term/iterm2</string>
+	<string>/Users/irliao/Developments/dotfiles/config/term/iterm2</string>
 	<key>PromptOnQuit</key>
 	<false/>
 	<key>QuitWhenAllWindowsClosed</key>
@@ -1792,7 +1792,7 @@
 	<key>SUHasLaunchedBefore</key>
 	<true/>
 	<key>SULastCheckTime</key>
-	<date>2016-11-20T04:25:08Z</date>
+	<date>2016-11-27T08:19:48Z</date>
 	<key>ShowBookmarkName</key>
 	<false/>
 	<key>ShowFullScreenTabBar</key>
