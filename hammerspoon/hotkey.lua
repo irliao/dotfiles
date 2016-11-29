@@ -34,7 +34,7 @@ hs.hotkey.bind(mash, "`", function() alertSystemStatus() end)
 hs.hotkey.bind(mash, ";", function() hs.toggleConsole() end)
 
 -- Application opener
-hs.hotkey.bind(mash, "C", function() openApplication("Safari") end)
+hs.hotkey.bind(mash, "C", function() openApplication(chooseBrowserByMachineName()) end)
 hs.hotkey.bind(mash, "Z", function() openApplication("Google Chrome") end)
 hs.hotkey.bind(mash, "E", function() openApplication("Sublime Text") end)
 hs.hotkey.bind(mash, "F", function() openApplication("Finder") end)
