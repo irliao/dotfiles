@@ -13,7 +13,8 @@
 chooseBrowserByMachineName = function()
   local machineName = hs.host.localizedName()
   if machineName == "irl-mba" or machineName == "irl-mbp" then -- personal
-    browser = "Safari Technology Preview"
+    -- browser = "Safari Technology Preview"
+    browser = "Safari"
   elseif machineName == "SDGL130e9919d" then -- work
     browser = "Google Chrome"
   else -- default
