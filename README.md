@@ -26,6 +26,7 @@ cd $HOME/Developments/dotfiles && source ./install.sh
 
 ## Todos
 
+* [ ] create menubar in Hammerspoon to set different default browsers with hotkeys
 * [ ] fully test and verify ./install.sh
 * [ ] consider adding badge for build status (https://github.com/badges/shields/blob/master/INSTALL.md)
 
