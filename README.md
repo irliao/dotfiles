@@ -28,6 +28,7 @@ cd $HOME/Developments/dotfiles && source ./install.sh
 
 * [ ] fix caffeinate in Hammerspoon not working
 * [ ] create menubar in Hammerspoon to set different default browsers with hotkeys
+* [ ] add configurations to Hyper term
 * [ ] fully test and verify ./install.sh
 * [ ] consider adding badge for build status (https://github.com/badges/shields/blob/master/INSTALL.md)
 
