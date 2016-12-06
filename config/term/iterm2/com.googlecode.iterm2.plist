@@ -692,10 +692,12 @@
 	</dict>
 	<key>Default Bookmark Guid</key>
 	<string>208D22C7-4CF7-4076-8941-79CC635BE84B</string>
+	<key>DimBackgroundWindows</key>
+	<false/>
 	<key>DimInactiveSplitPanes</key>
 	<true/>
 	<key>DimOnlyText</key>
-	<false/>
+	<true/>
 	<key>DisableFullscreenTransparency</key>
 	<false/>
 	<key>DisableWindowSizeSnap</key>
@@ -705,7 +707,7 @@
 	<key>FlashTabBarInFullscreen</key>
 	<false/>
 	<key>FocusFollowsMouse</key>
-	<true/>
+	<false/>
 	<key>GlobalKeyMap</key>
 	<dict>
 		<key>0x19-0x60000</key>
@@ -729,13 +731,6 @@
 			<key>Text</key>
 			<string>208D22C7-4CF7-4076-8941-79CC635BE84B</string>
 		</dict>
-		<key>0x71-0x40000</key>
-		<dict>
-			<key>Action</key>
-			<integer>31</integer>
-			<key>Text</key>
-			<string></string>
-		</dict>
 		<key>0x73-0x40000</key>
 		<dict>
 			<key>Action</key>
@@ -753,7 +748,7 @@
 		<key>0x9-0x40000</key>
 		<dict>
 			<key>Action</key>
-			<integer>2</integer>
+			<integer>31</integer>
 			<key>Text</key>
 			<string></string>
 		</dict>
@@ -909,11 +904,11 @@
 	<key>NSWindow Frame SessionsPreferences</key>
 	<string>763 63 606 456 0 0 1440 900 </string>
 	<key>NSWindow Frame SharedPreferences</key>
-	<string>2445 223 796 473 1440 0 2560 1440 </string>
+	<string>2445 293 796 473 1440 0 2560 1440 </string>
 	<key>NSWindow Frame UKCrashReporter</key>
 	<string>99 316 592 584 0 0 1440 900 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
-	<string>1709 29 1158 803 1440 0 2560 1440 </string>
+	<string>1595 18 650 502 1440 0 2560 1440 </string>
 	<key>New Bookmarks</key>
 	<array>
 		<dict>
@@ -1790,7 +1785,7 @@
 	<key>SUHasLaunchedBefore</key>
 	<true/>
 	<key>SULastCheckTime</key>
-	<date>2016-11-30T18:24:11Z</date>
+	<date>2016-12-05T17:47:43Z</date>
 	<key>SUSendProfileInfo</key>
 	<false/>
 	<key>ShowBookmarkName</key>
@@ -1804,7 +1799,7 @@
 	<key>SmartPlacement</key>
 	<false/>
 	<key>SplitPaneDimmingAmount</key>
-	<real>0.3298552684294872</real>
+	<real>0.59999999999999998</real>
 	<key>StealKeyFocus</key>
 	<false/>
 	<key>SuppressRestartAnnouncement</key>
