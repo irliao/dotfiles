@@ -21,13 +21,13 @@ hs.hotkey.bind(mash, "SPACE", function() hs.hints.windowHints(hs.window.focusedW
 -- Window management
 hs.hotkey.bind(mash, "H", function() hs.window.focusedWindow():focusWindowWest(nil, true, false) end)
 hs.hotkey.bind(mash, "L", function() hs.window.focusedWindow():focusWindowEast(nil, true, false) end)
-hs.hotkey.bind(mash, "A", function() focusPreviousWindow() end)
 hs.hotkey.bind(mash, "S", function() resizeLeftRightFull() end)
 hs.hotkey.bind(mash, "D", function() resizeTopBottomFull() end)
 -- hs.hotkey.bind(mash, "D", function() centerScreen() end)
 hs.hotkey.bind(mash, "P", function() showClipboardMenuBarAtMouse() end)
 hs.hotkey.bind(mash, "R", function() reloadConfig() end)
-hs.hotkey.bind(mash, "Tab", function() switcher_focused_apps:next() end)
+-- hs.hotkey.bind(mash, "Tab", function() switcher_focused_apps:next() end) -- TODO: map app switch to another hotkey
+hs.hotkey.bind(mash, "TAB", function() focusPreviousWindow() end) -- TODO: make focus cycle
 hs.hotkey.bind(mash, "ESCAPE", function() moveToNextScreen() end)
 hs.hotkey.bind(mash, "RETURN", function() toggleFullScreen() end)
 hs.hotkey.bind(mash, "DELETE", "Lock system", function() hs.caffeinate.lockScreen() end)
