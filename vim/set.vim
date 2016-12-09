@@ -80,7 +80,8 @@ set t_vb= " disable visual flash
 " search
 set showmatch " highlight matching code such as {},(),[]
 set mat=2 " show matching brackets for 2 tenths of a second to blink
-set incsearch " search while typing before Return
+" set incsearch " search while typing before Return
+set noincsearch " disable incremental search (search while typing without CR TODO: not working, still doing incsearch
 set hlsearch " highlight search results
 set ignorecase " ignoring cases for search
 set smartcase  " searches with case if any upper-case chars used
