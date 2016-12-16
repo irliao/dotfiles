@@ -904,11 +904,11 @@
 	<key>NSWindow Frame SessionsPreferences</key>
 	<string>763 63 606 456 0 0 1440 900 </string>
 	<key>NSWindow Frame SharedPreferences</key>
-	<string>2445 293 796 473 1440 0 2560 1440 </string>
+	<string>2445 385 796 473 1440 0 2560 1440 </string>
 	<key>NSWindow Frame UKCrashReporter</key>
 	<string>99 316 592 584 0 0 1440 900 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
-	<string>1709 29 1158 803 1440 0 2560 1440 </string>
+	<string>1762 129 650 502 1440 0 2560 1440 </string>
 	<key>New Bookmarks</key>
 	<array>
 		<dict>
@@ -1557,14 +1557,16 @@
 			</dict>
 			<key>Selection Color</key>
 			<dict>
+				<key>Alpha Component</key>
+				<real>1</real>
 				<key>Blue Component</key>
-				<real>0.2196078431372549</real>
+				<real>0.19978845119999999</real>
 				<key>Color Space</key>
-				<string>sRGB</string>
+				<string>Calibrated</string>
 				<key>Green Component</key>
-				<real>0.2196078431372549</real>
+				<real>0.19870945810000001</real>
 				<key>Red Component</key>
-				<real>0.2196078431372549</real>
+				<real>0.59985733029999999</real>
 			</dict>
 			<key>Send Code When Idle</key>
 			<false/>
@@ -1785,7 +1787,7 @@
 	<key>SUHasLaunchedBefore</key>
 	<true/>
 	<key>SULastCheckTime</key>
-	<date>2016-12-07T18:07:55Z</date>
+	<date>2016-12-12T16:32:55Z</date>
 	<key>SUSendProfileInfo</key>
 	<false/>
 	<key>ShowBookmarkName</key>
@@ -1828,5 +1830,9 @@
 	<false/>
 	<key>iTerm Version</key>
 	<string>3.0.12</string>
+	<key>kCPKSelectionViewPreferredModeKey</key>
+	<integer>1</integer>
+	<key>kCPKSelectionViewShowHSBTextFieldsKey</key>
+	<false/>
 </dict>
 </plist>

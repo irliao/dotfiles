@@ -26,8 +26,8 @@ hs.hotkey.bind(mash, "D", function() resizeTopBottomFull() end)
 -- hs.hotkey.bind(mash, "D", function() centerScreen() end)
 hs.hotkey.bind(mash, "P", function() showClipboardMenuBarAtMouse() end)
 hs.hotkey.bind(mash, "R", function() reloadConfig() end)
--- hs.hotkey.bind(mash, "Tab", function() switcher_focused_apps:next() end) -- TODO: map app switch to another hotkey
-hs.hotkey.bind(mash, "TAB", function() focusPreviousWindow() end) -- TODO: make focus cycle
+hs.hotkey.bind(mash, "Tab", function() switcher_focused_apps:next() end) -- TODO: map app switch to another hotkey
+-- hs.hotkey.bind(mash, "TAB", function() focusPreviousWindow() end) -- TODO: make focus cycle
 hs.hotkey.bind(mash, "ESCAPE", function() moveToNextScreen() end)
 hs.hotkey.bind(mash, "RETURN", function() toggleFullScreen() end)
 hs.hotkey.bind(mash, "DELETE", "Lock system", function() hs.caffeinate.lockScreen() end)
