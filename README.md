@@ -24,12 +24,11 @@ cd $HOME/Developments/dotfiles && source ./install.sh
 
 ## Todos
 
+* [ ] write wrapper around hs.window.toggleFullScreen() so exiting out of FullScreen will automatically maximize window
 * [ ] reduce size of repo
 * [ ] store IntelliJ settings from mbp
 * [ ] fix caffeine in Hammerspoon not working on mbp (might need to verify mba)
-* [ ] create menubar in Hammerspoon to set different default browsers with hotkeys
 * [ ] consider adding badge for build status (https://github.com/badges/shields/blob/master/INSTALL.md)
-* [ ] add configurations to Hyper term
 * [ ] fully test and verify ./install.sh
 * [ ] remove warnings from Hammerspoon console
 

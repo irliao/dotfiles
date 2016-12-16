@@ -1,10 +1,10 @@
--- Window manipulation
+-- Window management
 
--- TODO: implement function to go FullScreen + join another FullScreen space (if exists) to create split FullScreen
+-- TODO: implement function to use Mac split screen
 
 require("utility")
 
--- Check if window is maximized
+-- Check if window is maximized (not fullscreen)
 function isWindowMaximized(win)
   if not win or win:isFullScreen() then
     return false
@@ -39,6 +39,8 @@ function resizeLeftRightFull()
   if not win or win:isFullScreen() then
     return
   end
+
+  local originalFrame = win:frame()
   local f = win:frame()
   local screen = win:screen()
   local max = screen:frame()
@@ -74,6 +76,15 @@ function resizeLeftRightFull()
   end
 
   win:setFrame(f)
+
+  -- resize with setFrameCorrectness if window did not resize correctly due to max.y being below menubar instead of the screen
+  if originalFrame.x == f.x and originalFrame.y == f.y and originalFrame.w == f.w and originalFrame.h == f.h then
+    hs.alert('Debug: resizing window with setFrameCorrectness')
+    hs.window.setFrameCorrectness = true
+    win:setFrame(f)
+    hs.window.setFrameCorrectness = false -- disable to prevent window wiggling
+  end
+
   centerMouse()
 end
 
@@ -83,6 +94,7 @@ function resizeTopBottomFull()
   if not win or win:isFullScreen() then
     return
   end
+  local originalFrame = win:frame()
   local f = win:frame()
   local screen = win:screen()
   local max = screen:frame()
@@ -116,6 +128,15 @@ function resizeTopBottomFull()
   end
 
   win:setFrame(f)
+
+  -- resize with setFrameCorrectness if window did not resize correctly due to max.y being below menubar instead of the screen
+  if originalFrame.x == f.x and originalFrame.y == f.y and originalFrame.w == f.w and originalFrame.h == f.h then
+    hs.alert('Debug: resizing window with setFrameCorrectness')
+    hs.window.setFrameCorrectness = true
+    win:setFrame(f)
+    hs.window.setFrameCorrectness = false -- disable to prevent window wiggling
+  end
+
   centerMouse()
 end
 
@@ -164,20 +185,29 @@ function toggleFullScreen()
   local app = win:application()
   if app:name() == 'Terminal' then
     toggleTerminalFullScreen()
-  elseif app:name() == 'iTerm2' then
+  elseif app:name() == 'iTerm2' or app:name() == 'iTerm' then
     toggleiTermFullScreen()
   else
     win:toggleFullScreen()
   end
-  centerMouse()
 end
 
 -- Move focused window to next screen if available
 function moveToNextScreen()
     local win = (hs.window.focusedWindow() and hs.window.focusedWindow() or hs.window.frontmostWindow())
-    if not win or win:isFullScreen() then
+    if not win then
       return
     end
+
+    -- TODO: broken, does not toggleFullScreen properly
+    -- exit out of fullscreen to move to different screen
+    -- local shouldFullScreen = false
+    -- if win:isFullScreen() then
+    --   shouldFullScreen = true
+    --   win:setFullScreen(false)
+    --   win:toggleFullScreen()
+    -- end
+
     local prevScreen = win:screen():previous()
     local nextScreen = win:screen():next()
     if nextScreen ~= nil then
@@ -186,9 +216,17 @@ function moveToNextScreen()
     elseif prevScreen ~= nil then
         win:moveToScreen(prevScreen)
         centerMouse()
-    else
-        sendNotif('Screen', 'No Screen to Move to')
     end
+
+    -- TODO: broken, does not toggleFullScreen properly
+    -- reenter fullscreen on the new screen
+    -- if shouldFullScreen then
+    --   win:setFullScreen(true)
+    --   win:toggleFullScreen()
+    -- end
+
+    -- refocus to show current window even when moved to fullscreened screen
+    win:focus()
 end
 
 -- open an application that is named -app_name-

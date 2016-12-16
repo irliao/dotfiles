@@ -1,18 +1,28 @@
--- Hotkeys for Macs running osx10.12 and using HHKB keyboard layout (Capslock replaced with Control)
+-- Hotkeys bindings
 
 require("utility")
 require("window")
 require("clipboard")
+require("application-menu")
 
 local super = {"ctrl"}
 local mash = {"ctrl", "cmd"}
 local mashShift = {"ctrl", "cmd", "shift"}
 
--- Vim-style arrows TODO: fix hold down super+HJKL does not repeat the binded function
-hs.hotkey.bind(super, "H", function() hs.eventtap.keyStroke({}, "left") end)
-hs.hotkey.bind(super, "J", function() hs.eventtap.keyStroke({}, "down") end)
-hs.hotkey.bind(super, "K", function() hs.eventtap.keyStroke({}, "up") end)
-hs.hotkey.bind(super, "L", function() hs.eventtap.keyStroke({}, "right") end)
+-- removes delay for repeating keyStroke (default eventtap.keyStroke has sleep between the newKeyEvents)
+local function keyStrokeNoDelay(key)
+  return function()
+    hs.eventtap.event.newKeyEvent({}, string.lower(key), true):post()
+    hs.eventtap.event.newKeyEvent({}, string.lower(key), false):post()
+  end
+end
+hs.hotkey.bind(super, "H", keyStrokeNoDelay("left"), nil, keyStrokeNoDelay("left"))
+hs.hotkey.bind(super, "J", keyStrokeNoDelay("down"), nil, keyStrokeNoDelay("down"))
+hs.hotkey.bind(super, "K", keyStrokeNoDelay("up"), nil, keyStrokeNoDelay("up"))
+hs.hotkey.bind(super, "L", keyStrokeNoDelay("right"), nil, keyStrokeNoDelay("right"))
+
+-- Safari
+hs.hotkey.bind(mash, '1', cycle_safari_agents)
 
 -- Vimperator
 hs.hotkey.bind(mash, "SPACE", function() hs.hints.windowHints() end) -- display hints for all windows from active applications
@@ -23,11 +33,10 @@ hs.hotkey.bind(mash, "H", function() hs.window.focusedWindow():focusWindowWest(n
 hs.hotkey.bind(mash, "L", function() hs.window.focusedWindow():focusWindowEast(nil, true, false) end)
 hs.hotkey.bind(mash, "S", function() resizeLeftRightFull() end)
 hs.hotkey.bind(mash, "D", function() resizeTopBottomFull() end)
--- hs.hotkey.bind(mash, "D", function() centerScreen() end)
 hs.hotkey.bind(mash, "P", function() showClipboardMenuBarAtMouse() end)
 hs.hotkey.bind(mash, "R", function() reloadConfig() end)
 hs.hotkey.bind(mash, "Tab", function() switcher_focused_apps:next() end) -- TODO: map app switch to another hotkey
--- hs.hotkey.bind(mash, "TAB", function() focusPreviousWindow() end) -- TODO: make focus cycle
+-- hs.hotkey.bind(mash, "TAB", function() focusPreviousWindow() end) -- TODO: remap and make focus cycle when reaching the first previous window
 hs.hotkey.bind(mash, "ESCAPE", function() moveToNextScreen() end)
 hs.hotkey.bind(mash, "RETURN", function() toggleFullScreen() end)
 hs.hotkey.bind(mash, "DELETE", "Lock system", function() hs.caffeinate.lockScreen() end)
