@@ -8,15 +8,15 @@ local super = {"ctrl"}
 local mash = {"ctrl", "cmd"}
 local mashShift = {"ctrl", "cmd", "shift"}
 
--- Vim-style arrows
+-- Vim-style arrows TODO: fix hold down super+HJKL does not repeat the binded function
 hs.hotkey.bind(super, "H", function() hs.eventtap.keyStroke({}, "left") end)
 hs.hotkey.bind(super, "J", function() hs.eventtap.keyStroke({}, "down") end)
 hs.hotkey.bind(super, "K", function() hs.eventtap.keyStroke({}, "up") end)
 hs.hotkey.bind(super, "L", function() hs.eventtap.keyStroke({}, "right") end)
 
 -- Vimperator
-hs.hotkey.bind(super, "SPACE", function() hs.hints.windowHints() end) -- display hints for all windows from active applications
-hs.hotkey.bind(mash, "SPACE", function() hs.hints.windowHints(hs.window.focusedWindow():application():allWindows()) end) -- display hints only for windows from focused application
+hs.hotkey.bind(mash, "SPACE", function() hs.hints.windowHints() end) -- display hints for all windows from active applications
+-- hs.hotkey.bind(super, "SPACE", function() hs.hints.windowHints(hs.window.focusedWindow():application():allWindows()) end) -- display hints only for windows from focused application TODO: remap key
 
 -- Window management
 hs.hotkey.bind(mash, "H", function() hs.window.focusedWindow():focusWindowWest(nil, true, false) end)
