@@ -1,0 +1,26 @@
+#!/usr/bin/env perl
+
+# display background colors
+print "Background colors:\n";
+for ($fgbg = 38; $fgbg <= 48; $fgbg +=10) {
+  for ($color = 0; $color < 8; $color++) {
+    print "\x1b[${fgbg};5;${color}m::";
+  }
+  print "\x1b[0m\n";
+
+  for ($color = 8; $color < 16; $color++) {
+    print "\x1b[${fgbg};5;${color}m::";
+  }
+  print "\x1b[0m\n";
+}
+
+print "\n";
+
+# display the grayscale ramp
+print "Grayscale ramp:\n";
+for ($fgbg = 38; $fgbg <= 48; $fgbg +=10) {
+  for ($gray = 8; $gray < 256; $gray+=10) {
+    print "\x1b[${fgbg};2;${gray};${gray};${gray}m::";
+  }
+  print "\x1b[0m\n";
+}

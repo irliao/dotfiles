@@ -1,0 +1,285 @@
+#!/bin/bash
+
+# https://github.com/gnachman/iTermNudge
+#
+# Note that this script is pretty dumb and will blindly pass
+# the content you give it.
+#
+# For usage of the escape codes, see here:
+#    https://www.iterm2.com/documentation-escape-codes.html
+#
+
+# Error codes:
+#
+# 0 All OK
+# 1 Bad arguments, not iTerm2 3.0.0 or later, stdin or stdout not a tty, or other problems.
+
+# Check if the terminal is iTerm2
+function exit_if_not_iTerm2() {
+  # stdin and stdout must be a tty for this function to work.
+  if [ ! -t 0 ] ; then
+    exit 1
+  fi
+  if [ ! -t 1 ] ; then
+    exit 1
+  fi
+
+  # Save the tty's state.
+  saved_stty=$(stty -g)
+
+  # Trap ^C to fix the tty.
+  trap ctrl_c INT
+
+  function ctrl_c() {
+    stty "$saved_stty"
+    exit 1
+  }
+
+  # Read some bytes from stdin. Pass the number of bytes to read as the first argument.
+  function read_bytes() {
+    numbytes="$1"
+    dd bs=1 count=$numbytes 2>/dev/null
+  }
+
+  function read_dsr() {
+    # Reading response to DSR.
+    dsr=""
+    spam=$(read_bytes 2)
+    byte=$(read_bytes 1)
+    while [ "${byte}" != "n" ]; do
+      dsr=${dsr}${byte}
+      byte=$(read_bytes 1)
+    done
+    echo ${dsr}
+  }
+
+  # Extract the terminal name from DSR 1337
+  function terminal() {
+    echo -n "$1" | sed -e 's/ .*//'
+  }
+
+  # Extract the version number from DSR 1337
+  function version() {
+    echo -n "$1" | sed -e 's/.* //'
+  }
+
+  # Enter raw mode and turn off echo so the terminal and I can chat quietly.
+  stty -echo -icanon raw
+
+  # Support for the extension first appears in this version of iTerm2:
+  MIN_VERSION=3.0.0
+
+  # Send iTerm2-proprietary code. Other terminals ought to ignore it (but are
+  # free to use it respectfully).  The response won't start with a 0 so we can
+  # distinguish it from the response to DSR 5. It should contain the terminal's
+  # name followed by a space followed by its version number and be terminated
+  # with an n.
+  echo -n '[1337n'
+
+  # Report device status. Responds with esc [ 0 n. All terminals support this. We
+  # do this because if the terminal will not respond to iTerm2's custom escape
+  # sequence, we can still read from stdin without blocking indefinitely.
+  echo -n '[5n'
+
+  version_string=$(read_dsr)
+  if [ "${version_string}" != "0" -a "${version_string}" != "3" ]; then
+    # Already read DSR 1337. Read DSR 5 and throw it away.
+    dsr=$(read_dsr)
+  else
+    # Terminal didn't respond to the DSR 1337. The response we read is from DSR 5.
+    version_string=""
+  fi
+
+  # Restore the terminal to cooked mode.
+  stty "$saved_stty"
+
+  # Extract the terminal name and version number from the response.
+  version=$(version "${version_string}")
+  term=$(terminal "${version_string}")
+
+  # Make sure the result is what we're looking for
+  test "$term" = ITERM2 -a \( "$version" \> "$MIN_VERSION" -o "$version" = "$MIN_VERSION" \) || exit 1
+}
+
+# Help
+function show_help() {
+  cat << EOF
+Usage:
+    --color
+        Changes the terminal color.
+
+        Use one of the following letters followed by a standard hex color code:
+
+        g = foreground
+        h = background
+        i = bold color
+        j = selection color
+        k = selected text color
+        l = cursor
+        m = cursor text
+
+        For example, to turn the background white:
+        iterm_nudge --color hffffff
+
+    --profile
+        Changes the profile to the supplied name.
+
+        For example, to change profile to "my_profile":
+        iterm_nudge --profile my_profile
+
+
+    --cursor
+        Changes the cursor.
+
+        Use the following codes:
+        0: Block
+        1: Vertical bar
+        2: Underline
+
+        For example, to change cursor to underline:
+        iterm_nudge --cursor 2
+
+    --annotate
+        Adds an annotation beginning at the cursor position and extending to
+        the end of the line. The annotation must be non-empty.
+
+        For example, to add an annotation saying "Hello World!":
+                iterm_nudge --annotate 'Hello World!'
+
+    --badge
+        Sets the badge label.
+
+        For example, to set a badge showing the current directory:
+        iterm_nudge --badge "$(pwd)"
+
+    --force
+        Use this to output the escape codes even if $TERM_PROGRAM isn't
+        set to iTerm. Useful if you're in an ssh session, but you weren't able
+        to pass through TERM_PROGRAM from the client. Does not require a second argument.
+
+    Run the command without any arguments to discover if you're in an iTerm or not.
+    E.g.:
+
+    iterm_nudge && echo "You're in an iTerm session" || echo "You're not running iTerm :("
+
+EOF
+}
+
+# Force if not iTerm?
+force=0
+
+# Extra escaping for TMUX (yuk!)
+pre_esc=""
+post_esc=""
+if [ ! -z "$TMUX" ]; then
+  pre_esc='\ePtmux;\e'
+  post_esc='\e\'
+fi
+
+if [ $# -eq 0 ]; then
+  show_help
+  exit 0
+fi
+
+
+while [ $# -gt 0 ]; do
+  case "$1" in
+    --color|--colour)
+      if [ -z "$2" ]; then
+        show_help
+        exit 1
+      fi
+      color="$2"
+      if [ ${#color} -ne 7 ]; then
+        show_help
+        exit 1
+      fi
+      shift 2
+      ;;
+
+    --profile)
+      if [ -z "$2" ]; then
+        show_help
+        exit 1
+      fi
+      profile="$2"
+      shift 2
+      ;;
+
+    --cursor)
+      if [ -z "$2" ]; then
+        show_help
+        exit 1
+      fi
+      if [ "$2" -eq "$2" ] 2> /dev/null; then
+        cursor="$2"
+      else
+        # Not an integer
+        show_help
+        exit 1
+      fi
+      shift 2
+      ;;
+
+    --annotate)
+      if [ -z "$2" ]; then
+        show_help
+        exit 1
+      fi
+      annotate="$2"
+      shift 2
+      ;;
+
+    --badge)
+      if [ $# -lt 2 ]; then
+        show_help
+        exit 1
+      fi
+      badge="$2"
+      shift 2;
+      ;;
+
+    --force)
+      force=1
+      shift
+      ;;
+
+    --help|-h|-?)
+      show_help
+      exit 0
+      ;;
+
+    *)
+      echo "Unrecognised option ${1}."
+      show_help
+      exit 1
+      ;;
+  esac
+done
+
+# If we're not in iTerm2 (or we're not forcing things) exit with an error.
+if [ "$force" -ne 1 ]; then
+  exit_if_not_iTerm2
+fi
+
+if [ ! -z ${color+x} ]; then
+  printf "${pre_esc}\e]P${color}\e\\"
+fi
+
+if [ ! -z ${profile+x} ]; then
+  printf "${pre_esc}\e]1337;SetProfile=${profile}\a${post_esc}"
+fi
+
+if [ ! -z ${cursor+x} ]; then
+  printf "${pre_esc}\e]1337;CursorShape=${cursor}\a${post_esc}"
+fi
+
+if [ ! -z ${annotate+x} ]; then
+  printf "${pre_esc}\e]1337;AddAnnotation=${annotate}\a${post_esc}"
+fi
+
+if [ ! -z ${badge+x} ]; then
+  printf "${pre_esc}\e]1337;SetBadgeFormat=%s\a${post_esc}" $(echo "$badge" | base64)
+fi
+
+exit 0

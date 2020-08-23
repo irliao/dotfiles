@@ -1,0 +1,209 @@
+; default user
+[user]
+	name = Ryan Liao
+	email = ianryanliao@gmail.com
+
+; TODO: fix, not sourcing ~/.gitconfig_work
+; path can be full or relative to where this gitconfig is at (file at $PWD/ but symlinked to ~/)
+; [includeIf "gitdir:~/devel/"]
+;   path = .gitconfig_work
+
+; TODO: move this to a separate file
+; used only by git-open to open project repo in browser
+; [github]
+;   user = irliao
+
+[commit]
+  verbose = true
+  ; template = ~/.gitcommit_message
+
+[push]
+  default = simple
+
+[credential]
+	helper = osxkeychain
+
+[merge]
+  tool = vimdiff
+  conflictstyle = diff3 # set editor to display BASE(BA), LOCAL(LO), and REMOTE(RE) changes
+  ; prompt = false # no prompt before launching mergetool
+
+[core]
+  fileMode = false # ignore file mode difference
+  autocrlf = input # better cross-platform line ending handling
+  whitespace=fix,-indent-with-non-tab,trailing-space,cr-at-eol
+  excludesfile = ~/.gitignore_global
+  ; autosetuprebase = always # pull always run with --rebase
+
+[commit]
+	verbose = true
+
+[color]
+  interactive = auto
+  pager = true
+  ui = true
+
+[color "status"]
+  added = green ; added but not committed
+  changed = blue ; changed but not added in the index
+  untracked = white ; not tracked
+  deleted = red ; removed from index
+
+[color "branch"]
+  current = cyan
+  local = white
+  remote = yellow
+
+[color "diff"]
+    meta = white bold
+    frag = yellow bold
+    new = green bold
+    old = red bold
+    whitespace = white bold
+    commit = cyan bold
+
+[color "diff-highlight"]
+	oldNormal = red bold
+	oldHighlight = red bold 52
+	newNormal = green bold
+	newHighlight = green bold 22
+
+[web]
+    browser = open
+
+[instaweb]
+  httpd= lighttpd
+  ; port=4000 ; default port is 1234
+  browser = open
+
+[difftool]
+    prompt = false
+
+[diff]
+    tool = vimdiff
+    indentHeuristic = true
+
+[log]
+    date = local
+
+[rerere]
+    enabled = true
+
+[pager]
+    color = true
+    diff = diff-so-fancy | less --tabs=2 -RFX
+    show = diff-so-fancy | less --tabs=2 -RFX
+    ; diff and show below will fill up entire window by replacing every un
+    ; diff = diff-so-fancy | less --tabs=2 --pattern='^(added|deleted|modified): '
+    ; show = diff-so-fancy | less --tabs=2 --pattern='^(added|deleted|modified): '
+
+[diff-so-fancy]
+    stripLeadingSymbols = false
+    markEmptyLines = false
+
+[status]
+    color = true
+    submodulesummary = true
+    showUntrackedFiles = all
+    submodulesummary = true
+
+[help]
+    autocorrect = 1
+
+; TODO: integrate ~/.dotfiles/config/git/gitattributes
+
+; TODO: uncomment only after figuring out how lfs and media works
+; [filter "lfs"] ; Large File Storage
+; 	clean = git-lfs clean -- %f
+; 	smudge = git-lfs smudge -- %f
+; 	process = git-lfs filter-process
+; 	required = true
+; [filter "media"]
+; 	clean = git media clean %f
+; 	required = true
+; 	smudge = git media smudge %f
+
+; TODO: clean up aliases
+; TODO: add alias for undoing a commit and redo from: https://stackoverflow.com/questions/927358/how-to-undo-the-last-commits-in-git?rq=1
+[alias]
+  alias-ls = !git config -l | grep alias | cut -c 7-
+	whoami = !sh -c 'git log -i -1 --author=\"$1\" --pretty=\"format:%an <%ae>\"' -
+  author = config user.name
+  url = remote show origin
+  ls = ls-files
+  st = status -sb
+  ci = commit
+  cia = commit -a
+  cm = commit -m
+  co = checkout
+  br = branch -vv
+  rb = rebase
+  df = diff --color-words='[^[:space:]]'
+  sw = show --color-words='[^[:space:]]'
+  prd = rev-parse --show-toplevel ; return root directory name
+  backup = "!sh -c 'git stash save $(date): $0 && git stash apply stash@{0};'" ; backup current changes into stash with timestamp
+  unstash = stash pop ; apply last stash, then drop stash
+  web-start = instaweb --start
+  web-stop = instaweb --stop
+  web-open = web--browse --browser=open "http://localhost:1234"
+  add-all = add -A ; stages all
+  add-without-delete = add . ; stage new or modified, without deleted (do not stage 'rm' actions')
+  add-without-new = add -u ; stage modified or deleted, without new (do not stage untracked or new file)
+  diff-ls = diff --name-only ; show changed files against a branch
+  diff-prestage = diff ; show diffs for changes not staged yet
+  diff-precommit = diff --cached ; show diffs for changes not committed yet
+  last-commit = log -n1 -p ; show latest commit in current HEAD, same as 'git show'
+  ; diff-staged = diff --staged ; same as diff --cached
+  branches = branch -l ; show all local branches
+  branch-all = branch -a ; show all local and remote branches
+  branch-delete = branch -d; delete branch
+  branch-delete-force = branch -D; delete branch for sure
+  stashes = stash list ; show all stashes
+  remotes = remote -v ; show all remotes
+  branch-rename = branch -m ; rename current branch name to <newname>
+  branch-new = checkout -b
+  discard = checkout -- ; discard changes for file
+  amend = commit --amend ; modify previous commit's message
+  append = commit --amend --no-edit ; add/stage all changes, then commit with previous committed changes and message # TODO: investigate why this still adds extra commit with same message as last commit
+  ; commit-amend-all = commit -a --amend ; add all changes onto previous commit, then open editor to modify commit message to use
+  ; commit-amend = commit --amend ; add added/staged changes onto previous commit
+  unstage = reset -q HEAD -- ; unadd/unstage specified filename, should work the same for reset without options
+  unstage-all = reset -q HEAD ; unadd/unstage all staged, but not committed files
+  unstage-change = reset -p ; unadd/unstage each change interactively in all staged, but not committed files
+  untrack = rm -r --cached ; remove file from git's monitoring
+  uncommit = reset --mixed -- ; uncommit file
+  uncommit-all = reset --mixed HEAD~ ; uncommit all committed files
+  uncommit-hash = reset --soft ; <commit hash>
+  uncommit-last = reset --soft HEAD^ ; undo last commit
+  sanitize = rebase --interactive ; edit commit messages before push
+  ; graph = log --graph --oneline --decorate=short --branches='*'
+  log-pretty = log --format=format:'%C(auto)%h%Creset %s%C(auto)%d%Creset %C(yellow)<%an>%Creset' ; similar to log--decorate --oneline, but show ref name after commit message
+  log-history = log --date=format:'%c' --format=format:'%C(blue)%cd%Creset %s %C(yellow)<%cN>%Creset %C(auto)%d' ; similar to log--decorate --oneline, but show ref name after commit message
+  log-graph = log --graph --branches --remotes --tags --format=format:'%C(auto)%h%Creset - %s %C(yellow)<%cN>%Creset %C(blue)%cd%Creset %C(green)%D' --date-order
+  log-standup = "!git log --since yesterday --pretty=short --author `git config user.email`"
+  log-verbose = log --date=format:'%c' --format=format:'%C(auto)%p -> %h%Creset %s (%Cblue%cN%Creset, %C(yellow)%cd%Creset) %C(green)%D' ; show last commits with time
+  log-diffs = log -p ; show logs with diffs for each commit not pushed
+  committed-logs = log origin/master..HEAD ; log committed but not pushed changes
+  log-committed = log origin/master..HEAD ; log committed changes
+  log-file-history = log --follow ; lists version history for a file, including renames
+  ; ls-modified = diff --name-only HEAD ; show modified, but not staged filenames
+  ; non-added-files = ; TODO: implement showing only filenames with non-added changes
+  committed-files = diff origin/master..HEAD --name-only ; show committed, but not pushed filenames
+  committed-files-from = diff-tree --no-commit-id --name-only -r ; show files modified for a specified commit hash
+  add-ls = diff --staged --name-only ; show staged, but not committed filenames
+  ; non-added-files = ; TODO: implement showing only filenames with non-added changes
+  commit-ls = diff origin/master..HEAD --name-only ; show committed, but not pushed filenames
+  ls-committed-from-hash = diff-tree --no-commit-id --name-only -r ; show files modified for a specified commit hash
+  ls-ignored = ls-files --other --ignored --exclude-standard ; lists all ignored files in this project
+  ; diff-modified = diff HEAD ; show modified, but not staged changes
+  ; non-added-diffs = ; TODO: implement showing only diffs with non-added changes
+  commit-diff = diff origin/master..HEAD ; show committed, but not pushed changes
+  branche-diff= !sh -c 'git diff $1...$2' ; shows content differences between two branches
+  diff-committed = diff origin/master..HEAD ; show committed, but not pushed changes
+  diff-committed = diff origin/master..HEAD ; show committed, but not pushed changes
+  diff-unified-view = diff --color-words='.'
+  diff-ignore-space = diff --ignore-space-change
+  stat-commits = shortlog --summary --numbered ; log total commits by author
+  stat-diff-added = diff --staged --stat ; show lines for staged, but not committed changes
+  stat-diff-committed = diff origin/master..HEAD --stat ; show lines for committed, but not pushed changes
+

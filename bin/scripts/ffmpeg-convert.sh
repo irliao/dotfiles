@@ -1,0 +1,66 @@
+#!/usr/bin/env bash
+
+# set ffmpeg options
+case $1 in
+  ipad|iPad)
+    OPTIONS="-acodec aac -strict -2 -ac 2 -ab 160k -s 1024x768 -vcodec libx264 -b 1200k"
+    EXT=".iPad.mp4"
+    ;;
+  mjpeg)
+    OPTIONS="-vcodec mjpeg -qscale 1 -an"
+    EXT=".MJPEG.avi"
+    ;;
+  h264)
+    OPTIONS="-qscale 1 -vcodec libx264"
+    EXT=".H264.mp4"
+    ;;
+  gif)
+    BEFORE="mkdir output"
+    OPTIONS="-vf scale=640:-1 -r 10 output/gif%05d.png"
+    AFTER="convert +repage -loop 0 output/*.png animation.gif"
+    CLEANUP="rm -rf output"
+    ;;
+  mp3)
+    OPTIONS="-f mp3 -acodec libmp3lame -ab 320000 -ar 44100"
+    EXT=".mp3"
+    ;;
+  wav)
+    OPTIONS="-ar 44100"
+    EXT=".wav"
+    ;;
+  remove-audio)
+    OPTIONS="-vcodec copy -an"
+    EXT=".no-audio.mp4"
+    ;;
+  *)
+    echo "Usage: $0 [preset] [files]"
+    ;;
+esac
+
+# remove first attribute given from command line
+shift
+
+# run BEFORE if set
+if [[ -n $BEFORE ]]; then
+  $($BEFORE)
+fi
+
+# convert files
+for f in "$@"
+do
+  if [[ -n $EXT ]]; then
+    nice -n 10 ffmpeg -threads 0 -i "${f}" $OPTIONS "${f%.*}$EXT"
+  else
+    nice -n 10 ffmpeg -threads 0 -i "${f}" $OPTIONS
+  fi
+done
+
+# run AFTER if set
+if [[ -n $AFTER ]]; then
+  $($AFTER)
+fi
+
+# run CLEANUP if set
+if [[ -n $CLEANUP ]]; then
+  $($CLEANUP)
+fi

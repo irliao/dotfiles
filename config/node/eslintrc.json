@@ -1,0 +1,28 @@
+{
+  "env": {
+    "browser": true,
+    "node": true,
+    "mocha": true,
+    "es6": true
+  },
+  "ecmaFeatures": {
+    "modules": true
+  },
+  "settings": {
+    "ecmascript": 6
+  },
+  "rules": {
+    "indent": [2, 2],
+    "quotes": [2, "single", "avoid-escape"],
+    "linebreak-style": [2, "unix"],
+    "strict": 0,
+    "key-spacing": 0,
+    "no-multi-spaces": 0,
+    "no-unused-vars": 1,
+    "prefer-const": 0
+  },
+  "globals": {
+    "expect": false
+  },
+  "extends": "eslint:recommended"
+}

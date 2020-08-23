@@ -1,0 +1,34 @@
+*.swp
+*.DS_Store
+.DS_Store
+
+config/base16-shell/
+config/configstore/
+config/filezilla/
+config/hub/
+config/ranger/
+config/robomongo/
+config/workshopper/
+config/homebrew/Brewfile.lock.json
+
+config/karabiner/automatic_backups/*
+config/karabiner/assets/*
+config/karabiner/examples/*
+
+hammerspoon/local_profile.lua
+
+.idea/
+node_modules/
+lbin/
+
+vim/.netrwhist
+vim/bundle/
+vim/tmp/
+
+tmux/plugins/
+
+# Files that might appear on external disk
+.Spotlight-V100
+.Trashes
+
+# .*.s[a-w][a-z] # TODO: research this syntax

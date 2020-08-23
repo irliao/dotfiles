@@ -1,0 +1,6 @@
+# Ag Ignores
+
+.DS_Store
+cache
+node_modules
+tmp

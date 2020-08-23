@@ -1,0 +1,694 @@
+<!-- Archive -->
+    <item>
+        <name>Dev hotkey override for Safari</name>
+		<appendix>* When enabled, Command + Q will not quit Safari</appendix>
+		<appendix>* When enabled, Option + Q will quit Safari</appendix>
+		<appendix>* For persisting Safari Extension installed unsigned</appendix>
+		<identifier>private.debug.safari</identifier>
+		<only>SAFARI</only>
+		<autogen>
+			--KeyToKey--
+			KeyCode::Q, ModifierFlag::COMMAND_L, 
+			KeyCode::W, ModifierFlag::COMMAND_L
+		</autogen>
+		<autogen>
+			--KeyToKey--
+			KeyCode::Q, ModifierFlag::OPTION_L,
+			KeyCode::Q, ModifierFlag::COMMAND_R
+		</autogen>
+    </item> 
+
+	<item>
+		<name>Command_R + HJKL for Cursor (LDUR) Direction</name>
+		<identifier>private.command.right.hjkl</identifier>
+		<autogen>
+			--KeyToKey--
+			KeyCode::H, ModifierFlag::VM_SUPER, KeyCode::CURSOR_LEFT, ModifierFlag::NONE
+		</autogen>
+		<autogen>
+			--KeyToKey--
+			KeyCode::J, ModifierFlag::VM_SUPER, KeyCode::CURSOR_DOWN, ModifierFlag::NONE
+		</autogen>
+		<autogen>
+			--KeyToKey--
+			KeyCode::K, ModifierFlag::VM_SUPER, KeyCode::CURSOR_UP, ModifierFlag::NONE
+		</autogen>
+		<autogen>
+			--KeyToKey--
+			KeyCode::L, ModifierFlag::VM_SUPER, KeyCode::CURSOR_RIGHT, ModifierFlag::NONE
+		</autogen>
+	</item>
+
+<!-- App opener shortcut keys -->
+	<item>
+		<name>Super + Key to open Apps</name>
+		<appendix>* Super + [A,S,W,Q] to [left, right, full, hide] screen from Hammerspoon</appendix>
+		<appendix>* Super + C to open Safari</appendi>
+		<appendix>* Super + E to open Sublime</appendi>
+		<appendix>* Super + F to open Finder</appendi>
+		<appendix>* Super + M to open MacVim</appendi>
+		<appendix>* Super + P to open 1Password</appendi>
+		<appendix>* Super + R to open Evernote</appendi>
+		<appendix>* Super + T to open Terminal</appendi>
+		<appendix>* Super + , to open System Preferences</appendix>
+		<identifier>private.open_app</identifier>
+		<autogen>
+			--KeyToKey--
+			KeyCode::C, ModifierFlag::VM_SUPER, KeyCode::VK_OPEN_URL_APP_Safari, ModifierFlag::NONE
+		</autogen>
+		<autogen>
+			--KeyToKey--
+			KeyCode::E, ModifierFlag::VM_SUPER, KeyCode::VK_OPEN_URL_APP_Sublime, ModifierFlag::NONE
+		</autogen>
+		<autogen>
+			--KeyToKey--
+			KeyCode::F, ModifierFlag::VM_SUPER, KeyCode::VK_OPEN_URL_APP_Finder, ModifierFlag::NONE
+        </autogen>
+        <autogen>
+			--KeyToKey--
+			KeyCode::M, ModifierFlag::VM_SUPER, KeyCode::VK_OPEN_URL_APP_Messenger, ModifierFlag::NONE
+		</autogen>
+	    <autogen>
+			--KeyToKey--
+			KeyCode::M, ModifierFlag::VM_SUPER, KeyCode::VK_OPEN_URL_APP_MacVim, ModifierFlag::NONE
+		</autogen>
+	    <autogen>
+			--KeyToKey--
+			KeyCode::P, ModifierFlag::VM_SUPER, KeyCode::VK_OPEN_URL_APP_1Password, ModifierFlag::NONE
+		</autogen>
+		<autogen>
+			--KeyToKey--
+			KeyCode::R, ModifierFlag::VM_SUPER, KeyCode::VK_OPEN_URL_APP_Evernote, ModifierFlag::NONE
+		</autogen>
+		<autogen>
+			--KeyToKey--
+			KeyCode::T, ModifierFlag::VM_SUPER, KeyCode::VK_OPEN_URL_APP_Terminal, ModifierFlag::NONE
+		</autogen>
+		<autogen>
+			--KeyToKey--
+			KeyCode::COMMA, ModifierFlag::VM_SUPER, KeyCode::VK_OPEN_URL_APP_SystemPreferences, ModifierFlag::NONE
+		</autogen>
+	</item>
+
+	<item>
+		<name>Super + Key to open Dev apps</name>
+		<appendix>* Super + X to open WebStorm</appendix>
+		<identifier>private.super_app.dev</identifier>
+		<autogen>
+			--KeyToKey--
+			KeyCode::X, ModifierFlag::VM_SUPER, KeyCode::VK_OPEN_URL_APP_Webstorm, ModifierFlag::NONE
+		</autogen>
+	</item>	
+
+<!---------------------------------------------------->
+
+    <!-- Config only -->
+    <item>
+      <name>Config only</name>
+      <item>
+        <name>Core</name>
+        <identifier>remap.samples_config</identifier>
+        <appendix>A to 1 if samples_config_mode1 == active</appendix>
+        <appendix>B to 2 if samples_config_mode1 or samples_config_mode2 == active</appendix>
+        <appendix>A to 3 if samples_config_mode1 != active</appendix>
+        <appendix>B to 4 if samples_config_mode1 and samples_config_mode2 != active</appendix>
+        <appendix>C to 5</appendix>
+        <block>
+          <config_only>option.samples_config_mode1</config_only>
+          <autogen>__KeyToKey__ KeyCode::A, KeyCode::KEY_1</autogen>
+        </block>
+        <block>
+          <config_only>option.samples_config_mode1, option.samples_config_mode2</config_only>
+          <autogen>__KeyToKey__ KeyCode::B, KeyCode::KEY_2</autogen>
+        </block>
+        <block>
+          <config_not>option.samples_config_mode1</config_not>
+          <autogen>__KeyToKey__ KeyCode::A, KeyCode::KEY_3</autogen>
+        </block>
+        <block>
+          <config_not>option.samples_config_mode1, option.samples_config_mode2</config_not>
+          <autogen>__KeyToKey__ KeyCode::B, KeyCode::KEY_4</autogen>
+        </block>
+        <block>
+          <autogen>__KeyToKey__ KeyCode::C, KeyCode::KEY_5</autogen>
+        </block>
+      </item>
+      <item>
+        <name>Config only mode1</name>
+        <identifier vk_config="true">option.samples_config_mode1</identifier>
+      </item>
+      <item>
+        <name>Config only mode2</name>
+        <identifier>option.samples_config_mode2</identifier>
+      </item>
+      <item><name>──────────────────────────────</name></item>
+      <item>
+        <name>With KEYTOKEY_BEFORE_KEYDOWN, KEYTOKEY_AFTER_KEYUP</name>
+        <appendix>Space to Tab (And Before A, After B)</appendix>
+        <appendix>(If you type Space key, a sequence of "A,Tab,B" is fired.)</appendix>
+        <identifier>remap.samples_config_before_keydown</identifier>
+
+        <config_not>option.samples_config_mode1</config_not>
+        <autogen>
+          __KeyToKey__ KeyCode::SPACE, KeyCode::TAB,
+          Option::KEYTOKEY_BEFORE_KEYDOWN, KeyCode::VK_CONFIG_FORCE_ON_option_samples_config_mode1, KeyCode::A,
+          Option::KEYTOKEY_AFTER_KEYUP, KeyCode::VK_CONFIG_FORCE_OFF_option_samples_config_mode1, KeyCode::B
+        </autogen>
+      </item>
+    </item>
+
+		<!-- Hammerspoon -->
+<!-- 	<vkopenurldef>
+		<name>KeyCode::VK_OPEN_URL_HS_Window_FullScreen</name>
+		<url>hammerspoon://test1?someParam=hello</url>
+	</vkopenurldef> -->
+
+	<!-- Left/Right Shift requires keys from opposite side -->
+	<item>
+	    <name>Use the correct shift keys.</name>
+	    <identifier>private.correct_shift_keys</identifier>
+
+	    <autogen>--KeyToKey-- KeyCode::Q, ModifierFlag::SHIFT_L, KeyCode::VK_NONE</autogen>
+	    <autogen>--KeyToKey-- KeyCode::W, ModifierFlag::SHIFT_L, KeyCode::VK_NONE</autogen>
+	    <autogen>--KeyToKey-- KeyCode::E, ModifierFlag::SHIFT_L, KeyCode::VK_NONE</autogen>
+	    <autogen>--KeyToKey-- KeyCode::R, ModifierFlag::SHIFT_L, KeyCode::VK_NONE</autogen>
+	    <autogen>--KeyToKey-- KeyCode::T, ModifierFlag::SHIFT_L, KeyCode::VK_NONE</autogen>
+	    <autogen>--KeyToKey-- KeyCode::A, ModifierFlag::SHIFT_L, KeyCode::VK_NONE</autogen>
+	    <autogen>--KeyToKey-- KeyCode::S, ModifierFlag::SHIFT_L, KeyCode::VK_NONE</autogen>
+	    <autogen>--KeyToKey-- KeyCode::D, ModifierFlag::SHIFT_L, KeyCode::VK_NONE</autogen>
+	    <autogen>--KeyToKey-- KeyCode::F, ModifierFlag::SHIFT_L, KeyCode::VK_NONE</autogen>
+	    <autogen>--KeyToKey-- KeyCode::G, ModifierFlag::SHIFT_L, KeyCode::VK_NONE</autogen>
+	    <autogen>--KeyToKey-- KeyCode::Z, ModifierFlag::SHIFT_L, KeyCode::VK_NONE</autogen>
+	    <autogen>--KeyToKey-- KeyCode::X, ModifierFlag::SHIFT_L, KeyCode::VK_NONE</autogen>
+	    <autogen>--KeyToKey-- KeyCode::C, ModifierFlag::SHIFT_L, KeyCode::VK_NONE</autogen>
+	    <autogen>--KeyToKey-- KeyCode::V, ModifierFlag::SHIFT_L, KeyCode::VK_NONE</autogen>
+
+	    <autogen>--KeyToKey-- KeyCode::Y,         ModifierFlag::SHIFT_R, KeyCode::VK_NONE</autogen>
+	    <autogen>--KeyToKey-- KeyCode::U,         ModifierFlag::SHIFT_R, KeyCode::VK_NONE</autogen>
+	    <autogen>--KeyToKey-- KeyCode::I,         ModifierFlag::SHIFT_R, KeyCode::VK_NONE</autogen>
+	    <autogen>--KeyToKey-- KeyCode::O,         ModifierFlag::SHIFT_R, KeyCode::VK_NONE</autogen>
+	    <autogen>--KeyToKey-- KeyCode::P,         ModifierFlag::SHIFT_R, KeyCode::VK_NONE</autogen>
+	    <autogen>--KeyToKey-- KeyCode::H,         ModifierFlag::SHIFT_R, KeyCode::VK_NONE</autogen>
+	    <autogen>--KeyToKey-- KeyCode::J,         ModifierFlag::SHIFT_R, KeyCode::VK_NONE</autogen>
+	    <autogen>--KeyToKey-- KeyCode::K,         ModifierFlag::SHIFT_R, KeyCode::VK_NONE</autogen>
+	    <autogen>--KeyToKey-- KeyCode::L,         ModifierFlag::SHIFT_R, KeyCode::VK_NONE</autogen>
+	    <autogen>--KeyToKey-- KeyCode::SEMICOLON, ModifierFlag::SHIFT_R, KeyCode::VK_NONE</autogen>
+	    <autogen>--KeyToKey-- KeyCode::N,         ModifierFlag::SHIFT_R, KeyCode::VK_NONE</autogen>
+	    <autogen>--KeyToKey-- KeyCode::M,         ModifierFlag::SHIFT_R, KeyCode::VK_NONE</autogen>
+	    <autogen>--KeyToKey-- KeyCode::COMMA,     ModifierFlag::SHIFT_R, KeyCode::VK_NONE</autogen>
+	    <autogen>--KeyToKey-- KeyCode::DOT,       ModifierFlag::SHIFT_R, KeyCode::VK_NONE</autogen>
+	    <autogen>--KeyToKey-- KeyCode::QUOTE,     ModifierFlag::SHIFT_R, KeyCode::VK_NONE</autogen>
+	</item>
+
+	
+	<item>
+		<name>Remap Fn to Hyper or Fn</name>
+		<identifier>private.fn.hyper</identifier>
+		<autogen>
+			--KeyOverlaidModifier--
+			KeyCode::FN, 
+			KeyCode::COMMAND_L,
+			ModifierFlag::OPTION_L | ModifierFlag::CONTROL_L | ModifierFlag::SHIFT_L,
+			KeyCode::FN
+		</autogen>
+	</item>
+	<item>
+		<name>CapsLock to Super or Esc</name>
+		<identifier>private.capslock.super.escape</identifier>
+		<autogen>
+			--KeyOverlaidModifier--
+			KeyCode::F19, <!-- in Seil, CapsLock is mapped to 80, which is F19 -->
+			KeyCode::COMMAND_L,
+			ModifierFlag::OPTION_L | ModifierFlag::CONTROL_L,
+			KeyCode::ESCAPE
+		</autogen>
+	</item>
+
+<!-- Webs  -->
+<vkopenurldef>
+	<name>KeyCode::VK_OPEN_URL_WEB_github</name>
+	<url>https://github.com</url>
+</vkopenurldef>
+<vkopenurldef>
+	<name>KeyCode::VK_OPEN_URL_WEB_karabiner</name>
+	<url>https://pqrs.org/osx/karabiner/</url>
+</vkopenurldef>
+<vkopenurldef>
+	<name>KeyCode::VK_OPEN_URL_WEB_fbmessages</name>
+	<url>https://facebook.com/messages</url>
+</vkopenurldev>
+<vkopenurldef>
+	<name>KeyCode::VK_OPEN_URL_WEB_gmail</name>
+	<url>https://gmail.com</url>
+</vkopenurldev>
+<vkopenurldef>
+	<name>KeyCode::VK_OPEN_URL_WEB_google</name>
+	<url>https://google.com</url>
+</vkopenurldev>
+
+<vkopenurldef>
+	<name>KeyCode::VK_OPEN_URL_APP_Appstore</name>
+	<url type="file">/Applications/App Store.app</url>
+</vkopenurldef>
+<vkopenurldef>
+	<name>KeyCode::VK_OPEN_URL_APP_Evernote</name>
+	<url type="file">/Applications/Evernote.app</url>
+</vkopenurldef>
+
+<item>
+	<name>Fn - ` in Terminal to switch tabs (right)</name>
+	<appendix>Command + ` for next (right) tab</appendix>
+	<identifier>private.terminal.next.tab</identifier>
+	<only> TERMINAL </only>
+
+	<autogen>
+		--KeyToKey--
+		KeyCode::BACKQUOTE, ModifierFlag::COMMAND_L, ModifierFlag::OPTION_L, ModifierFlag::CONTROL_L, ModifierFlag::SHIFT_L,
+		KeyCode::CURSOR_RIGHT, ModifierFlag::COMMAND_L, ModifierFlag::SHIFT_L
+	</autogen>
+</item>
+
+<item>
+	<name>Control/Option ` in Terminal to switch tabs</name>
+	<appendix>Control/Option + ` for prev/next (left/right) tab</appendix>
+	<identifier>private.terminal.next.tab</identifier>
+	<only> TERMINAL </only>
+
+	<autogen>
+		--KeyToKey--
+		KeyCode::BACKQUOTE, ModifierFlag::OPTION_L,
+		KeyCode::CURSOR_RIGHT, ModifierFlag::COMMAND_L, ModifierFlag::SHIFT_L
+	</autogen>
+
+	<autogen>
+		--KeyToKey--
+		KeyCode::BACKQUOTE, ModifierFlag::CONTROL_L,
+		KeyCode::CURSOR_LEFT, ModifierFlag::COMMAND_L, ModifierFlag::SHIFT_L
+	</autogen>
+</item>
+
+<item>
+	<name>Command-Q Twice to Quit Finder</name>
+	<appendix>Cmd-Q twice to quit Finder</appendix>
+	<identifier>private.finder.cmd-q</identifier>
+	<only> FINDER </only>
+	<autogen>
+		__DoublePressModifier__
+		KeyCode::Q, MODIFIERFLAG_EITHER_LEFT_OR_RIGHT_COMMAND | ModifierFlag::NONE,
+		KeyCode::VK_NONE,
+		KeyCode::Q, MODIFIERFLAG_EITHER_LEFT_OR_RIGHT_COMMAND
+	</autogen>
+</item>
+
+
+<item>
+	<name>Tap shift to move over words</name>
+	<appendix>Shift keys move the cursor one word forward or backward when pressed alone. When used with other keys they act as normal shifts.</appendix>
+	<identifier>private.shifts_to_forward_backward_word</identifier>
+
+	<autogen>--KeyOverlaidModifier-- KeyCode::SHIFT_R, ModifierFlag::SHIFT_R | ModifierFlag::NONE, KeyCode::SHIFT_R, KeyCode::CURSOR_RIGHT, ModifierFlag::OPTION_L</autogen>
+	<autogen>--KeyOverlaidModifier-- KeyCode::SHIFT_L, ModifierFlag::SHIFT_L | ModifierFlag::NONE, KeyCode::SHIFT_L, KeyCode::CURSOR_LEFT, ModifierFlag::OPTION_L</autogen>
+
+</item>
+
+<!-- only used to train muscle to distinguish Shift_L vs Shift_R -->
+<item> 
+	<name>Use the correct shift keys.</name>
+	<identifier>private.correct_shift_keys</identifier>
+
+	<autogen>--KeyToKey-- KeyCode::Q, ModifierFlag::SHIFT_L, KeyCode::VK_NONE</autogen>
+	<autogen>--KeyToKey-- KeyCode::W, ModifierFlag::SHIFT_L, KeyCode::VK_NONE</autogen>
+	<autogen>--KeyToKey-- KeyCode::E, ModifierFlag::SHIFT_L, KeyCode::VK_NONE</autogen>
+	<autogen>--KeyToKey-- KeyCode::R, ModifierFlag::SHIFT_L, KeyCode::VK_NONE</autogen>
+	<autogen>--KeyToKey-- KeyCode::T, ModifierFlag::SHIFT_L, KeyCode::VK_NONE</autogen>
+	<autogen>--KeyToKey-- KeyCode::A, ModifierFlag::SHIFT_L, KeyCode::VK_NONE</autogen>
+	<autogen>--KeyToKey-- KeyCode::S, ModifierFlag::SHIFT_L, KeyCode::VK_NONE</autogen>
+	<autogen>--KeyToKey-- KeyCode::D, ModifierFlag::SHIFT_L, KeyCode::VK_NONE</autogen>
+	<autogen>--KeyToKey-- KeyCode::F, ModifierFlag::SHIFT_L, KeyCode::VK_NONE</autogen>
+	<autogen>--KeyToKey-- KeyCode::G, ModifierFlag::SHIFT_L, KeyCode::VK_NONE</autogen>
+	<autogen>--KeyToKey-- KeyCode::Z, ModifierFlag::SHIFT_L, KeyCode::VK_NONE</autogen>
+	<autogen>--KeyToKey-- KeyCode::X, ModifierFlag::SHIFT_L, KeyCode::VK_NONE</autogen>
+	<autogen>--KeyToKey-- KeyCode::C, ModifierFlag::SHIFT_L, KeyCode::VK_NONE</autogen>
+	<autogen>--KeyToKey-- KeyCode::V, ModifierFlag::SHIFT_L, KeyCode::VK_NONE</autogen>
+
+	<autogen>--KeyToKey-- KeyCode::Y,         ModifierFlag::SHIFT_R, KeyCode::VK_NONE</autogen>
+	<autogen>--KeyToKey-- KeyCode::U,         ModifierFlag::SHIFT_R, KeyCode::VK_NONE</autogen>
+	<autogen>--KeyToKey-- KeyCode::I,         ModifierFlag::SHIFT_R, KeyCode::VK_NONE</autogen>
+	<autogen>--KeyToKey-- KeyCode::O,         ModifierFlag::SHIFT_R, KeyCode::VK_NONE</autogen>
+	<autogen>--KeyToKey-- KeyCode::P,         ModifierFlag::SHIFT_R, KeyCode::VK_NONE</autogen>
+	<autogen>--KeyToKey-- KeyCode::H,         ModifierFlag::SHIFT_R, KeyCode::VK_NONE</autogen>
+	<autogen>--KeyToKey-- KeyCode::J,         ModifierFlag::SHIFT_R, KeyCode::VK_NONE</autogen>
+	<autogen>--KeyToKey-- KeyCode::K,         ModifierFlag::SHIFT_R, KeyCode::VK_NONE</autogen>
+	<autogen>--KeyToKey-- KeyCode::L,         ModifierFlag::SHIFT_R, KeyCode::VK_NONE</autogen>
+	<autogen>--KeyToKey-- KeyCode::SEMICOLON, ModifierFlag::SHIFT_R, KeyCode::VK_NONE</autogen>
+	<autogen>--KeyToKey-- KeyCode::N,         ModifierFlag::SHIFT_R, KeyCode::VK_NONE</autogen>
+	<autogen>--KeyToKey-- KeyCode::M,         ModifierFlag::SHIFT_R, KeyCode::VK_NONE</autogen>
+	<autogen>--KeyToKey-- KeyCode::COMMA,     ModifierFlag::SHIFT_R, KeyCode::VK_NONE</autogen>
+	<autogen>--KeyToKey-- KeyCode::DOT,       ModifierFlag::SHIFT_R, KeyCode::VK_NONE</autogen>
+	<autogen>--KeyToKey-- KeyCode::QUOTE,     ModifierFlag::SHIFT_R, KeyCode::VK_NONE</autogen>
+</item>
+
+
+<item>
+	<name>CapsLock-A as Ctrl-A in Term</name>
+	<appendix>CapsLock-A (Super-A) mapped to Ctrl-A for TMux</appendix>
+	<identifier>private.capslock-a.ctrl-a</identifier>
+
+	<autogen>
+		--KeyToKey--
+		KeyCode::A, ModifierFlag::COMMAND_L | ModifierFlag::OPTION_L | ModifierFlag::CONTROL_L | ModifierFlag::NONE,
+		KeyCode::A, ModifierFlag::CONTROL_L | ModifierFlag::NONE
+	</autogen>
+
+	<autogen>
+		--KeyToKey--
+		KeyCode::A, ModifierFlag::CONTROL_L | ModifierFlag::NONE,
+		KeyCode::A, ModifierFlag::COMMAND_L | ModifierFlag::OPTION_L | ModifierFlag::CONTROL_L | ModifierFlag::NONE
+	</autogen>
+</item>
+
+<!--src : http://sayzlim.net/disable-sysdiagnose-key-combination/ -->
+<item>
+	<name>Disable Sysdiagnose DOT Key</name>
+	<appendix>Disable Sysdiagnose DOT Key</appendix>
+	<identifier>private.disable_sysdiagnose_dot_key</identifier>
+	<autogen>
+		--KeyToKey--
+		KeyCode::DOT,
+		ModifierFlag::OPTION_L | ModifierFlag::SHIFT_L | ModifierFlag::CONTROL_L | ModifierFlag::COMMAND_L,
+		KeyCode::VK_NONE
+	</autogen>
+</item>
+
+<item>
+	<name>Disable Sysdiagnose COMMA Key</name>
+	<appendix>Disable Sysdiagnose COMMA Key</appendix>
+	<identifier>private.disable_sysdiagnose_comma_key</identifier>
+	<autogen>
+		--KeyToKey--
+		KeyCode::COMMA,
+		ModifierFlag::OPTION_L | ModifierFlag::SHIFT_L | ModifierFlag::CONTROL_L | ModifierFlag::COMMAND_L,
+		KeyCode::VK_NONE
+	</autogen>
+</item>
+
+<item>
+	<name>Disable Sysdiagnose Foward Slash Key</name>
+	<appendix>Disable Sysdiagnose FORWARD SLASH Key</appendix>
+	<identifier>private.disable_sysdiagnose_forward_slash</identifier>
+	<autogen>
+		--KeyToKey--
+		KeyCode::SLASH,
+		ModifierFlag::OPTION_L | ModifierFlag::SHIFT_L | ModifierFlag::CONTROL_L | ModifierFlag::COMMAND_L,
+		KeyCode::VK_NONE
+	</autogen>
+</item>
+
+<item>
+	<name>F19 to Escape and Control</name>
+	<appendix>Tap F19 for Escape, Hold F19 for Control</appendix>
+	<appendix>Works well with using Seil to remap CapsLock to F19(code 80).</appendix>
+	<identifier>private.remap.f19_escape_control</identifier>
+	<only>TERMINAL</only>only>
+	<autogen>
+		__DoublePressModifier__ 
+		KeyCode::A, ModifierFlag::COMMAND_L | ModifierFlag::OPTION_L | ModifierFlag::CONTROL_L | ModifierFlag::NONE,
+		KeyCode::VK_NONE,
+		KeyCode::A, ModifierFlag::CONTROL_L | ModifierFlag::NONE
+	</autogen>
+</item>
+
+<!-- Reference: http://stevelosh.com/blog/2012/10/a-modern-space-cadet/ -->  
+<item>
+	<name>Shifts to Parentheses(QWERTY)</name>
+	<appendix>Shifts, when pressed alone, type parentheses.  
+		When used with other keys they're normal shifts.
+	</appendix>
+	<identifier>private.shifts_to_parens_qwerty</identifier>
+
+	<!-- This is the basic mapping. -->
+	<autogen>--KeyOverlaidModifier-- 
+		KeyCode::SHIFT_R, ModifierFlag::SHIFT_R | 
+		ModifierFlag::NONE, KeyCode::SHIFT_R, 
+		KeyCode::KEY_0, ModifierFlag::SHIFT_L
+	</autogen>
+	<autogen>--KeyOverlaidModifier-- 
+		KeyCode::SHIFT_L, ModifierFlag::SHIFT_L | 
+		ModifierFlag::NONE, KeyCode::SHIFT_L, 
+		KeyCode::KEY_9, ModifierFlag::SHIFT_L
+	</autogen>
+<!-- Remap the "rolls" of () and )( because it's too easy to hit one before finishing the other, 
+and there's no other reason to be pressing both shift keys at once anyway -->
+<autogen>--KeyToKey-- 
+	KeyCode::SHIFT_L, ModifierFlag::SHIFT_R, 
+	KeyCode::KEY_0, ModifierFlag::SHIFT_L, KeyCode::KEY_9, ModifierFlag::SHIFT_L
+</autogen>
+<autogen>--KeyToKey-- 
+	KeyCode::SHIFT_R, ModifierFlag::SHIFT_L, 
+	KeyCode::KEY_9, ModifierFlag::SHIFT_L, KeyCode::KEY_0, ModifierFlag::SHIFT_L
+</autogen>
+<!-- Remap Rshift+Space to ') ', because when typing an end paren and
+then a space I tend to hit space before I let go of rshift. -->
+<autogen>--KeyToKey-- 
+	KeyCode::SPACE, ModifierFlag::SHIFT_R, 
+	KeyCode::KEY_0, ModifierFlag::SHIFT_L, KeyCode::SPACE
+</autogen>
+</item>
+
+
+
+<!----------------------------------OPTIONAL/UNUSED --------------------------->
+<!-- Vim Cursor (for the [OMBU Web](http://ombuweb.com) Team) :) -->
+<item>
+	<name>Right CMD + (hjkl) to (left,down,top,right)</name>
+	<appendix>Vim Style</appendix>
+	<identifier>private.right_cmd_hjkl</identifier>
+	<autogen>
+		--KeyOverlaidModifier--
+		KeyCode::K,
+		ModifierFlag::COMMAND_R,
+		KeyCode::CURSOR_UP
+	</autogen>
+	<autogen>
+		--KeyOverlaidModifier--
+		KeyCode::J,
+		ModifierFlag::COMMAND_R,
+		KeyCode::CURSOR_DOWN
+	</autogen>
+	<autogen>
+		--KeyOverlaidModifier--
+		KeyCode::H,
+		ModifierFlag::COMMAND_R,
+		KeyCode::CURSOR_LEFT
+	</autogen>
+	<autogen>
+		--KeyOverlaidModifier--
+		KeyCode::L,
+		ModifierFlag::COMMAND_R,
+		KeyCode::CURSOR_RIGHT
+	</autogen>
+</item>
+
+
+
+<item>
+	<name>Option to Braces (QWERTY) </name>
+	<appendix>Option, when pressed alone, type braces.  
+		When used with other keys they're normal shifts.
+	</appendix>
+
+	<identifier>private.option_to_braces_qwerty</identifier>
+
+	<!-- This is the basic mapping. -->
+	<autogen>--KeyOverlaidModifier-- 
+		KeyCode::OPTION_R, ModifierFlag::OPTION_R | 
+		ModifierFlag::NONE, KeyCode::OPTION_R, 
+		KeyCode::BRACKET_RIGHT, ModifierFlag::SHIFT_L
+	</autogen>
+	<autogen>--KeyOverlaidModifier-- 
+		KeyCode::OPTION_L, ModifierFlag::OPTION_L | 
+		ModifierFlag::NONE, KeyCode::OPTION_L, 
+		KeyCode::BRACKET_LEFT, ModifierFlag::SHIFT_L
+	</autogen>
+<!--
+Remap the "rolls" of {} and }{ because it's too easy to hit one
+before finishing the other, and there's no other reason to be
+pressing both shift keys at once anyway
+-->
+<autogen>--KeyToKey-- 
+	KeyCode::OPTION_L, ModifierFlag::OPTION_R, 
+	KeyCode::BRACKET_RIGHT, ModifierFlag::SHIFT_L, KeyCode::BRACKET_LEFT, ModifierFlag::SHIFT_L
+</autogen>
+<autogen>--KeyToKey-- 
+	KeyCode::OPTION_R, ModifierFlag::OPTION_L, 
+	KeyCode::BRACKET_LEFT, ModifierFlag::SHIFT_L, KeyCode::BRACKET_RIGHT, ModifierFlag::SHIFT_L
+</autogen>
+
+<!--
+Remap Rshift+Space to '} ', because when typing an end paren and
+then a space I tend to hit space before I let go of rshift.
+-->
+<autogen>--KeyToKey-- 
+	KeyCode::SPACE, ModifierFlag::OPTION_R, 
+	KeyCode::BRACKET_RIGHT, ModifierFlag::SHIFT_L, KeyCode::SPACE
+</autogen>
+</item>
+
+
+<item>
+	<name>Option to Braces (Programmer Dvorak)</name>
+	<appendix>Option, when pressed alone, type braces.  
+		When used with other keys they're normal shifts.
+	</appendix>
+
+	<identifier>private.option_to_braces_dvorak</identifier>
+
+	<!-- This is the basic mapping. -->
+	<autogen>--KeyOverlaidModifier-- 
+		KeyCode::OPTION_R, ModifierFlag::OPTION_R | 
+		ModifierFlag::NONE, KeyCode::OPTION_R, 
+		KeyCode::KEY_4, ModifierFlag::NONE
+	</autogen>
+	<autogen>--KeyOverlaidModifier--
+		KeyCode::OPTION_L, ModifierFlag::OPTION_L | 
+		ModifierFlag::NONE, KeyCode::OPTION_L, 
+		KeyCode::KEY_3, ModifierFlag::NONE
+	</autogen>
+<!--
+Remap the "rolls" of {} and }{ because it's too easy to hit one
+before finishing the other, and there's no other reason to be
+pressing both shift keys at once anyway
+-->
+<autogen>--KeyToKey-- 
+	KeyCode::OPTION_L, ModifierFlag::OPTION_R, 
+	KeyCode::KEY_4, ModifierFlag::NONE, KeyCode::KEY_3, ModifierFlag::NONE
+</autogen>
+<autogen>--KeyToKey-- 
+	KeyCode::OPTION_R, ModifierFlag::OPTION_L, 
+	KeyCode::KEY_3, ModifierFlag::NONE, KeyCode::KEY_4, ModifierFlag::NONE
+</autogen>
+
+<!--
+Remap Rshift+Space to '} ', because when typing an end paren and
+then a space I tend to hit space before I let go of rshift.
+-->
+<autogen>--KeyToKey-- 
+	KeyCode::SPACE, ModifierFlag::OPTION_R, 
+	KeyCode::KEY_4, ModifierFlag::NONE, KeyCode::SPACE
+</autogen>
+</item>
+
+<item>
+	<name>FN to Hyper Modifier Key</name>     
+	<appendix>FN mapped to Hyper:(ctrl+shift+cmd+opt)</appendix>
+	<identifier>private.hyper.fn</identifier>
+	<autogen>
+		--KeyToKey--
+		KeyCode::FN,
+		KeyCode::COMMAND_L,
+		ModifierFlag::OPTION_L | ModifierFlag::SHIFT_L | ModifierFlag::CONTROL_L
+	</autogen>
+</item>
+
+<item>
+	<name>Remap Left Control to Super</name>
+	<appendix>Ctrl_L mapped to Super:(ctrl+cmd+opt)</appendix>
+	<identifier>private.super.control_l</identifier>
+	<autogen>
+		--KeyToKey--
+		KeyCode::CONTROL_L,
+		KeyCode::COMMAND_L,
+		ModifierFlag::OPTION_L | ModifierFlag::CONTROL_L
+	</autogen>
+</item>
+
+<!-- Reference: http://stevelosh.com/blog/2012/10/a-modern-space-cadet/ -->  
+<item>
+	<name>Shifts to Parentheses (Programmer Dvorak) </name>
+	<appendix>Shifts, when pressed alone, type parentheses.  
+		When used with other keys they're normal shifts.
+	</appendix>
+
+	<identifier>private.shifts_to_parens_dvorak</identifier>
+
+	<!-- This is the basic mapping. -->
+	<autogen>--KeyOverlaidModifier-- 
+		KeyCode::SHIFT_R, ModifierFlag::SHIFT_R | 
+		ModifierFlag::NONE, KeyCode::SHIFT_R,            <!-- key combo pressed -->
+		KeyCode::KEY_8, ModifierFlag::NONE               <!-- actual key sent -->
+	</autogen> 
+	<autogen>--KeyOverlaidModifier-- 
+		KeyCode::SHIFT_L, ModifierFlag::SHIFT_L | 
+		ModifierFlag::NONE, KeyCode::SHIFT_L, 
+		KeyCode::KEY_5, ModifierFlag::NONE
+	</autogen>
+
+<!-- Remap the "rolls" of () and )( because it's too easy to hit one before finishing the other, 
+and there's no other reason to be pressing both shift keys at once anyway -->
+<autogen>--KeyToKey-- 
+	KeyCode::SHIFT_L, ModifierFlag::SHIFT_R, 
+	KeyCode::KEY_8, ModifierFlag::NONE, KeyCode::KEY_5, ModifierFlag::NONE
+</autogen>
+<autogen>--KeyToKey-- 
+	KeyCode::SHIFT_R, ModifierFlag::SHIFT_L, 
+	KeyCode::KEY_5, ModifierFlag::NONE, KeyCode::KEY_8, ModifierFlag::NONE
+</autogen>
+
+<!-- Remap Rshift+Space to ') ', because when typing an end paren and
+then a space I tend to hit space before I let go of rshift. -->
+<autogen>--KeyToKey-- 
+	KeyCode::SPACE, ModifierFlag::SHIFT_R, 
+	KeyCode::KEY_8, ModifierFlag::NONE, KeyCode::SPACE
+</autogen>
+</item>
+
+
+
+
+<!-- Diamond Cursor -->
+<item> 
+	<name>Caps Lock (Right Control/keycode 62) + I = Up</name>
+	<appendix>Diamond Keys Style</appendix>
+	<identifier>private.diamond_up</identifier>
+	<autogen>
+		--KeyOverlaidModifier--
+		KeyCode::I,
+		ModifierFlag::CONTROL_R,
+		KeyCode::CURSOR_UP
+	</autogen>
+</item>
+<item>
+	<name>Caps Lock (Right Control/keycode 62) + K = Down</name>
+	<appendix>Diamond Keys Style</appendix>
+	<identifier>private.diamond_down</identifier>
+	<autogen>
+		--KeyOverlaidModifier--
+		KeyCode::K,
+		ModifierFlag::CONTROL_R,
+		KeyCode::CURSOR_DOWN
+	</autogen>
+</item>
+
+<item>
+	<name>Caps Lock (Right Control/keycode 62) + J = Left</name>
+	<appendix>Diamond Keys Style</appendix>
+	<identifier>private.diamond_left</identifier>
+	<autogen>
+		--KeyOverlaidModifier--
+		KeyCode::J,
+		ModifierFlag::CONTROL_R,
+		KeyCode::CURSOR_LEFT
+	</autogen>
+</item>
+
+<item>
+	<name>Caps Lock (Right Control/keycode 62) + L = Right</name>
+	<appendix>Diamond Keys Style</appendix>
+	<identifier>private.diamond_right</identifier>
+	<autogen>
+		--KeyOverlaidModifier--
+		KeyCode::L,
+		ModifierFlag::CONTROL_R,
+		KeyCode::CURSOR_RIGHT
+	</autogen>
+</item>

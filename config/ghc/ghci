@@ -1,0 +1,7 @@
+-- http://ascii-table.com/ansi-escape-sequences.php
+
+-- \STX (start of text) allows Haskell to know the correct width of the prompt
+:set prompt " \ESC[1;90m\STX%s \ESC[0;32m\STXλ> \ESC[m\STX" 
+:set editor vim
+:set -fbreak-on-exception
+:def clear \_ -> return $ ":!clear"

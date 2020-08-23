@@ -1,0 +1,89 @@
+#!/bin/sh
+
+# bridge ip: https://www.meethue.com/api/nupnp
+# API docs: https://developers.meethue.com/philips-hue-api
+
+# TODO: add verbose mode - show all curl outputs
+# TODO: implement toggle function, run it by default if no args
+
+debug=''
+verbose=''
+OPTIND=1
+nonOptArgs=()
+while [ "$#" -gt 0 ] && [ "$1" != '--' ]; do
+  while getopts ':h?d' opt; do
+    case "$opt" in
+       h|\?) echo 'Usage: hue [-dh] [room] [scene/setting]' >&1; exit 0;; # requires :h, lets ? case match to unsupported option, let : case match to missing value
+       d) debug=1;;
+       v) verbose=1;;
+       *) echo "Invalid option: $1" >&2; exit 1;;
+    esac
+  done
+  shift "$((OPTIND-1))"
+  unset OPTIND
+
+  while [ "$#" -gt 0 ] && ! [[ "$1" =~ ^- ]]; do # NOTE: the ^- should not be surrounded by any quotes!
+    nonOptArgs=("${nonOptArgs[@]}" "$1")
+    shift
+  done
+done
+
+if [ "$1" == '--' ]; then
+  shift
+  nonOptArgs=("${nonOptArgs[@]}" "$@")
+fi
+
+room=''
+scene=''
+nonOptArgsCount="${#nonOptArgs[@]}"
+case "$nonOptArgsCount" in
+  0) room='all'
+     scene='home'
+     ;;
+  1) room='all'
+     scene="${nonOptArgs[0]}"
+     ;;
+  *) room="${nonOptArgs[0]}"
+     scene="${nonOptArgs[1]}"
+     ;;
+esac
+
+groupId=''
+case "$room" in
+  bedroom) groupId=2;;
+  office) groupId=3;;
+  recreation) groupId=4;;
+  all|*) groupId=0;; # all lights
+esac
+
+requestBody=''
+case "$scene" in
+  off) requestBody='{"on": false}';;
+  home) requestBody='{"on": true, "bri": 163, "scene": "bf4a3f8f4-on-0"}';;
+  # TODO: add bedroom only option
+  high) requestBody='{"on": true, "bri": 163}';;
+  mid) requestBody='{"on": true, "bri": 77}';;
+  low) requestBody='{"on": true, "bri": 37}';;
+  # TODO: add max brightness option
+  min) requestBody='{"on": true, "bri": 0}';;
+  *) requestBody='{"on": true}';; # default, lights on
+esac
+
+ip="$(curl -s -X GET https://www.meethue.com/api/nupnp -H 'Cache-Control: no-cache' | jq --raw-output '. | if length == 1 then .[0].internalipaddress else . end')"
+if [[ ! "$ip" =~ ^[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
+  echo "Error: could not get Hub's IP address from https://www.meethue.com/api/nupnp, make sure to disable ExpressVPN"
+  exit 1
+fi
+username='rivU7OQiaBuwzYMqPEMVhb-ndAEq2rTv6X-XKyJH' # TODO: verify if this username is safe to store in public GitHub
+url="http://$ip/api/$username"
+requestUrl="$url/groups/$groupId/action"
+
+if [ "$debug" ]; then
+  echo "Debug: nonOptArgsCount: $nonOptArgsCount"
+  echo "Debug: room: $room, scene: $scene"
+  echo "Debug: requestUrl: $requestUrl"
+  echo "Debug: requestBody: $requestBody"
+fi
+
+curl -s -H 'Content-Type: application/json' -X PUT -d "$requestBody" "$requestUrl" >/dev/null # show stderr only, stdout silenced
+

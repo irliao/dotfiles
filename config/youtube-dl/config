@@ -1,0 +1,10 @@
+# Shared configs for youtube-dl
+
+# Always extract audio
+# -x
+
+# Convert video files to audio-only files (requires ffmpeg or avconv and ffprobe or avprobe)
+# --extract-audio
+
+# Do not copy the mtime
+--no-mtime

@@ -1,0 +1,249 @@
+# vim: ft=zsh
+#
+# Mingit Theme
+# @author: Ryan Liao - irliao
+#
+
+# TODO: implement functionality to toggle color theme and git branch display style
+
+# TODO: reference and apply tricks from: https://github.com/andschwa/shell/blob/df12f5fe8c946f529dc3280409d3cb1ed0771507/.bash_completion.d/git-prompt.sh
+# TODO: refactor with named colors below OR load and use "colors" module
+# Helper function that is meant to be called from __git_ps1.  It
+# injects color codes into the appropriate gitstring variables used
+# to build a gitstring.
+# __git_ps1_colorize_gitstring ()
+# {
+# 	if [[ -n ${ZSH_VERSION-} ]]; then
+# 		local c_red='%F{red}'
+# 		local c_green='%F{green}'
+# 		local c_lblue='%F{blue}'
+# 		local c_clear='%f'
+# 	else
+# 		# Using \[ and \] around colors is necessary to prevent
+# 		# issues with command line editing/browsing/completion!
+# 		local c_red='\[\e[31m\]'
+# 		local c_green='\[\e[32m\]'
+# 		local c_lblue='\[\e[1;34m\]'
+# 		local c_clear='\[\e[0m\]'
+# 	fi
+# 	local bad_color=$c_red
+# 	local ok_color=$c_green
+# 	local flags_color="$c_lblue"
+
+# 	local branch_color=""
+# 	if [ $detached = no ]; then
+# 		branch_color="$ok_color"
+# 	else
+# 		branch_color="$bad_color"
+# 	fi
+# 	c="$branch_color$c"
+
+# 	z="$c_clear$z"
+# 	if [ "$w" = "*" ]; then
+# 		w="$bad_color$w"
+# 	fi
+# 	if [ -n "$i" ]; then
+# 		i="$ok_color$i"
+# 	fi
+# 	if [ -n "$s" ]; then
+# 		s="$flags_color$s"
+# 	fi
+# 	if [ -n "$u" ]; then
+# 		u="$bad_color$u"
+# 	fi
+# 	r="$c_clear$r"
+# }
+#
+
+# ***BASH ONLY*** color escape codes
+# local color_off='\[\e[0m\]'
+# local color_red='\[\e[0;31m\]'
+# local color_green='\[\e[0;32m\]'
+# local color_yellow='\[\e[0;33m\]'
+# local color_blue='\[\e[0;34m\]'
+# local color_purple='\[\e[0;35m\]'
+# local color_cyan='\[\e[0;36m\]'
+
+# named colors for base16-default-dark theme
+# local red = "%F{1}"
+# local green = "%F{2}"
+# local yellow = "%F{3}"
+# local blue = "%F{4}"
+# local magenta= "%F{5}"
+# local cyan = "%F{6}"
+# local white = "%F{7}"
+# local gray = "%F{8}"
+
+# set iTerm tab
+prompt_iterm_preexec() {
+  # TODO: figure out what this does
+  echo -ne "\e]1; $(history $HISTCMD | cut -b7- ) \a" # set title to last command
+}
+
+# indent prompt by printing spaces
+gst_get_prefix() {
+  print ""
+}
+
+# shows icon for start of input with color to indicate return status of last command
+gst_get_suffix() {
+  # local suffix='❯' # TODO: replace suffix character with variable in print
+  # print "%(?:%F{7}$%f :%F{8}$%f %s)" # success/failure - white/gray
+  print "%(?:%F{2}λ%f :%F{1}λ%f %s)" # success/failure - cyan/red
+  # print "%(?:%F{2}$%f :%F{7}$%f %s)" # success/failure - cyan/white
+  # print "%(?:%F{2}λ%f :%F{7}λ%f %s)" # success/failure - cyan/white
+}
+
+# run before $(git_current_branch) to have branch name display with color based on git status
+parse_git_dirty() {
+  local STATUS=''
+  local FLAGS
+  FLAGS=('--porcelain' '--ignore-submodules=dirty')
+  if [[ ${zgit_hide_prompt} != 'true' ]]; then
+    if [[ "${zgit_disable_untracked_dirty}" == "true" ]]; then
+      FLAGS+='--untracked-files=no'
+    fi
+    STATUS=$(command git status ${FLAGS} 2> /dev/null | tail -n1)
+  fi
+  if [[ -n ${STATUS} ]]; then
+    print ${ZSH_THEME_GIT_PROMPT_DIRTY}
+  else
+    print ${ZSH_THEME_GIT_PROMPT_CLEAN}
+  fi
+}
+
+# prints name of current branch
+git_current_branch() {
+  # git symbolic-ref HEAD 2> /dev/null | sed -e 's/refs\/heads\///' # TODO: check if this is more useful
+  git symbolic-ref --short HEAD 2> /dev/null;
+}
+
+# prints hash of current commit
+git_current_commit() {
+  git rev-parse --short HEAD 2> /dev/null;
+}
+
+git_prompt_info() {
+  local ref
+  if [[ ${zgit_hide_prompt} != 'true' ]]; then
+    ref=$(git_current_branch) || \
+      ref=$(git_current_commit) || \
+      return 0
+    # print "${ZSH_THEME_GIT_PROMPT_PREFIX}${ref}$(parse_git_dirty)${ZSH_THEME_GIT_PROMPT_SUFFIX}"
+    print "$(parse_git_dirty)${ref}${ZSH_THEME_GIT_PROMPT_SUFFIX}"
+
+  fi
+}
+
+# shortens the pwd for use in prompt
+git_short_pwd() {
+  local current_dir="${1:-${PWD}}"
+  local return_dir='~'
+
+  current_dir="${current_dir/#${HOME}/~}"
+
+  # if we aren't in ~
+  if [[ ${current_dir} != '~' ]]; then
+    return_dir="${${${${(@j:/:M)${(@s:/:)current_dir}##.#?}:h}%/}//\%/%%}/${${current_dir:t}//\%/%%}"
+  fi
+
+  print ${return_dir}
+}
+
+gst_get_pwd() {
+  prompt_short_dir="$(git_short_pwd)"
+  git_root="$(command git rev-parse --show-toplevel 2> /dev/null)" && \
+    prompt_short_dir="${prompt_short_dir#${$(git_short_pwd $git_root):h}/}"
+  # print "%F{2}${prompt_short_dir}%f "
+  print "%F{8}${prompt_short_dir}%f "
+}
+
+prompt_mingit_precmd() {
+  if [[ "$TERM_PROGRAM" == "iTerm.app" ]];then
+    echo -ne "\e]1; ${PWD##*/} \a" # set title to short pwd
+  fi
+
+  if [ -n "$TMUX" ]; then
+    tmux setenv TMUXPWD_$(tmux display -p "#D" | tr -d %) "$PWD"
+  fi
+
+  # TODO: determine if this is useful to keep or not
+  # PROMPT="$PROMPT"'$([ -n "$TMUX" ] && tmux setenv TMUXPWD_$(tmux display -p "#D" | tr -d %) "$PWD")'
+
+  # PROMPT="$(gst_get_pwd)$(git_prompt_info)$(gst_get_suffix)"
+  PROMPT="$(gst_get_prefix)$(gst_get_pwd)$(git_prompt_info)$(gst_get_suffix)" # indented prompt (space as prefix)
+  RPROMPT="%*" # right end of the prompt, show time in 24 hours format with seconds
+}
+
+prompt_mingit_setup() {
+  # ZSH_THEME_GIT_PROMPT_PREFIX="%F{4}"
+  # ZSH_THEME_GIT_PROMPT_SUFFIX="%f "
+  # ZSH_THEME_GIT_PROMPT_DIRTY="%F{3}*%f"
+  # ZSH_THEME_GIT_PROMPT_CLEAN=""
+
+  ZSH_THEME_GIT_PROMPT_PREFIX=""
+  ZSH_THEME_GIT_PROMPT_SUFFIX="%f "
+  # ZSH_THEME_GIT_PROMPT_DIRTY="%F{1}✗" # red
+  ZSH_THEME_GIT_PROMPT_DIRTY="%F{1}" # red
+  # ZSH_THEME_GIT_PROMPT_DIRTY="%F{3}" # yellow
+  ZSH_THEME_GIT_PROMPT_CLEAN="%F{2}"
+  # ZSH_THEME_GIT_PROMPT_CLEAN="%F{6}✓"
+
+  # autoload -Uz colors && colors
+  autoload -Uz add-zsh-hook
+  add-zsh-hook precmd prompt_mingit_precmd
+  prompt_opts=(cr subst percent)
+  # prompt_opts=(cr percent sp subst)
+}
+
+prompt_mingit_setup "$@"
+
+# TODO: research this implementation's speed compared to above, if not harmful then use code below for readibility
+# git_prompt_info() {
+#   current_branch=$(git current-branch 2> /dev/null)
+#   if [[ -n $current_branch ]]; then
+#     echo " %{$fg_bold[green]%}$current_branch%{$reset_color%}"
+#   fi
+# }
+# setopt promptsubst
+# PS1='${SSH_CONNECTION+"%{$fg_bold[green]%}%n@%m:"}%{$fg_bold[blue]%}%c%{$reset_color%}$(git_prompt_info) %# '
+
+# TODO: broken, prints ~/ as %~
+# print pwd in full length
+# gst_get_pwd_full(){
+#   git_root=$PWD
+#   while [[ $git_root != / && ! -e $git_root/.git ]]; do
+#     git_root=$git_root:h
+#   done
+#   if [[ $git_root = / ]]; then
+#     unset git_root
+#     prompt_short_dir=%~
+#   else
+#     parent=${git_root%\/*}
+#     prompt_short_dir=${PWD#$parent/}
+#   fi
+#   echo $prompt_short_dir
+# }
+
+# Unique symbols
+# ❯
+
+# String variables
+# git:
+# %b => current branch
+# %a => current action (rebase/merge)
+# prompt:
+# %F => color dict
+# %f => reset color
+# %~ => current path
+# %* => time
+# %n => username
+# %m => shortname host
+# %(?..) => prompt conditional - %(condition.true.false)
+# terminal codes:
+# \e7   => save cursor position
+# \e[2A => move cursor 2 lines up
+# \e[1G => go to position 1 in terminal
+# \e8   => restore cursor position
+# \e[K  => clears everything after the cursor on the current line
+# \e[2K => clear everything on the current line

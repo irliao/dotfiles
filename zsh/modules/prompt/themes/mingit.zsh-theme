@@ -1,0 +1,1 @@
+../functions/prompt_mingit_setup
