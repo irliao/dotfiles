@@ -1,6 +1,6 @@
 " set gdefault
 set number
-set relativenumber
+" set relativenumber
 set history
 set hlsearch
 " set incsearch

@@ -14,7 +14,6 @@ endif
 call plug#begin('~/.vim/bundle')
 
 " utility
-Plug 'junegunn/fzf', { 'do': './install --all' }
 Plug 'thinca/vim-quickrun' " execute current partial or full buffer as command, :QuickRun to execute current buffer
 Plug 'mileszs/ack.vim' " use Ag in Vim
 Plug 'jeetsukumaran/vim-buffergator' " show lists of buffers with mru support
