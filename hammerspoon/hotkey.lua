@@ -34,11 +34,13 @@ hs.hotkey.bind(ctrlCmd, "L", "Focus Right Window", function() focusWindowAtDirec
 hs.hotkey.bind(ctrlCmd, "Z", "Hide All Windows", function() hideAllWindows() end)
 hs.hotkey.bind(ctrlCmd, "TAB", "Focus Previous Window", function() module.windowSwitcher:focusPreviousWindow() end)
 hs.hotkey.bind(ctrlCmdShift, "TAB", "Focus Next Window", function() module.windowSwitcher:focusNextWindow() end)
+hs.hotkey.bind(ctrlCmd, "ESCAPE", "Move Previous Screen", function() moveWindowToScreen("prev") end)
+hs.hotkey.bind(ctrlCmdShift, "ESCAPE", "Move Next Screen", function() moveWindowToScreen("next") end)
 hs.hotkey.bind(ctrlCmd, "`", "Move Previous Screen", function() moveWindowToScreen("prev") end)
 hs.hotkey.bind(ctrlCmdShift, "`", "Move Next Screen", function() moveWindowToScreen("next") end)
 hs.hotkey.bind(ctrlCmd, "RETURN", "Enter Full Screen", function() toggleFullScreen() end)
 hs.hotkey.bind(ctrlCmd, "G", "Vimperator", function() hs.hints.windowHints(hs.window:focusedWindow():otherWindowsSameScreen()) end)
-hs.hotkey.bind(ctrlCmd, "1", "System Status", function() alertSystemStatus() end)
+hs.hotkey.bind(ctrlCmd, "I", "System Status", function() alertSystemStatus() end)
 
 -- Application opener
 hs.hotkey.bind(ctrlCmd, "C", "Safari", function() openApplication("Safari") end)
@@ -56,5 +58,6 @@ hs.hotkey.bind(ctrlCmd, "R", "iTerm", function() openApplication("iTerm") end)
 hs.hotkey.bind(ctrlAlt, "R", "Terminal", function() openApplication("Terminal") end)
 hs.hotkey.bind(ctrlCmd, ";", "Hammerspoon", function() openApplication("Hammerspoon") end)
 hs.hotkey.bind(ctrlCmd, ",", "System Preferences", function() openApplication("System Preferences") end)
+hs.hotkey.bind(ctrlCmd, "/", "Activity Monitor", function() openApplication("Activity Monitor") end)
 
 return module

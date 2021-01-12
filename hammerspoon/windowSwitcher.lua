@@ -9,8 +9,7 @@ local focusedAppWindowFilter = hs.window.filter.new(function(win)
     local focusedWin = hs.window.focusedWindow()
     return (
       win:isStandard() and
-      win:application() == focusedWin:application() and
-      win:screen() == focusedWin:screen()
+      win:application() == focusedWin:application()
     )
   end)
 
