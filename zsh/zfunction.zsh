@@ -101,6 +101,13 @@ mmd() {
     mmdc -i "$1" -o "$2";
 }
 
+# sets to the specified jdk version found in /Library/Java/JavaVirtualMachines/
+jdk-set-to() {
+  version=$1
+  export JAVA_HOME=$(/usr/libexec/java_home -v"$version");
+  java -version
+}
+
 # Pwd prints path replacing /User/userId/... with ~/...
 pwd-tilda() {
   echo $(pwd | sed -e "s,^$HOME,~,")
