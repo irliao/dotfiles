@@ -160,9 +160,11 @@ alias bu="brew update && brew upgrade && brew cleanup && brew doctor"
 alias bl="brew leaves" # show formulas not dependencies of another installed formula
 alias bls="brew list"
 alias brm="brew rmtree" # remove formula with all it's dependencies (brew rm/uninstall only removes the specified formula), requires "brew tap beeftornado/rmtree"
+alias brew-config-install="brew bundle --file ~/.dotfiles/config/homebrew/Brewfile" # install configs from Brewfile using brew bundle
+alias brew-config-save="brew bundle dump --file ~/.dotfiles/config/homebrew/Brewfile --force" # save current configs to Brewfile using brew bundle
+alias brew-config-check="brew bundle check --file ~/.dotfiles/config/homebrew/Brewfile" # list updates from Brewfile using brew bundle
 alias brew-cask-search="brew search --cask"
 # alias brew-deps='brew deps --installed --tree' # show installed formulaes' dependencies
-# alias brew-save="cd ~/.dotfiles/config/brew && brew bundle dump --force; cd -" # save brew install
 # alias brew-uses='brew uses --installed' # show which formuales use $1 as dependency
 
 # Stack for Haskell
