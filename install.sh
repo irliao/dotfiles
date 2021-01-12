@@ -109,11 +109,6 @@ main() {
     homebrew_file="$dotfiles_path/config/homebrew/Brewfile"
     (! brew bundle check --verbose --file "$homebrew_file") &&
       echo "found missing brew formula(s), install with command: brew bundle install --file $homebrew_file"
-
-    # fix permissions for QuickLook plugins on macOS Catalina listed in https://github.com/sindresorhus/quick-look-plugins
-    [ ! -z "$(xattr -r ~/Library/QuickLook)" ] && # check if xattr returns null or empty
-      echo 'found extended attributes for QuickLook, removing quarantine attributes for QuickLook plugins to work with macOS Catalina' &&
-      xattr -d -r com.apple.quarantine ~/Library/QuickLook
   fi
 
   # install zim, needs to install last for sourcing ~/.zlogin
