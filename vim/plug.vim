@@ -14,7 +14,6 @@ endif
 call plug#begin('~/.vim/bundle')
 
 " utility
-Plug 'thinca/vim-quickrun' " execute current partial or full buffer as command, :QuickRun to execute current buffer
 Plug 'mileszs/ack.vim' " use Ag in Vim
 Plug 'jeetsukumaran/vim-buffergator' " show lists of buffers with mru support
   " Buffergator to help manage buffers
@@ -54,11 +53,11 @@ Plug 'tpope/vim-surround' " move in Mormal mode with surrounding objects as oper
 Plug 'tpope/vim-repeat' " repeat supported plugin maps with '.'
 Plug 'sjl/vitality.vim' " better focus event from Vim in both Tmux and iTerm2
 Plug 'scrooloose/nerdtree'
-Plug 'mhinz/vim-sayonara' " closes window appropriately based on current buffer/tab/split
 Plug 'tpope/vim-endwise' " ends certain structure automatically (ex: in Lua, will auto insert 'end' for keywords like 'if' or 'function'
 Plug 'romainl/vim-cool' " auto turn off search result highlights upon navigation
 Plug 'sjl/gundo.vim' " visualize undo tree
 
+" TODO: replace with https://github.com/mg979/vim-visual-multi
 Plug 'terryma/vim-multiple-cursors'
   " multiple cursors plugin, NOTE: plugin only supports mapping to someMod + someKey (ex. <C-n> or <M-n>)
   let g:multi_cursor_use_default_mapping=0
@@ -73,6 +72,8 @@ Plug 'terryma/vim-multiple-cursors'
   " highlight multiple_cursors_cursor term=reverse cterm=reverse gui=reverse
   " highlight link multiple_cursors_visual Visual
 
+"window management
+Plug 'mhinz/vim-sayonara' " closes window appropriately based on current buffer/tab/split
 Plug 't9md/vim-choosewin' " navigate window/split interactively
   let g:choosewin_overlay_enable = 1
   nnoremap <leader>g :ChooseWin<CR>
@@ -114,19 +115,14 @@ Plug 'Yggdroot/indentLine' " show indent characters
 Plug 'maksimr/vim-jsbeautify' " automatic formats JS files
 Plug 'editorconfig/editorconfig-vim' " uses ~/.editorconfig for vim-jsbeautify
 
-" autocompletion
-Plug 'ervandew/supertab' " tab completion going down list
-  let g:SuperTabDefaultCompletionType = "<c-n>" " <Tab> completion goes from top to bottom
+" tab completion
+Plug 'ervandew/supertab'
+  let g:SuperTabDefaultCompletionType = "<c-n>" " uses completion from ^N, which should be default from Vim
   let g:SuperTabMappingForward  = "<tab>"
   let g:SuperTabMappingBackward = "<s-tab>"
   function! SuperTab(m)
     return s:super_duper_tab(a:m == 'n' ? "\<c-n>" : "\<c-p>", a:m == 'n' ? "\<tab>" : "\<s-tab>")
   endfunction
-
-function! BuildYCM(info)
-  !./install.py --clang-completer --java-completer --js-completer
-endfunction
-Plug 'Valloric/YouCompleteMe', { 'do': function('BuildYCM') }
 
 " color scheme
 Plug 'jacoborus/tender.vim' " 24bit colorscheme, resembles base16, light colors and less strains on the eyes

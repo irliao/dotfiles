@@ -1,5 +1,5 @@
 " Vim Configs
-set nocompatible " vi improved, required
+set nocompatible " sets Vim to not act like Vi
 " WARN: remove any [filetype off, filetype plugin indent on, syntax on], already included by vim-plug
 
 " WARN: source order matters

@@ -52,8 +52,11 @@ set iskeyword-=_
 " set wildignore+=*/tmp/*,*.so,*.swp,*.zip     " Linux/MacOSX
 " set wildignore+=*\\tmp\\*,*.swp,*.zip,*.exe  " Windows
 
+" file finding settings
+set path+=** " search every subdiretory recursively when using :find to find file
+
 " auto-completion settings
-set wildmenu " visual autocomplete for Vim command menu
+set wildmenu " visual autocomplete for Vim command menu when Tab is pressed
 set wildignore+=*.o,*.obj,*~,*.pyc,*.aux,*.bbl,*.blg,.git,.svn,.hg
 set wildignore+=*~
 set wildignore+=*DS_Store*

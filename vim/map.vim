@@ -36,6 +36,12 @@ cnoreabbrev H vert h
 command! Cwd cd %:p:h
 cnoreabbrev CD Cwd
 
+" create 'tag' files for auto completeion (requires install from brew tap 'universal-ctags')
+command! MakeTags !ctags -R .
+
+" snippets
+nnoremap ,java :-1read $HOME/.vim/snippets/skeleton.java<CR>2wi
+
 " show all <leader> mappings
 nnoremap <leader>? :map <leader><CR>
 
@@ -98,8 +104,9 @@ nnoremap <leader>m :<c-u><c-r><c-r>='let @'. v:register .' = '. string(getreg(v:
 " redraw screen
 nnoremap <leader>r :nohlsearch<CR>:diffupdate<CR>:syntax sync fromstart<CR><c-l>
 
+" TODO: enable after finding a different key to map to
 " diff unsaved buffer against saved buffer
-nnoremap <leader>d :call DiffWithSaved()<CR> " diff current buffer aganst most recent save
+" nnoremap <leader>d :call DiffWithSaved()<CR> " diff current buffer aganst most recent save
 
 " file searching
 nnoremap <leader>f :Ack!<SPACE>
@@ -120,8 +127,8 @@ nnoremap <leader>{ <C-b> " scroll up full page
 nnoremap <leader>} <C-f> " scroll down full page
 nnoremap <leader>[ <C-w>p<CR> " focus previous split
 nnoremap <leader>] <C-w>w<CR> " focus next split
-nnoremap <leader>s :vnew<CR> " split vertically
-nnoremap <leader>S :new<CR> " split horizontally
+nnoremap <leader>d :vnew<CR> " split vertically
+nnoremap <leader>D :new<CR> " split horizontally
 nnoremap <leader>t :tabnew<CR>
 nnoremap <leader>T <C-w>T " break out current window buffer into a new tabview
 nnoremap <leader>q :ccl<CR> " close quickfix window
