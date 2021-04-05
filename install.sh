@@ -26,13 +26,6 @@ main() {
       brew upgrade &&
       echof 'installed brew'
 
-  # install vim (bundled in macvim)
-  (! brew ls --version macvim > /dev/null) &&
-    brew tap macvim-dev/macvim &&
-    brew install --HEAD macvim-dev/macvim/macvim &&
-    # symlink /usr/local/Cellar/macvim/*/MacVim.app/ /Applications/ &&
-    echof 'installed vim (macvim) with brew'
-
   # TODO: install and setup ruby with rbenv installed from brew
 
   # set zsh as default shell (not needed for /bin/zsh because macOS Catalina or newer uses /bin/zsh as default shell)
