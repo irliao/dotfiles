@@ -66,13 +66,12 @@ t() {
 }
 
 # open with vim
-# NOTE: specifying full path for vim to avoid using /usr/bin/vim (default without OS Clipboard access)
 v() {
     if [[ "$#" == 0 ]]; then
-        /usr/local/bin/vim .
+        vim .
         return "$?"
     fi
-    /usr/local/bin/vim "$@";
+    vim "$@";
 }
 
 # open with Editor (mvim)
@@ -82,14 +81,6 @@ e() {
         return "$?"
     fi
     "$EDITOR" "$@";
-}
-
-# TODO: clean up the printed info
-i() {
-  date
-  pmset -g batt
-  echo "Wi-Fi: $(airport -I | /usr/bin/grep -w SSID)"
-  echo "Bluetooth {0:Off, 1:ON}: $(blueutil --power)"
 }
 
 # convert .mmd file to viewable diagrams, requires mmdc installed (npm install -g mermaid.cli)
@@ -196,10 +187,6 @@ swd() { echo "$(pwd | sed -e "s,^$HOME,~,")" }
 
 # Make and go to directory
 md() { [[ -n ${1} ]] && mkdir -p ${1} && builtin cd ${1}; }
-
-# TODO: check if this is faster than hgrep defined in ~/.zalias
-# Search for string in history with fc
-hg() { fc -lim "$@" 1 }
 
 # ssh inside Tmux split window
 tmux-ssh() {
@@ -752,61 +739,3 @@ makeAppIcon() {
         rm -r $filename.iconset
     fi
 }
-
-# TODO: uncomment after fixing error preventing disabling:/System/Library/LaunchAgents/com.apple.notificationcenterui.plist: Operation not permitted while System Integrity Protection is engaged
-# Toggle Notification Center (menubar icon location: /System/Library/CoreServices/SystemUIServer.app/Contents/Resources/menuitemNormal.pdf)
-# toggleNotificationCenter() {
-# 	read  -q "REPLY?disable Notification Center? $1? (y/n) "
-# 	echo  "" # (optional) move to a new line
-#   notif_status="Enabled"
-#   # disable Notification Center
-# 	if [[ $REPLY =~ ^[Yy]$ ]] then
-#     launchctl unload -w /System/Library/LaunchAgents/com.apple.notificationcenterui.plist && \
-#       killall NotificationCenter && \
-#       notif_status="Disabled"
-# 	else
-#     launchctl load -w /System/Library/LaunchAgents/com.apple.notificationcenterui.plist && \
-#       open '/System/Library/CoreServices/NotificationCenter.app'
-# 	fi
-#   echo "Notification Center: $notif_status"
-# }
-
-# TODO: implement
-# osxDnsReset() {
-# # TODO: should use different commands based on different versions
-#   sudo killall -HUP mDNSResponder # 10.10.4 or later:
-#   sudo discoveryutil mdnsflushcache # 10.10 ~ 10.10.3:
-#   sudo killall -HUP mDNSResponder # 10.7 ~ 10.9.5:
-#   sudo dscacheutil -flushcache # 10.6 ~ 10.6.8:
-# }
-
-# TODO: implement function to save default writes using:
-# PROMPT_COMMAND='echo "$(history 1 | grep "defaults write")" | sed '/^$/d' >> ~/Documents/defaults-write.txt'
-
-# TODO: implement this as a function
-# Add HiDPI option to System Preferences' Display panel
-# sudo defaults write /Library/Preferences/com.apple.windowserver.plist DisplayResolutionEnabled -bool true
-
-# TODO: implement DiskUtils referencing:
-# http://osxdaily.com/2015/11/04/verify-repair-permissions-mac-os-x/
-
-# TODO: make this a function
-# alias setfindercolumnsview="defaults write com.apple.Finder FXPreferredViewStyle Nlsv;killall Finder" # nlsv - list, icnv - icon, clmv - column, flwv - cover flow
-# TODO: implement this function
-# Show defaults queried with optional type and/or app name
-# showDefaultsUsed() {}
-
-# TODO: make this a function
-# alias showdefaults='history | grep "defaults"'
-# alias showdefaultswrites='history | grep "defaults write"'
-# alias showdefaultsdeletes='history | grep "defaults delete"'
-# alias showdefaultsfinder='history | grep "defaults write com.apple.finder"' # can be any app
-
-# TODO: make this a function
-# alias osx-set-sleep='pmset schedule sleep "12/24/2009 00:00:00"'
-# alias osx-set-wake='pmset schedule wake "12/26/2009 00:00:00"'
-# alias osx-log-sleep='syslog |grep -i "Wake reason"'
-# alias osx-lidwake='sudo pmset lidwake 0'
-# alias osx-set-morning='pmset repeat wakeorpoweron MTWRF 07:45:00'
-# alias osx-cancel-morning='pmset repeat cancel'
-

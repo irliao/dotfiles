@@ -18,9 +18,9 @@ zmodule utility
 # Prompt
 #
 # Exposes git repository status information to prompts.
-zmodule git-info
+# zmodule git-info # NOTE: disabled to use custom git info function in prompt
 # A customizable version of steeef's prompt theme.
-zmodule steeef
+# zmodule steeef
 
 # Additional completion definitions for Zsh.
 zmodule zsh-users/zsh-completions

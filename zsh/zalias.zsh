@@ -164,8 +164,13 @@ alias brew-config-install="brew bundle --file ~/.dotfiles/config/homebrew/Brewfi
 alias brew-config-save="brew bundle dump --file ~/.dotfiles/config/homebrew/Brewfile --force" # save current configs to Brewfile using brew bundle
 alias brew-config-check="brew bundle check --file ~/.dotfiles/config/homebrew/Brewfile" # list updates from Brewfile using brew bundle
 alias brew-cask-search="brew search --cask"
+alias brew-nuke="brew remove --force $(brew list) --ignore-dependencies && brew remove --cask --force $(brew list) --ignore-dependencies && brew cleanup"
+
 # alias brew-deps='brew deps --installed --tree' # show installed formulaes' dependencies
 # alias brew-uses='brew uses --installed' # show which formuales use $1 as dependency
+
+# Ctags
+alias ctags-make="ctags -R ." # creates tags using universal-ctags from brew
 
 # Stack for Haskell
 alias ghci="stack --silent ghci --ghci-options -v0" # ghci without loading messages
@@ -222,7 +227,7 @@ alias h="history" # use 1st arg to specify starting index of history
 alias ha="history 1" # show all history (1 is the index of first history)
 alias hd="dirs -v" # show history of directories visited in current shell session
 # alias htop='history | sort -rn | head' # TODO: realias and reenable
-alias hgrep='history 1 | grep' # search for string in history with grep
+alias hg='history 1 | grep' # search for string in history with grep
 alias hag='history 1 | ag' # search for string in history with ag
 
 # Youtube

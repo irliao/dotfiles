@@ -3,10 +3,8 @@
 #
 
 # Begin intialize zimfw
-# Remove older command from the history if a duplicate is to be added.
-setopt HIST_IGNORE_ALL_DUPS
-## Remove path separator from WORDCHARS.
-WORDCHARS=${WORDCHARS//[\/]}
+setopt HIST_IGNORE_ALL_DUPS # Remove older command from the history if a duplicate is to be added.
+WORDCHARS=${WORDCHARS//[\/]} # Remove path separator from WORDCHARS.
 ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets)
 export ZIM_HOME=${ZDOTDIR:-${HOME}}/.zim
 if [[ ${ZIM_HOME}/init.zsh -ot ${ZDOTDIR:-${HOME}}/.zimrc ]]; then
@@ -35,7 +33,7 @@ unsetopt inc_append_history
 unsetopt share_history
 
 # skip_global_compinit=1 # faster zsh startup time
-DEFAULT_USER="irliao" # replaces user@hostname with specified username
+DEFAULT_USER="rliao" # replaces user@hostname with specified username
 [ -z "$LANG" ] && eval "$(locale)" # set language if not found
 PATH=/usr/local/bin:/usr/local/sbin:~/.bin:/usr/bin:/bin:/usr/sbin:/sbin
 # WORDCHARS='*?_-.[]~=&;!#$%^(){}<>' # list of word delimeters
@@ -56,15 +54,13 @@ fpath=(
 # [[ -n "$LS_COLORS" || -f "$HOME/.dircolors" ]] &&
 #   gls --color -d . &>/dev/null && alias ls='gls --color=tty'
 
+# loads zprof to profile shell startup time
+# zmodload zsh/zprof # NOTE: uncomment to use for debugging performance
+
 autoload -Uz clear-scrollback && clear-scrollback
 autoload -Uz promptinit && promptinit
 prompt cmder # load custom prompt theme
 # autoload -Uz compinit && compinit
-
-# TODO: check if this is needed
-# Smart Urls
-# autoload -Uz url-quote-magic
-# zle -N self-insert url-quote-magic
 
 export DEVPATH="$HOME/Developments"
 export EDITOR='vim'
@@ -81,23 +77,17 @@ export PAGER='less'
 #   autoload -U +X bashcompinit && bashcompinit
 #   eval "$(stack --bash-completion-script stack)"
 # fi
-PATH="$PATH:$HOME/.local/bin" # where stack installs hlint
+# PATH="$PATH:$HOME/.local/bin" # where stack installs hlint
 
 # Go
 # export GOPATH="$DEVPATH/go"
 # PATH="$PATH:$GOPATH/bin"
 
-# theFuck
-if (( $+commands[thefuck] )); then
-  eval $(thefuck --alias) # adds 'fuck' as alias
-  eval $(thefuck --alias fk) # adds 'fk' as alias
-fi
-
 # Node
-if (( $+commands[node] )) && [[ -d "/usr/local/lib/node_modules" ]]; then
-  export NODE_MODULES_GLOBAL_PATH="/usr/local/lib/node_modules"
-  PATH="$PATH:node_modules/.bin" # access ./node_modules/.bin/ in project root directory
-fi
+# if (( $+commands[node] )) && [[ -d "/usr/local/lib/node_modules" ]]; then
+#   export NODE_MODULES_GLOBAL_PATH="/usr/local/lib/node_modules"
+#   PATH="$PATH:node_modules/.bin" # access ./node_modules/.bin/ in project root directory
+# fi
 
 # Python
 # for python installed with brew, modules and executables installed in pip will be installed under some brew directory
@@ -143,27 +133,6 @@ TRAPWINCH() {
 [[ -f "${HOME}/.zalias" ]] && source "${HOME}/.zalias" # should source before functions
 [[ -f "${HOME}/.zfunction" ]] && source "${HOME}/.zfunction" # should source after aliases
 
-# TODO: enable after merging zle in this file to zsh/modules/editor/terminfo.zsh
-# Custom bindkeys for less common or unavailable in  OSX (ex. PageDown, PageUp)
-# [[ -f ~/.dotfiles/zsh/modules/editor/function-key.zsh ]] && source ~/.dotfiles/zsh/modules/editor/function-key.zsh
-
-# TODO: figure out how to autoload (like mingit prompt in fpath) instead of sourcing Z
-# Z module for jumping to MRU directories
-# [ -f ~/.dotfiles/zsh/modules/z/z.sh ] && source ~/.dotfiles/zsh/modules/z/z.sh
-
-# Zsh-autosuggestions module settings and bindings
-# [ ! -d ~/.zsh-autosuggestions ] && git clone git://github.com/zsh-users/zsh-autosuggestions ~/.zsh-autosuggestions
-# source ~/.zsh-autosuggestions/zsh-autosuggestions.zsh
-# ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=8" # suggestion style, default is fg=8
-# ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE=20 # disable suggestion for large buffers
-# bindkey '\e^I' autosuggest-accept # Option+Tab to accept current suggestion NOTE: requires zsh-autosuggestions module
-# bindkey '^ ' autosuggest-execute # Option+Return TODO: Option+Return map does not work
-# bindkey '\e^?' autosuggest-clear # Option+Delete TODO: Option+Delte map does not work
-
-# GitHub profile for ~/.bin/git-open
-# export GITHUB_USER='irliao'
-# export GITHUB_URL='https://git.my-company.com' # mainly for GitHub Enterprise, should override in custom ~/.bash_profile
-
 # Bash profile
 [[ -f "${HOME}/.bash_profile" ]] && source "${HOME}/.bash_profile"
 
@@ -192,29 +161,8 @@ function set_cursor_shape {
   fi
 }
 
-# TODO: merge logic into zle-keymap-select zle-line-init
-# Make aborted command-lines available after pressing undo
-# zle-line-init() {
-#   if [[ -n $ZLE_LINE_ABORTED ]]; then
-#     local savebuf="$BUFFER" savecur="$CURSOR"
-#     BUFFER="$ZLE_LINE_ABORTED"
-#     CURSOR="$#BUFFER"
-#     zle split-undo
-#     BUFFER="$savebuf" CURSOR="$savecur"
-#   fi
-# }
-
 # Updates prompt with editor mode when keymap changes OR when prompt inits
 function zle-keymap-select zle-line-init {
-  #  TODO: prevent this from causeing mouse clicks to paste clipboard content when prompt is frozen due to some process running
-  # if [[ -n $ZLE_LINE_ABORTED ]]; then
-  #   local savebuf="$BUFFER" savecur="$CURSOR"
-  #   BUFFER="$ZLE_LINE_ABORTED"
-  #   CURSOR="$#BUFFER"
-  #   zle split-undo
-  #   BUFFER="$savebuf" CURSOR="$savecur"
-  # fi
-
   case $KEYMAP in
     vicmd) set_cursor_shape 0 ;; # block cursor
     viins) set_cursor_shape 1 ;; # line cursor
@@ -232,39 +180,9 @@ zle -N zle-line-init
 zle -N zle-keymap-select
 
 function zle-line-finish {
-
     set_cursor_shape 0 # block cursor
 }
 zle -N zle-line-finish
-
-# TODO: verify if this works by trying i", a(, etc
-# Select-bracketed which selects text delimited by brackets and select-quoted which selects text delimited by quote characters
-# autoload -U select-bracketed select-quoted
-# zle -N select-bracketed
-# zle -N select-quoted
-#   for km in viopp visual; do
-#   bindkey -M $km -- '-' vi-up-line-or-history
-#   for c in {a,i}"${(s..):-\'\"\`\|,./:;-=+@}"; do
-#     bindkey -M $km $c select-quoted
-#   done
-#   for c in {a,i}${(s..):-'()[]{}<>bB'}; do
-#     bindkey -M $km $c select-bracketed
-#   done
-# done
-
-# TODO: fix broken
-# Pressing Enter/Return on empty promptline will run ls
-# auto-ls-empty-prompt () {
-#   if [[ $#BUFFER -eq 0 ]]; then
-#     echo ""
-#     ls
-#     zle redisplay
-#   else
-#     zle .$WIDGET
-#   fi
-# }
-# zle -N accept-line auto-ls-empty-prompt
-# zle -N other-widget auto-ls-empty-prompt
 
 # Press Tab on empty prompt to run ls
 function expand-or-complete-or-list-files-empty-prompt() {
@@ -310,17 +228,17 @@ bindkey "^P" history-substring-search-up
 bindkey "^N" history-substring-search-down
 bindkey -M vicmd 'k' history-substring-search-up
 bindkey -M vicmd 'j' history-substring-search-down
+# TODO: check if $key will make the startup time slow
+# bindkey "$key[Up]" history-substring-search-up # same as ^[[A
+# bindkey "$key[Down]" history-substring-search-down # same as ^[[B
 bindkey '^[[A' history-substring-search-up
 bindkey '^[[B' history-substring-search-down
 # bindkey "^N" down-line-or-history
 # bindkey "^P" up-line-or-history
 # bindkey "^N" down-line-or-search
 # bindkey "^P" up-line-or-search
-# bindkey '^R' history-incremental-search-backward # starts searching history backward
-bindkey "^R" fzf-history-widget # R for replay history
+bindkey '^R' history-incremental-pattern-search-backward # starts searching history backward with pattern enabled
 # bindkey "^W" history-incremental-search-forward
-
-#
 # bindkey "^W" delete-word
 bindkey "^Y" push-line-or-edit # stash current prompt, restore current prompt after immediate command returns
 bindkey '^I' expand-or-complete-or-list-files-empty-prompt # ^I == Tab, press Tab to ls when pressed on empty prompt
@@ -382,7 +300,9 @@ else
   # unsupported terminal emulators
 fi
 
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+# Enables keybindings from fzf, overrides ^R to fzf search command history
+[ -f ~/.fzf.zsh ] &&
+  source ~/.fzf.zsh
 
 # TODO: verify if this or syntax-highlighting needs to be loaded last
 # Rbenv (NOTE: should be the very last lines in ~/.zshrc or ~/.bash_profile)
