@@ -88,17 +88,6 @@ main() {
 
   # TODO: add code to check and install fonts in config/macos/fonts/*.ttf for macOS
 
-  # TODO: look into replacing config/homebrew/brewfile.sh + "mas-cli" + "brew cask" with "brew-bundle"
-  # TODO: add code to use "mas-cli" or other safe alternatives to install AppStore apps
-  # TODO: verify if "Brew Cask" is safest/bestest way to install apps
-  # TODO: move this to a new script file in config/homebrew and source the script here
-  # install macOS applications not found in the AppStore using Brew Cask
-  # [ ! -e /Applications/Google\ Chrome.app ] && brew cask install google-chrome > /dev/null && echof 'cask installed Google Chrome'
-  # [ ! -e /Applications/iTerm.app ] && brew cask install iterm2 > /dev/null && echof 'cask installed iTerm'
-  # [ ! -e /Applications/Karabiner-Elements.app ] && brew cask install karabiner-elements > /dev/null && echof 'cask installed Karabiner-Elements'
-  # [ ! -e /Applications/Hammerspoon.app ] && brew cask install hammerspoon && echof 'cask installed Hammerspoon'
-  # [ ! -e /Applications/AppCleaner.app ] && brew cask install appcleaner && echof 'cask installed AppCleaner'
-
   # user specific instructions
   if ([ "$USER" = 'irliao' ] || [ "$USER" = 'rliao' ]); then
     # symlink git files only for my personal account
