@@ -164,7 +164,6 @@ alias brew-config-install="brew bundle --file ~/.dotfiles/config/homebrew/Brewfi
 alias brew-config-save="brew bundle dump --file ~/.dotfiles/config/homebrew/Brewfile --force" # save current configs to Brewfile using brew bundle
 alias brew-config-check="brew bundle check --file ~/.dotfiles/config/homebrew/Brewfile" # list updates from Brewfile using brew bundle
 alias brew-cask-search="brew search --cask"
-alias brew-nuke="brew remove --force $(brew list) --ignore-dependencies && brew remove --cask --force $(brew list) --ignore-dependencies && brew cleanup"
 
 # alias brew-deps='brew deps --installed --tree' # show installed formulaes' dependencies
 # alias brew-uses='brew uses --installed' # show which formuales use $1 as dependency

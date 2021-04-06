@@ -83,6 +83,13 @@ e() {
     "$EDITOR" "$@";
 }
 
+# remove all brew installed dependencies and casks
+brew-nuke() {
+    brew remove --force $(brew list) --ignore-dependencies &&
+      brew remove --cask --force $(brew list) --ignore-dependencies &&
+      brew cleanup
+}
+
 # convert .mmd file to viewable diagrams, requires mmdc installed (npm install -g mermaid.cli)
 mmd() {
     if [[ "$#" != 2 ]]; then
