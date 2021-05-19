@@ -1,3 +1,0 @@
-Zim commit ref:   9039549
-Zsh version:      zsh 5.5.1 (x86_64-apple-darwin17.5.0)
-System info:      Darwin Ryans-Air 17.7.0 Darwin Kernel Version 17.7.0: Thu Jun 21 22:53:14 PDT 2018; root:xnu-4570.71.2~1/RELEASE_X86_64 x86_64

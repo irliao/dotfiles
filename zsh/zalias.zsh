@@ -33,8 +33,6 @@ alias sdcards-mount="diskutil mountDisk /dev/disk2" # insert SD card
 # Zsh
 alias zs="source ~/.zshrc && echo 'zsh: sourced zshrc: ~/.zshrc'"
 alias zc="rm $HISTFILE && echo 'zsh: removed $HISTFILE: restart shell to clear history'" # clear history and prompt
-alias ze="zmanage info >| $HOME/.dotfiles/zsh/zinfo.txt && echo 'zsh: exported zmanage info to: $HOME/.dotfiles/zsh/zinfo.txt'" # write Zim info to file, '>|' overwrites existing file
-alias zdebug="source $HOME/.dotfiles/zsh/zdebug.zsh && echo 'zsh: loaded zsh debug utils from sourcing: $HOME/.dotfiles/zsh/zdebug.zsh'" # load the Zsh debugging utils # TODO: convert this into a toggle function
 alias zu="zimfw upgrade && zimfw update && echo 'zsh: updated Zim with: zmanage update'" # update Zim
 
 # Python
@@ -285,20 +283,4 @@ alias airdrop-disable="defaults write com.apple.NetworkBrowser DisableAirDrop -b
 alias apps-update-all="sudo softwareupdate -ia"
 alias apps-update-ls="sudo softwareupdate -l"
 alias macos-system-icons="open /System/Library/CoreServices/CoreTypes.bundle/Contents/Resources/" # NOTE: .icns in here must be copied to another folder and chmod to 777 to be usable as folder icons
-
-# Time Machine
-# alias timemachine="tmutil"
-# alias timemachine-set-interval="sudo defaults write /System/Library/LaunchDaemons/com.apple.backupd-auto StartInterval -int" # pass in 1800 for 30 minutes
-# alias timemachine-ls="tmutil listbackups"
-# alias timemachine-path="tmutil destinationinfo"
-# alias timemachine-exclude="sudo tmutil addexclusion" # exclude passed in folder path
-# alias timemachine-enable="sudo tmutil enable"
-# alias timemachine-disable="sudo tmutil disable"
-# alias timemachine-start="tmutil startbackup"
-# alias timemachine-stop="tmutil stopbackup"
-# alias timemachine-verify-backup-at="sudo tmutil verifychecksums" # verify passed in path to backup
-# alias timemachine-status-local-snapshots="defaults read /Library/Preferences/com.apple.TimeMachine MobileBackups"
-# alias timemachine-disable-local-snapshots="sudo tmutil disablelocal"
-# alias timemachine-enable-local-snapshots="sudo tmutil enablelocal"
-# alias timemachine-diff="tmutil calculatedrift" # see deltas for passed in backup folder path
 
