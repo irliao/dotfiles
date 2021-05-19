@@ -46,25 +46,21 @@ function resizeFocusedWindowToSize(x, y, w, h)
   win:setFrame(f)
 end
 
--- Resize window to left half
-function resizeToLeftHalf()
-  local max = hs.window.focusedWindow():screen():frame()
-  resizeFocusedWindowToSize(max.x, max.y,
-                            max.w / 2, max.h)
-end
-
--- Resize window to right half
-function resizeToRightHalf()
-  local max = hs.window.focusedWindow():screen():frame()
-  resizeFocusedWindowToSize(max.x + (max.w / 2), max.y,
-                            max.w / 2, max.h)
-end
-
--- Resize window to full
-function resizeToFullScreen()
-  local max = hs.window.focusedWindow():screen():frame()
-  resizeFocusedWindowToSize(max.x, max.y,
-                            max.w, max.h)
+function resizeFocusedWindowTo(direction)
+    local max = hs.window.focusedWindow():screen():frame()
+    if direction == "center" then
+      resizeFocusedWindowToSize(max.x, max.y, max.w, max.h)
+    elseif direction == "left" then
+      resizeFocusedWindowToSize(max.x, max.y, max.w / 2, max.h)
+    elseif direction == "right" then
+      resizeFocusedWindowToSize(max.x + (max.w / 2), max.y, max.w / 2, max.h)
+    elseif direction == "top" then
+      resizeFocusedWindowToSize(max.x, max.y, max.w, max.h / 2)
+    elseif direction == "bottom" then
+      resizeFocusedWindowToSize(max.x, max.y + (max.h / 2), max.w, max.h / 2)
+    else
+      hs.alert("ERROR: please specify direction (center|left|right|top|bottom) of window to resize to")
+    end
 end
 
 -- Toggle Full Screen

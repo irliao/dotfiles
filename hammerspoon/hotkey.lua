@@ -26,9 +26,11 @@ local ctrlCmdShift = {"ctrl", "cmd", "shift"} -- inverse modifier for most frequ
 local ctrlAltShift = {"ctrl", "alt", "shift"} -- inverse modifier for less frequent hotkey
 
 -- Window management
-hs.hotkey.bind(ctrlCmd, "A", "Resize Left", function() resizeToLeftHalf() end)
-hs.hotkey.bind(ctrlCmd, "S", "Resize Full", function() resizeToFullScreen() end)
-hs.hotkey.bind(ctrlCmd, "D", "Resize Right", function() resizeToRightHalf() end)
+hs.hotkey.bind(ctrlCmd, "S", "Resize Full", function() resizeFocusedWindowTo("center") end)
+hs.hotkey.bind(ctrlCmd, "A", "Resize Left", function() resizeFocusedWindowTo("left") end)
+hs.hotkey.bind(ctrlCmd, "D", "Resize Right", function() resizeFocusedWindowTo("right") end)
+hs.hotkey.bind(ctrlCmd, "W", "Resize Top", function() resizeFocusedWindowTo("top") end)
+hs.hotkey.bind(ctrlCmd, "X", "Resize Bottom", function() resizeFocusedWindowTo("bottom") end)
 hs.hotkey.bind(ctrlCmd, "H", "Focus Left Window", function() focusWindowAtDirection("left") end)
 hs.hotkey.bind(ctrlCmd, "L", "Focus Right Window", function() focusWindowAtDirection("right") end)
 hs.hotkey.bind(ctrlCmd, "Z", "Hide All Windows", function() hideAllWindows() end)
