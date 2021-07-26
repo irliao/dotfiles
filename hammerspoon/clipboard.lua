@@ -216,7 +216,7 @@ function showClipboardMenuBarAtMouse()
   if clipboardMenuBar == nil then
     return
   end
-  clipboardMenuBar:popupMenu(hs.mouse.getAbsolutePosition())
+  clipboardMenuBar:popupMenu(hs.mouse.absolutePosition())
 end
 
 -- TODO: since Cmd+C is systemAssigned key, so it's not meant to be assignable, but leaving this here for now since reassigning Command + C seems like a more valid override
