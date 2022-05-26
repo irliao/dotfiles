@@ -1,59 +1,28 @@
 # vim: ft=zsh
-#
-# Mingit Theme
-# @author: Ryan Liao - irliao
-#
 
-# TODO: implement functionality to toggle color theme and git branch display style
+# Unique symbols
+# ❯
+# λ
 
-# TODO: reference and apply tricks from: https://github.com/andschwa/shell/blob/df12f5fe8c946f529dc3280409d3cb1ed0771507/.bash_completion.d/git-prompt.sh
-# TODO: refactor with named colors below OR load and use "colors" module
-# Helper function that is meant to be called from __git_ps1.  It
-# injects color codes into the appropriate gitstring variables used
-# to build a gitstring.
-# __git_ps1_colorize_gitstring ()
-# {
-# 	if [[ -n ${ZSH_VERSION-} ]]; then
-# 		local c_red='%F{red}'
-# 		local c_green='%F{green}'
-# 		local c_lblue='%F{blue}'
-# 		local c_clear='%f'
-# 	else
-# 		# Using \[ and \] around colors is necessary to prevent
-# 		# issues with command line editing/browsing/completion!
-# 		local c_red='\[\e[31m\]'
-# 		local c_green='\[\e[32m\]'
-# 		local c_lblue='\[\e[1;34m\]'
-# 		local c_clear='\[\e[0m\]'
-# 	fi
-# 	local bad_color=$c_red
-# 	local ok_color=$c_green
-# 	local flags_color="$c_lblue"
-
-# 	local branch_color=""
-# 	if [ $detached = no ]; then
-# 		branch_color="$ok_color"
-# 	else
-# 		branch_color="$bad_color"
-# 	fi
-# 	c="$branch_color$c"
-
-# 	z="$c_clear$z"
-# 	if [ "$w" = "*" ]; then
-# 		w="$bad_color$w"
-# 	fi
-# 	if [ -n "$i" ]; then
-# 		i="$ok_color$i"
-# 	fi
-# 	if [ -n "$s" ]; then
-# 		s="$flags_color$s"
-# 	fi
-# 	if [ -n "$u" ]; then
-# 		u="$bad_color$u"
-# 	fi
-# 	r="$c_clear$r"
-# }
-#
+# String variables
+# git:
+# %b => current branch
+# %a => current action (rebase/merge)
+# prompt:
+# %F => color dict
+# %f => reset color
+# %~ => current path
+# %* => time
+# %n => username
+# %m => shortname host
+# %(?..) => prompt conditional - %(condition.true.false)
+# terminal codes:
+# \e7   => save cursor position
+# \e[2A => move cursor 2 lines up
+# \e[1G => go to position 1 in terminal
+# \e8   => restore cursor position
+# \e[K  => clears everything after the cursor on the current line
+# \e[2K => clear everything on the current line
 
 # ***BASH ONLY*** color escape codes
 # local color_off='\[\e[0m\]'
@@ -171,7 +140,7 @@ prompt_mingit_precmd() {
   # PROMPT="$PROMPT"'$([ -n "$TMUX" ] && tmux setenv TMUXPWD_$(tmux display -p "#D" | tr -d %) "$PWD")'
 
   # PROMPT="$(gst_get_pwd)$(git_prompt_info)$(gst_get_suffix)"
-  PROMPT="$(gst_get_prefix)$(gst_get_pwd)$(git_prompt_info)$(gst_get_suffix)" # indented prompt (space as prefix)
+  PROMPT=" $(gst_get_prefix)$(gst_get_pwd)$(git_prompt_info)$(gst_get_suffix)" # indented prompt (space as prefix)
   RPROMPT="%*" # right end of the prompt, show time in 24 hours format with seconds
 }
 
@@ -225,25 +194,3 @@ prompt_mingit_setup "$@"
 #   echo $prompt_short_dir
 # }
 
-# Unique symbols
-# ❯
-
-# String variables
-# git:
-# %b => current branch
-# %a => current action (rebase/merge)
-# prompt:
-# %F => color dict
-# %f => reset color
-# %~ => current path
-# %* => time
-# %n => username
-# %m => shortname host
-# %(?..) => prompt conditional - %(condition.true.false)
-# terminal codes:
-# \e7   => save cursor position
-# \e[2A => move cursor 2 lines up
-# \e[1G => go to position 1 in terminal
-# \e8   => restore cursor position
-# \e[K  => clears everything after the cursor on the current line
-# \e[2K => clear everything on the current line

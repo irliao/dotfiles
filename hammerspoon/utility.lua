@@ -17,21 +17,20 @@ end
 alertSystemStatus = function()
     hs.alert.closeAll()
 
-    local bat_num = hs.battery.percentage() -- local var for immediate battery status
-    local bat_time = hs.battery.timeRemaining()
-    local bat_remain = string.format("%0.2f Remaining", (bat_time / 60))
-    -- TODO: make bat_remain have max precision of 2 decimal places
-    if bat_time == -1 then -- calculating
-      bat_remain = "Calculating Remaining"
-    elseif bat_time == -2 then -- plugged in
+    local batteryPercentage = hs.battery.percentage() -- local var for immediate battery status
+    local batteryTimeRemaining = hs.battery.timeRemaining()
+    local batteryRemainDisplay = string.format("%d hours %d minutes Remaining", math.floor(batteryTimeRemaining / 60), batteryTimeRemaining % 60)
+    if batteryTimeRemaining == -1 then -- calculating
+      batteryRemainDisplay = "Calculating Remaining"
+    elseif batteryTimeRemaining == -2 then -- plugged in
       if hs.battery.isCharged() then
-        bat_remain = "Charged"
+        batteryRemainDisplay = "Charged"
       elseif hs.battery.isCharging() then
         local bat_charge = hs.battery.timeToFullCharge()
         if bat_charge == -1 then -- calculating
-          bat_remain = "Calculating Time till Full"
+          batteryRemainDisplay = "Calculating Time till Full"
         else
-          bat_remain = string.format("Time till Full: %0.2f", (bat_charge / 60))
+          batteryRemainDisplay = string.format("Time till Full: %0.2f", (bat_charge / 60))
         end
       end
     end
@@ -40,11 +39,11 @@ alertSystemStatus = function()
     if not curWifiName then
       curWifiName = "Off"
     end
-    local wifiStr = "Wi-Fi: " .. curWifiName
+    local wifiInfiDisplay = "Wi-Fi: " .. curWifiName
 
-    local time_str = os.date("%A %b %d, %Y - %H:%M") -- os.date("%a, %m/%d/%y - %H:%m")
+    local timeDisplay = os.date("%A %b %d, %Y - %H:%M") -- os.date("%a, %m/%d/%y - %H:%m")
 
-    local bat_str = "Battery: " .. (bat_num and (bat_num .. "%") or "Nil") .. ", " .. bat_remain
+    local batteryInfoDisplay = "Battery: " .. (batteryPercentage and (math.floor(batteryPercentage) .. "%") or "Nil") .. ", " .. batteryRemainDisplay
 
     -- TODO: refactor to get sourceName from input-source.lua once getter function is complete
     local inputSources = {}
@@ -53,12 +52,12 @@ alertSystemStatus = function()
     inputSources["com.apple.inputmethod.TCIM.Pinyin"] = "中文"
     local sourceId = hs.keycodes.currentSourceID()
     local sourceName = inputSources[sourceId]
-    local input_str = "Input: " .. sourceName
+    local inputInfoDisplay = "Input: " .. sourceName
 
-    hs.alert(time_str)
-    hs.alert(bat_str)
-    hs.alert(wifiStr)
-    hs.alert(input_str)
+    hs.alert(timeDisplay)
+    hs.alert(batteryInfoDisplay)
+    hs.alert(wifiInfiDisplay)
+    hs.alert(inputInfoDisplay)
 end
 
 -- Sent message to OSX Notification Center

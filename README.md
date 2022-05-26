@@ -9,14 +9,14 @@ I am not responsible for any issue, data loss, or damage caused by this reposito
 ./install.sh
 ```
 
-## Dependencies
+## Core Tools
 * [zimfw](https://github.com/zimfw/zimfw) - Zsh configuration framework
 * [vim-plug](https://github.com/junegunn/vim-plug) - Vim plugin manager
 * [Hammerspoon](https://github.com/Hammerspoon/hammerspoon) - Automation for macOS
 * [Karabiner-Elements](https://github.com/tekezo/Karabiner-Elements) - Keyboard customizer for macOS
 
 ## License
-Copyright (c) 2020 Ryan Liao. Released under the [MIT License][license].
+Copyright (c) 2022 Ryan Liao. Released under the [MIT License][license].
 
 [license]: LICENSE
 [readme]: README.md

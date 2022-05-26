@@ -1,9 +1,0 @@
-# initial setup: stack install haskeline
-
-editMode: Vi
-completionType: MenuCompletion # default ListCompletion
-historyDuplicates: IgnoreConsecutive # default AlwaysAdd, alternative IgnoreAll
-
-# TODO: does not work, ask on haskeline GitHub for help
-# bind ctrl-p up
-# bind ctrl-n down

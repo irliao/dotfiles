@@ -2,13 +2,24 @@
 # User configuration sourced by interactive shells
 #
 
+# TODO: move zim specific to another file
 # Begin intialize zimfw
 setopt HIST_IGNORE_ALL_DUPS # Remove older command from the history if a duplicate is to be added.
 WORDCHARS=${WORDCHARS//[\/]} # Remove path separator from WORDCHARS.
 ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets)
 export ZIM_HOME=${ZDOTDIR:-${HOME}}/.zim
-if [[ ${ZIM_HOME}/init.zsh -ot ${ZDOTDIR:-${HOME}}/.zimrc ]]; then
-  # Update static initialization script if it's outdated, before sourcing it
+
+if [[ ! -e ${ZIM_HOME}/zimfw.zsh ]]; then
+  # Download zimfw script if missing.
+  command mkdir -p ${ZIM_HOME}
+  if (( ${+commands[curl]} )); then
+    command curl -fsSL -o ${ZIM_HOME}/zimfw.zsh https://github.com/zimfw/zimfw/releases/latest/download/zimfw.zsh
+  else
+    command wget -nv -O ${ZIM_HOME}/zimfw.zsh https://github.com/zimfw/zimfw/releases/latest/download/zimfw.zsh
+  fi
+fi
+if [[ ! ${ZIM_HOME}/init.zsh -nt ${ZDOTDIR:-${HOME}}/.zimrc ]]; then
+  # Install missing modules, and update ${ZIM_HOME}/init.zsh if missing or outdated.
   source ${ZIM_HOME}/zimfw.zsh init -q
 fi
 source ${ZIM_HOME}/init.zsh
@@ -59,7 +70,8 @@ fpath=(
 
 autoload -Uz clear-scrollback && clear-scrollback
 autoload -Uz promptinit && promptinit
-prompt cmder # load custom prompt theme
+# prompt cmder # load custom prompt theme
+prompt mingit # load custom prompt theme
 # autoload -Uz compinit && compinit
 
 export DEVPATH="$HOME/Developments"
@@ -105,6 +117,9 @@ export PAGER='less'
 #   export XCODE="$(xcode-select --print-path)"
 #   PATH="$PATH:$XCODE/Tools"
 # fi
+
+# Brew
+PATH="/opt/homebrew/bin:$PATH" # needed for M1 Pro
 
 # Ensure all sessions will have the PATH with access to external cli's bin
 export PATH

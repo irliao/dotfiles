@@ -18,15 +18,13 @@ main() {
 
   # install brew if not found
   (! command -v brew > /dev/null) && # checks if brew is installed
-    ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)" && # downloads brew
-    /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)" && # installs brew
+      /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)" &&
+      export PATH="/opt/homebrew/bin:$PATH" && # needed for M1 Macs
       brew analytics off && # opt out of sending Homebrew analytics
       brew doctor &&
       brew update &&
       brew upgrade &&
       echof 'installed brew'
-
-  # TODO: install and setup ruby with rbenv installed from brew
 
   # set zsh as default shell (not needed for /bin/zsh because macOS Catalina or newer uses /bin/zsh as default shell)
   zshpath=$(command -v zsh) # detecting which zsh in case using brew installed zsh (/usr/local/bin)
@@ -45,21 +43,26 @@ main() {
     symlink "$zshdir/zlogin.zsh" ~/.zlogin &&
     symlink "$zshdir/zshrc.zsh" ~/.zshrc &&
     symlink "$zshdir/hushlogin.sh" ~/.hushlogin &&
-    ln -sfh "$dotfiles_path/config/term/iterm2/iterm2_shell_integration.zsh" ~/.iterm2_shell_integration.zsh
+    ln -sfh "$dotfiles_path/term/iterm2/iterm2_shell_integration.zsh" ~/.iterm2_shell_integration.zsh
+
+  # create config folder
+  mkdir -p ~/.config
+
+  # symlink karabiner directory
+  ln -svfh "$dotfiles_path/karabiner" ~/.config/karabiner
 
   # symlink miscellaneous directories
   symlink "$dotfiles_path/bin" ~/.bin
-  symlink "$dotfiles_path/config" ~/.config
 
   # symlink grep files
-  symlink "$dotfiles_path/config/grep/ignore" ~/.ignore # used by Ag search
+  symlink "$dotfiles_path/grep/ignore" ~/.ignore # used by Ag search
 
   # symlink pip files
-  symlink "$dotfiles_path/config/pip" ~/.pip
+  symlink "$dotfiles_path/pip" ~/.pip
 
   # symlink ghci files
-  symlink "$dotfiles_path/config/ghc/ghci" ~/.ghci &&
-    symlink "$dotfiles_path/config/ghc/haskeline" ~/.haskeline # need to install haskeline with stack
+  symlink "$dotfiles_path/ghc/ghci" ~/.ghci &&
+    symlink "$dotfiles_path/ghc/haskeline" ~/.haskeline # need to install haskeline with stack
 
   # symlink vim files
   symlink "$dotfiles_path/vim" ~/.vim &&
@@ -77,27 +80,27 @@ main() {
   symlink "$dotfiles_path/hammerspoon" ~/.hammerspoon
 
   # symlink airport utility for macOS
-  symlink /System/Library/PrivateFrameworks/Apple80211.framework/Versions/Current/Resources/airport /usr/local/bin/airport
+  # symlink /System/Library/PrivateFrameworks/Apple80211.framework/Versions/Current/Resources/airport /usr/local/bin/airport
 
   # TODO: add code to check and install fonts in config/macos/fonts/*.ttf for macOS
 
   # user specific instructions
   if ([ "$USER" = 'irliao' ] || [ "$USER" = 'rliao' ]); then
     # symlink git files only for my personal account
-      symlink "$dotfiles_path/config/git/gitconfig" ~/.gitconfig &&
-        symlink "$dotfiles_path/config/git/gitignore_global" ~/.gitignore_global
+      symlink "$dotfiles_path/git/gitconfig" ~/.gitconfig &&
+        symlink "$dotfiles_path/git/gitignore_global" ~/.gitignore_global
 
     # check and install brew formulas from Brewfile
-    homebrew_file="$dotfiles_path/config/homebrew/Brewfile"
-    (! brew bundle check --verbose --file "$homebrew_file") &&
-      echo "found missing brew formula(s), install with command: brew bundle install --file $homebrew_file"
+    # homebrew_file="$dotfiles_path/config/homebrew/Brewfile"
+    # (! brew bundle check --verbose --file "$homebrew_file") &&
+      # echo "found missing brew formula(s), install with command: brew bundle install --file $homebrew_file"
   fi
 
   # install zim, needs to install last for sourcing ~/.zlogin
-  [ ! -d ~/.zim ] && # test -d for directory or symlink, -L for symlink
-    curl -fsSL https://raw.githubusercontent.com/zimfw/install/master/install.zsh | zsh &&
-    source ~/.zlogin && # only needed once during first install
-    echof 'downloaded zim to ~/.zim, assuming this is initial install, sourced ~/.zlogin'
+  # [ ! -d ~/.zim ] && # test -d for directory or symlink, -L for symlink
+  #   curl -fsSL https://raw.githubusercontent.com/zimfw/install/master/install.zsh | zsh &&
+  #   source ~/.zlogin && # only needed once during first install
+  #   echof 'downloaded zim to ~/.zim, assuming this is initial install, sourced ~/.zlogin'
 
   return 0 # install succeeded without error
 }
