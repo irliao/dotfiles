@@ -51,14 +51,14 @@ prompt_iterm_preexec() {
 
 # indent prompt by printing spaces
 gst_get_prefix() {
-  print ""
+  print " "
 }
 
 # shows icon for start of input with color to indicate return status of last command
 gst_get_suffix() {
   # local suffix='❯' # TODO: replace suffix character with variable in print
   # print "%(?:%F{7}$%f :%F{8}$%f %s)" # success/failure - white/gray
-  print "%(?:%F{2}λ%f :%F{1}λ%f %s)" # success/failure - cyan/red
+  print "%(?:%F{2}❯%f :%F{1}❯%f %s)" # success/failure - cyan/red
   # print "%(?:%F{2}$%f :%F{7}$%f %s)" # success/failure - cyan/white
   # print "%(?:%F{2}λ%f :%F{7}λ%f %s)" # success/failure - cyan/white
 }
@@ -140,7 +140,7 @@ prompt_mingit_precmd() {
   # PROMPT="$PROMPT"'$([ -n "$TMUX" ] && tmux setenv TMUXPWD_$(tmux display -p "#D" | tr -d %) "$PWD")'
 
   # PROMPT="$(gst_get_pwd)$(git_prompt_info)$(gst_get_suffix)"
-  PROMPT=" $(gst_get_prefix)$(gst_get_pwd)$(git_prompt_info)$(gst_get_suffix)" # indented prompt (space as prefix)
+  PROMPT="$(gst_get_prefix)$(gst_get_pwd)$(git_prompt_info)$(gst_get_suffix)" # indented prompt (space as prefix)
   RPROMPT="%*" # right end of the prompt, show time in 24 hours format with seconds
 }
 
@@ -153,9 +153,10 @@ prompt_mingit_setup() {
   ZSH_THEME_GIT_PROMPT_PREFIX=""
   ZSH_THEME_GIT_PROMPT_SUFFIX="%f "
   # ZSH_THEME_GIT_PROMPT_DIRTY="%F{1}✗" # red
-  ZSH_THEME_GIT_PROMPT_DIRTY="%F{1}" # red
-  # ZSH_THEME_GIT_PROMPT_DIRTY="%F{3}" # yellow
-  ZSH_THEME_GIT_PROMPT_CLEAN="%F{2}"
+  # ZSH_THEME_GIT_PROMPT_DIRTY="%F{1}" # red
+  ZSH_THEME_GIT_PROMPT_DIRTY="%F{11}" # yellow
+  ZSH_THEME_GIT_PROMPT_CLEAN="%F{14}" # teal
+  # ZSH_THEME_GIT_PROMPT_CLEAN="%F{2}" # green
   # ZSH_THEME_GIT_PROMPT_CLEAN="%F{6}✓"
 
   # autoload -Uz colors && colors
