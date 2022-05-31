@@ -46,6 +46,7 @@ console = require("console")
 utility = require("utility")
 hotkey = require("hotkey")
 caffeine = require("caffeine")
+clipboard = require("clipboard")
 windowFilter = require("windowFilter")
 applicationWatcher = require("applicationWatcher").start()
 fileWatcher = hs.pathwatcher.new(os.getenv("HOME") .. "/.hammerspoon/init.lua", reloadConfig):start() -- reloads Hammerspoon whenever ~/.hammerspoon/init.lua is edited and saved

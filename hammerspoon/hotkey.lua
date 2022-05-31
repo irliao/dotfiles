@@ -17,7 +17,6 @@ require("utility")
 local windowUtil = require("windowUtil")
 
 module.windowSwitcher = require("windowSwitcher")
-module.clipboard = require("clipboard")
 
 -- Modifiers (Ctrl + Cmd/Alt)
 local ctrlCmd = {"ctrl", "cmd"} -- modifier for most frequent hotkey
@@ -34,8 +33,8 @@ hs.hotkey.bind(ctrlCmd, "X", "Resize Bottom", function() resizeFocusedWindowTo("
 hs.hotkey.bind(ctrlCmd, "H", "Focus Left Window", function() focusWindowAtDirection("left") end)
 hs.hotkey.bind(ctrlCmd, "L", "Focus Right Window", function() focusWindowAtDirection("right") end)
 hs.hotkey.bind(ctrlCmd, "Z", "Hide All Windows", function() hideAllWindows() end)
-hs.hotkey.bind(ctrlCmd, "TAB", "Focus Previous Window", function() module.windowSwitcher:focusPreviousWindow() end)
-hs.hotkey.bind(ctrlCmdShift, "TAB", "Focus Next Window", function() module.windowSwitcher:focusNextWindow() end)
+hs.hotkey.bind({"alt"}, "TAB", "Focus Previous Window", function() module.windowSwitcher:focusPreviousWindow() end)
+hs.hotkey.bind({"alt", "shift"}, "TAB", "Focus Next Window", function() module.windowSwitcher:focusNextWindow() end)
 hs.hotkey.bind(ctrlCmd, "ESCAPE", "Move Previous Screen", function() moveWindowToScreen("prev") end)
 hs.hotkey.bind(ctrlCmdShift, "ESCAPE", "Move Next Screen", function() moveWindowToScreen("next") end)
 hs.hotkey.bind(ctrlCmd, "`", "Move Previous Screen", function() moveWindowToScreen("prev") end)
