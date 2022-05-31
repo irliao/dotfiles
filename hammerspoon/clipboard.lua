@@ -21,10 +21,10 @@ local logger = hs.logger.new('Clipboard')
 -- Feel free to change those settings
 local hist_size = 50 -- How many items to keep on history
 local label_length = 100 -- How wide (in characters) the dropdown menu should be. Copies larger than this will have their label truncated and end with "…" (unicode for elipsis ...)
-local honor_clearcontent = false --asmagill request. If any application clears the pasteboard, we also remove it from the history https://groups.google.com/d/msg/hammerspoon/skEeypZHOmM/Tg8QnEj_N68J
+-- TODO: verify if the honor flag below is behaving as intended
+local honor_clearcontent = true --asmagill request. If any application clears the pasteboard, we also remove it from the history https://groups.google.com/d/msg/hammerspoon/skEeypZHOmM/Tg8QnEj_N68J
 
--- Don't change anything bellow this line
-local settingsKey = "com.irliao.clipboard" -- key to access clipboard_history stored in hs.settings
+local settingsKey = "com.hs.clipboard.history.me" -- key to access clipboard_history stored in hs.settings
 local clipboardMenuBar = hs.menubar.new():setTooltip("clipboard")
 -- TODO: implement chooser with same clipboard history
 -- local chooser = hs.chooser.new(function (choice)
@@ -34,28 +34,16 @@ local clipboardMenuBar = hs.menubar.new():setTooltip("clipboard")
 --     hs.alert("chosen")
 --   end
 -- end)
-local pasteboard = require("hs.pasteboard") -- http://www.hammerspoon.org/docs/hs.pasteboard.html
-
-local pasteboardOnChangeCallback
-pasteboardOnChangeCallback = function(pbContentDidChange)
-  if pbContentDidChange then
-    -- hs.alert("pasteboard changed to: " .. pasteboard.getContents())
-    savePbContentToClipboard()
-  else
-
-    -- case when timeout occurrs and pasteboard did not change
-  end
-
-  -- need to reattach the callback otherwise it detaches after the first time it fires
-  pasteboard.callbackWhenChanged(math.huge, pasteboardOnChangeCallback)
-end
-pasteboard.callbackWhenChanged(math.huge, pasteboardOnChangeCallback)
-
-
+local pasteboard = require("hs.pasteboard")
 local settings = require("hs.settings") -- http://www.hammerspoon.org/docs/hs.settings.html
 
 --Array to store the clipboard history
 clipboard_history = settings.get(settingsKey) or {} --If no history is saved on the system, create an empty history
+
+-- watcher will by default poll every 0.25s
+module.pbWatcher = hs.pasteboard.watcher.new(function(newPbValue)
+  savePbContentToClipboard(newPbValue)
+end)
 
 -- Internal method: Verify whether the pasteboard contents matches one of the identifiers that need to be ignored.
 -- Code from https://github.com/asmagill/hammerspoon-config/blob/master/utils/_menus/newClipper.lua
@@ -82,7 +70,7 @@ end
 function putOnPaste(textToPaste, keysPressed)
     pasteboard.setContents(textToPaste)
     hs.eventtap.keyStroke({"cmd"}, "v")
-    savePbContentToClipboard()
+    savePbContentToClipboard(textToPaste)
 end
 
 -- Clears the clipboard and history
@@ -170,13 +158,13 @@ populateChooser = function(key)
 end
 
 -- If the pasteboard owner has changed, we add the current item to our history and update the counter.
-function savePbContentToClipboard()
+function savePbContentToClipboard(clipboard_content)
     if not shouldBeStored() then
-      logger.i('Pasteboard not saved, item listed in ignoreList')
+      hs.alert('Pasteboard not saved, item listed in ignoreList')
       return
     end
 
-    current_clipboard = pasteboard.getContents()
+    current_clipboard = clipboard_content -- pasteboard.getContents()
     -- asmagill requested this feature. It prevents the history from keeping items removed by password managers
     if (current_clipboard == nil and honor_clearcontent) then
       clearLastItem()
