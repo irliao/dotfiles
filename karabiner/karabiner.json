@@ -434,69 +434,6 @@
                         ]
                     },
                     {
-                        "description": "Toggle input source language between en (English) and zh-Hant (Traditional Chinese)/zh-Hans (Simplified Chinese)",
-                        "manipulators": [
-                            {
-                                "conditions": [
-                                    {
-                                        "input_sources": [
-                                            {
-                                                "language": "^zh-Han.$"
-                                            }
-                                        ],
-                                        "type": "input_source_if"
-                                    }
-                                ],
-                                "from": {
-                                    "key_code": "period",
-                                    "modifiers": {
-                                        "mandatory": [
-                                            "control",
-                                            "command"
-                                        ]
-                                    }
-                                },
-                                "to": [
-                                    {
-                                        "select_input_source": {
-                                            "language": "^en$"
-                                        }
-                                    }
-                                ],
-                                "type": "basic"
-                            },
-                            {
-                                "conditions": [
-                                    {
-                                        "input_sources": [
-                                            {
-                                                "language": "^en$"
-                                            }
-                                        ],
-                                        "type": "input_source_if"
-                                    }
-                                ],
-                                "from": {
-                                    "key_code": "period",
-                                    "modifiers": {
-                                        "mandatory": [
-                                            "control",
-                                            "command"
-                                        ]
-                                    }
-                                },
-                                "to": [
-                                    {
-                                        "select_input_source": {
-                                            "language": "^zh-Han.$"
-                                        }
-                                    }
-                                ],
-                                "type": "basic"
-                            }
-                        ]
-                    },
-                    {
                         "description": "Mouse side buttons to back/forward (primarily for Razer mouse back/forward not working in Safari)",
                         "manipulators": [
                             {
@@ -838,7 +775,7 @@
                     ]
                 }
             ],
-            "name": "default",
+            "name": "Main",
             "parameters": {
                 "delay_milliseconds_before_open_device": 1000
             },
