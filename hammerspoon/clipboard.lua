@@ -1,9 +1,7 @@
 -- Clipboard in menu bar with history persistent across launches
 
--- TODO: merge clipchooser.lua into this module
 -- TODO: convert this file to exportable module, then move bindings below to hotkey.lua
 -- TODO: implement exporting to file or print using this Hammerspoon command: hs.inspect(hs.settings.get("HSClipboardHistory"))
--- TODO: call storeCopy when "yy" is pressed
 
 local module = {
   consider_ignore=true,  -- Respect the `ignore` settings
@@ -40,6 +38,22 @@ local clipboardMenuBar = hs.menubar.new():setTooltip("clipboard")
 --   end
 -- end)
 local pasteboard = require("hs.pasteboard") -- http://www.hammerspoon.org/docs/hs.pasteboard.html
+
+local pasteboardOnChangeCallback
+pasteboardOnChangeCallback = function(pbContentDidChange)
+  if pbContentDidChange then
+    -- hs.alert("pasteboard changed to: " .. pasteboard.getContents())
+    savePbContentToClipboard()
+  else
+    -- case when timeout occurrs and pasteboard did not change
+  end
+
+  -- need to reattach the callback otherwise it detaches after the first time it fires
+  pasteboard.callbackWhenChanged(math.huge, pasteboardOnChangeCallback)
+end
+pasteboard.callbackWhenChanged(math.huge, pasteboardOnChangeCallback)
+
+
 local settings = require("hs.settings") -- http://www.hammerspoon.org/docs/hs.settings.html
 
 --Array to store the clipboard history
@@ -58,13 +72,6 @@ local function shouldBeStored()
     return true
 end
 
--- Focus the last used window.
-local function focusLastFocused()
-    local wf = hs.window.filter
-    local lastFocused = wf.defaultCurrentSpace:getWindows(wf.sortByFocusedLast)
-    if #lastFocused > 0 then lastFocused[1]:focus() end
-end
-
 function setMenuBarIcon()
   if (#clipboard_history == 0) then
     clipboardMenuBar:setIcon("assets/clipboard_empty.png")
@@ -77,8 +84,7 @@ end
 function putOnPaste(textToPaste, keysPressed)
     pasteboard.setContents(textToPaste)
     hs.eventtap.keyStroke({"cmd"}, "v")
-    -- overwriteCtrlJKHotkeys(false)
-    storeCopy()
+    savePbContentToClipboard()
 end
 
 -- Clears the clipboard and history
@@ -166,7 +172,7 @@ populateChooser = function(key)
 end
 
 -- If the pasteboard owner has changed, we add the current item to our history and update the counter.
-function storeCopy()
+function savePbContentToClipboard()
     if not shouldBeStored() then
       logger.i('Pasteboard not saved, item listed in ignoreList')
       return
@@ -190,59 +196,12 @@ function showChooser()
   chooser:show()
 end
 
--- TODO: incorrect behavior, this hack is also a bit misleading, the approach is correct but the mappings enabled might be incorrect
--- TODO: enable when needing to solve similar case but for Ctrl + HL for iTerm2 (Ctrl + JK solved for iTerm2 for now (or forever???) by disabling the Ctrl + JK key mappings in Profile tab)
--- TODO: add logging with logger
--- NOTE: Hack to overwrite the Ctrl + JK to Arrow Down/Up mappings from iTerm2 since those hotkeys are set to something else (check Profiles -> Keys tab in iTerm2)
--- function overwriteCtrlJKHotkeys(overwrite)
---   if (not module.ctrlJHotkey) then
---     module.ctrlJHotkey =   hs.hotkey.bind({"ctrl"}, "J", function() hs.eventtap.keyStroke(nil, "down") end)
---   end
-
---   if (not module.ctrlKHotkey) then
---     module.ctrlKHotkey = hs.hotkey.bind({"ctrl"}, "K", function() hs.eventtap.keyStroke(nil, "up") end)
---   end
-
---   if (not overwrite) then
---     module.ctrlJHotkey:disable()
---     module.ctrlKHotkey:disable()
---   else
---     module.ctrlJHotkey:enable()
---     module.ctrlKHotkey:enable()
---   end
--- end
-
 function showClipboardMenuBarAtMouse()
   if clipboardMenuBar == nil then
     return
   end
   clipboardMenuBar:popupMenu(hs.mouse.absolutePosition())
 end
-
--- TODO: since Cmd+C is systemAssigned key, so it's not meant to be assignable, but leaving this here for now since reassigning Command + C seems like a more valid override
--- Override Command + C hotkey by disabling system assigned hotkey
--- module.commandC = hs.hotkey.bind({"cmd"}, "c", function()
---     module.commandC:disable() -- disable so the system assigned Command + C hotkey will not execute Copy command and will execute the lines below instead
---     hs.eventtap.keyStroke({"cmd"}, "c")
---     storeCopy()
---     module.commandC:enable() -- enable the overridden Command + C hotkey
--- end)
-
--- Override Command + C hotkey by executing clipboard commands when keyUp event occurs for pressing Command + C
-module.pressedCommandC = false
-module.commandC = hs.eventtap.new({hs.eventtap.event.types.keyDown, hs.eventtap.event.types.keyUp}, function (event)
-  if event:getCharacters() == 'c' and event:getFlags().cmd then
-    if event:getType() == hs.eventtap.event.types.keyDown then
-      module.pressedCommandC = true
-    else
-      if module.pressedCommandC then
-        storeCopy()
-      end
-      module.pressedCommandC = false
-    end
-  end
-end)
-module.commandC:start()
 
 setMenuBarIcon() --Avoid wrong title if the user already has something on his saved history
 clipboardMenuBar:setMenu(populateMenu)
