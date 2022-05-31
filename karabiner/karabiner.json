@@ -497,7 +497,7 @@
                         ]
                     },
                     {
-                        "description": "Change Mouse side buttons to back/forward",
+                        "description": "Mouse side buttons to back/forward (primarily for Razer mouse back/forward not working in Safari)",
                         "manipulators": [
                             {
                                 "conditions": [
@@ -700,6 +700,19 @@
                     },
                     "ignore": true,
                     "manipulate_caps_lock_led": false,
+                    "simple_modifications": []
+                },
+                {
+                    "disable_built_in_keyboard_if_exists": false,
+                    "fn_function_keys": [],
+                    "identifiers": {
+                        "is_keyboard": true,
+                        "is_pointing_device": true,
+                        "product_id": 142,
+                        "vendor_id": 5426
+                    },
+                    "ignore": false,
+                    "manipulate_caps_lock_led": true,
                     "simple_modifications": []
                 }
             ],
