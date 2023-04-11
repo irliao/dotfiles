@@ -30,7 +30,7 @@ hs.preferencesDarkMode(true)
 hs.accessibilityState(true) -- show System Preferences if Accessibility is not enabled for Hammerspoon
 hs.dockIcon(false)
 hs.menuIcon(false)
-hs.consoleOnTop(true)
+hs.consoleOnTop(false)
 
 -- window configs
 hs.window.animationDuration = 0
@@ -48,6 +48,7 @@ hotkey = require("hotkey")
 caffeine = require("caffeine")
 clipboard = require("clipboard")
 windowFilter = require("windowFilter")
+windowResizeMenu = require("windowResizeMenu")
 applicationWatcher = require("applicationWatcher").start()
 fileWatcher = hs.pathwatcher.new(os.getenv("HOME") .. "/.hammerspoon/init.lua", reloadConfig):start() -- reloads Hammerspoon whenever ~/.hammerspoon/init.lua is edited and saved
 

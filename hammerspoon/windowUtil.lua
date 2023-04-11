@@ -50,6 +50,8 @@ function resizeFocusedWindowTo(direction)
     local max = hs.window.focusedWindow():screen():frame()
     if direction == "center" then
       resizeFocusedWindowToSize(max.x, max.y, max.w, max.h)
+    elseif direction == "middle" then
+      resizeFocusedWindowToSize(max.x + (max.w / 3), max.y, max.w / 3, max.h)
     elseif direction == "left" then
       resizeFocusedWindowToSize(max.x, max.y, max.w / 2, max.h)
     elseif direction == "right" then
@@ -58,8 +60,16 @@ function resizeFocusedWindowTo(direction)
       resizeFocusedWindowToSize(max.x, max.y, max.w, max.h / 2)
     elseif direction == "bottom" then
       resizeFocusedWindowToSize(max.x, max.y + (max.h / 2), max.w, max.h / 2)
+    elseif direction == "top-left" then
+      resizeFocusedWindowToSize(max.x, max.y, max.w / 2, max.h / 2)
+    elseif direction == "top-right" then
+      resizeFocusedWindowToSize(max.x + (max.w / 2), max.y, max.w / 2, max.h / 2)
+    elseif direction == "bottom-left" then
+      resizeFocusedWindowToSize(max.x, max.y + (max.h / 2), max.w / 2, max.h / 2)
+    elseif direction == "bottom-right" then
+      resizeFocusedWindowToSize(max.x + (max.w / 2), max.y + (max.h / 2), max.w, max.h / 2)
     else
-      hs.alert("ERROR: please specify direction (center|left|right|top|bottom) of window to resize to")
+      hs.alert("ERROR: please specify direction (center|left|right|top|bottom|diagonal) of window to resize to")
     end
 end
 

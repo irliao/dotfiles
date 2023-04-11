@@ -33,8 +33,8 @@ hs.hotkey.bind(ctrlCmd, "X", "Resize Bottom", function() resizeFocusedWindowTo("
 hs.hotkey.bind(ctrlCmd, "H", "Focus Left Window", function() focusWindowAtDirection("left") end)
 hs.hotkey.bind(ctrlCmd, "L", "Focus Right Window", function() focusWindowAtDirection("right") end)
 hs.hotkey.bind(ctrlCmd, "Z", "Hide All Windows", function() hideAllWindows() end)
-hs.hotkey.bind({"alt"}, "TAB", "Focus Previous Window", module.windowSwitcher.focusPreviousWindow, nil, module.windowSwitcher.focusPreviousWindow)
-hs.hotkey.bind({"alt", "shift"}, "TAB", "Focus Next Window", module.windowSwitcher.focusNextWindow, nil, module.windowSwitcher.focusNextWindow)
+hs.hotkey.bind(ctrlCmd, "TAB", "Focus Previous Window", module.windowSwitcher.focusPreviousWindow, nil, module.windowSwitcher.focusPreviousWindow)
+hs.hotkey.bind(ctrlCmdShift, "TAB", "Focus Next Window", module.windowSwitcher.focusNextWindow, nil, module.windowSwitcher.focusNextWindow)
 hs.hotkey.bind(ctrlCmd, "ESCAPE", "Move Previous Screen", function() moveWindowToScreen("prev") end)
 hs.hotkey.bind(ctrlCmdShift, "ESCAPE", "Move Next Screen", function() moveWindowToScreen("next") end)
 hs.hotkey.bind(ctrlCmd, "`", "Move Previous Screen", function() moveWindowToScreen("prev") end)
@@ -44,8 +44,11 @@ hs.hotkey.bind(ctrlCmd, "G", "Vimperator", function() hs.hints.windowHints(hs.wi
 hs.hotkey.bind(ctrlCmd, "I", "System Status", function() alertSystemStatus() end)
 
 -- Application opener
+hs.hotkey.bind(ctrlCmd, "1", "Misson Control", function() openApplication("Mission Control") end)
+hs.hotkey.bind(ctrlCmd, "2", "Launchpad", function() openApplication("Launchpad") end)
 hs.hotkey.bind(ctrlCmd, "C", "Safari", function() openApplication("Safari") end)
 hs.hotkey.bind(ctrlAlt, "C", "Chrome", function() openApplication("Google Chrome") end)
+-- hs.hotkey.bind(ctrlCmd, "E", "Visual Studio Code", function() openApplication("Visual Studio Code") end)
 hs.hotkey.bind(ctrlCmd, "E", "IntelliJ", function() openApplication("IntelliJ IDEA CE") end)
 hs.hotkey.bind(ctrlAlt, "E", "Sublime", function() openApplication("Sublime Text") end)
 hs.hotkey.bind(ctrlCmd, "F", "Finder", function() openApplication("Finder") end)

@@ -6,12 +6,9 @@ module.focusedAppWins = {}
 module.windowCycler = nil
 
 local focusedAppWindowFilter = hs.window.filter.new(function(win)
-    local focusedWin = hs.window.focusedWindow()
-    return (
-      win:isStandard() and
-      win:application() == focusedWin:application()
-    )
-  end)
+  local focusedWindow = hs.window.focusedWindow()
+  return focusedWindow ~= nil and win:isStandard() and win:application() == focusedWindow:application() -- check win:isStandard() to exclude minimized windows
+end):setCurrentSpace(true):setDefaultFilter{}
 
 local switcher = hs.window.switcher.new(focusedAppWindowFilter)
 switcher.ui.fontname = 'Hack'
