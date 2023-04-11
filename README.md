@@ -16,7 +16,7 @@ I am not responsible for any issue, data loss, or damage caused by this reposito
 * [Karabiner-Elements](https://github.com/tekezo/Karabiner-Elements) - Keyboard customizer for macOS
 
 ## License
-Copyright (c) 2022 Ryan Liao. Released under the [MIT License][license].
+Copyright (c) 2023 Ryan Liao. Released under the [MIT License][license].
 
 [license]: LICENSE
 [readme]: README.md
