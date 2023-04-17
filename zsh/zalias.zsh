@@ -106,7 +106,6 @@ alias wget='wget -c'
 alias grep='grep --color=auto'
 alias egrep='egrep --color=auto'
 alias fgrep='fgrep --color=auto'
-alias diff="colordiff" # diff with colors
 alias ag="ag --path-to-ignore=~/.ignore"
 # TODO: reenable after figuring out why 'bat' cannot auto complete in zsh
 # alias cat="bat" # cat with syntax highlighting
@@ -152,6 +151,7 @@ alias speedtest='curl -o /dev/null http://speedtest.wdc01.softlayer.com/download
 alias notify='terminal-notifier -message'
 alias shlint-sh='shellcheck'
 alias unrar-multipart='unrar x -e' # pass in first/beginning part's file as arg1, install from Brew
+alias cdiff='colordiff'
 
 # Brew
 alias bu="brew update && brew upgrade && brew cleanup && brew doctor"
