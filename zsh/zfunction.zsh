@@ -58,6 +58,11 @@ f() {
 
 # tree (installed with HomeBrew), arg1 - path, arg2 - level
 t() {
+  if [[ "$#" == 1 ]]; then
+      tree . -L "$1"
+      return "$?"
+  fi
+
   if [[ "$#" == 2 ]]; then
       tree "$1" -L "$2"
       return "$?"
