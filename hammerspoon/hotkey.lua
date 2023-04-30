@@ -25,14 +25,15 @@ local ctrlCmdShift = {"ctrl", "cmd", "shift"} -- inverse modifier for most frequ
 local ctrlAltShift = {"ctrl", "alt", "shift"} -- inverse modifier for less frequent hotkey
 
 -- Window management
-hs.hotkey.bind(ctrlCmd, "S", "Resize Full", function() resizeFocusedWindowTo("center") end)
+hs.hotkey.bind(ctrlCmd, "S", "Resize Full", function() resizeFocusedWindowTo("full") end)
 hs.hotkey.bind(ctrlCmd, "A", "Resize Left", function() resizeFocusedWindowTo("left") end)
 hs.hotkey.bind(ctrlCmd, "D", "Resize Right", function() resizeFocusedWindowTo("right") end)
 hs.hotkey.bind(ctrlCmd, "W", "Resize Top", function() resizeFocusedWindowTo("top") end)
 hs.hotkey.bind(ctrlCmd, "X", "Resize Bottom", function() resizeFocusedWindowTo("bottom") end)
+hs.hotkey.bind(ctrlCmd, "Z", "Resize Center", function() resizeFocusedWindowTo("center") end)
 hs.hotkey.bind(ctrlCmd, "H", "Focus Left Window", function() focusWindowAtDirection("left") end)
 hs.hotkey.bind(ctrlCmd, "L", "Focus Right Window", function() focusWindowAtDirection("right") end)
-hs.hotkey.bind(ctrlCmd, "Z", "Hide All Windows", function() hideAllWindows() end)
+-- hs.hotkey.bind(ctrlCmd, "Z", "Hide All Windows", function() hideAllWindows() end)
 hs.hotkey.bind(ctrlCmd, "TAB", "Focus Previous Window", module.windowSwitcher.focusPreviousWindow, nil, module.windowSwitcher.focusPreviousWindow)
 hs.hotkey.bind(ctrlCmdShift, "TAB", "Focus Next Window", module.windowSwitcher.focusNextWindow, nil, module.windowSwitcher.focusNextWindow)
 hs.hotkey.bind(ctrlCmd, "ESCAPE", "Move Previous Screen", function() moveWindowToScreen("prev") end)

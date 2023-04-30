@@ -48,8 +48,10 @@ end
 
 function resizeFocusedWindowTo(direction)
     local max = hs.window.focusedWindow():screen():frame()
-    if direction == "center" then
+    if direction == "full" then
       resizeFocusedWindowToSize(max.x, max.y, max.w, max.h)
+    elseif direction == "center" then
+      resizeFocusedWindowToSize(max.x + (max.w / 4), max.y + (max.h / 10), max.w / 2, max.h / 1.5)
     elseif direction == "middle" then
       resizeFocusedWindowToSize(max.x + (max.w / 3), max.y, max.w / 3, max.h)
     elseif direction == "left" then
