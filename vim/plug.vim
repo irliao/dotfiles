@@ -128,6 +128,7 @@ Plug 'ervandew/supertab'
 Plug 'jacoborus/tender.vim' " 24bit colorscheme, resembles base16, light colors and less strains on the eyes
   let macvim_skip_colorscheme=1 " fixes issue where MacVim will not use tender as theme
 Plug 'tomasr/molokai'
+Plug 'morhetz/gruvbox'
 " Plug 'chriskempson/base16-vim'
 " Plug 'flazz/vim-colorschemes' " lots of color theme, may have conflict with same name themes from other plugins
 "   cnoreabbrev CS colorscheme

@@ -65,7 +65,8 @@ else " Vim
 endif
 
 set background=dark
-colorscheme tender
+" colorscheme tender
+colorscheme gruvbox
 
 " NOTE: must be after setting colorscheme, otherwise may get overridden by colorscheme
 set colorcolumn=81
