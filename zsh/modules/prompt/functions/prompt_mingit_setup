@@ -46,7 +46,7 @@
 # set iTerm tab
 prompt_iterm_preexec() {
   # TODO: figure out what this does
-  echo -ne "\e]1; $(history $HISTCMD | cut -b7- ) \a" # set title to last command
+  # echo -ne "\e]1; $(history $HISTCMD | cut -b7- ) \a" # set title to last command
 }
 
 # indent prompt by printing spaces
@@ -129,7 +129,8 @@ gst_get_pwd() {
 
 prompt_mingit_precmd() {
   if [[ "$TERM_PROGRAM" == "iTerm.app" ]];then
-    echo -ne "\e]1; ${PWD##*/} \a" # set title to short pwd
+    echo -ne "\e]1; ${PWD##*/} \a" # set title to short pwd, must have "Applications in terminal may change the title" checked in iTerm settings
+    # echo -ne "\e]1; ${TODO_PROMPT##*/} \a" # set title to short pwd, must have "Applications in terminal may change the title" checked in iTerm settings
   fi
 
   if [ -n "$TMUX" ]; then

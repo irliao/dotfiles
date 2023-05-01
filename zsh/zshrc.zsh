@@ -296,6 +296,8 @@ bindkey ' ' magic-space # press Space to do history expansion when running histo
 
 # iTerm customizations
 if [[ ($TERM_PROGRAM == "iTerm.app") ]]; then
+  DISABLE_AUTO_TITLE="true" # enables setting Tab title, TODO: this doesn't appear to work?
+
   # enable shell-integration for these commands: imgls, imgcat, download, divider
   test -e ${HOME}/.iterm2_shell_integration.zsh && source ~/.iterm2_shell_integration.`basename $SHELL`
 
@@ -308,6 +310,7 @@ if [[ ($TERM_PROGRAM == "iTerm.app") ]]; then
   # # Set badge to show the current session name and git branch, if any is set
   # printf "\e]1337;SetBadgeFormat=%s\a" \
   #   $(echo -n "\(session.name) \(user.gitBranch)" | base64)
+  #
 elif [[ ($TERM_PROGRAM == "Apple_Terminal") ]]; then # Apple Terminal
   # automatically start Tmux
   [[ -f ~/.dotfiles/zsh/ztmux.zsh ]] && source ~/.dotfiles/zsh/ztmux.zsh
