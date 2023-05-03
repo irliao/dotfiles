@@ -2,6 +2,20 @@
 
 " NOTE: Indent size set by FileType autocmd replaced with ~/.editorconfig (symlinked to ~/.dotfiles/vim/editorconfig.conf)
 
+" Set the title of the Terminal to the currently open file (source: https://gist.github.com/bignimbus/1da46a18416da4119778)
+function! SetTerminalTitle()
+    let titleString = expand('%:t')
+    if len(titleString) > 0
+        let &titlestring = expand('%:t')
+        " this is the format iTerm2 expects when setting the window title
+        let args = "\033];".&titlestring."\007"
+        let cmd = 'silent !echo -e "'.args.'"'
+        execute cmd
+        redraw!
+    endif
+endfunction
+autocmd BufEnter * call SetTerminalTitle()
+
 " Cursor at position of last saved line when opening file
 autocmd BufReadPost *
     \ if line("'\"") > 1 && line("'\"") <= line("$") |
