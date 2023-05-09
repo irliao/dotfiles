@@ -9,8 +9,8 @@ WORDCHARS=${WORDCHARS//[\/]} # Remove path separator from WORDCHARS.
 ZSH_HIGHLIGHT_HIGHLIGHTERS=(main brackets)
 export ZIM_HOME=${ZDOTDIR:-${HOME}}/.zim
 
+# Download zimfw script if missing.
 if [[ ! -e ${ZIM_HOME}/zimfw.zsh ]]; then
-  # Download zimfw script if missing.
   command mkdir -p ${ZIM_HOME}
   if (( ${+commands[curl]} )); then
     command curl -fsSL -o ${ZIM_HOME}/zimfw.zsh https://github.com/zimfw/zimfw/releases/latest/download/zimfw.zsh
@@ -18,8 +18,9 @@ if [[ ! -e ${ZIM_HOME}/zimfw.zsh ]]; then
     command wget -nv -O ${ZIM_HOME}/zimfw.zsh https://github.com/zimfw/zimfw/releases/latest/download/zimfw.zsh
   fi
 fi
+
+# Install missing modules, and update ${ZIM_HOME}/init.zsh if missing or outdated.
 if [[ ! ${ZIM_HOME}/init.zsh -nt ${ZDOTDIR:-${HOME}}/.zimrc ]]; then
-  # Install missing modules, and update ${ZIM_HOME}/init.zsh if missing or outdated.
   source ${ZIM_HOME}/zimfw.zsh init -q
 fi
 source ${ZIM_HOME}/init.zsh
@@ -296,7 +297,7 @@ bindkey ' ' magic-space # press Space to do history expansion when running histo
 
 # iTerm customizations
 if [[ ($TERM_PROGRAM == "iTerm.app") ]]; then
-  DISABLE_AUTO_TITLE="true" # enables setting Tab title, TODO: this doesn't appear to work?
+  DISABLE_AUTO_TITLE="false" # used by prompt to auto set tab title
 
   # enable shell-integration for these commands: imgls, imgcat, download, divider
   test -e ${HOME}/.iterm2_shell_integration.zsh && source ~/.iterm2_shell_integration.`basename $SHELL`

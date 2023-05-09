@@ -88,6 +88,17 @@ e() {
     "$EDITOR" "$@";
 }
 
+# set static tab title for iTerm
+tt() { # term-title
+  if [[ "$#" == 0 ]]; then
+    DISABLE_AUTO_TITLE="false" # used by prompt for auto titling
+    return "$?"
+  fi
+
+  DISABLE_AUTO_TITLE="true" # used by prompt for auto titling
+  echo -ne "\033]0;"$*"\007"
+}
+
 # remove all brew installed dependencies and casks
 brew-nuke() {
     brew remove --force $(brew list) --ignore-dependencies &&
@@ -433,15 +444,17 @@ calc-pi() {
   echo $pi
 }
 
+# NOTE: disabled in favor of using `fd` from brew
 # find a file with a pattern in name:
-function ff() {
-  find . -type f -iname '*'$*'*' -ls
-}
+# function ff() {
+#   find . -type f -iname '*'$*'*' -ls
+# }
 
+# NOTE: disabled in favor of using `fd` from brew
 # find a directory with a pattern in name:
-function fd() {
-  find . -type d -iname '*'$*'*' -ls
-}
+# function fd() {
+#   find . -type d -iname '*'$*'*' -ls
+# }
 
 # TODO: find out how this works differently from mdfind -name or remove if same as ff above
 # ff() {

@@ -5,12 +5,16 @@
 
 # Sets sane Zsh built-in environment options.
 zmodule environment
+
 # Provides handy git aliases and functions.
 zmodule git
+
 # Applies correct bindkeys for input events.
 zmodule input
+
 # Sets a custom terminal title.
-zmodule termtitle
+# zmodule termtitle # NOTE: disabled to use custom tab title control
+
 # Utility aliases and functions. Adds colour to ls, grep and less.
 zmodule utility
 

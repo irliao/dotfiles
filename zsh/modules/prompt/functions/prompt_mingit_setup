@@ -129,8 +129,10 @@ gst_get_pwd() {
 
 prompt_mingit_precmd() {
   if [[ "$TERM_PROGRAM" == "iTerm.app" ]];then
-    echo -ne "\e]1; ${PWD##*/} \a" # set title to short pwd, must have "Applications in terminal may change the title" checked in iTerm settings
+    if [[ "$DISABLE_AUTO_TITLE" == "false" ]];then
+      echo -ne "\e]1; ${PWD##*/} \a" # set title to short pwd, must have "Applications in terminal may change the title" checked in iTerm settings
     # echo -ne "\e]1; ${TODO_PROMPT##*/} \a" # set title to short pwd, must have "Applications in terminal may change the title" checked in iTerm settings
+    fi
   fi
 
   if [ -n "$TMUX" ]; then
