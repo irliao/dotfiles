@@ -54,6 +54,15 @@ main() {
   # symlink miscellaneous directories
   symlink "$dotfiles_path/bin" ~/.bin
 
+  # symlink homebrew files
+  symlink "$dotfiles_path/homebrew" ~/.homebrew
+
+  # symlink bat files
+  symlink "$dotfiles_path/bat" ~/.config/bat
+
+  # symlink fzf files
+  symlink "$dotfiles_path/fzf/fzf.zsh" ~/.fzf.zsh
+
   # symlink grep files
   symlink "$dotfiles_path/grep/ignore" ~/.ignore # used by Ag search
 
