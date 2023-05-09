@@ -44,6 +44,7 @@ Plug 'scrooloose/syntastic'
   " NOTE: uncomment two lines below to auto lint on save
   " autocmd bufwritepost *.js silent !semistandard % --fix
   " set autoread
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } } " install latest binary if missing
 Plug 'ctrlpvim/ctrlp.vim' " Fuzzy file, buffer, mru, tag, etc finder
 Plug 'tacahiroy/ctrlp-funky' " uses Ctrl-P to show list of functions in current buffer to jump to
 Plug 'junegunn/vim-easy-align' " alignment tool
