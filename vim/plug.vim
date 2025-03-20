@@ -57,6 +57,7 @@ Plug 'scrooloose/nerdtree'
 Plug 'tpope/vim-endwise' " ends certain structure automatically (ex: in Lua, will auto insert 'end' for keywords like 'if' or 'function'
 Plug 'romainl/vim-cool' " auto turn off search result highlights upon navigation
 Plug 'sjl/gundo.vim' " visualize undo tree
+Plug 'github/copilot.vim'
 
 " TODO: replace with https://github.com/mg979/vim-visual-multi
 Plug 'terryma/vim-multiple-cursors'
