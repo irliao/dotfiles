@@ -35,9 +35,6 @@ alias zs="source ~/.zshrc && echo 'zsh: sourced zshrc: ~/.zshrc'"
 alias zc="rm $HISTFILE && echo 'zsh: removed $HISTFILE: restart shell to clear history'" # clear history and prompt
 alias zu="zimfw upgrade && zimfw update && echo 'zsh: updated Zim with: zmanage update'" # update Zim
 
-# Python
-alias py="python3"
-
 # Find Utilities
 alias locate-ignorecase-='locate -i' # -i to make the search case insensitive
 alias locate-updatedb="sudo /usr/libexec/locate.updatedb"
@@ -197,6 +194,8 @@ alias prettify="prettier --write" # use Prettier (under ./node_modules) to lint/
 # Python
 alias pip="pip3"
 alias pip2="/usr/local/bin/pip" # brew installed Python 2.7
+alias venv-new="python3 -m venv .venv"
+alias venv-activate="source .venv/bin/activate"
 # alias pi='pip install'
 # alias piu='pip install --user --install-option="--prefix="' # package-name as arg, mainly for brew installed python puts executable scripts in ~/Library/Python/<X>.<Y>/bin
 # alias hass='~/Library/Python/3.6/bin/hass' # TODO: replace 3.6 with current python3 version

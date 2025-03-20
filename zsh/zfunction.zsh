@@ -481,12 +481,6 @@ clearFontCache (){
     atsutil server -ping
 }
 
-battery() {
-	bat_perc=$(pmset -g batt | egrep "([0-9]+\%)" -o)
-  bat_time=$(pmset -g batt | egrep "([0-9]+\:[0-9]+)" -o)
-  echo "Battery Remaining: $bat_perc\% $bat_time Hours"
-}
-
 bluetooth() {
   if [[ "$#" == 0 ]]; then
     echo 'bluetooth {0:Off, 1:ON}: $(blueutil --power)'

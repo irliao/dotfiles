@@ -47,7 +47,7 @@ unsetopt share_history
 # skip_global_compinit=1 # faster zsh startup time
 DEFAULT_USER="rliao" # replaces user@hostname with specified username
 [ -z "$LANG" ] && eval "$(locale)" # set language if not found
-PATH=/usr/local/bin:/usr/local/sbin:~/.bin:/usr/bin:/bin:/usr/sbin:/sbin
+PATH=/usr/local/bin:/usr/local/sbin:~/.bin:/usr/bin:/bin:/usr/sbin:/sbin:$HOME/Library/Python/3.9/bin
 # WORDCHARS='*?_-.[]~=&;!#$%^(){}<>' # list of word delimeters
 
 # Function search path
@@ -120,7 +120,8 @@ export PAGER='less'
 # fi
 
 # Brew
-PATH="/opt/homebrew/bin:$PATH" # needed for M1 Pro
+PATH="/opt/homebrew/bin:$PATH" # needed for Macs
+PATH="/opt/homebrew/sbin:$PATH" # needed for Macs
 
 # Ensure all sessions will have the PATH with access to external cli's bin
 export PATH
