@@ -48,7 +48,7 @@ hotkey = require("hotkey")
 caffeine = require("caffeine")
 clipboard = require("clipboard")
 windowFilter = require("windowFilter")
-windowResizeMenu = require("windowResizeMenu")
+-- windowResizeMenu = require("windowResizeMenu")
 applicationWatcher = require("applicationWatcher").start()
 fileWatcher = hs.pathwatcher.new(os.getenv("HOME") .. "/.hammerspoon/init.lua", reloadConfig):start() -- reloads Hammerspoon whenever ~/.hammerspoon/init.lua is edited and saved
 
@@ -58,16 +58,17 @@ spoon.HeadphoneAutoPause.autoResume = false
 spoon.HeadphoneAutoPause.defaultControlFns('iTunes')
 spoon.HeadphoneAutoPause:start()
 
+-- TODO: this is causing exception: ERROR:   LuaSkin: hs.wifi.watcher callback for SSIDChange: ...ryanliao/.hammerspoon/Spoons/WifiNotifier.spoon/init.lua:63: attempt to concatenate a nil value (field 'lastSSID')
 -- plugin to get notification when WiFi changes
-hs.loadSpoon('WifiNotifier')
-spoon.WifiNotifier:init()
-spoon.WifiNotifier:start()
+-- hs.loadSpoon('WifiNotifier')
+-- spoon.WifiNotifier:init()
+-- spoon.WifiNotifier:start()
 
 -- callback when Hammerspoon is exiting or reloading, mainly for serialising state,
 -- destroying system resources that will not be released by normal Lua garbage collection processes, etc
 hs.shutdownCallback = function()
   applicationWatcher.stop()
-  spoon.WifiNotifier:stop()
+  -- spoon.WifiNotifier:stop()
   spoon.HeadphoneAutoPause:stop()
   localProfile = nil
   logger.i("Hammerspoon Shutting Down")

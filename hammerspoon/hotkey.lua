@@ -5,11 +5,9 @@
 
 -- Global settings
 hs.hotkey.alertDuration = 0 -- hotkey alerts are disabled
--- hs.hints.style = 'vimperator' -- window hint starts with the first character of the parent application's title
-hs.hints.hintChars = { 'A', 'S', 'D', 'F', 'J', 'K', 'L', 'Q', 'W', 'E', 'R', 'Z', 'X', 'C' } -- NOTE: ignored when style is vimperator
+hs.hints.style = 'vimperator' -- window hint starts with the first character of the parent application's title
 hs.hints.fontName = 'Hack-Regular'
 hs.hints.fontSize = 10
-hs.hints.showTitleThresh = 0 -- if number of windows is less than or equal to this, show window titles in hint
 
 local module = {}
 
@@ -41,28 +39,28 @@ hs.hotkey.bind(ctrlCmdShift, "ESCAPE", "Move Next Screen", function() moveWindow
 hs.hotkey.bind(ctrlCmd, "`", "Move Previous Screen", function() moveWindowToScreen("prev") end)
 hs.hotkey.bind(ctrlCmdShift, "`", "Move Next Screen", function() moveWindowToScreen("next") end)
 hs.hotkey.bind(ctrlCmd, "RETURN", "Enter Full Screen", function() toggleFullScreen() end)
-hs.hotkey.bind(ctrlCmd, "G", "Vimperator", function() hs.hints.windowHints(hs.window:focusedWindow():otherWindowsSameScreen()) end)
+hs.hotkey.bind(ctrlCmd, "SPACE", "Vimperator", function() hs.hints.windowHints() end)
 hs.hotkey.bind(ctrlCmd, "I", "System Status", function() alertSystemStatus() end)
 
 -- Application opener
 hs.hotkey.bind(ctrlCmd, "1", "Misson Control", function() openApplication("Mission Control") end)
 hs.hotkey.bind(ctrlCmd, "2", "Launchpad", function() openApplication("Launchpad") end)
+hs.hotkey.bind(ctrlCmd, "B", "Docker", function() openApplication("Docker Desktop") end)
 hs.hotkey.bind(ctrlCmd, "C", "Safari", function() openApplication("Safari") end)
 hs.hotkey.bind(ctrlAlt, "C", "Chrome", function() openApplication("Google Chrome") end)
--- hs.hotkey.bind(ctrlCmd, "E", "Visual Studio Code", function() openApplication("Visual Studio Code") end)
-hs.hotkey.bind(ctrlCmd, "E", "IntelliJ", function() openApplication("IntelliJ IDEA CE") end)
-hs.hotkey.bind(ctrlAlt, "E", "Sublime", function() openApplication("Sublime Text") end)
+hs.hotkey.bind(ctrlCmd, "E", "Xcode", function() openApplication("Xcode") end)
+hs.hotkey.bind(ctrlAlt, "E", "Visual Studio Code", function() openApplication("Visual Studio Code") end)
 hs.hotkey.bind(ctrlCmd, "F", "Finder", function() openApplication("Finder") end)
+hs.hotkey.bind(ctrlCmd, "G", "MacGPT", function() openApplication("MacGPT") end)
 hs.hotkey.bind(ctrlCmd, "M", "Line", function() openApplication("Line") end)
 hs.hotkey.bind(ctrlAlt, "M", "Messages", function() openApplication("Messages") end)
 hs.hotkey.bind(ctrlCmd, "N", "Notes", function() openApplication("Notes") end)
 hs.hotkey.bind(ctrlCmd, "P", "Postman", function() openApplication("Postman") end)
 hs.hotkey.bind(ctrlCmd, "T", "Spotify", function() openApplication("Spotify") end)
-hs.hotkey.bind(ctrlAlt, "T", "iTunes", function() openApplication("iTunes") end)
 hs.hotkey.bind(ctrlCmd, "R", "iTerm", function() openApplication("iTerm") end)
-hs.hotkey.bind(ctrlAlt, "R", "Terminal", function() openApplication("Terminal") end)
 hs.hotkey.bind(ctrlCmd, ";", "Hammerspoon", function() openApplication("Hammerspoon") end)
 hs.hotkey.bind(ctrlCmd, ",", "System Preferences", function() openApplication("System Preferences") end)
-hs.hotkey.bind(ctrlCmd, "/", "Activity Monitor", function() openApplication("Activity Monitor") end)
+hs.hotkey.bind(ctrlCmd, "'", "Activity Monitor", function() openApplication("Activity Monitor") end)
+hs.hotkey.bind(ctrlCmd, "\\", "Passwords", function() openApplication("Passwords") end)
 
 return module
