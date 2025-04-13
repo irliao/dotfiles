@@ -120,6 +120,7 @@
                     },
                     {
                         "description": "Better Shifting: Parentheses on shift keys",
+                        "enabled": false,
                         "manipulators": [
                             {
                                 "from": { "key_code": "left_shift" },
@@ -149,6 +150,7 @@
                     },
                     {
                         "description": "Better Shifting: Shift rolls",
+                        "enabled": false,
                         "manipulators": [
                             {
                                 "from": {
@@ -196,6 +198,7 @@
                     },
                     {
                         "description": "Better Shifting: End parenthesis on shift + space",
+                        "enabled": false,
                         "manipulators": [
                             {
                                 "from": {
