@@ -194,7 +194,7 @@ alias prettify="prettier --write" # use Prettier (under ./node_modules) to lint/
 # Python
 alias pip="pip3"
 alias pip2="/usr/local/bin/pip" # brew installed Python 2.7
-alias venv-new="python3 -m venv .venv"
+alias venv-create="python3 -m venv .venv"
 alias venv-activate="source .venv/bin/activate"
 # alias pi='pip install'
 # alias piu='pip install --user --install-option="--prefix="' # package-name as arg, mainly for brew installed python puts executable scripts in ~/Library/Python/<X>.<Y>/bin
