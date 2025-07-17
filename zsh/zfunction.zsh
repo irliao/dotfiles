@@ -481,6 +481,14 @@ clearFontCache (){
     atsutil server -ping
 }
 
+ssd_info() {
+  df -g / | awk 'NR==2 {
+    avail=$4; total=$2;
+    percent=int((avail/total)*100);
+    print avail " GB available / " total " GB total (" percent "% free)"
+  }'
+}
+
 bluetooth() {
   if [[ "$#" == 0 ]]; then
     echo 'bluetooth {0:Off, 1:ON}: $(blueutil --power)'
@@ -725,16 +733,6 @@ resetFinderDefaultViewOption() {
     if [[ $REPLY =~ ^[Y]$ ]] then
         sudo find / -name .DS_Store -delete; killall Finder;
     fi
-}
-
-# Wrapper for youtube-dl to download MP3 file using URL
-youtubeDownloadMP3() {
-	if [[ $# != 1 ]] then
-		echo "error: youtubeDownloadMP3 requires 1 arg"
-		return 1;
-	fi
-
-	youtube-dl "$1" --extract-audio --audio-format mp3
 }
 
 # quickly create an application icon from 1024px master file

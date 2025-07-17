@@ -67,6 +67,11 @@ endif
 set background=dark
 " colorscheme tender
 colorscheme gruvbox
+" set termguicolors     " enable true colors support
+" let ayucolor="light"  " for light version of theme
+" let ayucolor="mirage" " for mirage version of theme
+" let ayucolor="dark"   " for dark version of theme
+" colorscheme ayu
 
 " NOTE: must be after setting colorscheme, otherwise may get overridden by colorscheme
 set colorcolumn=81

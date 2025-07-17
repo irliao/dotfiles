@@ -218,6 +218,7 @@
                     },
                     {
                         "description": "HHKB Media Key Mode (fn + asdf to Volume down/up/mute, eject) (rev 2)",
+                        "enabled": false,
                         "manipulators": [
                             {
                                 "from": {

@@ -56,7 +56,7 @@ hs.hotkey.bind(ctrlCmd, "G", "ChatGPT", function() openApplication("ChatGPT") en
 hs.hotkey.bind(ctrlCmd, "M", "Line", function() openApplication("Line") end)
 hs.hotkey.bind(ctrlAlt, "M", "Messages", function() openApplication("Messages") end)
 hs.hotkey.bind(ctrlCmd, "N", "Notes", function() openApplication("Notes") end)
-hs.hotkey.bind(ctrlCmd, "P", "Bruno", function() openApplication("Bruno") end)
+hs.hotkey.bind(ctrlCmd, "P", "Postman", function() openApplication("Postman") end)
 hs.hotkey.bind(ctrlCmd, "T", "Spotify", function() openApplication("Spotify") end)
 hs.hotkey.bind(ctrlCmd, "R", "iTerm", function() openApplication("iTerm") end)
 hs.hotkey.bind(ctrlCmd, ";", "Hammerspoon", function() openApplication("Hammerspoon") end)
