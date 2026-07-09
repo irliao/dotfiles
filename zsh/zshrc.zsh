@@ -82,15 +82,8 @@ export PAGER='less'
 # export VISUAL='vim'
 # export EDITOR="$VISUAL"
 
-# Haskell
-# TODO: fix shell complaining about compinit in insecure path
-# Auto-completion for Haskell-Stack
-# if (( $+commands[stack] )) then
-#   autoload -U +X compinit && compinit # may already be loaded by zsh frameworks and such
-#   autoload -U +X bashcompinit && bashcompinit
-#   eval "$(stack --bash-completion-script stack)"
-# fi
-# PATH="$PATH:$HOME/.local/bin" # where stack installs hlint
+# Added by LM Studio CLI (lms)
+export PATH="$PATH:$HOME/.lmstudio/bin"
 
 # Go
 # export GOPATH="$DEVPATH/go"
@@ -100,17 +93,6 @@ export PAGER='less'
 # if (( $+commands[node] )) && [[ -d "/usr/local/lib/node_modules" ]]; then
 #   export NODE_MODULES_GLOBAL_PATH="/usr/local/lib/node_modules"
 #   PATH="$PATH:node_modules/.bin" # access ./node_modules/.bin/ in project root directory
-# fi
-
-# Python
-# for python installed with brew, modules and executables installed in pip will be installed under some brew directory
-# variables below will let system python know which compiler flag to set in order to build bindings for python softwares installed under some brew directory
-# CFLAGS=-I$(brew --prefix)/include
-# LDFLAGS=-L$(brew --prefix)/lib
-
-# Yarn
-# if (( $+commands[yarn] )) && [[ -d ~/.yarn/bin ]]; then
-#   PATH=~/.yarn/bin:"$PATH"
 # fi
 
 # xCode
@@ -331,3 +313,4 @@ if (( $+commands[rbenv] )); then
   eval "$(rbenv init -)"
   # export RBENV_VERSION=2.4.3 # shell specific Ruby version
 fi
+

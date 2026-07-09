@@ -73,6 +73,9 @@ main() {
   symlink "$dotfiles_path/ghc/ghci" ~/.ghci &&
     symlink "$dotfiles_path/ghc/haskeline" ~/.haskeline # need to install haskeline with stack
 
+  # symlink Claude files
+  symlink "$dotfiles_path/cloaude/CLAUDE.md" ~/.claude/CLAUDE.md
+
   # symlink vim files
   symlink "$dotfiles_path/vim" ~/.vim &&
     symlink "$dotfiles_path/vim/vimrc.vim" ~/.vimrc &&

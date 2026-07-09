@@ -5,6 +5,7 @@
 # File Editors/Viewers
 alias vi="vim -X" # shorter startup time in terminal (do not connect to X server), ???but window title and clipboard will not be used??? TODO: research why the ??? statement is not true
 alias vt="vim -p"
+alias cc="claude"
 alias subl="/Applications/Sublime\ Text.app/Contents/SharedSupport/bin/subl"
 alias ql="qlmanage -px &>/dev/null"
 
