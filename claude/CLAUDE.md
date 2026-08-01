@@ -19,6 +19,7 @@ These are common instructions for Ryan's agents across all scenarios.
   Log boundaries and error paths at appropriate levels (debug/info/warn/error) with contextual metadata, never secrets or PII.
 - Apply that same high standard to engineering excellence: lint, test failures, and test flakiness.
   If you see one, even if it is not caused by what you are working on right now, still get it fixed.
+- When I ask to stash something, persist the said item in a STASH.md for the project the conversation is on. 
 
 ## Ryan's Opinions
 
